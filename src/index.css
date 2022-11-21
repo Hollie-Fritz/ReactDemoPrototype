@@ -1,3 +1,5 @@
+/*Works Cited:
+How to Hide Scroll Bars: https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp*/
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -11,15 +13,13 @@
   --color-grey: #AAAAAA;
   --color-white: #FFFFFF;
 }
-/* background image add  */
+/* background image and removal of scroll bars (may need to fix later)*/
 body {
     background-image: url("./components/img/NuOrderHomeBG.jpg");
+    overflow-y: hidden; /*Hides the vertical scrollbar*/
+    overflow-x: hidden; /*Hides the horizontal scrollbar*/
 } 
 
-body {
-  overflow-y: hidden; /* Hide vertical scrollbar */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-}
 
 /* * {
   box-sizing: border-box; 

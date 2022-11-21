@@ -1,3 +1,4 @@
+/*Work Cited: https://ui.docs.amplify.aws/react/components/button */
 .a {
     margin-top: 100px;
     margin-bottom : 50px;
@@ -7,14 +8,17 @@
     margin-left: 90px;
 }
 
+/* overrides .amplify-button so that the default button state is transparent*/
 .amplify-button {
     background-color: transparent;
   }
 
+  /* overrides .amplify-button so that the hover color is black*/
 .amplify-button:hover {
     background-color: black;
   }
 
+/* overrides .amplify-button so that the last button clicked is transparent*/
   .amplify-button:focus {
     background-color: transparent;
   }
