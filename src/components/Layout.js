@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuthenticator, Button } from '@aws-amplify/ui-react';
 
-import logo from './img/NuOrderBlackLogo.png';
+import logo from './img/SmallNuOrderLogo.png';
 import "./Layout.css";
 
 export function Layout() {

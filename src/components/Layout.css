@@ -6,3 +6,15 @@
 .I {
     margin-left: 90px;
 }
+
+.amplify-button {
+    background-color: black;
+  }
+
+.amplify-button:hover {
+    background-color: rgb(75, 74, 74);
+  }
+
+  .amplify-button:focus {
+    background-color: rgb(32, 32, 32);
+  }
