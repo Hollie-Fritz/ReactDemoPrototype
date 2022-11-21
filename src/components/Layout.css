@@ -8,13 +8,13 @@
 }
 
 .amplify-button {
-    background-color: black;
+    background-color: transparent;
   }
 
 .amplify-button:hover {
-    background-color: rgb(75, 74, 74);
+    background-color: black;
   }
 
   .amplify-button:focus {
-    background-color: rgb(32, 32, 32);
+    background-color: transparent;
   }
