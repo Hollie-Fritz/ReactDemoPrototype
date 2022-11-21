@@ -16,6 +16,11 @@ body {
     background-image: url("./components/img/NuOrderHomeBG.jpg");
 } 
 
+body {
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
 /* * {
   box-sizing: border-box; 
   padding: 0;
