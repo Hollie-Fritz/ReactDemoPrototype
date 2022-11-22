@@ -35,7 +35,7 @@ export function Layout() {
         {route !== 'authenticated' ? (
           <Button style={{color: "orange"}} onClick={() => navigate('/login')}> Restaurateur </Button>
         ) : (
-          <Button onClick={() => logOut()}> Logout </Button>
+          <Button style={{color: "green"}} onClick={() => logOut()}> Logout </Button>
         )}
         <Button style={{color: "orange"}} onClick={() => navigate('/customer')}> Customer </Button>
         </ButtonGroup>;
