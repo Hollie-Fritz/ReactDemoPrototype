@@ -22,7 +22,8 @@ export function Layout() {
   return (
     <> 
       {/* <img src={logo} alt="logo"/> */}
-      <Button onClick={() => navigate('/')}> <img src={logo} alt="logo"/> </Button>
+      <div className = "LogoHome">
+      <Button onClick={() => navigate('/')}> <img src={logo} alt="logo"/> </Button></div>
       <nav className="a">
       </nav>
 
@@ -30,7 +31,7 @@ export function Layout() {
       <h2 style={{color: "white"}}>I'm a </h2>
       </div>
       
-      <div>
+      <div className = "RestaurantCustomer">
       <ButtonGroup size="large">
         {route !== 'authenticated' ? (
           <Button style={{color: "orange"}} onClick={() => navigate('/login')}> Restaurateur </Button>
@@ -38,7 +39,7 @@ export function Layout() {
           <Button style={{color: "green"}} onClick={() => logOut()}> Logout </Button>
         )}
         <Button style={{color: "orange"}} onClick={() => navigate('/customer')}> Customer </Button>
-        </ButtonGroup>;
+        </ButtonGroup>
       </div>
       <Outlet />
     </>

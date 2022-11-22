@@ -14,8 +14,13 @@ h2.I{
     text-align: left;
 }
 
-/* overrides .amplify-button so that the default button state is transparent*/
-.amplify-button {
+/* overrides .amplify-button so that the default button state is transparent */
+.amplify-button.RestaurantCustomer {
+    background-color: transparent;
+  }
+
+/* overrides .amplify-button so that the default button state is transparent */
+.amplify-button.LogoHome {
     background-color: transparent;
   }
 
@@ -25,6 +30,6 @@ h2.I{
   }
 
 /* overrides .amplify-button so that the last button clicked is transparent*/
-  .amplify-button:focus {
+.amplify-button:focus {
     background-color: transparent;
   }
