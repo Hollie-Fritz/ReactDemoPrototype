@@ -1,16 +1,13 @@
 /*Work Cited: https://ui.docs.amplify.aws/react/components/button */
-.a {
-    margin-top: 100px;
-    margin-bottom : 50px;
-}
 
 /*To increase the closeness of the buttons to the text*/
-.I {
-    margin-bottom: -15px;
+.I-secondRow {
+  margin-top: 100px;
+  margin-bottom: -15px;
 }
 
 /*Overriding "I'm a" test to be to the left of the page*/
-h2.I{
+h2.I-secondRow{
     text-align: left;
 }
 

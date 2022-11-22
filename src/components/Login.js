@@ -16,8 +16,9 @@ export function Login() {
     }
   }, [route, navigate, from]);
   return (
-    <View className="auth-wrapper">
-      <Authenticator></Authenticator>
+    <View className="auth-wrapper"> #Signin box
+      <Authenticator>
+      </Authenticator>
     </View>
   );
 }
