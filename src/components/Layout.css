@@ -4,8 +4,14 @@
     margin-bottom : 50px;
 }
 
+/*To increase the closeness of the buttons to the text*/
 .I {
-    margin-left: 90px;
+    margin-bottom: -15px;
+}
+
+/*Overriding "I'm a" test to be to the left of the page*/
+h2.I{
+    text-align: left;
 }
 
 /* overrides .amplify-button so that the default button state is transparent*/
