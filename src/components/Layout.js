@@ -25,7 +25,8 @@ export function Layout() {
     <> 
       {/* <img src={logo} alt="logo"/> */}
       <div className = "LogoHome">
-      <Button onClick={() => navigate('/')}> <img src={logo} alt="logo"/> </Button></div>
+      <Button onClick={() => navigate('/')}> <img src={logo} alt="logo"/> </Button>
+      </div>
 
       <div className="I-secondRow">
       <h2 style={{color: "white"}}>I'm a </h2>
@@ -42,7 +43,7 @@ export function Layout() {
         </ButtonGroup>
       </div>
 
-      <Outlet /> #Sign-in box
+      <Outlet /> {/*  Sign-in box */}
     </>
   );
 }
