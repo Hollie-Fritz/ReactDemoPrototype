@@ -5,7 +5,7 @@ import { useAuthenticator, Button } from '@aws-amplify/ui-react';
 import { ButtonGroup } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-import logo from './img/SmallNuOrderLogo.png';
+import logo from '../img/SmallNuOrderLogo.png';
 import "./Layout.css";
 
 export function Layout() {

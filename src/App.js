@@ -2,10 +2,10 @@ import React from "react";
 
 import { Authenticator } from '@aws-amplify/ui-react';
 
-import { Home } from './components/Home';
+import { Home } from './components/home/Home';
 import { Login } from './components/Login';
-import { Customer } from './components/Customer';
-import { Layout } from './components/Layout';
+import { Customer } from './components/customers/Customer';
+import { Layout } from './components/layout/Layout';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
