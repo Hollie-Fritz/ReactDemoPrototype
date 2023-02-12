@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from "react-bootstrap"
-import { Navigate, Route, Routes, Link } from 'react-router-dom';
+import { Navigate,  BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -8,6 +8,9 @@ import Contact from './pages/Contact';
 import Signin from './pages/Signin';
 import Search from './pages/Search';
 import { Login } from './components/Login';
+import Owner  from './components/Owner';
+import { Authenticator } from '@aws-amplify/ui-react';
+
 
 let App = () => {
   return (
@@ -23,15 +26,17 @@ let App = () => {
           <Link to="/contact">Contact</Link> |
           <Link to="/search">Search</Link>
         </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Navigate to='/' replace />} />
-        </Routes>
+        <Authenticator.Provider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/owner" element={<Owner />} />
+              <Route path="*" element={<Navigate to='/' replace />} />
+            </Routes>
+        </Authenticator.Provider>
       </div>
     </ThemeProvider>
   );
