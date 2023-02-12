@@ -1,0 +1,27 @@
+.home_bg_image{
+    background-image: url(/src/assests/NuOrderHomeBG.jpg); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+
+}
+
+.logoHome:hover{
+    box-shadow: 0 0 20px #514f4f;
+}
+
+.logoHome{
+    transition: 0.3s ease-in-out;
+    width: 100%;
+    height: 60px;
+    object-fit: scale-down;
+    resize: contain;
+}
+
+#shadow{
+      box-shadow: none !important;
+}
+
+
+
