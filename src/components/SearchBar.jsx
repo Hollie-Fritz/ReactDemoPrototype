@@ -6,12 +6,10 @@ import {
   Form,
   Stack,
   Row,
-  Col,
-  Card
+  Col
 } from "react-bootstrap";
 import "../pages/Home.css";
 import { DropdownSubmenu} from "react-bootstrap-submenu";
-import { useNavigate } from "react-router-dom";
 
 // const Restaurants = () {
 //     let navigate = useNavigate();
@@ -25,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 //             map: "Open Map",
 //             category: "Chinese",
 //             reviews: "Reviews"
-//             // stars: 
+//             // stars:
 //         },    ];
 
 //         const renderCard = (card, index) => {

@@ -1,11 +1,10 @@
 import React from 'react';
 import { ThemeProvider } from "react-bootstrap"
-import { Navigate,  BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { Navigate, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Signin from './pages/Signin';
 import Search from './pages/Search';
 import { Login } from './components/Login';
 import Owner  from './components/Owner';

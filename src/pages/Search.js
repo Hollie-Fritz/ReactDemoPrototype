@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Navbar } from "react-bootstrap";
+import { Container, Navbar } from "react-bootstrap";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router-dom";
 import logo from "../assests/NuOrderLogoLarge.png";
@@ -24,7 +24,7 @@ const Search = () => {
             <SearchBar />
           </div>
       </Container>
-      
+
     </>
   );
 };

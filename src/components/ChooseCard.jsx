@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthenticator} from '@aws-amplify/ui-react';
 import { Container, Col, Button, Row, Card} from 'react-bootstrap';
 import "../pages/Home.css"
