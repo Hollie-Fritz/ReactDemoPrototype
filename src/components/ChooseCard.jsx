@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthenticator} from '@aws-amplify/ui-react';
-import { Container, Col, Button, Row, Card} from 'react-bootstrap';
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import { Container, Col, Button, Row, Card } from 'react-bootstrap';
 import "../pages/Home.css"
 
 import '@aws-amplify/ui-react/styles.css';
 
-let Counter = () => {
+let ChooseCard = () => {
 
     const { route, signOut } = useAuthenticator((context) => [
         context.route,
@@ -42,7 +42,7 @@ let Counter = () => {
                                 <Button variant='success' className='m-1' onClick={() => logOut()}> Logout </Button>
                                 )
                             }
-                                <Button variant='success' className='m-1' href='./search'>Customer</Button>
+                                <Button variant='success' className='m-1' href='./customer'>Customer</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -51,4 +51,4 @@ let Counter = () => {
     )
 };
 
-export default Counter;
+export default ChooseCard;
