@@ -9,6 +9,8 @@ import Search from "./pages/Search";
 import { Login } from "./components/Login";
 import Owner from "./components/Owner";
 import { Authenticator } from "@aws-amplify/ui-react";
+import PersistResForm from "./owner/PersistResForm";
+import ViewOrders from "./pages/ViewOrders";
 
 let App = () => {
   return (
@@ -29,6 +31,8 @@ let App = () => {
             <Route path="/search" element={<Search />} />
             <Route path="/login" element={<Login />} />
             <Route path="/owner" element={<Owner />} />
+            <Route path="/create" element={<PersistResForm />} />
+            <Route path="/orders" element={<ViewOrders />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Authenticator.Provider>

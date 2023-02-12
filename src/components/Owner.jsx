@@ -1,25 +1,21 @@
-// import React from 'react'
-
-// let Owner = () => {
-
-//     return (
-//         <>
-//         <div> hello you are an owner</div>
-//         </>
-//     )
-// }
-
-// export default Owner;
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import PersistResForm from "../owner/PersistResForm";
+import { Button, Stack } from "react-bootstrap";
 
 function Owner() {
   return (
-    <div className="Owner">
-      <PersistResForm />
-    </div>
+    <Stack className="Owner" gap={1}>
+      <div>
+        <Button variant="success" className="m-1" href="./create">
+          Webpage Creation
+        </Button>
+      </div>
+      <div>
+        <Button variant="success" className="m-1" href="./orders">
+          Check Orders
+        </Button>
+      </div>
+    </Stack>
   );
 }
 export default Owner;
