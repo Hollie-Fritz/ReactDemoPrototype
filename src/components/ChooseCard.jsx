@@ -1,6 +1,4 @@
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useAuthenticator , Button as button} from '@aws-amplify/ui-react';
 import { Container, Col, Button, Row, Card} from 'react-bootstrap';
 import "../pages/Home.css"
 
@@ -37,8 +35,8 @@ let Counter = () => {
                         <Card md={4} className='shadow-lg' id="shadow" style={{marginTop: 50, marginBottom: 50, backgroundColor: 'transparent'}}>
                             <Card.Body>
                                 <p className='display-6' style={{color: 'white'}}>I am...</p>
-                                <Button variant='success' className='m-1' href='./search'>Customer</Button> 
-                                <Button variant='success' className='m-1'>Restaurateaur</Button>
+                                <Button variant='success' className='m-1' href='./search'> Customer </Button> 
+                                <Button variant='success' className='m-1' href='./signin'> Restaurateaur </Button>
 
 {/* 
                                 {route !== 'authenticated' ? (

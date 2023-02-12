@@ -45,8 +45,6 @@ import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
   return (
     <>
-
-
       <Container fluid="sm">
         <Row className="justify-content-lg-center">
             <Col  xs lg="6">

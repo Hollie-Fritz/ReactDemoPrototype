@@ -5,6 +5,7 @@ import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Signin from './pages/Signin';
 import Search from './pages/Search';
 import { Login } from './components/Login';
 
@@ -26,6 +27,7 @@ let App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/search" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Navigate to='/' replace />} />
