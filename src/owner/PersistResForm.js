@@ -27,9 +27,7 @@ function PersistResForm() {
 
   //state object that contains all the fields for ResMenu
   const [menuItems, setMenuItems] = useState([
-    { menuItem: "",
-     menuPrice: "",
-      menuDesc: "" },
+    { menuItem: "", menuPrice: "", menuDesc: "" },
   ]);
 
   //titles that appear at the top left of the form
@@ -69,7 +67,8 @@ function PersistResForm() {
         onClick={() => {
           // enables prev button to work by decrementing
           setPage((currPage) => currPage - 1);
-        }}>
+        }}
+      >
         Prev
       </Button>
       <Button
@@ -82,7 +81,8 @@ function PersistResForm() {
             // enables next button to work by incrementing
             setPage((currPage) => currPage + 1);
           }
-        }}>
+        }}
+      >
         {/* Conditionally render the button to display submit
         on the last page and next on all other pages */}
         {page === FormTitles.length - 1 ? "Submit" : "Next"}

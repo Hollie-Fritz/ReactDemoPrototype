@@ -6,10 +6,10 @@ import {
   Form,
   Stack,
   Row,
-  Col
+  Col,
 } from "react-bootstrap";
 import "../pages/Home.css";
-import { DropdownSubmenu} from "react-bootstrap-submenu";
+import { DropdownSubmenu } from "react-bootstrap-submenu";
 
 // const Restaurants = () {
 //     let navigate = useNavigate();
@@ -45,37 +45,37 @@ const SearchBar = () => {
     <>
       <Container fluid="sm">
         <Row className="justify-content-lg-center">
-            <Col  xs lg="6">
-        <Stack direction="horizontal" gap={3}>
-          <div>
-            <Dropdown>
-              <Dropdown.Toggle variant="info" id="dropdown-basic">
-                Filter
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Top Rated</Dropdown.Item>
-                <DropdownSubmenu title="Cuisine Type">
-                    <Dropdown.Item href="#/action-2">Chinese</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Thai</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Italian</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Fast Food</Dropdown.Item>
-                </DropdownSubmenu>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-          <div>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-dark">Search</Button>
-          </Form>
-          </div>
-        </Stack>
-        </Col>
+          <Col xs lg="6">
+            <Stack direction="horizontal" gap={3}>
+              <div>
+                <Dropdown>
+                  <Dropdown.Toggle variant="info" id="dropdown-basic">
+                    Filter
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Top Rated</Dropdown.Item>
+                    <DropdownSubmenu title="Cuisine Type">
+                      <Dropdown.Item href="#/action-2">Chinese</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">Thai</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">Italian</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">Fast Food</Dropdown.Item>
+                    </DropdownSubmenu>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+              <div>
+                <Form className="d-flex">
+                  <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                  />
+                  <Button variant="outline-dark">Search</Button>
+                </Form>
+              </div>
+            </Stack>
+          </Col>
         </Row>
       </Container>
     </>

@@ -20,11 +20,10 @@ const Search = () => {
         </Container>
       </Navbar>
       <Container>
-          <div>
-            <SearchBar />
-          </div>
+        <div>
+          <SearchBar />
+        </div>
       </Container>
-
     </>
   );
 };

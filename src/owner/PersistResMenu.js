@@ -48,7 +48,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
               name="menuItem"
               placeholder="Enter menu item name"
               value={menu.menuItem}
-              onChange={(e) => handleChange(index, e)}></Form.Control>
+              onChange={(e) => handleChange(index, e)}
+            ></Form.Control>
           </Form.Group>
           <Form.Group controlId="formItemPrice" className="col col-sm-4">
             <Form.Label>Price</Form.Label>
@@ -59,7 +60,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 name="menuPrice"
                 placeholder="Enter price"
                 value={menu.menuPrice}
-                onChange={(e) => handleChange(index, e)}></Form.Control>
+                onChange={(e) => handleChange(index, e)}
+              ></Form.Control>
             </InputGroup>
           </Form.Group>
           <Form.Group controlId="formItemDesc" className="col col-sm-4">
@@ -73,7 +75,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 name="menuDesc"
                 placeholder="Enter menu item description"
                 value={menu.menuDesc}
-                onChange={(e) => handleChange(index, e)}></Form.Control>
+                onChange={(e) => handleChange(index, e)}
+              ></Form.Control>
             </InputGroup>
           </Form.Group>
         </Row>

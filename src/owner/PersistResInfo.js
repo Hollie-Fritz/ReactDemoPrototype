@@ -27,7 +27,7 @@ function PersistResInfo({ formData, setFormData }) {
         <Form.Group controlId="phone" className="col col-sm-6">
           <Form.Label>Phone Number</Form.Label>
           <InputGroup>
-          {/* country code 1 for US */}
+            {/* country code 1 for US */}
             <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
             <Form.Control
               aria-label="Phone Number"
@@ -91,7 +91,8 @@ function PersistResInfo({ formData, setFormData }) {
             value={formData.usstate}
             onChange={(event) =>
               setFormData({ ...formData, usstate: event.target.value })
-            }>
+            }
+          >
             <option value="Choose...">Choose...</option>
             <option value="WA">WA</option>
           </Form.Select>
@@ -119,7 +120,8 @@ function PersistResInfo({ formData, setFormData }) {
             value={formData.openhours}
             onChange={(event) =>
               setFormData({ ...formData, openhours: event.target.value })
-            }>
+            }
+          >
             <option value="Choose...">Choose...</option>
             <option value="0">00:00</option>
             <option value="0:30">00:30</option>
@@ -181,7 +183,8 @@ function PersistResInfo({ formData, setFormData }) {
             value={formData.closehours}
             onChange={(event) =>
               setFormData({ ...formData, closehours: event.target.value })
-            }>
+            }
+          >
             <option value="Choose...">Choose...</option>
             <option value="0">00:00</option>
             <option value="0:30">00:30</option>

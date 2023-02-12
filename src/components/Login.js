@@ -1,25 +1,26 @@
 import { useEffect } from "react";
 
-import { Authenticator, useAuthenticator, View } from '@aws-amplify/ui-react';
+import { Authenticator, useAuthenticator, View } from "@aws-amplify/ui-react";
 
-import '@aws-amplify/ui-react/styles.css';
+import "@aws-amplify/ui-react/styles.css";
 
-import { useNavigate, useLocation } from 'react-router';
+import { useNavigate, useLocation } from "react-router";
 
 export function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
   const location = useLocation();
   const navigate = useNavigate();
-  let from = location.state?.from?.pathname || '/owner';  //redirects to "/" if successful
+  let from = location.state?.from?.pathname || "/owner"; //redirects to "/" if successful
   useEffect(() => {
-    if (route === 'authenticated') {
+    if (route === "authenticated") {
       navigate(from, { replace: true });
     }
   }, [route, navigate, from]);
   return (
-    <View className="auth-wrapper"> {/*  Sign-in box */}
-      <Authenticator>
-      </Authenticator>
+    <View className="auth-wrapper">
+      {" "}
+      {/*  Sign-in box */}
+      <Authenticator></Authenticator>
     </View>
   );
 }
