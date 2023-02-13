@@ -32,28 +32,24 @@ function PersistResForm() {
   ]);
 
   const userAction = async () => {
-    console.log("submitting");
     //let user = await Auth.currentSession();
     // let token = user.getAccessToken().getJwtToken();
     let nameJson = await Auth.currentUserInfo();
     let name = nameJson["username"];
     console.log(JSON.stringify(nameJson));
 
+    const newMenu = [];
+    for (let i = 0; i < menuItems.length; i++) {
+      newMenu[i] = {
+        "foodId": menuItems[i]["menuItem"],
+        "foodName": menuItems[i]["menuItem"],
+        "foodType": menuItems[i]["menuItem"],
+        "foodPrice": menuItems[i]["menuPrice"]
+      }
+    }
+
     const data = {
-      Food: [
-        {
-          foodName: "sandwich",
-          Price: "$14.00",
-          foodType: "main",
-          foodID: "124",
-        },
-        {
-          foodName: "lasagna",
-          Price: "$2.00",
-          foodType: "sides",
-          foodID: "6790",
-        },
-      ],
+      Food: newMenu,
       Phone: formData.phoneNo,
       resID: 1,
       Address:
@@ -71,14 +67,18 @@ function PersistResForm() {
       Name: formData.resName,
     };
 
+    console.log("submitting, json listed below");
+    console.log(JSON.stringify(data));
+
     await fetch(
       "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant",
       {
+        mode: 'no-cors',
         method: "POST",
         headers: {
           Accept: "application/json",
         },
-        body: data,
+        body: JSON.stringify(data)
       }
     )
       .then((response) => response.json())
