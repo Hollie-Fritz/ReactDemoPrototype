@@ -71,20 +71,19 @@ function PersistResForm() {
     console.log(JSON.stringify(data));
 
     await fetch(
-      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant",
+      'https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant',
       {
-        mode: 'no-cors',
         method: "POST",
         headers: {
-          Accept: "application/json",
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       }
     )
-      .then((response) => response.json())
-      .then((data) => {
+    .then((response) => response.json())
+    .then((data) => {
         console.log(data);
-      });
+    });
   };
 
   //titles that appear at the top left of the form
