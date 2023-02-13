@@ -14,6 +14,7 @@ let Counter = () => {
       ]);
       const navigate = useNavigate();
 
+      
     function logOut() {
         signOut();
         navigate('/');
