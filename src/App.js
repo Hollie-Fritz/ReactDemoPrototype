@@ -9,6 +9,7 @@ import { Customer } from './components/customer/Customer';
 import { Login } from './components/Login';
 import Owner  from './components/Owner';
 import { Authenticator } from '@aws-amplify/ui-react';
+import PageNotFound from './pages/PageNotFound';
 
 
 let App = () => {
@@ -20,12 +21,12 @@ let App = () => {
     >
       <div>
 
-        <nav>
+        {/* <nav>
           <Link to="/">Home</Link> |
           <Link to="/about">About</Link> |
           <Link to="/contact">Contact</Link> |
           <Link to="/search">Search</Link>
-        </nav>
+        </nav> */}
 
         <Authenticator.Provider>
             <Routes>
@@ -35,7 +36,7 @@ let App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/owner" element={<Owner />} />
               <Route path="/customer" element={<Customer />} />
-              <Route path="*" element={<Navigate to='/' replace />} />
+              <Route path="*" element={<PageNotFound/>} />
             </Routes>
         </Authenticator.Provider>
       </div>
