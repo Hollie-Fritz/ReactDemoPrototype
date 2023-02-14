@@ -51,7 +51,6 @@ function PersistResForm() {
     const data = {
       Food: newMenu,
       Phone: formData.phoneNo,
-      resID: 1,
       Address:
         formData.address1 +
         " " +
@@ -65,6 +64,8 @@ function PersistResForm() {
       Cuisine: formData.resCuisine,
       userID: name,
       Name: formData.resName,
+      OpenHours: formData.openhours,
+      CloseHours: formData.closehours
     };
 
     console.log("submitting, json listed below");
@@ -90,7 +91,7 @@ function PersistResForm() {
   const FormTitles = [
     "Restaurant Information",
     "Restaurant Menu",
-    "Review Information",
+    "Review Restaurant Information:",
   ];
 
   //check which page you are in
@@ -106,7 +107,7 @@ function PersistResForm() {
         <PersistResMenu menuItems={menuItems} setMenuItems={setMenuItems} />
       );
     } else {
-      return <PersistResReview formData={formData} setFormData={setFormData} />;
+      return <PersistResReview formData={formData} menuItems={menuItems} />;
     }
   };
 
