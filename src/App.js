@@ -1,37 +1,44 @@
 import React from "react";
-//need for Authentication
-import { Authenticator } from '@aws-amplify/ui-react';
+import { ThemeProvider } from "react-bootstrap";
+import { Navigate, Route, Routes, Link } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Search from "./pages/Search";
+import { Login } from "./components/Login";
+import Owner from "./components/Owner";
+import { Authenticator } from "@aws-amplify/ui-react";
+import PersistResForm from "./owner/PersistResForm";
+import ViewOrders from "./pages/ViewOrders";
 
-import { Home } from './components/home/Home';
-import { Login } from './components/Login';
-import { Customer } from './components/customers/Customer';
-import { Layout } from './components/layout/Layout';
-
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import './App.css';
-
-function MyRoutes() {
+let App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/customer" element={<Customer />}/> 
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider
+      breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+      minBreakpoint="xxs"
+    >
+      <div>
+        <nav>
+          <Link to="/">Home</Link> |<Link to="/about">About</Link> |
+          <Link to="/contact">Contact</Link> |<Link to="/search">Search</Link>
+        </nav>
+        <Authenticator.Provider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/owner" element={<Owner />} />
+            <Route path="/create" element={<PersistResForm />} />
+            <Route path="/orders" element={<ViewOrders />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Authenticator.Provider>
+      </div>
+    </ThemeProvider>
   );
-}
+};
 
-function App() {
-  return (
-    <div>
-    <Authenticator.Provider>
-      <MyRoutes />
-    </Authenticator.Provider>
-    </div>
-  );
-}
 export default App;
