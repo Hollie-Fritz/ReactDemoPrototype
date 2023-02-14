@@ -7,6 +7,7 @@ function PersistResReview({ formData, menuItems }) {
     <Container className="d-flex vh-50">
       <Row className="m-auto align-self-center">
         <div>
+          {/* outer card */}
           <Card style={{ width: "30rem" }}>
             <Card.Header as="h1" className="text-center">
               {formData.resName}
@@ -15,6 +16,7 @@ function PersistResReview({ formData, menuItems }) {
               <Card.Title as="h4" className="text-center">
                 Restaurant General Information:
               </Card.Title>
+              {/* inner card one */}
               <Card style={{ width: "25rem" }}>
                 <Card.Text>
                   <nobr className="fw-bold">Address: </nobr>
@@ -32,6 +34,7 @@ function PersistResReview({ formData, menuItems }) {
                   <nobr className="fw-bold">Cuisine Type: </nobr>
                   {formData.resCuisine}
                 </Card.Text>
+                {/* end inner card one */}
               </Card>
               <br></br>
               <Card.Title as="h4" className="text-center">
@@ -39,6 +42,7 @@ function PersistResReview({ formData, menuItems }) {
               </Card.Title>
               {menuItems.map((menuItems) => {
                 return (
+                  // inner card two
                   <Card style={{ width: "25rem" }}>
                     <Card.Body>
                       <Card.Text>
@@ -54,10 +58,12 @@ function PersistResReview({ formData, menuItems }) {
                         {menuItems.menuDesc}
                       </Card.Text>
                     </Card.Body>
+                    {/* end inner card two */}
                   </Card>
                 );
               })}
             </Card.Body>
+            {/* end card */}
           </Card>
         </div>
       </Row>
