@@ -1,7 +1,6 @@
 import Card from "react-bootstrap/Card";
 import { Row, Container } from "react-bootstrap";
 
-//testing data populating from json
 function PersistResReview({ formData, menuItems }) {
   return (
     <Container className="d-flex vh-50">

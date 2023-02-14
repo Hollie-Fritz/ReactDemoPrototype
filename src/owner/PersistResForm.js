@@ -32,13 +32,14 @@ function PersistResForm() {
   ]);
 
   const userAction = async () => {
-    //let user = await Auth.currentSession();
-    // let token = user.getAccessToken().getJwtToken();
     let nameJson = await Auth.currentUserInfo();
     let name = nameJson["username"];
     console.log(JSON.stringify(nameJson));
 
     const newMenu = [];
+
+    //fix required, need to get on same page about data
+    //then edit this to reflect our final data
     for (let i = 0; i < menuItems.length; i++) {
       newMenu[i] = {
         foodId: menuItems[i]["menuItem"],
@@ -48,6 +49,7 @@ function PersistResForm() {
       };
     }
 
+    //data to be sent in the format of our DynamoDB table
     const data = {
       Food: newMenu,
       Phone: formData.phoneNo,
@@ -81,6 +83,7 @@ function PersistResForm() {
         body: JSON.stringify(data),
       }
     )
+    //check if data was correctly sent in console log
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -134,6 +137,7 @@ function PersistResForm() {
             //logs the data
             console.log(formData);
             console.log(menuItems);
+            //sends the data to DynamoDB by invoking userAction();
             userAction();
           } else {
             // enables next button to work by incrementing
