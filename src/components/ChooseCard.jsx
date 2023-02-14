@@ -43,6 +43,14 @@ let Counter = () => {
             }}
           >
             <Card.Body>
+              {route === "authenticated" ? (
+                <Button
+                  variant="success"
+                  className="m-1"
+                  onClick={() => navigate("/owner")}
+                >Restauranteur
+                </Button>
+              ):""}
               {route !== "authenticated" ? (
                 <Button
                   variant="success"
