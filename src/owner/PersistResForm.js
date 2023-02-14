@@ -41,11 +41,11 @@ function PersistResForm() {
     const newMenu = [];
     for (let i = 0; i < menuItems.length; i++) {
       newMenu[i] = {
-        "foodId": menuItems[i]["menuItem"],
-        "foodName": menuItems[i]["menuItem"],
-        "foodType": menuItems[i]["menuItem"],
-        "foodPrice": menuItems[i]["menuPrice"]
-      }
+        foodId: menuItems[i]["menuItem"],
+        foodName: menuItems[i]["menuItem"],
+        foodType: menuItems[i]["menuItem"],
+        foodPrice: menuItems[i]["menuPrice"],
+      };
     }
 
     const data = {
@@ -65,26 +65,26 @@ function PersistResForm() {
       userID: name,
       Name: formData.resName,
       OpenHours: formData.openhours,
-      CloseHours: formData.closehours
+      CloseHours: formData.closehours,
     };
 
     console.log("submitting, json listed below");
     console.log(JSON.stringify(data));
 
     await fetch(
-      'https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant',
+      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant",
       {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       }
     )
-    .then((response) => response.json())
-    .then((data) => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
-    });
+      });
   };
 
   //titles that appear at the top left of the form
@@ -145,6 +145,11 @@ function PersistResForm() {
         on the last page and next on all other pages */}
         {page === FormTitles.length - 1 ? "Submit" : "Next"}
       </Button>
+      {page === FormTitles.length - 1 ? (
+        <Button variant="success" className="m-1" href="./owner">
+          Go Back to Options
+        </Button>
+      ) : ("")}
     </div>
   );
 }
