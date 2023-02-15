@@ -20,14 +20,6 @@ let App = () => {
       minBreakpoint="xxs"
     >
       <div>
-
-        {/* <nav>
-          <Link to="/">Home</Link> |
-          <Link to="/about">About</Link> |
-          <Link to="/contact">Contact</Link> |
-          <Link to="/search">Search</Link>
-        </nav> */}
-
         <Authenticator.Provider>
             <Routes>
               <Route path="/" element={<Home />} />

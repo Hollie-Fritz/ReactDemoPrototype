@@ -26,7 +26,7 @@ let NavBarHome = () =>  {
                         <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Sign Up</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.3">Search Restaurant</NavDropdown.Item>
+                        <NavDropdown.Item href="/customer">Search Restaurant</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                     </Navbar.Collapse>

@@ -9,3 +9,7 @@
     height: fit-content;
     overflow-y: hidden !important;
 }
+
+.row-height {
+    height: 100rem !important;
+  }

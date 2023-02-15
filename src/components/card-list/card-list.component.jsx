@@ -1,12 +1,17 @@
-import './card-list.styles.css';
-import Card from '../card/card.component';
+import "./card-list.styles.css";
+import Card from "../card/card.component";
+import { Container, Row, Col } from "react-bootstrap";
 
 const CardList = ({ restaurants }) => (
-    <div className='card-list'> 
+  <>
+    <Container fluid>
+      <Row xs={2} md={3} lg={4}>
         {restaurants.map((restaurant) => {
-            return <Card restaurant={restaurant} />;
+          return <Card restaurant={restaurant} />;
         })}
-    </div>
+      </Row>
+    </Container>
+  </>
 );
 
 export default CardList;

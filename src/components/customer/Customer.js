@@ -1,79 +1,66 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import CardList from '../card-list/card-list.component';
-import SearchBox from '../search-box/search-box.component';
+import React from "react";
+import { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import CardList from "../card-list/card-list.component";
+import NavBarHome from "../NavBarHome";
+import SearchBox from "../search-box/search-box.component";
 
 import "./Customer.css";
 
 const Search = () => {
-  const [searchField, setSearchField] = useState('');
-  const [selectedOption, setSelectedOption] = useState('name'); // default selected option is name
+  const [searchField, setSearchField] = useState("");
   const [restaurants, setRestaurants] = useState([]);
-  const [filteredRestaurants, setFilterRestaurants] = useState([]);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      let url = '';
-      if (selectedOption === 'name') {
-        url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant?name=${searchField}`;
-      } else {
-        url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant?cuisine=${searchField}`;
-      }
+      let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant?name=${searchField}`;
       const response = await fetch(url);
       const data = await response.json();
       setRestaurants(data);
       console.log(data);
     };
     fetchData();
-  }, [searchField, selectedOption]);
+  }, [searchField]);
 
   useEffect(() => {
-    const newFilteredRestaurants = restaurants.filter(restaurant => {
-      return selectedOption === 'name'
-        ? restaurant.Name.toLocaleLowerCase().includes(searchField)
-        : restaurant.Cuisine.toLocaleLowerCase().includes(searchField);
-    });
-    setFilterRestaurants(newFilteredRestaurants);
-    setNotFound(newFilteredRestaurants.length === 0 && searchField !== '');
-  }, [restaurants, searchField, selectedOption]);
+    setNotFound(restaurants.length === 0 && searchField !== "");
+  }, [restaurants, searchField]);
 
-  const onSearchChange = event => {
+  const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
 
-  const onOptionChange = event => {
-    setSelectedOption(event.target.value);
-  };
-
   return (
-    <div className="App">
-      <h1 className="app-title"> </h1>
-      <select value={selectedOption} onChange={onOptionChange}>
-        <option value="name">Name</option>
-        <option value="cuisine">Cuisine</option>
-      </select>
+    <div>
       <SearchBox
-        className="restaurant-search-box"
         onChangeHandler={onSearchChange}
         placeholder="Search Restaurant"
       />
       {notFound ? (
         <h2>Restaurant cannot be found</h2>
       ) : (
-        <CardList restaurants={filteredRestaurants} />
+        <CardList restaurants={restaurants} className="card-grid" />
       )}
     </div>
   );
-
-}
+};
 
 export function Customer() {
-    return (
+  return (
+    <>
       <div>
-      <h1 className="header-h1"> Let's find some food! </h1>
-      <Search />
+        <NavBarHome />
       </div>
-    );
-  }
+      <Container fluid="md">
+        <Row className="justify-content-center">
+          <Col>
+          <h1> Let's find some food! </h1>
+          <Search  />
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+}
