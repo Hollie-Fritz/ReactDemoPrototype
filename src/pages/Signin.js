@@ -1,11 +1,11 @@
-import React from 'react';
-import '@aws-amplify/ui-react/styles.css';
-import "../pages/Home.css"
+import React from "react";
+import "@aws-amplify/ui-react/styles.css";
+import "../pages/Home.css";
 
-import awsExports from '../aws-exports';
+import awsExports from "../aws-exports";
 
-import { Amplify } from 'aws-amplify'
-import { withAuthenticator, Button } from '@aws-amplify/ui-react';;
+import { Amplify } from "aws-amplify";
+import { withAuthenticator, Button } from "@aws-amplify/ui-react";
 
 Amplify.configure(awsExports);
 
