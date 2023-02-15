@@ -1,16 +1,20 @@
-import React from "react";
-import { ThemeProvider } from "react-bootstrap";
-import { Navigate, Route, Routes, Link } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+
+import React from 'react';
+import { ThemeProvider } from "react-bootstrap"
+import { Navigate,  BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import './App.css';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import { Customer } from './components/customer/Customer';
+import { Login } from './components/Login';
+import Owner  from './components/Owner';
+import { Authenticator } from '@aws-amplify/ui-react';
+import PageNotFound from './pages/PageNotFound';
 import Search from "./pages/Search";
-import { Login } from "./components/Login";
-import Owner from "./components/Owner";
-import { Authenticator } from "@aws-amplify/ui-react";
 import PersistResForm from "./owner/PersistResForm";
 import ViewOrders from "./pages/ViewOrders";
+
 
 let App = () => {
   return (
@@ -33,7 +37,8 @@ let App = () => {
             <Route path="/owner" element={<Owner />} />
             <Route path="/create" element={<PersistResForm />} />
             <Route path="/orders" element={<ViewOrders />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/customer" element={<Customer />} />
+             <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Authenticator.Provider>
       </div>
