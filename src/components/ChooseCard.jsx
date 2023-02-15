@@ -71,7 +71,7 @@ let ChooseCard = () => {
                   Logout{" "}
                 </Button>
               )}
-              <Button variant="success" className="m-1" href="./search">
+              <Button variant="success" className="m-1" href="./customer">
                 Customer
               </Button>
             </Card.Body>
