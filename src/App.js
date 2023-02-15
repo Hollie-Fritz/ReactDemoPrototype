@@ -21,7 +21,7 @@ let App = () => {
       <div>
         <nav>
           <Link to="/">Home</Link> |<Link to="/about">About</Link> |
-          <Link to="/contact">Contact</Link> |<Link to="/search">Search</Link>
+          <Link to="/contact">Contact</Link> |<Link to="/customer">Search</Link>
         </nav>
         <Authenticator.Provider>
           <Routes>

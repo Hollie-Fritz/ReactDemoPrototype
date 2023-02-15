@@ -36,7 +36,7 @@ let NavBarHome = () => {
                       Sign Up
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.3">
+                    <NavDropdown.Item href="/customer">
                       Search Restaurant
                     </NavDropdown.Item>
                   </NavDropdown>
