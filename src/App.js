@@ -14,6 +14,8 @@ import PageNotFound from './pages/PageNotFound';
 import Search from "./pages/Search";
 import PersistResForm from "./owner/PersistResForm";
 import ViewOrders from "./pages/ViewOrders";
+import Menu from "./pages/menu/Menu";
+import Cart from "./pages/cart/Cart";
 
 
 let App = () => {
@@ -38,6 +40,8 @@ let App = () => {
             <Route path="/create" element={<PersistResForm />} />
             <Route path="/orders" element={<ViewOrders />} />
             <Route path="/customer" element={<Customer />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/cart" element={<Cart/>} />
              <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Authenticator.Provider>
