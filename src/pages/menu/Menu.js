@@ -13,9 +13,13 @@ const Menu = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+
+  //does not work
   const Globalstate = useContext(Cartcontext);
   const dispatch = Globalstate.dispatch;
   console.log(Globalstate);
+
   return (
     <div className="menu">
       {data.map((item, index) => {
