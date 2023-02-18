@@ -1,7 +1,9 @@
 import "./card.styles.css";
 import { Card, CardGroup, ListGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
+  const navigate = useNavigate();
   return (
     <>
       <CardGroup className="my-1">
@@ -9,6 +11,7 @@ const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
           style={{ width: "18rem" }}
           className="card-container"
           key={userID}
+          onClick={() => navigate(`/${userID}`)}
         >
           <Card.Body>
             <Card.Title style={{ textAlign: "center" }}>{Name}</Card.Title>

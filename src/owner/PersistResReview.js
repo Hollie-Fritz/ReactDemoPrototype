@@ -62,7 +62,7 @@ function PersistResReview({ formData, menuItems }) {
                 );
               })}
             </Card.Body>
-            {/* end card */}
+            {/* end outer card */}
           </Card>
         </div>
       </Row>

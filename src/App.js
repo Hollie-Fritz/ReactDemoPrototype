@@ -14,7 +14,7 @@ import PageNotFound from './pages/PageNotFound';
 import Search from "./pages/Search";
 import PersistResForm from "./owner/PersistResForm";
 import ViewOrders from "./pages/ViewOrders";
-
+import ViewWebpage from './components/ViewWebPage';
 
 let App = () => {
   return (
@@ -38,6 +38,7 @@ let App = () => {
             <Route path="/create" element={<PersistResForm />} />
             <Route path="/orders" element={<ViewOrders />} />
             <Route path="/customer" element={<Customer />} />
+            <Route path="/vp" element={<ViewWebpage />} />
              <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Authenticator.Provider>
