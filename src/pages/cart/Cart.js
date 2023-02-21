@@ -14,7 +14,7 @@ const Cart = () => {
     <div className="cart">
       {state.map((item, index) => {
         return (
-          <div className="card" key={index}>
+          <div className="card-item" key={index}>
             <img src={item.image} alt="" />
             <p>{item.title}</p>
             <p>{item.quantity * item.price}</p>

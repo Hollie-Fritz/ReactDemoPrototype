@@ -41,7 +41,7 @@ let App = () => {
             <Route path="/orders" element={<ViewOrders />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="/cart" element={<Cart/>} />
+            <Route path="/cart" element={<Cart />} />
              <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Authenticator.Provider>

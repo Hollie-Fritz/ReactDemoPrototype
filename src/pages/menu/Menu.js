@@ -14,8 +14,6 @@ const Menu = () => {
     fetchData();
   }, []);
 
-
-  //does not work
   const Globalstate = useContext(Cartcontext);
   const dispatch = Globalstate.dispatch;
   console.log(Globalstate);
@@ -25,7 +23,7 @@ const Menu = () => {
       {data.map((item, index) => {
         item.quantity = 1;
         return (
-          <div className="card" key={index}>
+          <div className="card-food" key={index}>
             <img src={item.image} alt="" />
             <p>{item.title}</p>
             <h3>$. {item.price}</h3>

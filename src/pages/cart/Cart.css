@@ -4,24 +4,24 @@
     gap: 32px;
     padding: 128px;
   }
-  .cart .card {
+  .cart .card-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .cart .card img {
+  .cart .card-item img {
     width: 40px;
     height: 40px;
   }
-  .cart .card p {
+  .cart .card-item p {
     width: 200px;
   }
-  .cart .card .quantity {
+  .cart .card-item .quantity {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .cart .card .quantity p {
+  .cart .card-item .quantity p {
     width: 50px;
     text-align: center;
   }

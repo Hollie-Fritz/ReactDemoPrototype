@@ -4,12 +4,12 @@
     padding: 200px;
     gap: 150px;
   }
-  .menu .card {
+  .menu .card-food {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  .menu .card img {
+  .menu .card-food img {
     width: 100%;
     max-height: 300px;
   }
