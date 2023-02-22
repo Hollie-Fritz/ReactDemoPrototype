@@ -11,7 +11,7 @@ const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
           style={{ width: "18rem" }}
           className="card-container"
           key={userID}
-          onClick={() => navigate(`/${userID}`)}
+          onClick={() => navigate(`/r/${userID}`)}
         >
           <Card.Body>
             <Card.Title style={{ textAlign: "center" }}>{Name}</Card.Title>

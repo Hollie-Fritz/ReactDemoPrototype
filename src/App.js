@@ -39,6 +39,7 @@ let App = () => {
             <Route path="/orders" element={<ViewOrders />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/vp" element={<ViewWebpage />} />
+            <Route path="/r/:id" element={<ViewWebpage />}/>
              <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Authenticator.Provider>

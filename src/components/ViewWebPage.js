@@ -2,12 +2,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 
-function ViewWebpage() {
+function ViewWebpage(props) {
   const [count, setCount] = useState([]);
   const [restaurantId, setRestaurantId] = useState([""]);
 
   useEffect(() => {
-    let username = "jona";
+    let username = this.props.match.params.id;
     async function userAction() {
       await fetch(
         `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurantById?id=${username}`,
@@ -22,9 +22,7 @@ function ViewWebpage() {
         .then((response) => response.json())
         .then((data) => {
           console.log("data is below");
-          console.log(data);
-          setCount(data);
-          setRestaurantId(username);
+          console.log(JSON.stringify(data));
         });
     }
     userAction();
@@ -45,28 +43,7 @@ function ViewWebpage() {
                 </Card.Text>
               </Card.Body>
 
-            {count.map((temp) => {
-                return (
-                  // inner card two
-                  <Card style={{ width: "25rem" }}>
-                    <Card.Body>
-                      <Card.Text>
-                        <nobr className="fw-bold">Menu Item Name: </nobr>
-                        {temp["FoodId"]}
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Menu Item Price: </nobr>{" "}
-                        {/* {menuItems.menuPrice} */}
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Menu Item Description: </nobr>
-                        {/* {menuItems.menuDesc} */}
-                      </Card.Text>
-                    </Card.Body>
-                    {/* end inner card two */}
-                  </Card>
-                );
-              })}
+
               </Card>
           );
         })}
