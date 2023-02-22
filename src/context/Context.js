@@ -6,7 +6,7 @@ export const Context = (props) => {
   const reducer = (state, action) => {
     switch (action.type) {
       case "ADD":
-        const tempstate = state.filter((item) => action.payload.id === item.id);
+        const tempstate = state.filter((item) => action.payload.foodId === item.foodId);
         if (tempstate.length > 0) {
           return state;
         } else {
@@ -14,7 +14,7 @@ export const Context = (props) => {
         }
       case "INCREASE":
         const tempstate1 = state.map((item) => {
-          if (item.id === action.payload.id) {
+          if (item.foodId === action.payload.foodId) {
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
@@ -23,7 +23,7 @@ export const Context = (props) => {
         return tempstate1;
       case "DECREASE":
         const tempstate2 = state.map((item) => {
-          if (item.id === action.payload.id) {
+          if (item.foodId === action.payload.foodId) {
             return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
@@ -32,7 +32,7 @@ export const Context = (props) => {
         return tempstate2;
       case "REMOVE":
         const tempstate3 = state.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item.foodId !== action.payload.foodId
         );
 
         return tempstate3;

@@ -31,7 +31,7 @@ let App = () => {
         </nav>
         <Authenticator.Provider>
           <Routes>
-            <Route path="/r/:id" component={MenuOrder}/>
+            
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
@@ -41,9 +41,10 @@ let App = () => {
             <Route path="/create" element={<PersistResForm />} />
             <Route path="/orders" element={<ViewOrders />} />
             <Route path="/customer" element={<Customer />} />
-           
+            
+            <Route path="/menu" element={<MenuOrder />} />
             <Route path="/cart" element={<Cart />} />
-             <Route path="*" element={<PageNotFound/>} />
+            <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Authenticator.Provider>
       </div>

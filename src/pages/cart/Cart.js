@@ -8,16 +8,16 @@ const Cart = () => {
   const dispatch = Globalstate.dispatch;
 
   const total = state.reduce((total, item) => {
-    return total + item.price * item.quantity;
+    return total + item.foodPrice * item.quantity;
   }, 0);
   return (
     <div className="cart">
-      {state.map((item, index) => {
+      {state.map((item, foodId) => {
         return (
-          <div className="card-item" key={index}>
+          <div className="card-item" key={foodId}>
             <img src={item.image} alt="" />
-            <p>{item.title}</p>
-            <p>{item.quantity * item.price}</p>
+            <p>{item.foodName}</p>
+            <p>{(item.quantity * item.foodPrice).toFixed(2)}</p>
             <div className="quantity">
               <button
                 onClick={() => dispatch({ type: "INCREASE", payload: item })}>
