@@ -3,10 +3,11 @@ import "./Menu.css";
 import axios from "axios";
 import { Cartcontext } from "../../context/Context";
 
-const Menu = () => {
+const MenuOrder = () => {
+  const userId = this.props.match.params.id;
   const [data, setdata] = useState([]);
   const fetchData = async () => {
-    const response = await axios.get("https://fakestoreapi.com/products"); //need the menu API here
+    const response = await axios.get(`https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant/${userId}`); //need the menu API here https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant?name=${searchField}`
     setdata(response.data);
     console.log(data);
   };
@@ -37,4 +38,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default MenuOrder;
