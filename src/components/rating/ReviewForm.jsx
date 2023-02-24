@@ -2,13 +2,38 @@ import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 
-function ReviewForm({show, handleClose}) {
-  const [rating, setRating] = useState(0);
+function ReviewForm({ show, handleClose, userId, name }) {
+  const [rating, setRating] = useState(1);
   const [review, setReview] = useState("");
+  const [author, setAuthor] = useState("Anonymous");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    //Reset form after submission 
+
+    const data = {
+      author: author,
+      comment: review,
+      rating: rating,
+      resName: name,
+      userId: userId,
+    };
+
+    await fetch(
+      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      //check if data was correctly sent in console log
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+    //Reset form after submission
     setRating(0);
     setReview("");
     handleClose();
@@ -23,22 +48,27 @@ function ReviewForm({show, handleClose}) {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formRating">
-                <Form.Label>Author:</Form.Label>
-                <Form.Control type="text" placeholder="Your name"/>
-                <br/>
+              <Form.Label>Author:</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Your name"
+                value={author}
+                onChange={(event) => setAuthor(event.target.value)}
+              />
+              <br />
               <Form.Label>Rating:</Form.Label>
-                <Rating
-                  name="rating"
-                  count={5}
-                  value={rating}
-                  onChange={setRating}
-                  size={24}
-                  activeColor="#ffd700"
-                />
+              <Rating
+                name="rating"
+                count={5}
+                value={rating}
+                onChange={setRating}
+                size={24}
+                activeColor="#ffd700"
+              />
             </Form.Group>
             <Form.Group controlId="formReview">
               <Form.Label>Review:</Form.Label>
-              <br/>
+              <br />
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -46,7 +76,7 @@ function ReviewForm({show, handleClose}) {
                 onChange={(event) => setReview(event.target.value)}
               />
             </Form.Group>
-            <br/>
+            <br />
             <Button variant="primary" type="submit">
               Submit
             </Button>

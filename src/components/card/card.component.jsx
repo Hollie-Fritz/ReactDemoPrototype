@@ -2,6 +2,7 @@ import "./card.styles.css";
 import { Card, CardGroup, ListGroup, Button } from "react-bootstrap";
 import { useState } from "react";
 import ReviewForm from "../rating/ReviewForm";
+import ViewReview from "../rating/ViewReview";
 
 const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -12,6 +13,10 @@ const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
 
   const handleReviewFormClose = () => {
     setShowReviewForm(false);
+  }
+
+  const handleShowReviewClick = () =>{
+
   }
 
   return (
@@ -34,7 +39,12 @@ const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
             <Button variant="primary" type="submit" onClick={handleWriteReviewClick}>
             Leave Review
           </Button> 
-          <ReviewForm show={showReviewForm} handleClose={handleReviewFormClose} />
+          <br/><br/>
+          <Button variant="primary" type="submit" onClick={handleShowReviewClick}>
+            View Reviews
+          </Button> 
+          <ViewReview userId ={userID} />
+          <ReviewForm show={showReviewForm} handleClose={handleReviewFormClose} userId ={userID} name={Name}/>
           </Card.Body>
         </Card>
       </CardGroup>
