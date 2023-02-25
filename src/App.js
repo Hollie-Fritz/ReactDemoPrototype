@@ -14,7 +14,7 @@ import PageNotFound from './pages/PageNotFound';
 import Search from "./pages/Search";
 import PersistResForm from "./owner/PersistResForm";
 import ViewOrders from "./pages/ViewOrders";
-import ViewWebpage from './components/ViewWebPage';
+import ViewWebpage from './pages/ViewWebPage';
 
 let App = () => {
   return (

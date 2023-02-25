@@ -1,13 +1,31 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
-import { Row, Container } from "react-bootstrap";
 import { useParams } from "react-router";
+import { Row, Container, Button } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Cart from "./Cart";
 
 function ViewWebpage() {
   const { id } = useParams();
   const [resdata, setresdata] = useState({});
   const [fooddata, setfooddata] = useState([]);
+  const [cart, setcart] = useState({});
+  const [showCart, setShowCart] = useState(false);
+  const handleShowCart = () => {
+    setShowCart(true);
+  };
+  const handleShowCartClose = () => {
+    setShowCart(false);
+  };
+
+  // const [showViewReviewForm, setShowViewReviewForm] = useState(false);
+
+  // const handleShowReviewClick = () =>{
+  //   setShowViewReviewForm(true);
+  // }
+
+  // const handleViewReviewFormClose = () => {
+  //   setShowViewReviewForm(false);
+  // }
 
   useEffect(() => {
     let username = id;
@@ -37,7 +55,7 @@ function ViewWebpage() {
   return (
     <Container className="d-flex vh-50">
       <Row className="m-auto align-self-center">
-        <div class="row no-gutters">
+        <div classname="row no-gutters">
           {/* outer card */}
           <Card style={{ width: "30rem" }}>
             <Card.Header as="h1" className="text-center">
@@ -83,13 +101,34 @@ function ViewWebpage() {
                         <nobr className="fw-bold">Description: </nobr>
                         {item.foodDesc}
                       </Card.Text>
+                      <Button
+                        onClick={() => {
+                          var temp = cart;
+                          temp[item.foodId] = (temp[item.foodId] || 0) + 1;
+                          setcart(temp);
+                        }}
+                      >
+                        Add
+                      </Button>
                     </Card.Body>
                     {/* end inner card two */}
                   </Card>
                 );
               })}
+              <Button onClick={() => console.log(JSON.stringify(cart))}>
+                View Cart
+              </Button>
             </Card.Body>
             {/* end outer card */}
+            <Button variant="primary" type="submit" onClick={handleShowCart}>
+              View Cart
+            </Button>
+            <Cart
+              show={showCart}
+              handleClose={handleShowCartClose}
+              fooddata={fooddata}
+              cart={cart}
+            />
           </Card>
         </div>
       </Row>
