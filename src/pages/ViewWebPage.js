@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { Row, Container, Button } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import { Row, Container, Button, Card } from "react-bootstrap";
 import Cart from "./Cart";
 
 function ViewWebpage() {
@@ -17,15 +16,6 @@ function ViewWebpage() {
     setShowCart(false);
   };
 
-  // const [showViewReviewForm, setShowViewReviewForm] = useState(false);
-
-  // const handleShowReviewClick = () =>{
-  //   setShowViewReviewForm(true);
-  // }
-
-  // const handleViewReviewFormClose = () => {
-  //   setShowViewReviewForm(false);
-  // }
 
   useEffect(() => {
     let username = id;
@@ -55,7 +45,7 @@ function ViewWebpage() {
   return (
     <Container className="d-flex vh-50">
       <Row className="m-auto align-self-center">
-        <div classname="row no-gutters">
+        <div className="row no-gutters">
           {/* outer card */}
           <Card style={{ width: "30rem" }}>
             <Card.Header as="h1" className="text-center">
@@ -88,10 +78,10 @@ function ViewWebpage() {
               <Card.Title as="h4" className="text-center">
                 Menu Information:{" "}
               </Card.Title>
-              {fooddata.map((item) => {
+              {fooddata.map((item, test) => {
                 return (
                   // inner card two
-                  <Card style={{ width: "25rem" }}>
+                  <Card key={test} style={{ width: "25rem" }}>
                     <Card.Body>
                       <Card.Text>
                         <nobr className="fw-bold">{item.foodName}</nobr>

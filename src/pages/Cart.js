@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 import { Modal } from "react-bootstrap";
 
-const Cart = (show, handleClose, fooddata, cart) => {
+const Cart = ({show, handleClose, fooddata, cart}) => {
   return (
     <>
       <Modal show={show} onHide={handleClose} centered>
