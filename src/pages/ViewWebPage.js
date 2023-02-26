@@ -16,7 +16,6 @@ function ViewWebpage() {
     setShowCart(false);
   };
 
-
   useEffect(() => {
     let username = id;
     async function userAction() {
@@ -59,18 +58,20 @@ function ViewWebpage() {
               <Card style={{ width: "25rem" }}>
                 <Card.Text>
                   <nobr className="fw-bold">Address: </nobr>
-                  Restaurant Address: {resdata["Address"]}
+                  Restaurant Address: {resdata["address1"]}{" "}
+                  {resdata["address2"]}, {resdata["city"]}, {resdata["state"]}{" "}
+                  {resdata["zipCode"]}
                 </Card.Text>
                 <Card.Text>
-                  <nobr className="fw-bold">Phone:</nobr> 1-{resdata["Phone"]}
+                  <nobr className="fw-bold">Phone:</nobr> 1-{resdata["phone"]}
                 </Card.Text>
                 <Card.Text>
                   <nobr className="fw-bold">Hours: </nobr>
-                  {resdata["OpenHours"]} - {resdata["CloseHours"]}
+                  {resdata["openHours"]} - {resdata["closeHours"]}
                 </Card.Text>
                 <Card.Text>
                   <nobr className="fw-bold">Cuisine Type: </nobr>
-                  {resdata["Cuisine"]}
+                  {resdata["cuisine"]}
                 </Card.Text>
                 {/* end inner card one */}
               </Card>
@@ -87,10 +88,7 @@ function ViewWebpage() {
                         <nobr className="fw-bold">{item.foodName}</nobr>
                       </Card.Text>
                       <Card.Text>${item.foodPrice}</Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Description: </nobr>
-                        {item.foodDesc}
-                      </Card.Text>
+                      <Card.Text>{item.foodDesc}</Card.Text>
                       <Button
                         onClick={() => {
                           var temp = cart;
@@ -105,9 +103,6 @@ function ViewWebpage() {
                   </Card>
                 );
               })}
-              <Button onClick={() => console.log(JSON.stringify(cart))}>
-                View Cart
-              </Button>
             </Card.Body>
             {/* end outer card */}
             <Button variant="primary" type="submit" onClick={handleShowCart}>

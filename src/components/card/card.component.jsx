@@ -2,7 +2,18 @@ import "./card.styles.css";
 import { Card, CardGroup, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
+const CardComponent = ({
+  restaurant: {
+    userId,
+    name,
+    cuisine,
+    address1,
+    address2,
+    city,
+    state,
+    zipCode,
+  },
+}) => {
   const navigate = useNavigate();
   return (
     <>
@@ -10,15 +21,15 @@ const CardComponent = ({ restaurant: { userID, Name, Cuisine, Address } }) => {
         <Card
           style={{ width: "18rem" }}
           className="card-container"
-          key={userID}
-          onClick={() => navigate(`/r/${userID}`)}
+          key={userId}
+          onClick={() => navigate(`/r/${userId}`)}
         >
           <Card.Body>
-            <Card.Title style={{ textAlign: "center" }}>{Name}</Card.Title>
-            <Card.Text style={{ textAlign: "center" }}>{Cuisine}</Card.Text>
+            <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
+            <Card.Text style={{ textAlign: "center" }}>{cuisine}</Card.Text>
             <ListGroup className="list-group-flush">
               <ListGroup.Item style={{ textAlign: "center" }}>
-                {Address}
+                {address1} {address2}, {city}, {state} {zipCode}
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>

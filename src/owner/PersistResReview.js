@@ -56,6 +56,10 @@ function PersistResReview({ formData, menuItems }) {
                         <nobr className="fw-bold">Menu Item Description: </nobr>
                         {menuItems.menuDesc}
                       </Card.Text>
+                      <Card.Text>
+                        <nobr className="fw-bold">Menu Type: </nobr>
+                        {menuItems.menuType}
+                      </Card.Text>
                     </Card.Body>
                     {/* end inner card two */}
                   </Card>

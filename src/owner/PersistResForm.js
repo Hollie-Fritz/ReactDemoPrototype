@@ -28,7 +28,7 @@ function PersistResForm() {
 
   //state object that contains all the fields for ResMenu
   const [menuItems, setMenuItems] = useState([
-    { menuItem: "", menuPrice: "", menuDesc: "" },
+    { menuItem: "", menuPrice: "", menuDesc: "", menuType: "" },
   ]);
 
   const userAction = async () => {
@@ -44,31 +44,30 @@ function PersistResForm() {
       newMenu[i] = {
         foodId: menuItems[i]["menuItem"],
         foodName: menuItems[i]["menuItem"],
-        foodType: menuItems[i]["menuItem"],
+        foodType: menuItems[i]["menuType"],
         foodPrice: menuItems[i]["menuPrice"],
+        foodDesc: menuItems[i]["menuDesc"],
       };
     }
 
     //data to be sent in the format of our DynamoDB table
     const data = {
       Food: newMenu,
-      Phone: formData.phoneNo,
-      Address:
-        formData.address1 +
-        " " +
-        formData.address2 +
-        ", " +
-        formData.city +
-        " " +
-        formData.usstate +
-        " " +
-        formData.zip,
-      Cuisine: formData.resCuisine,
-      userID: name,
-      Name: formData.resName,
-      OpenHours: formData.openhours,
-      CloseHours: formData.closehours,
+      phone: formData.phoneNo,
+      address1: formData.address1,
+      address2: formData.address2,
+      city: formData.city,
+      state: formData.usstate,
+      zipCode: formData.zip,
+      cuisine: formData.resCuisine,
+      userId: name,
+      name: formData.resName,
+      openHours: formData.openhours,
+      closeHours: formData.closehours,
     };
+
+    // "resImageUrl": "null",
+    // "searchTerm": "mike MIKE MIKES mikes mike's",
 
     console.log("submitting, json listed below");
     console.log(JSON.stringify(data));
@@ -83,7 +82,7 @@ function PersistResForm() {
         body: JSON.stringify(data),
       }
     )
-    //check if data was correctly sent in console log
+      //check if data was correctly sent in console log
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -153,7 +152,9 @@ function PersistResForm() {
         <Button variant="success" className="m-1" href="./owner">
           Go Back to Options
         </Button>
-      ) : ("")}
+      ) : (
+        ""
+      )}
     </div>
   );
 }

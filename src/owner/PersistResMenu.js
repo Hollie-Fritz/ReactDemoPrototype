@@ -24,6 +24,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
         menuItem: "",
         menuPrice: "",
         menuDesc: "",
+        menuType: "",
       },
     ]);
   };
@@ -78,6 +79,21 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>
             </InputGroup>
+          </Form.Group>
+          <Form.Group controlId="formItemType" className="col col-sm-4">
+            <Form.Label>Menu Item Type</Form.Label>
+            <Form.Select
+              defaultValue="Choose..."
+              className="form-control"
+              name="menuType"
+              value={menu.menuType}
+              onChange={(e) => handleChange(index, e)}
+            >
+              <option value="Choose...">Choose...</option>
+              <option value="Appetizer">Appetizer</option>
+              <option value="Entree">Entree</option>
+              <option value="Dessert">Dessert</option>
+            </Form.Select>
           </Form.Group>
         </Row>
       ))}
