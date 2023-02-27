@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Row, Container, Button, Card } from "react-bootstrap";
-import Cart from "./Cart";
+//import Cart from "./Cart";
 
 function ViewWebpage() {
   const { id } = useParams();
@@ -48,7 +48,7 @@ function ViewWebpage() {
           {/* outer card */}
           <Card style={{ width: "30rem" }}>
             <Card.Header as="h1" className="text-center">
-              {resdata["Name"]}
+              {resdata["name"]}
             </Card.Header>
             <Card.Body>
               <Card.Title as="h4" className="text-center">
@@ -86,10 +86,7 @@ function ViewWebpage() {
                     <Card.Body>
                       <Card.Text>
                         <nobr className="fw-bold">{item.foodName}</nobr>
-                      </Card.Text>
-                      <Card.Text>${item.foodPrice}</Card.Text>
-                      <Card.Text>{item.foodDesc}</Card.Text>
-                      <Button
+                        <Button style={{float: "right"}}
                         onClick={() => {
                           var temp = cart;
                           temp[item.foodId] = (temp[item.foodId] || 0) + 1;
@@ -98,6 +95,9 @@ function ViewWebpage() {
                       >
                         Add
                       </Button>
+                      </Card.Text>
+                      <Card.Text>${item.foodPrice}</Card.Text>
+                      <Card.Text>{item.foodDesc}</Card.Text>
                     </Card.Body>
                     {/* end inner card two */}
                   </Card>
@@ -108,12 +108,12 @@ function ViewWebpage() {
             <Button variant="primary" type="submit" onClick={handleShowCart}>
               View Cart
             </Button>
-            <Cart
+            {/* <Cart
               show={showCart}
               handleClose={handleShowCartClose}
               fooddata={fooddata}
               cart={cart}
-            />
+            /> */}
           </Card>
         </div>
       </Row>
