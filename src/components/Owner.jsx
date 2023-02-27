@@ -15,6 +15,11 @@ function Owner() {
           Check Orders
         </Button>
       </div>
+      <div>
+        <Button variant="success" className="m-1" href="./edit">
+          Edit Restaurant Webpage
+        </Button>
+      </div>
     </Stack>
   );
 }
