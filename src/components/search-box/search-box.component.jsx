@@ -3,7 +3,7 @@ import "./search-box.styles.css";
 
 const SearchBox = ({ className, placeholder, onChangeHandler }) => (
   <>
-    <Form >
+    <Form inline="true">
       <FormControl
         className={`search-box ${className} `}
         type="search"
