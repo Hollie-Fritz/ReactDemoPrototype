@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import { Row, Container } from "react-bootstrap";
 
-function PersistResReview({ formData, menuItems }) {
+function ReviewEdit({ formData, menuItems }) {
   return (
     <Container className="d-flex vh-50">
       <Row className="m-auto align-self-center">
@@ -56,17 +56,13 @@ function PersistResReview({ formData, menuItems }) {
                         <nobr className="fw-bold">Menu Item Description: </nobr>
                         {menuItems.menuDesc}
                       </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Menu Type: </nobr>
-                        {menuItems.menuType}
-                      </Card.Text>
                     </Card.Body>
                     {/* end inner card two */}
                   </Card>
                 );
               })}
             </Card.Body>
-            {/* end outer card */}
+            {/* end card */}
           </Card>
         </div>
       </Row>
@@ -74,4 +70,4 @@ function PersistResReview({ formData, menuItems }) {
   );
 }
 
-export default PersistResReview;
+export default ReviewEdit;

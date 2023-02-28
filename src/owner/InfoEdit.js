@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Row } from "react-bootstrap";
 
 //form for restaurant info such as name, phone number and address
-function PersistResInfo({ formData, setFormData }) {
+function InfoEdit({ formData, setFormData }) {
   return (
     //using ‘container’ and ‘mb-3’ bootstrap classes
     <Form className="container mt-3 mb-3">
@@ -255,4 +255,4 @@ function PersistResInfo({ formData, setFormData }) {
   );
 }
 
-export default PersistResInfo;
+export default InfoEdit;

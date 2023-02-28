@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import ReviewForm from "../rating/ReviewForm";
 import ViewReview from "../rating/ViewReview";
 import AverageRating from "../rating/AverageRating";
+import { useNavigate } from "react-router-dom";
+import "./card.styles.css";
 
 const CardComponent = ({
   restaurant: {
@@ -16,6 +18,7 @@ const CardComponent = ({
     zipCode,
   },
 }) => {
+  const navigate = useNavigate();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
@@ -45,6 +48,7 @@ const CardComponent = ({
     fetchAverageRating();
   }, [userId]);
 
+
   return (
     <>
       <CardGroup className="my-1">
@@ -52,6 +56,7 @@ const CardComponent = ({
           style={{ width: "18rem" }}
           className="card-container"
           key={userId}
+          onClick={() => navigate(`/r/${userId}`)}
         >
           <Card.Body>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>

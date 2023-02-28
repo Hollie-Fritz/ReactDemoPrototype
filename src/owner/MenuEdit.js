@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Row, Button } from "react-bootstrap";
 
 //2nd page of restaurant owner's form, contains the form for menu items
-function PersistResMenu({ menuItems, setMenuItems }) {
+function MenuEdit({ menuItems, setMenuItems }) {
   //update and set the menu form items
   const handleChange = (index, e) => {
     const updatedMenuItems = [...menuItems];
@@ -17,14 +17,13 @@ function PersistResMenu({ menuItems, setMenuItems }) {
   };
 
   //function to add form items
-  const handleAddItem = () => {
+  const handleAddItem = () => { 
     setMenuItems([
       ...menuItems,
       {
         menuItem: "",
         menuPrice: "",
         menuDesc: "",
-        menuType: "",
       },
     ]);
   };
@@ -80,21 +79,6 @@ function PersistResMenu({ menuItems, setMenuItems }) {
               ></Form.Control>
             </InputGroup>
           </Form.Group>
-          <Form.Group controlId="formItemType" className="col col-sm-4">
-            <Form.Label>Menu Item Type</Form.Label>
-            <Form.Select
-              defaultValue="Choose..."
-              className="form-control"
-              name="menuType"
-              value={menu.menuType}
-              onChange={(e) => handleChange(index, e)}
-            >
-              <option value="Choose...">Choose...</option>
-              <option value="Appetizer">Appetizer</option>
-              <option value="Entree">Entree</option>
-              <option value="Dessert">Dessert</option>
-            </Form.Select>
-          </Form.Group>
         </Row>
       ))}
       <Button variant="primary" onClick={handleAddItem}>
@@ -109,4 +93,4 @@ function PersistResMenu({ menuItems, setMenuItems }) {
   );
 }
 
-export default PersistResMenu;
+export default MenuEdit;

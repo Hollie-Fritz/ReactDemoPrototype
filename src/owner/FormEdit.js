@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import PersistResInfo from "./PersistResInfo";
-import PersistResMenu from "./PersistResMenu";
-import PersistResReview from "./PersistResReview";
+import React, { useState, useEffect } from "react";
+import InfoEdit from "./InfoEdit";
+import MenuEdit from "./MenuEdit";
+import ReviewEdit from "./ReviewEdit";
 import { Button } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
-function PersistResForm() {
+function FormEdit() {
   //page keeps track of which step we are on
   //will mutate the variable setPage
   //useState(0) = ResInfo
+
   const [page, setPage] = useState(0);
   //state object that contains all the different fields for ResInfo
   const [formData, setFormData] = useState({
@@ -46,7 +47,7 @@ function PersistResForm() {
         foodName: menuItems[i]["menuItem"],
         foodType: menuItems[i]["menuType"],
         foodPrice: menuItems[i]["menuPrice"],
-        foodDesc: menuItems[i]["menuDesc"],
+        foodDesc: menuItems[i]["menuDesc"]
       };
     }
 
@@ -66,9 +67,6 @@ function PersistResForm() {
       closeHours: formData.closehours,
     };
 
-    // "resImageUrl": "null",
-    // "searchTerm": "mike MIKE MIKES mikes mike's",
-
     console.log("submitting, json listed below");
     console.log(JSON.stringify(data));
 
@@ -81,13 +79,63 @@ function PersistResForm() {
         },
         body: JSON.stringify(data),
       }
-    )
+      )
       //check if data was correctly sent in console log
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
       });
-  };
+    };
+
+  useEffect(() => {
+    let username = "seth";
+    var temp = [];
+    const getData = async () => {
+      await fetch(
+        `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurantById?id=${username}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        }
+      )
+      //check if data was correctly sent in console log
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("data is below");
+          console.log(data);
+          if(data.length !== 0){
+            setFormData({
+              resName: data[0]["name"],
+              phoneNo: data[0]["phone"],
+              resCuisine: data[0]["cuisine"],
+              address1: data[0]["address1"],
+              address2: data[0]["address2"],
+              city: data[0]["city"],
+              usstate: data[0]["state"],
+              zip: data[0]["zipCode"],
+              openhours: data[0]["openHours"],
+              closehours: data[0]["closeHours"]
+            });
+            data[0]["Food"].forEach(current => {
+              console.log(current["foodName"] + " is foodName");
+              temp.push({ 
+                "menuItem": current["foodName"],
+                "menuType": current["foodType"],
+                "menuPrice": current["foodPrice"], 
+                "menuDesc": current["foodDesc"],
+              });
+            });
+            console.log("menuItems below");
+            setMenuItems(temp);
+            console.log(JSON.stringify(menuItems));
+          }
+        });
+    };
+    getData();
+    // eslint-disable-next-line
+  }, []);
 
   //titles that appear at the top left of the form
   const FormTitles = [
@@ -102,14 +150,14 @@ function PersistResForm() {
   const PageDisplay = () => {
     if (page === 0) {
       // keep restauraunt info persistent even when navigating to a new page
-      return <PersistResInfo formData={formData} setFormData={setFormData} />;
+      return <InfoEdit formData={formData} setFormData={setFormData} />;
     } else if (page === 1) {
       return (
         //keep the menu items persistent when navigating away from page
-        <PersistResMenu menuItems={menuItems} setMenuItems={setMenuItems} />
+        <MenuEdit menuItems={menuItems} setMenuItems={setMenuItems} />
       );
     } else {
-      return <PersistResReview formData={formData} menuItems={menuItems} />;
+      return <ReviewEdit formData={formData} menuItems={menuItems} />;
     }
   };
 
@@ -152,11 +200,9 @@ function PersistResForm() {
         <Button variant="success" className="m-1" href="./owner">
           Go Back to Options
         </Button>
-      ) : (
-        ""
-      )}
+      ) : ("")}
     </div>
   );
 }
 
-export default PersistResForm;
+export default FormEdit;
