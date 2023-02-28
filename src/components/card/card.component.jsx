@@ -23,18 +23,24 @@ const CardComponent = ({
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
   const [reviews, setReviews] = useState([]);
-  const handleWriteReviewClick = () => {
+
+  const handleWriteReviewClick = (event) => {
+    event.stopPropagation();
     setShowReviewForm(true);
   };
-  const handleShowReviewClick = () => {
+
+  const handleShowReviewClick = (event) => {
+    event.stopPropagation();
     setShowViewReviewForm(true);
   };
 
-  const handleReviewFormClose = () => {
+  const handleReviewFormClose = (event) => {
+    event.stopPropagation()
     setShowReviewForm(false);
   };
 
-  const handleViewReviewFormClose = () => {
+  const handleViewReviewFormClose = (event) => {
+    event.stopPropagation();
     setShowViewReviewForm(false);
   };
 
@@ -48,10 +54,9 @@ const CardComponent = ({
     fetchAverageRating();
   }, [userId]);
 
-{/* <h1>Hello</h1> */}
+
   return (
     <>
-    
       <CardGroup className="my-1">
         <Card
           style={{ width: "18rem" }}
