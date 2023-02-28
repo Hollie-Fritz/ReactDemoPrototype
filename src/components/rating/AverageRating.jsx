@@ -35,7 +35,7 @@ const AverageRating = ({ reviews }) => {
         fullIcon={<i className="fa fa-star"></i>}
         activeColor="#ffd700"
       />
-      <span style={{ marginLeft: "10px" }}>{roundedRating.toFixed(1)}</span>
+      <span style={{ marginLeft: "10px" }}>{roundedRating.toFixed(1)} /4</span>
     </>
   );
 };
