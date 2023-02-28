@@ -48,9 +48,10 @@ const CardComponent = ({
     fetchAverageRating();
   }, [userId]);
 
-
+{/* <h1>Hello</h1> */}
   return (
     <>
+    
       <CardGroup className="my-1">
         <Card
           style={{ width: "18rem" }}
