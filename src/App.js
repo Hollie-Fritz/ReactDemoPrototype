@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { ThemeProvider } from "react-bootstrap"
-import { Navigate,  BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -15,6 +14,7 @@ import Search from "./pages/Search";
 import PersistResForm from "./owner/PersistResForm";
 import ViewOrders from "./pages/ViewOrders";
 import ViewWebpage from './pages/ViewWebPage';
+
 
 let App = () => {
   return (

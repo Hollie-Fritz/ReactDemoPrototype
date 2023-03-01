@@ -36,7 +36,7 @@ const Search = () => {
     <div>
       <SearchBox
         onChangeHandler={onSearchChange}
-        placeholder="Search Restaurant"
+        placeholder="Search Restaurant or Cuisine Type"
       />
       {notFound ? (
         <h2>Restaurant cannot be found</h2>
@@ -56,7 +56,7 @@ export function Customer() {
       <Container fluid="md">
         <Row className="justify-content-center">
           <Col>
-          <h1> Let's find some food! </h1>
+          <h1 style={{ textAlign: "center" }}> Let's find some food! </h1>
           <Search  />
           </Col>
         </Row>
