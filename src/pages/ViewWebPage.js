@@ -48,7 +48,7 @@ function ViewWebpage() {
           {/* outer card */}
           <Card style={{ width: "30rem" }}>
             <Card.Header as="h1" className="text-center">
-              {resdata["Name"]}
+              {resdata["name"]}
             </Card.Header>
             <Card.Body>
               <Card.Title as="h4" className="text-center">
@@ -58,7 +58,7 @@ function ViewWebpage() {
               <Card style={{ width: "25rem" }}>
                 <Card.Text>
                   <nobr className="fw-bold">Address: </nobr>
-                  Restaurant Address: {resdata["address1"]}{" "}
+                  {resdata["address1"]}{" "}
                   {resdata["address2"]}, {resdata["city"]}, {resdata["state"]}{" "}
                   {resdata["zipCode"]}
                 </Card.Text>
@@ -113,6 +113,8 @@ function ViewWebpage() {
               handleClose={handleShowCartClose}
               fooddata={fooddata}
               cart={cart}
+              userId={resdata["userId"]}
+              name={resdata["name"]}
             />
           </Card>
         </div>

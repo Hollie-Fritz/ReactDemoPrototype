@@ -29,17 +29,23 @@ function MenuEdit({ menuItems, setMenuItems }) {
   };
 
   //function to remove form items unless there is only one remaining
-  const handleRemoveItem = () => {
-    const values = [...menuItems];
-    if (values.length > 1) values.pop();
-    setMenuItems(values);
+  // const handleRemoveItem = () => {
+  //   const values = [...menuItems];
+  //   if (values.length > 1) values.pop();
+  //   setMenuItems(values);
+  // };
+
+  const handleRemove = (index) => {
+    const temp = [...menuItems];
+    temp.splice(index, 1);
+    setMenuItems(temp);
   };
 
   return (
     <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
       {menuItems.map((menu, index) => (
         <Row className="mb-3" key={index}>
-          <Form.Group controlId="formItem" className="col col-sm-4">
+          <Form.Group controlId="formItem" className="col col-sm-3">
             <Form.Label>Menu Item</Form.Label>
             <Form.Control
               required
@@ -51,7 +57,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
               onChange={(e) => handleChange(index, e)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId="formItemPrice" className="col col-sm-4">
+          <Form.Group controlId="formItemPrice" className="col col-sm-3">
             <Form.Label>Price</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
@@ -64,7 +70,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
               ></Form.Control>
             </InputGroup>
           </Form.Group>
-          <Form.Group controlId="formItemDesc" className="col col-sm-4">
+          <Form.Group controlId="formItemDesc" className="col col-sm-3">
             <Form.Label>Description</Form.Label>
             <InputGroup>
               <Form.Control
@@ -79,16 +85,34 @@ function MenuEdit({ menuItems, setMenuItems }) {
               ></Form.Control>
             </InputGroup>
           </Form.Group>
-        </Row>
+          <Form.Group controlId="formItemType" className="col col-sm-3">
+            <Form.Label>Menu Item Type</Form.Label>
+            <Form.Select
+              placeholder="Choose..."
+              className="form-control"
+              name="menuType"
+              value={menu.menuType}
+              onChange={(e) => handleChange(index, e)}
+            >
+              <option value="Choose...">Choose...</option>
+              <option value="Appetizer">Appetizer</option>
+              <option value="Entree">Entree</option>
+              <option value="Dessert">Dessert</option>
+            </Form.Select>
+          </Form.Group>
+          {menuItems.length !== 1 && (
+                <Button variant="danger"
+                  onClick={() => handleRemove(index)}
+                >
+                  Remove
+                </Button>)
+          }
+          </Row>
       ))}
       <Button variant="primary" onClick={handleAddItem}>
         Add Item
       </Button>
       {/* button to remove iteration of the form */}
-      {/* onClick calls upon handleRemoveItem to remove an iteration */}
-      <Button variant="danger" onClick={handleRemoveItem}>
-        Remove
-      </Button>
     </Form>
   );
 }

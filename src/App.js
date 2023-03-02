@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from "react-bootstrap"
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -15,6 +15,7 @@ import PersistResForm from "./owner/PersistResForm";
 import ViewOrders from "./pages/ViewOrders";
 import ViewWebpage from './pages/ViewWebPage';
 import FormEdit from './owner/FormEdit';
+import NavBarHome from './components/NavBarHome';
 
 let App = () => {
   return (
@@ -23,10 +24,7 @@ let App = () => {
       minBreakpoint="xxs"
     >
       <div>
-        <nav>
-          <Link to="/">Home</Link> |<Link to="/about">About</Link> |
-          <Link to="/contact">Contact</Link> |<Link to="/customer">Search</Link>
-        </nav>
+        <NavBarHome />
         <Authenticator.Provider>
           <Routes>
             <Route path="/" element={<Home />} />

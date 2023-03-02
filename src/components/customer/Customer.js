@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardList from "../card-list/card-list.component";
-import NavBarHome from "../NavBarHome";
 import SearchBox from "../search-box/search-box.component";
 
 import "./Customer.css";
@@ -50,9 +49,6 @@ const Search = () => {
 export function Customer() {
   return (
     <>
-      <div>
-        <NavBarHome />
-      </div>
       <Container fluid="md">
         <Row className="justify-content-center">
           <Col>
