@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Row, Container, Button, Card } from "react-bootstrap";
 import Cart from "./Cart";
+import ReviewForm from "../components/rating/ReviewForm";
+import ViewReview from "../components/rating/ViewReview";
+import AverageRating from "../components/rating/AverageRating";
+import { useNavigate } from "react-router-dom";
 
 function ViewWebpage() {
   const { id } = useParams();
@@ -9,6 +13,48 @@ function ViewWebpage() {
   const [fooddata, setfooddata] = useState([]);
   const [cart, setcart] = useState({});
   const [showCart, setShowCart] = useState(false);
+  const navigate = useNavigate();
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [showViewReviewForm, setShowViewReviewForm] = useState(false);
+  const [averageRating, setAverageRating] = useState(0);
+  const [reviews, setReviews] = useState([]);
+
+  const handleWriteReviewClick = (event) => {
+    event.stopPropagation();
+    setShowReviewForm(true);
+  };
+
+  const handleShowReviewClick = (event) => {
+    // event.stopPropagation();
+    setShowViewReviewForm(true);
+  };
+
+  const handleReviewFormClose = (event) => {
+    // event.stopPropagation()
+    setShowReviewForm(false);
+  };
+
+  const handleReviewFormSubmit = (event) => {
+    event.preventDefault();
+    setShowReviewForm(false);
+  }
+
+  const handleViewReviewFormClose = (event) => {
+    // event.stopPropagation();
+    setShowViewReviewForm(false);
+  };
+
+  useEffect(() => {
+    const fetchAverageRating = async () => {
+      let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review?userId=${id}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setReviews(data);
+    };
+    fetchAverageRating();
+    console.log(resdata["name"]+ "is name");
+  }, [id]);
+
   const handleShowCart = () => {
     setShowCart(true);
   };
@@ -52,6 +98,10 @@ function ViewWebpage() {
             </Card.Header>
             <Card.Body>
               <Card.Title as="h4" className="text-center">
+              <div style={{ display: "flex", justifyContent: "center" }}>
+              <AverageRating reviews={reviews} />
+            </div>
+            <br/>
                 Restaurant Information:
               </Card.Title>
               {/* inner card one */}
@@ -72,6 +122,39 @@ function ViewWebpage() {
                 <Card.Text>
                   <nobr className="fw-bold">Cuisine Type: </nobr>
                   {resdata["cuisine"]}
+                </Card.Text>
+                <Card.Text>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                variant="primary"
+                type="submit"
+                onClick={handleWriteReviewClick}
+              >
+                Leave Review
+              </Button>{" "}
+            </div>
+            <br />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                variant="primary"
+                type="submit"
+                onClick={handleShowReviewClick}
+              >
+                View Reviews
+              </Button>{" "}
+            </div>
+            <ViewReview
+              show={showViewReviewForm}
+              handleClose={handleViewReviewFormClose}
+              userId={id}
+              name={resdata["name"]}
+            />
+            <ReviewForm
+              show={showReviewForm}
+              handleClose={handleReviewFormClose}
+              userId={id}
+              name={resdata["name"]}
+            />
                 </Card.Text>
                 {/* end inner card one */}
               </Card>

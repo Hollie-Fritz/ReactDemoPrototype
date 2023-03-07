@@ -73,6 +73,7 @@ function Cart(props) {
         console.log("order data submitted");
         console.log(data);
       });
+    handleClose();
   };
 
   return (
@@ -151,7 +152,7 @@ function Cart(props) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button variant="primary" onClick={handleSubmit} type="submit">
           Checkout
         </Button>
       </Modal.Footer>
