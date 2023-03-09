@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import Rating from "react-rating-stars-component";
-import Rating from 'react-rating';
+// import Rating from 'react-rating';
 
 const AverageRating = ({ reviews }) => {
   const [averageRating, setAverageRating] = useState(0);
@@ -39,7 +39,7 @@ const AverageRating = ({ reviews }) => {
         readonly
       /> */}
       <br/>
-      <span style={{ marginLeft: "10px" }}><strong>Rating:</strong> {roundedRating.toFixed(1)} /4</span>
+      <span style={{ marginLeft: "10px" }}><strong>Rating:</strong> {roundedRating.toFixed(1)}/5</span>
     </>
   );
 };

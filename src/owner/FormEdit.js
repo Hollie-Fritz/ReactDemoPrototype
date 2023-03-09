@@ -4,6 +4,7 @@ import MenuEdit from "./MenuEdit";
 import ReviewEdit from "./ReviewEdit";
 import { Button } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
+import NavBarHome from "../components/NavBarHome";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
@@ -167,6 +168,7 @@ function FormEdit() {
 
   return (
     <div className="form">
+      <NavBarHome />
       {/* displays the FormTitles based on which page we are on */}
       <h1>{FormTitles[page]}</h1>
 

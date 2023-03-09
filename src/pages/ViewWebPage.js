@@ -6,6 +6,7 @@ import ReviewForm from "../components/rating/ReviewForm";
 import ViewReview from "../components/rating/ViewReview";
 import AverageRating from "../components/rating/AverageRating";
 import { useNavigate } from "react-router-dom";
+import NavBarHome from "../components/NavBarHome";
 
 function ViewWebpage() {
   const { id } = useParams();
@@ -13,10 +14,8 @@ function ViewWebpage() {
   const [fooddata, setfooddata] = useState([]);
   const [cart, setcart] = useState({});
   const [showCart, setShowCart] = useState(false);
-  const navigate = useNavigate();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
-  const [averageRating, setAverageRating] = useState(0);
   const [reviews, setReviews] = useState([]);
 
   const handleWriteReviewClick = (event) => {
@@ -88,6 +87,8 @@ function ViewWebpage() {
     userAction();
   }, [id]);
   return (
+    <>
+    <NavBarHome />
     <Container className="d-flex vh-50">
       <Row className="m-auto align-self-center">
         <div className="row no-gutters">
@@ -203,6 +204,7 @@ function ViewWebpage() {
         </div>
       </Row>
     </Container>
+    </>
   );
 }
 

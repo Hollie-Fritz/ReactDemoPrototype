@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Auth from "@aws-amplify/auth";
-
+import NavBarHome from "./NavBarHome";
 function Owner() {
   const [userId, setUserId] = useState("");
   
@@ -22,6 +22,7 @@ function Owner() {
 
   return (
     <Stack className="Owner" gap={1}>
+          <NavBarHome />
       <h1>Welcome, {userId}</h1>
       <div>
         <Button variant="success" className="m-1" href="./create">

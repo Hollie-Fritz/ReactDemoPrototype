@@ -52,9 +52,13 @@ const CardComponent = ({
           <Card.Body  key={userId}
           onClick={() => navigate(`/r/${userId}`)}>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
+            {reviews.length != 0 ?
             <div style={{ display: "flex", justifyContent: "center" }}>
               <AverageRating reviews={reviews} />
             </div>
+            :
+            ""
+            }
             <Card.Text style={{ textAlign: "center" }}>{cuisine}</Card.Text>
             <ListGroup className="list-group-flush">
               <ListGroup.Item style={{ textAlign: "center" }}>
