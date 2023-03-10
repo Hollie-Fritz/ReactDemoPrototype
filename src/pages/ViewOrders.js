@@ -54,12 +54,24 @@ function ViewOrder() {
           {
             count.map((temp) => {
               return  <Card style={{ width: '30rem' }}>
-              <Card.Img variant="top" src="../assests/dumpling.jpeg" />
+              <Card.Img variant="top" src="../assests/dumpling" />
               <Card.Body>
                 <Card.Title>{temp["customerName"]}'s order</Card.Title>
                 <Card.Text>
-                <div>Quantity: {temp["quantity"]}</div>
                 <div>Restaurant Name: {temp["restaurantName"]}</div>
+                { temp["menuItems"].map((current)=>{
+                    return(
+                      <>
+                      <br></br>
+                      <div>foodId: {current["foodId"]}</div>
+                      <div>foodName: {current["foodName"]}</div>
+                      <div>Quantity: {current["quantity"]}</div>
+                      <div>price: {current["priceEach"]}</div>
+                      <br></br>
+                      </>
+                    )
+                  })
+                }
                 <div>Order Date/Time: {temp["dateTime"]}</div>
                 <div>Total Cost: {temp["totalCost"]}</div>
                 </Card.Text>

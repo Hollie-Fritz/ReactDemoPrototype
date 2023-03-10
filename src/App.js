@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from "react-bootstrap"
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -23,10 +23,6 @@ let App = () => {
       minBreakpoint="xxs"
     >
       <div>
-        <nav>
-          <Link to="/">Home</Link> |<Link to="/about">About</Link> |
-          <Link to="/contact">Contact</Link> |<Link to="/customer">Search</Link>
-        </nav>
         <Authenticator.Provider>
           <Routes>
             <Route path="/" element={<Home />} />

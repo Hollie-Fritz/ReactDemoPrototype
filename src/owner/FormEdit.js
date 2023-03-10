@@ -4,6 +4,7 @@ import MenuEdit from "./MenuEdit";
 import ReviewEdit from "./ReviewEdit";
 import { Button } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
+import NavBarHome from "../components/NavBarHome";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
@@ -87,53 +88,57 @@ function FormEdit() {
       });
     };
 
+  // eslint-disable-next-line
   useEffect(() => {
-    let username = "seth";
     var temp = [];
+
     const getData = async () => {
+      let nameJson = await Auth.currentUserInfo();
+      let username = nameJson["username"];
+
       await fetch(
-        `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurantById?id=${username}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
+          `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurantById?id=${username}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
           }
-        }
-      )
-      //check if data was correctly sent in console log
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("data is below");
-          console.log(data);
-          if(data.length !== 0){
-            setFormData({
-              resName: data[0]["name"],
-              phoneNo: data[0]["phone"],
-              resCuisine: data[0]["cuisine"],
-              address1: data[0]["address1"],
-              address2: data[0]["address2"],
-              city: data[0]["city"],
-              usstate: data[0]["state"],
-              zip: data[0]["zipCode"],
-              openhours: data[0]["openHours"],
-              closehours: data[0]["closeHours"]
-            });
-            data[0]["Food"].forEach(current => {
-              console.log(current["foodName"] + " is foodName");
-              temp.push({ 
-                "menuItem": current["foodName"],
-                "menuType": current["foodType"],
-                "menuPrice": current["foodPrice"], 
-                "menuDesc": current["foodDesc"],
+        )
+        //check if data was correctly sent in console log
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("data is below");
+            console.log(data);
+            if(data.length !== 0){
+              setFormData({
+                resName: data[0]["name"],
+                phoneNo: data[0]["phone"],
+                resCuisine: data[0]["cuisine"],
+                address1: data[0]["address1"],
+                address2: data[0]["address2"],
+                city: data[0]["city"],
+                usstate: data[0]["state"],
+                zip: data[0]["zipCode"],
+                openhours: data[0]["openHours"],
+                closehours: data[0]["closeHours"]
               });
-            });
-            console.log("menuItems below");
-            setMenuItems(temp);
-            console.log(JSON.stringify(menuItems));
-          }
-        });
-    };
-    getData();
+              data[0]["Food"].forEach(current => {
+                console.log(current["foodName"] + " is foodName");
+                temp.push({ 
+                  "menuItem": current["foodName"],
+                  "menuType": current["foodType"],
+                  "menuPrice": current["foodPrice"], 
+                  "menuDesc": current["foodDesc"],
+                });
+              });
+              console.log("menuItems below");
+              setMenuItems(temp);
+              console.log(JSON.stringify(menuItems));
+            }
+          });
+      };
+      getData();
     // eslint-disable-next-line
   }, []);
 
@@ -163,6 +168,7 @@ function FormEdit() {
 
   return (
     <div className="form">
+      <NavBarHome />
       {/* displays the FormTitles based on which page we are on */}
       <h1>{FormTitles[page]}</h1>
 

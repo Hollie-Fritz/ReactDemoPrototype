@@ -34,7 +34,7 @@ function ReviewForm({ show, handleClose, userId, name }) {
         console.log(data);
       });
     //Reset form after submission
-    setRating(0);
+    setRating(1);
     setReview("");
     handleClose();
   };
