@@ -17,7 +17,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
   };
 
   //function to add form items
-  const handleAddItem = () => { 
+  const handleAddItem = () => {
     setMenuItems([
       ...menuItems,
       {
@@ -100,14 +100,17 @@ function MenuEdit({ menuItems, setMenuItems }) {
               <option value="Dessert">Dessert</option>
             </Form.Select>
           </Form.Group>
-          {menuItems.length !== 1 && (
-                <Button variant="danger"
-                  onClick={() => handleRemove(index)}
-                >
-                  Remove
-                </Button>)
-          }
-          </Row>
+          <Form.Group>
+            {menuItems.length !== 1 && (
+              <Button
+              variant="danger"
+              onClick={() => handleRemove(index)}
+              >
+                Remove
+              </Button>
+            )}
+          </Form.Group>
+        </Row>
       ))}
       <Button variant="primary" onClick={handleAddItem}>
         Add Item
