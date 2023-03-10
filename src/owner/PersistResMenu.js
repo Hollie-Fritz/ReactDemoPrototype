@@ -101,13 +101,16 @@ function PersistResMenu({ menuItems, setMenuItems }) {
               <option value="Dessert">Dessert</option>
             </Form.Select>
           </Form.Group>
-          {menuItems.length !== 1 && (
-                <Button variant="danger"
-                  onClick={() => handleRemove(index)}
-                >
-                  Remove
-                </Button>)
-          }
+          <Form.Group>
+            {menuItems.length !== 1 && (
+              <Button
+              variant="danger"
+              onClick={() => handleRemove(index)}
+              >
+                Remove
+              </Button>
+            )}
+          </Form.Group>
         </Row>
       ))}
       <Button variant="primary" onClick={handleAddItem}>
