@@ -223,16 +223,9 @@ function ViewWebpage() {
           </div>
 
         </Row>
-        {/* <div>
-          <iframe style={{width:"100%", height:"500px"}} 
-            src={"https://maps.google.com/maps?q=" + address.replace(` `, "%20") }
-            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-          >
-          </iframe>
-        </div>  */}
-        <div style={{overflow: "hidden", height: "300px", width:"300px"}}>
+        <div style={{overflow: "hidden", height: "300px", width:"500px"}}>
               <iframe 
-                src={"https://maps.google.com/maps?q=" + address.replace(` `, "%20")+ "&t=&z=13&ie=UTF8&iwloc=&output=embed"}
+                src={"https://maps.google.com/maps?q=" + address.replace(` `, "%20")+ "&t=k&z=17&ie=UTF8&iwloc=&output=embed"}
                 width="100%"
                 height="600"
                 frameborder="0"
