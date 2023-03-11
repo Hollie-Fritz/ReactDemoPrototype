@@ -5,22 +5,13 @@ import { Container, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../pages/About.css";
 import OurStory from "../components/OurStory";
+import NavBarHome from "../components/NavBarHome";
 
 const About = () => {
   let navigate = useNavigate();
   return (
     <div className="about_bg_image" variant="sm">
-      <Navbar className="navbar-default">
-        <Container>
-          <Navbar.Brand
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            <img src={logo} alt="logo" className="logo-img" />
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+     <NavBarHome/>
       <OurStory />
     </div>
   );

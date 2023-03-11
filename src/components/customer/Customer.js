@@ -46,19 +46,19 @@ const Search = () => {
   );
 };
 
+//Customer.js
 export function Customer() {
   return (
-    <>
-      <div className="bg">
-        <NavBarHome />
-        <Container fluid="md">
-          <Row className="justify-content-center">
-            <Col>
-            <h1 style={{ textAlign: "center" }}> Let's find some food! </h1>
-            <Search  />
-            </Col>
-          </Row>
+     <div className="bg">
+      <NavBarHome />
+      <Container fluid="md">
+        <Row className="justify-content-center">
+          <Col>
+
+          <Search  />
+          </Col>
+        </Row>
       </Container></div>
-    </>
+
   );
 }

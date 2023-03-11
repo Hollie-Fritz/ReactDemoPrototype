@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Modal, Container, Row, Col } from "react-bootstrap";
+import { Modal, Container, Row, Col, Table } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 
 const ViewReview = ({ show, handleClose, userId, name }) => {
@@ -26,33 +26,41 @@ const ViewReview = ({ show, handleClose, userId, name }) => {
     <>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Reviews of {name}</Modal.Title>
+          <Modal.Title className="ms-auto">Reviews of {name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {reviews.map((current) => {
-            return (
-              <>
-                <Container>
-                  <Row>
-                    <Col>{current["author"]}</Col>
-                    <Col>
-                        <Rating 
-                            value={current["rating"]}
-                            edit={false}
-                            count={5}
-                            size={20}
-                            activeColor="#ffd700"
-                        /></Col>
-                    <Col>{current["date"]}</Col>
-                  </Row>
-                  <Row>
-                    <Col>{current["comment"]}</Col>
-                  </Row>
-                </Container>{" "}
-                <br></br>
-              </>
-            );
-          })}
+          <Table responsive="lg" hover size="sm">
+            <thead>
+              <tr>
+                <th width='25%'>Author</th>
+                <th width='20%'>Rating</th>
+                <th width='18%'>Date</th>
+                <th  width='40%'>Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reviews.map((current) => {
+                return (
+                  <>
+                    <tr key={current["author"]}>
+                      <td>{current["author"]}</td>
+                      <td>
+                        <Rating
+                          value={current["rating"]}
+                          edit={false}
+                          count={5}
+                          size={20}
+                          activeColor="#ffd700"
+                        />
+                      </td>
+                      <td>{current["date"]}</td>
+                      <td>{current["comment"]}</td>
+                    </tr>
+                  </>
+                );
+              })}
+            </tbody>
+          </Table>
         </Modal.Body>
       </Modal>
     </>

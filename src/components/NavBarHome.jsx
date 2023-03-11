@@ -26,9 +26,9 @@ let NavBarHome = () => {
               <Navbar.Toggle aria-controls="navbarScroll" />
               <Navbar.Collapse id="navbarScroll">
                 <Nav className="justify-content-end">
-                  <Nav.Link href="/about">About</Nav.Link>
-                  <Nav.Link href="/contact">Contacts</Nav.Link>
-                  <NavDropdown title="Action" id="basic-nav-dropdown">
+                  <Nav.Link className="fw-bold" href="/about">About</Nav.Link>
+                  <Nav.Link className="fw-bold" href="/contact">Contacts</Nav.Link>
+                  <NavDropdown className="fw-bold"  title="Action" id="basic-nav-dropdown">
                     <NavDropdown.Item onClick={() => {
                     navigate("/login");
                     }}>
