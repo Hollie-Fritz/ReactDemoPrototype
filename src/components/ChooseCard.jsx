@@ -34,9 +34,9 @@ let ChooseCard = () => {
       </Row>
       <Row>
         <Col md={4}>
-          <Card
+        <Card
             md={4}
-            className="shadow-lg"
+            className="border-0"
             id="shadow"
             style={{
               marginTop: 50,
@@ -47,15 +47,18 @@ let ChooseCard = () => {
             <Card.Body>
               {route === "authenticated" ? (
                 <Button
-                  variant="success"
+                  variant="light"
                   className="m-1"
                   onClick={() => navigate("/owner")}
-                >Restauranteur
+                >
+                  Restaurateur
                 </Button>
-              ):""}
+              ) : (
+                ""
+              )}
               {route !== "authenticated" ? (
                 <Button
-                  variant="success"
+                  variant="light"
                   className="m-1"
                   onClick={() => navigate("/login")}
                 >
@@ -64,7 +67,7 @@ let ChooseCard = () => {
                 </Button>
               ) : (
                 <Button
-                  variant="success"
+                  variant="secondary"
                   className="m-1"
                   onClick={() => logOut()}
                 >
@@ -72,7 +75,7 @@ let ChooseCard = () => {
                   Logout{" "}
                 </Button>
               )}
-              <Button variant="success" className="m-1" href="./customer">
+              <Button variant="light" className="m-1" href="./customer">
                 Customer
               </Button>
             </Card.Body>
