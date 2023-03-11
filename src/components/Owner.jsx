@@ -7,7 +7,7 @@ import NavBarHome from "./NavBarHome";
 
 function Owner() {
   const [userId, setUserId] = useState("");
-  
+
   // eslint-disable-next-line
   useEffect(() => {                                         //WATCH FOR BUGS
     let nameJson = "";

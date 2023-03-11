@@ -58,7 +58,7 @@ const OurStory = () => {
           <Accordion.Body>
             No, NuOrder will have the contact for the restaurant but because the
             application will not be dealing with transactions, it will be the
-            restaurantU+2019s job to issue refunds or other services for the
+            restaurant's responsibility to issue refunds or other services for the
             customers.
           </Accordion.Body>
         </Accordion.Item>

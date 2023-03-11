@@ -200,8 +200,8 @@ function ViewWebpage() {
                   </Col>
                 </Row>
               <br></br>
-              <Card.Title as="h4" className="text-center">
-                Menu Information:{" "}
+              <Card.Title as="h4" >
+
               </Card.Title>
               <Row xs={1} md={3} className="g-4">
                 {fooddata.map((item, test) => {

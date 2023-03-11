@@ -38,7 +38,7 @@ const Contact = () => {
         "https://static.vecteezy.com/system/resources/thumbnails/009/383/800/small/kitty-cat-clipart-design-illustration-free-png.png",
       name: "Jonida Durbaku",
       position: "Front-End Developer of NuOrder since 2022",
-      email: "durbaku.j@gmail.com",
+      email: "jonida.durbaku@belllevuecollege.edu",
       github: "https://github.com/jonida19",
     },
   ];
