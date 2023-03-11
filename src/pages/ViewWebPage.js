@@ -94,7 +94,7 @@ function ViewWebpage() {
       <Row className="m-auto align-self-center">
         <div className="row no-gutters">
           {/* outer card */}
-          <Card className="mb-3" border="dark">
+          <Card className="mb-3" border="dark" style={{ width: "58rem" }}>
             <Card.Header
               border="light"
               style={{ background: "white" }}
@@ -103,8 +103,7 @@ function ViewWebpage() {
             >
               {resdata["name"]}
             </Card.Header>
-
-            <Card.Body style={{ overflow: "hidden" }}>
+            <Card.Body>
               <Card.Title as="h4" className="text-center">
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <AverageRating reviews={reviews} />
@@ -112,96 +111,65 @@ function ViewWebpage() {
                 <br />
               </Card.Title>
               {/* inner card one */}
-              <Row className="d-flex justify-content-between">
-                  <Col xs={1} md={5} className="mb-4">
-                    <Card
-                      className="border-0 ml-auto mr-3"
-                      style={{ display: "inline-block", alignItems: "left" }}
-                    >
-                      <Card.Text>
-                        <nobr className="fw-bold">Address: </nobr>
-                        {resdata["address1"]} {resdata["address2"]},{" "}
-                        {resdata["city"]}, {resdata["state"]}{" "}
-                        {resdata["zipCode"]}
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Phone:</nobr> 1-
-                        {resdata["phone"]}
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Hours: </nobr>
-                        {resdata["openHours"]} - {resdata["closeHours"]}
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Cuisine Type: </nobr>
-                        {resdata["cuisine"]}
-                      </Card.Text>
-
-                      <Card.Text>
-                        <Stack direction="horizontal" gap={2}>
-                          <Button
-                            variant="info"
-                            type="submit"
-                            onClick={handleWriteReviewClick}
-                          >
-                            Leave Review
-                          </Button>{" "}
-                          <Button
-                            variant="info"
-                            type="submit"
-                            onClick={handleShowReviewClick}
-                          >
-                            View Reviews
-                          </Button>{" "}
-                        </Stack>
-
-                        <ViewReview
-                          show={showViewReviewForm}
-                          handleClose={handleViewReviewFormClose}
-                          userId={id}
-                          name={resdata["name"]}
-                        />
-                        <ReviewForm
-                          show={showReviewForm}
-                          handleClose={handleReviewFormClose}
-                          userId={id}
-                          name={resdata["name"]}
-                        />
-
-                        {/* end inner card one */}
-                      </Card.Text>
-                    </Card>
-                  </Col>
-
-                  <Col
-                    xs={1}
-                    md={6}
-                    className="mb-4"
-                    style={{ display: "inline-block", alignItems: "right" }}
-                  >
-                    <Card className="border-0 mr-0">
-                      <div
-                        style={{
-                          overflow: "hidden",
-                          height: "200px",
-                          width: "500px",
-                        }}
+              <Card
+                className="border-0 m-auto align-self-center"
+                style={{ width: "25rem" }}
+              >
+                <Card.Text>
+                  <nobr className="fw-bold">Address: </nobr>
+                  {resdata["address1"]} {resdata["address2"]},{" "}
+                  {resdata["city"]}, {resdata["state"]} {resdata["zipCode"]}
+                </Card.Text>
+                <Card.Text>
+                  <nobr className="fw-bold">Phone:</nobr> 1-{resdata["phone"]}
+                </Card.Text>
+                <Card.Text>
+                  <nobr className="fw-bold">Hours: </nobr>
+                  {resdata["openHours"]} - {resdata["closeHours"]}
+                </Card.Text>
+                <Card.Text>
+                  <nobr className="fw-bold">Cuisine Type: </nobr>
+                  {resdata["cuisine"]}
+                </Card.Text>
+                <Card.Text>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Stack direction="horizontal" gap={2}>
+                      <Button
+                        variant="info"
+                        type="submit"
+                        onClick={handleWriteReviewClick}
                       >
-                        <iframe
-                          src={
-                            "https://maps.google.com/maps?q=" + address.replace(` `, "%20") + "&t=k&z=17&ie=UTF8&iwloc=&output=embed"}
-                          width="100%"
-                          height="600"
-                          frameBorder="0"
-                          style={{ border: "0", marginTop: "-150px" }}
-                        ></iframe>
-                      </div>
-                    </Card>
-                  </Col>
-                </Row>
-              <br></br>
-              <Card.Title as="h4" >
+                        Leave Review
+                      </Button>{" "}
+                      <Button
+                        variant="info"
+                        type="submit"
+                        onClick={handleShowReviewClick}
+                      >
+                        View Reviews
+                      </Button>{" "}
+                    </Stack>
+                  </div>
 
+                  <ViewReview
+                    show={showViewReviewForm}
+                    handleClose={handleViewReviewFormClose}
+                    userId={id}
+                    name={resdata["name"]}
+                  />
+                  <ReviewForm
+                    show={showReviewForm}
+                    handleClose={handleReviewFormClose}
+                    userId={id}
+                    name={resdata["name"]}
+                  />
+                </Card.Text>
+                {/* end inner card one */}
+              </Card>
+
+              <br></br>
+              <Card.Title as="h4" className="text-center">
+                Menu Information:{" "}
               </Card.Title>
               <Row xs={1} md={3} className="g-4">
                 {fooddata.map((item, test) => {
