@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import Rating from "react-rating-stars-component";
-// import Rating from 'react-rating';
+import Rating from "react-rating-stars-component";
 
 const AverageRating = ({ reviews }) => {
   const [averageRating, setAverageRating] = useState(0);
@@ -17,12 +16,13 @@ const AverageRating = ({ reviews }) => {
   }, [reviews]);
 
   const roundedRating = Math.round(averageRating * 2) / 2;
-  const wholeRating = Math.round(roundedRating * 2);
+  // const wholeRating = Math.round(roundedRating * 2);
 
   return (
     <>
-      {/* <Rating
-        value={wholeRating}
+      <Rating
+        key={`stars_${roundedRating}`}
+        value={averageRating}
         edit={false}
         count={5}
         size={20}
@@ -31,15 +31,25 @@ const AverageRating = ({ reviews }) => {
         halfIcon={<i className="fa fa-star-half-alt"></i>}
         fullIcon={<i className="fa fa-star"></i>}
         activeColor="#ffd700"
-      /> */}
-      {/* <Rating
+      />
+
+      {/* <ReactStars
+          count={5}
+          size={24}
+          isHalf={true}
+          emptyIcon={<i className="far fa-star"></i>}
+          halfIcon={<i className="fa fa-star-half-alt"></i>}
+          fullIcon={<i className="fa fa-star"></i>}
+          activeColor="#ffd700"
+      />
+      <Rating
         initialRating={roundedRating}
         emptySymbol={<i className="far fa-star"></i>}
         fullSymbol={<i className="fas fa-star"></i>}
         readonly
-      /> */}
+      />
       <br/>
-      <span style={{ marginLeft: "10px" }}><strong>Rating:</strong> {roundedRating.toFixed(1)}/5</span>
+      <span style={{ marginLeft: "10px" }}><strong>Rating:</strong> {roundedRating.toFixed(1)}/5</span> */}
     </>
   );
 };
