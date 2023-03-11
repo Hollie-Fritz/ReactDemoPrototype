@@ -1,9 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import { Button, Stack } from "react-bootstrap";
+import { Button, Stack, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "./NavBarHome";
+
 function Owner() {
   const [userId, setUserId] = useState("");
   
@@ -21,25 +22,28 @@ function Owner() {
   }, []);
 
   return (
-    <Stack className="Owner" gap={1}>
-          <NavBarHome />
-      <h1>Welcome, {userId}</h1>
-      <div>
-        <Button variant="success" className="m-1" href="./create">
-          Webpage Creation
-        </Button>
-      </div>
-      <div>
-        <Button variant="success" className="m-1" href="./orders">
-          Check Orders
-        </Button>
-      </div>
-      <div>
-        <Button variant="success" className="m-1" href="./edit">
-          Edit Restaurant Webpage
-        </Button>
-      </div>
-    </Stack>
+    <>
+      <NavBarHome />
+      <Container fluid>
+        <h1>Welcome, {userId}!</h1>
+        <Stack gap={3}>
+          <Stack direction="horizontal" className="Owner" gap={2}>
+            <Button variant="light" className="Owner" href="./create">
+              Webpage Creation
+            </Button>
+
+            <Button variant="light" className="Owner" href="./edit">
+              Edit Restaurant Webpage
+            </Button>
+          </Stack>
+          <div>
+            <Button variant="success" className="Owner" href="./orders">
+              Check Orders
+            </Button>
+          </div>
+        </Stack>
+      </Container>
+    </>
   );
 }
 export default Owner;

@@ -49,15 +49,16 @@ const Search = () => {
 export function Customer() {
   return (
     <>
-      <NavBarHome />
-      <Container fluid="md">
-        <Row className="justify-content-center">
-          <Col>
-          <h1 style={{ textAlign: "center" }}> Let's find some food! </h1>
-          <Search  />
-          </Col>
-        </Row>
-      </Container>
+      <div className="bg">
+        <NavBarHome />
+        <Container fluid="md">
+          <Row className="justify-content-center">
+            <Col>
+            <h1 style={{ textAlign: "center" }}> Let's find some food! </h1>
+            <Search  />
+            </Col>
+          </Row>
+      </Container></div>
     </>
   );
 }

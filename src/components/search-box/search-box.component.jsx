@@ -1,16 +1,31 @@
-import { Form, FormControl } from "react-bootstrap";
+import {
+  Form,
+  FormControl,
+  Col,
+  Row,
+  Container,
+  FloatingLabel,
+} from "react-bootstrap";
 import "./search-box.styles.css";
 
 const SearchBox = ({ className, placeholder, onChangeHandler }) => (
   <>
-    <Form inline="true">
-      <FormControl
-        className={`search-box ${className} `}
-        type="search"
-        placeholder={placeholder}
-        onChange={onChangeHandler}
-      />
-    </Form>
+    <Container>
+      <Form inline="true">
+        <Row className="justify-content-md-center">
+          <Col xs lg="6">
+            <FloatingLabel controlId="floatingName" label={placeholder}>
+              <FormControl
+                className={`search-box ${className} `}
+                type="search"
+                placeholder={placeholder}
+                onChange={onChangeHandler}
+              />
+            </FloatingLabel>
+          </Col>
+        </Row>
+      </Form>
+    </Container>
   </>
 );
 

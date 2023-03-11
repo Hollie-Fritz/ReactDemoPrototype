@@ -19,7 +19,6 @@ const CardComponent = ({
 }) => {
   const navigate = useNavigate();
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
-  const [averageRating, setAverageRating] = useState(0);
   const [reviews, setReviews] = useState([]);
 
   const handleShowReviewClick = (event) => {
@@ -52,7 +51,7 @@ const CardComponent = ({
           <Card.Body  key={userId}
           onClick={() => navigate(`/r/${userId}`)}>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
-            {reviews.length != 0 ?
+            {reviews.length !== 0 ?
             <div style={{ display: "flex", justifyContent: "center" }}>
               <AverageRating reviews={reviews} />
             </div>
@@ -66,7 +65,7 @@ const CardComponent = ({
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
-          <Card.Footer>
+          <Card.Footer className="border-0" style={{ background: "white" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 variant="primary"
