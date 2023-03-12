@@ -2,20 +2,11 @@ import React from "react";
 import { Modal, Button, Table, Form, FloatingLabel } from "react-bootstrap";
 import { useState } from "react";
 
-function Cart(props) {
-  const { show, handleClose, fooddata, cart, userId, name } = props;
+function Cart({show, handleClose, fooddata, cart, userId, name}) {
   const [cart2, setcart2] = useState(cart);
   const [customerName, setCustomerName] = useState("anonymous");
-  const handleCompelete = () => {
-    handleSubmit();
-    setShowMessage(true);
-
-    // set a timeout for how long you want the message to show up for
-    setTimeout(()=>{
-      setShowMessage(false);
-    }, 10000) // 10 seconds
-  };
   const [showMessage, setShowMessage] = useState(false);
+  
   const handleDecrement = (foodId) => {
     const temp = { ...cart2 };
     if (temp[foodId] > 1) {
@@ -57,6 +48,11 @@ function Cart(props) {
           quantity: quantity,
         });
       }
+      setShowMessage(true);
+    // set a timeout for how long you want the message to show up for
+    setTimeout(()=>{
+      setShowMessage(false);
+    }, 7000) // 7 seconds
     });
 
     const converted = {
@@ -170,7 +166,7 @@ function Cart(props) {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleCompelete} type="submit">
+            <Button variant="primary" onClick={handleSubmit} type="submit">
               Checkout
             </Button>
           </Modal.Footer>
