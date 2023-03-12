@@ -13,7 +13,7 @@ function Cart(props) {
     // set a timeout for how long you want the message to show up for
     setTimeout(()=>{
       setShowMessage(false);
-    }, 7000) // 7 seconds
+    }, 10000) // 10 seconds
   };
   const [showMessage, setShowMessage] = useState(false);
   const handleDecrement = (foodId) => {
@@ -100,7 +100,7 @@ function Cart(props) {
             <Table responsive>
               <thead>
                 <tr>
-                 head <th>Name</th>
+                  <th>Name</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Subtotal</th>
@@ -111,7 +111,7 @@ function Cart(props) {
                 {fooddata.map((item, index) => {
                   const quantity = cart2[item.foodId] || 0;
                   if (quantity > 0) {
-                    const total = quantity * item.foodPrice;
+                    const total = (quantity * item.foodPrice).toFixed(2);
                     return (
                       <tr key={item.foodId}>
                         <td>{item.foodName}</td>
