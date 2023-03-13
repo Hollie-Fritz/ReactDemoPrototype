@@ -1,9 +1,43 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row } from "react-bootstrap";
+import { Form, InputGroup, Row, Button, Col } from "react-bootstrap";
+import { v4 as uuidv4 } from "uuid";
+import { useEffect } from "react";
 
 //form for restaurant info such as name, phone number and address
 function InfoEdit({ formData, setFormData }) {
+
+  useEffect(() => {
+    const imageForm = document.querySelector("#imageForm");
+    const imageInput = document.querySelector("#imageInput");
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const file = imageInput.files[0];
+      const imageName = uuidv4();
+
+      await fetch(
+        "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/s3/nuorderbucket/" +
+          imageName,
+        {
+          method: "PUT",
+          body: file,
+          headers: {
+            "Content-type": file.type,
+          },
+        }
+      ).then(() => {
+        setFormData({ ...formData, mainImageUrl: imageName });
+      });
+    };
+
+    imageForm.addEventListener("submit", handleSubmit);
+
+    return () => {
+      imageForm.removeEventListener("submit", handleSubmit);
+    };
+  }, [formData]);
+
   return (
     //using ‘container’ and ‘mb-3’ bootstrap classes
     <Form className="container mt-3 mb-3">
@@ -250,7 +284,17 @@ function InfoEdit({ formData, setFormData }) {
             }
           />
         </Form.Group>
+        <div>
+          <img src = {`https://nuorderbucket.s3.us-west-2.amazonaws.com/` + formData["mainImageUrl"]} alt = "current restaurant mainImage"/>
+        </div>
+        <button onClick={()=>console.log(JSON.stringify(formData))}>log</button>
       </Row>
+      <Row className="d-flex align-items-end">
+        <Form id="imageForm" className="col col-sm-6">
+            <input id="imageInput" type="file" accept="image/*"/>
+            <Button className="col col-sm-6" type="submit">Upload</Button>
+        </Form> 
+       </Row>
     </Form>
   );
 }

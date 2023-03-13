@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import PersistResInfo from "./PersistResInfo";
 import PersistResMenu from "./PersistResMenu";
 import PersistResReview from "./PersistResReview";
-import { Button } from "react-bootstrap";
+import { Button, ButtonGroup } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "../components/NavBarHome";
+import "./Form.css";
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
 function PersistResForm() {
@@ -24,7 +25,7 @@ function PersistResForm() {
     zip: "",
     openhours: "",
     closehours: "",
-    mainImageUrl:"",
+    mainImageUrl: "",
   });
 
   //state object that contains all the fields for ResMenu
@@ -65,7 +66,7 @@ function PersistResForm() {
       name: formData.resName,
       openHours: formData.openhours,
       closeHours: formData.closehours,
-      mainImageUrl: formData.mainImageUrl
+      mainImageUrl: formData.mainImageUrl,
     };
 
     // "resImageUrl": "null",
@@ -116,48 +117,52 @@ function PersistResForm() {
   };
 
   return (
-    <div className="form">
+    <div className="createform">
       <NavBarHome />
       {/* displays the FormTitles based on which page we are on */}
       <h1>{FormTitles[page]}</h1>
 
       <div className="body">{PageDisplay()}</div>
-
-      <Button
-        // previous button disabled if on page 0
-        disabled={page === 0}
-        onClick={() => {
-          // enables prev button to work by decrementing
-          setPage((currPage) => currPage - 1);
-        }}
-      >
-        Prev
-      </Button>
-      <Button
-        onClick={() => {
-          if (page === FormTitles.length - 1) {
-            //logs the data
-            console.log(formData);
-            console.log(menuItems);
-            //sends the data to DynamoDB by invoking userAction();
-            userAction();
-          } else {
-            // enables next button to work by incrementing
-            setPage((currPage) => currPage + 1);
-          }
-        }}
-      >
-        {/* Conditionally render the button to display submit
+      <center>
+        <Button
+          // previous button disabled if on page 0
+          disabled={page === 0}
+          onClick={() => {
+            // enables prev button to work by decrementing
+            setPage((currPage) => currPage - 1);
+          }}
+        >
+          Prev
+        </Button>{" "}
+        <Button
+          onClick={() => {
+            if (page === FormTitles.length - 1) {
+              //logs the data
+              console.log(formData);
+              console.log(menuItems);
+              //sends the data to DynamoDB by invoking userAction();
+              userAction();
+            } else {
+              // enables next button to work by incrementing
+              setPage((currPage) => currPage + 1);
+            }
+          }}
+        >
+          {/* Conditionally render the button to display submit
         on the last page and next on all other pages */}
-        {page === FormTitles.length - 1 ? "Submit" : "Next"}
-      </Button>
-      {page === FormTitles.length - 1 ? (
-        <Button variant="success" className="m-1" href="./owner">
-          Go Back to Options
-        </Button>
-      ) : (
-        ""
-      )}
+          {page === FormTitles.length - 1 ? "Submit" : "Next"}
+        </Button>{" "}
+        {page === FormTitles.length - 1 ? (
+          <>
+            <br></br>
+            <Button variant="success" className="m-1" href="./owner">
+              Go Back to Options
+            </Button>
+          </>
+        ) : (
+          ""
+        )}
+      </center>
     </div>
   );
 }

@@ -18,7 +18,6 @@ function ViewWebpage() {
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [address, setAddress] = useState("");
-
   const handleWriteReviewClick = (event) => {
     event.stopPropagation();
     setShowReviewForm(true);
@@ -84,7 +83,7 @@ function ViewWebpage() {
             setresdata(data[0]);
             setfooddata(data[0]["Food"]);
             setAddress(
-              data[0]["address1"] +
+                data[0]["address1"] +
                 " " +
                 data[0]["address2"] +
                 " " +
@@ -296,6 +295,7 @@ function ViewWebpage() {
                 handleClose={handleShowCartClose}
                 fooddata={fooddata}
                 cart={cart}
+                setCart={setcart}
                 userId={resdata["userId"]}
                 name={resdata["name"]}
               />

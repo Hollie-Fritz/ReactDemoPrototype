@@ -26,6 +26,7 @@ function FormEdit() {
     zip: "",
     openhours: "",
     closehours: "",
+    mainImageUrl:"",
   });
 
   //state object that contains all the fields for ResMenu
@@ -66,6 +67,7 @@ function FormEdit() {
       name: formData.resName,
       openHours: formData.openhours,
       closeHours: formData.closehours,
+      mainImageUrl: formData.mainImageUrl,
     };
 
     console.log("submitting, json listed below");
@@ -121,14 +123,15 @@ function FormEdit() {
                 usstate: data[0]["state"],
                 zip: data[0]["zipCode"],
                 openhours: data[0]["openHours"],
-                closehours: data[0]["closeHours"]
+                closehours: data[0]["closeHours"],
+                mainImageUrl: data[0]["mainImageUrl"]
               });
               data[0]["Food"].forEach(current => {
                 console.log(current["foodName"] + " is foodName");
-                temp.push({ 
+                temp.push({
                   "menuItem": current["foodName"],
                   "menuType": current["foodType"],
-                  "menuPrice": current["foodPrice"], 
+                  "menuPrice": current["foodPrice"],
                   "menuDesc": current["foodDesc"],
                 });
               });
@@ -167,46 +170,52 @@ function FormEdit() {
   };
 
   return (
-    <div className="form">
+    <div className="createform">
       <NavBarHome />
       {/* displays the FormTitles based on which page we are on */}
       <h1>{FormTitles[page]}</h1>
 
       <div className="body">{PageDisplay()}</div>
-
-      <Button
-        // previous button disabled if on page 0
-        disabled={page === 0}
-        onClick={() => {
-          // enables prev button to work by decrementing
-          setPage((currPage) => currPage - 1);
-        }}
-      >
-        Prev
-      </Button>
-      <Button
-        onClick={() => {
-          if (page === FormTitles.length - 1) {
-            //logs the data
-            console.log(formData);
-            console.log(menuItems);
-            //sends the data to DynamoDB by invoking userAction();
-            userAction();
-          } else {
-            // enables next button to work by incrementing
-            setPage((currPage) => currPage + 1);
-          }
-        }}
-      >
-        {/* Conditionally render the button to display submit
+      <center>
+        <Button
+          // previous button disabled if on page 0
+          disabled={page === 0}
+          onClick={() => {
+            // enables prev button to work by decrementing
+            setPage((currPage) => currPage - 1);
+          }}
+        >
+          Prev
+        </Button>{" "}
+        <Button
+          onClick={() => {
+            if (page === FormTitles.length - 1) {
+              //logs the data
+              console.log(formData);
+              console.log(menuItems);
+              //sends the data to DynamoDB by invoking userAction();
+              userAction();
+            } else {
+              // enables next button to work by incrementing
+              setPage((currPage) => currPage + 1);
+            }
+          }}
+        >
+          {/* Conditionally render the button to display submit
         on the last page and next on all other pages */}
-        {page === FormTitles.length - 1 ? "Submit" : "Next"}
-      </Button>
-      {page === FormTitles.length - 1 ? (
-        <Button variant="success" className="m-1" href="./owner">
-          Go Back to Options
-        </Button>
-      ) : ("")}
+          {page === FormTitles.length - 1 ? "Submit" : "Next"}
+        </Button>{" "}
+        {page === FormTitles.length - 1 ? (
+          <>
+            <br></br>
+            <Button variant="success" className="m-1" href="./owner">
+              Go Back to Options
+            </Button>
+          </>
+        ) : (
+          ""
+        )}
+      </center>
     </div>
   );
 }

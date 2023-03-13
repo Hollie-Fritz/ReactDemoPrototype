@@ -25,7 +25,7 @@ function Owner() {
     <>
       <NavBarHome />
       <Container fluid>
-        <h1>Welcome, {userId}!</h1>
+        <h1 style={{ color: "#fff" }}>Welcome, {userId}!</h1>
         <Stack gap={3}>
           <Stack direction="horizontal" className="Owner" gap={2}>
             <Button variant="light" className="Owner" href="./create">
@@ -37,7 +37,7 @@ function Owner() {
             </Button>
           </Stack>
           <div>
-            <Button variant="success" className="Owner" href="./orders">
+            <Button  variant="light" className="Owner" href="./orders">
               Check Orders
             </Button>
           </div>
