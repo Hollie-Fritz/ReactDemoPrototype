@@ -1,11 +1,39 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Row } from "react-bootstrap";
+import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
 
 //form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
+
+  useEffect(() => {
+    const imageForm = document.querySelector("#imageForm")
+    const imageInput = document.querySelector("#imageInput")
+
+    imageForm.addEventListener("submit", async event => {
+      event.preventDefault()
+      const file = imageInput.files[0]
+
+      // const name = crypto.randomBytes(16).toString('hex');
+      const imageName = uuidv4();
+
+      await fetch('https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/s3/nuorderbucket/' + imageName, {
+          method: "PUT",
+          body: file,
+          headers: {
+          "Content-type": file.type
+          }
+        }
+      )
+      .then(() => {
+        setFormData({...formData, mainImageUrl: imageName});
+      })
+    })
+  },[])
   return (
     //using ‘container’ and ‘mb-3’ bootstrap classes
+    <>
     <Form className="container mt-3 mb-3">
       {/* React-Bootstrap Row component to align particular components horizontally */}
       <Row className="mb-3">
@@ -252,6 +280,11 @@ function PersistResInfo({ formData, setFormData }) {
         </Form.Group>
       </Row>
     </Form>
+    <form id="imageForm">
+            <input id="imageInput" type="file" accept="image/*"/>
+            <button type="submit">Upload</button>
+    </form>
+    </>
   );
 }
 

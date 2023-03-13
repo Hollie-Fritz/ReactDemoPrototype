@@ -24,6 +24,7 @@ function PersistResForm() {
     zip: "",
     openhours: "",
     closehours: "",
+    mainImageUrl:"",
   });
 
   //state object that contains all the fields for ResMenu
@@ -64,6 +65,7 @@ function PersistResForm() {
       name: formData.resName,
       openHours: formData.openhours,
       closeHours: formData.closehours,
+      mainImageUrl: formData.mainImageUrl
     };
 
     // "resImageUrl": "null",

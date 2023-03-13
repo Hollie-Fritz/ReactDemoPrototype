@@ -127,6 +127,9 @@ function ViewWebpage() {
                 </Card.Title>
                 {/* inner card one */}
                 <Row className="d-flex justify-content-between">
+                <Col xs={1} md={5} className="mb-4">
+                  {resdata["mainImageUrl"] !== ""? <img src={"https://nuorderbucket.s3.us-west-2.amazonaws.com/" + resdata["mainImageUrl"]}/>:""}
+                </Col>
                   <Col xs={1} md={5} className="mb-4">
                     <Card
                       className="border-0 ml-auto mr-3"
