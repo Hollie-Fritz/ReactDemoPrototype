@@ -13,7 +13,7 @@ const OurStory = () => {
           <Accordion.Header onClick={handleOnClick} className="header-accr">
             Our Story
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="acc-body"> 
             We offer restaurant owners a website for free to present their own
             restaurant page on the site as well as take in orders and requests.
             No prior experience is needed to use NuOrder for creating the
@@ -26,14 +26,14 @@ const OurStory = () => {
       </Accordion>
       <br />
       <br />
-      <h3>Frequently Asked Questions (FAQs)</h3>
+      <h3 style={{color: "#fff"}}>Frequently Asked Questions (FAQs)</h3>
       <Accordion defaultActiveKey="1">
         <Accordion.Item className="accr">
-          <Accordion.Header onClick={handleOnClick} className="header-accr">
+          <Accordion.Header onClick={handleOnClick} className="header-accr" >
             1. What fees will I pay for as a restaurant owner getting access to
             NuOrder?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="acc-body">
             The use of NuOrder will be completely free.
           </Accordion.Body>
         </Accordion.Item>
@@ -43,7 +43,7 @@ const OurStory = () => {
           <Accordion.Header onClick={handleOnClick} className="header-accr">
             2. What makes NuOrder different from other ordering websites?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="acc-body">
             A restaurant has complete control and choice over over their prices
             and will not give up a percentage to to be hosted.
           </Accordion.Body>
@@ -55,7 +55,7 @@ const OurStory = () => {
             3. Will NuOrder be responsible for customer service for all the
             restaurants it hosts?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="acc-body">
             No, NuOrder will have the contact for the restaurant but because the
             application will not be dealing with transactions, it will be the
             restaurant's responsibility to issue refunds or other services for the
@@ -68,7 +68,7 @@ const OurStory = () => {
           <Accordion.Header onClick={handleOnClick} className="header-accr">
             4. Is delivery offered?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="acc-body">
             No, not at this time. A restaurant customer will be able to see if
             the individual restaurant offers delivery and will be able to
             contact the restaurant directly using the contact information.

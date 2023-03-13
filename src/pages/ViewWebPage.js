@@ -101,6 +101,9 @@ function ViewWebpage() {
     }
     userAction();
   }, [id]);
+
+  const bucketUrl = "https://nuorderbucket.s3.us-west-2.amazonaws.com/" + resdata["mainImageUrl"];
+
   return (
     <>
       <NavBarHome />
@@ -111,11 +114,25 @@ function ViewWebpage() {
             <Card className="mb-3" border="dark">
               <Card.Header
                 border="light"
-                style={{ background: "white" }}
-                as="h1"
-                className="text-center"
+                style={{ 
+                  backgroundImage: `url(${bucketUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPostion: "center",
+                  color: "white",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "left",
+                  alignItems: "center",
+                  position: "relative"
+                }}
               >
-                {resdata["name"]}
+                <h1 style={{ 
+                  position: "absolute",
+                  bottom: 0,
+                  marginBottom: "0.5rem",
+                  fontWeight: "bold",
+                  textShadow: "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000",
+                 }}>{resdata["name"]}</h1>
               </Card.Header>
 
               <Card.Body style={{ overflow: "hidden" }}>
@@ -127,9 +144,6 @@ function ViewWebpage() {
                 </Card.Title>
                 {/* inner card one */}
                 <Row className="d-flex justify-content-between">
-                <Col xs={1} md={5} className="mb-4">
-                  {resdata["mainImageUrl"] !== ""? <img src={"https://nuorderbucket.s3.us-west-2.amazonaws.com/" + resdata["mainImageUrl"]}/>:""}
-                </Col>
                   <Col xs={1} md={5} className="mb-4">
                     <Card
                       className="border-0 ml-auto mr-3"

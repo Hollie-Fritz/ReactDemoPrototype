@@ -4,7 +4,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import CardList from "../card-list/card-list.component";
 import SearchBox from "../search-box/search-box.component";
 import NavBarHome from "../NavBarHome";
-import "./Customer.css";
 
 const Search = () => {
   const [searchField, setSearchField] = useState("");

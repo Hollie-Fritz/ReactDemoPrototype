@@ -3,7 +3,7 @@ import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
 import logo from "../assests/NuOrderLogoLarge.png";
 import "../pages/Home.css";
 import { useNavigate } from "react-router-dom";
-import { useAuthenticator, UseAuthenticator } from "@aws-amplify/ui-react";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 let NavBarHome = () => {
   const { signOut, user } = useAuthenticator((context) => [
@@ -38,11 +38,12 @@ let NavBarHome = () => {
               <Navbar.Toggle aria-controls="navbarScroll" />
               <Navbar.Collapse id="navbarScroll">
                 <Nav className="mr-auto">
-                  <Nav.Link href="/about">About</Nav.Link>
-                  <Nav.Link href="/contact">Contacts</Nav.Link>
+                  <Nav.Link href="/about" style={{fontWeight: "bold"}}>About</Nav.Link>
+                  <Nav.Link href="/contact" style={{fontWeight: "bold"}}>Contacts</Nav.Link>
                   <NavDropdown
                     title="Action"
                     id="basic-nav-dropdown"
+                    style={{fontWeight: "bold"}}
                   >
                     {user ? (
                       <NavDropdown.Item onClick={() => logOut()}>
