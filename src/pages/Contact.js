@@ -4,6 +4,7 @@ import "../components/Grid.css";
 import { useNavigate } from "react-router-dom";
 import "../pages/About.css";
 import logo from "../assests/NuOrderLogoLarge.png";
+import NavBarHome from "../components/NavBarHome";
 
 const Contact = () => {
   let navigate = useNavigate();
@@ -12,7 +13,7 @@ const Contact = () => {
       image:
         "https://static.vecteezy.com/system/resources/previews/009/384/545/original/kitty-cat-clipart-design-illustration-free-png.png",
       name: "Hollie Fritz",
-      position: "Program Manager of NuOrder since 2022",
+      position: "Program Manager and Front-End Developer of NuOrder since 2022",
       email: "hollie.fritz@bellevuecollege.edu",
       github: "https://github.com/Hollie-Fritz",
     },
@@ -20,24 +21,24 @@ const Contact = () => {
       image:
         "https://static.vecteezy.com/system/resources/thumbnails/009/354/797/small/kitty-cat-clipart-design-illustration-free-png.png",
       name: "Giang Ngo",
-      position: "Frontend Developer of NuOrder since 2022",
-      email: "gnngo2502@gmail.com",
+      position: "Front-End Developer of NuOrder since 2022",
+      email: "giang.ngo@bellevuecollege.edu",
       github: "https://github.com/gnngo",
     },
     {
       image:
         "https://static.vecteezy.com/system/resources/thumbnails/009/380/316/small_2x/kitty-cat-clipart-design-illustration-free-png.png",
       name: "Nao Mai",
-      position: "Backend Developer of NuOrder since 2022",
-      email: "kylemai96@gmail.com",
+      position: "Full-Stack Developer of NuOrder since 2022",
+      email: "nao.mai@belllevuecollege.edu",
       github: "https://github.com/kylemai96",
     },
     {
       image:
         "https://static.vecteezy.com/system/resources/thumbnails/009/383/800/small/kitty-cat-clipart-design-illustration-free-png.png",
       name: "Jonida Durbaku",
-      position: "Frontend Developer of NuOrder since 2022",
-      email: "durbaku.j@gmail.com",
+      position: "Front-End Developer of NuOrder since 2022",
+      email: "jonida.durbaku@belllevuecollege.edu",
       github: "https://github.com/jonida19",
     },
   ];
@@ -68,17 +69,7 @@ const Contact = () => {
 
   return (
     <>
-      <Navbar className="navbar-default">
-        <Container>
-          <Navbar.Brand
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            <img src={logo} alt="logo" className="logo-img" />
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+     <NavBarHome/>
       <div className="grid">{cardInfo.map(renderCard)}</div>
     </>
   );

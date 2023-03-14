@@ -80,6 +80,7 @@ const CardComponent = ({
               handleClose={handleViewReviewFormClose}
               userId={userId}
               name={name}
+              reviews={reviews}
             />
           </Card.Footer>
         </Card>

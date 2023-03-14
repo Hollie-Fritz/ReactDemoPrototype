@@ -4,7 +4,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import CardList from "../card-list/card-list.component";
 import SearchBox from "../search-box/search-box.component";
 import NavBarHome from "../NavBarHome";
-import "./Customer.css";
 
 const Search = () => {
   const [searchField, setSearchField] = useState("");
@@ -35,10 +34,10 @@ const Search = () => {
     <div>
       <SearchBox
         onChangeHandler={onSearchChange}
-        placeholder="Search Restaurant or Cuisine Type"
+        placeholder="Search by Restaurant, Cuisine or City"
       />
       {notFound ? (
-        <h2>Restaurant cannot be found</h2>
+        <h2 style={{color: "#fff"}}>Restaurant cannot be found</h2>
       ) : (
         <CardList restaurants={restaurants} className="card-grid" />
       )}
@@ -46,19 +45,19 @@ const Search = () => {
   );
 };
 
+//Customer.js
 export function Customer() {
   return (
-    <>
-      <div className="bg">
-        <NavBarHome />
-        <Container fluid="md">
-          <Row className="justify-content-center">
-            <Col>
-            <h1 style={{ textAlign: "center" }}> Let's find some food! </h1>
-            <Search  />
-            </Col>
-          </Row>
+     <div className="bg">
+      <NavBarHome />
+      <Container fluid="md">
+        <Row className="justify-content-center">
+          <Col>
+
+          <Search  />
+          </Col>
+        </Row>
       </Container></div>
-    </>
+
   );
 }

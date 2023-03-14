@@ -3,11 +3,12 @@ import { Row, Container } from "react-bootstrap";
 
 function ReviewEdit({ formData, menuItems }) {
   return (
+    <div>
     <Container className="d-flex vh-50">
       <Row className="m-auto align-self-center">
-        <div>
+      <div className="blacktext">
           {/* outer card */}
-          <Card style={{ width: "30rem" }}>
+          <Card style={{ width: "40rem" }}>
             <Card.Header as="h1" className="text-center">
               {formData.resName}
             </Card.Header>
@@ -16,7 +17,7 @@ function ReviewEdit({ formData, menuItems }) {
                 Restaurant General Information:
               </Card.Title>
               {/* inner card one */}
-              <Card style={{ width: "25rem" }}>
+              <Card className="m-auto align-self-center" style={{ width: "30rem" }}>
                 <Card.Text>
                   <nobr className="fw-bold">Address: </nobr>
                   {formData.address1} {formData.address2}, {formData.city},{" "}
@@ -42,7 +43,7 @@ function ReviewEdit({ formData, menuItems }) {
               {menuItems.map((menuItems) => {
                 return (
                   // inner card two
-                  <Card style={{ width: "25rem" }}>
+                  <Card className="m-auto align-self-center" style={{ width: "30rem" }}>
                     <Card.Body>
                       <Card.Text>
                         <nobr className="fw-bold">Menu Item Name: </nobr>
@@ -67,6 +68,8 @@ function ReviewEdit({ formData, menuItems }) {
         </div>
       </Row>
     </Container>
+     <div><br></br></div>
+     </div>
   );
 }
 

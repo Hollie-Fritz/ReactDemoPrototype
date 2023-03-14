@@ -1,87 +1,108 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Auth from "@aws-amplify/auth";
 import React, { useState, useEffect } from "react";
-import Card from 'react-bootstrap/Card';
+import { Card, Table, Container, Row } from "react-bootstrap";
+import res from "../assests/SmallDumpling.png";
+import NavBarHome from "../components/NavBarHome";
 
 function ViewOrder() {
-
-  const[count, setCount] = useState([]);
-  const[restaurantId, setRestaurantId] = useState(['']);
+  const [count, setCount] = useState([]);
+  const [restaurantId, setRestaurantId] = useState([""]);
 
   useEffect(() => {
-      async function userAction() {
-          // let user = await Auth.currentSession()
-          // let token = user.getAccessToken().getJwtToken()
-          let nameJson = await Auth.currentUserInfo()
-          let name = nameJson['username']
-          console.log(JSON.stringify(nameJson))
+    async function userAction() {
+      // let user = await Auth.currentSession()
+      // let token = user.getAccessToken().getJwtToken()
+      let nameJson = await Auth.currentUserInfo();
+      let name = nameJson["username"];
+      console.log(JSON.stringify(nameJson));
 
-          await fetch('https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order?name=' + name, 
-                {
-                  method: 'GET',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  }
-                  // body: token
-                }
-            ).then(
-                response => response.json()
-            ).then(
-              data => {
-                console.log(data)
-                setCount(data)
-                setRestaurantId(name)
-              }
-            );
-      }
-      userAction();
-    }, []
-  );
+      await fetch(
+        "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order?name=" +
+          name,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: token
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setCount(data);
+          setRestaurantId(name);
+        });
+    }
+    userAction();
+  }, []);
 
   return (
     <>
-      {/* <div style={{color: "orange"}} >{restaurantId}</div>
-      <div style={{color: "orange"}} >
-          {
-            count.map((one) => {return <div>{JSON.stringify(one)}</div>})
-          }
-      </div> */}
-      
-      <div>
-        <Card style={{ width: '30rem' }}>
-          <Card.Title>Your Username: {restaurantId}</Card.Title>
-        </Card>
-          {
-            count.map((temp) => {
-              return  <Card style={{ width: '30rem' }}>
-              <Card.Img variant="top" src="../assests/dumpling" />
-              <Card.Body>
-                <Card.Title>{temp["customerName"]}'s order</Card.Title>
-                <Card.Text>
-                <div>Restaurant Name: {temp["restaurantName"]}</div>
-                { temp["menuItems"].map((current)=>{
-                    return(
-                      <>
-                      <br></br>
-                      <div>foodId: {current["foodId"]}</div>
-                      <div>foodName: {current["foodName"]}</div>
-                      <div>Quantity: {current["quantity"]}</div>
-                      <div>price: {current["priceEach"]}</div>
-                      <br></br>
-                      </>
-                    )
-                  })
-                }
-                <div>Order Date/Time: {temp["dateTime"]}</div>
-                <div>Total Cost: {temp["totalCost"]}</div>
-                </Card.Text>
-              </Card.Body>
+      <NavBarHome />
+      <Container className="d-flex vh-50">
+        <Row className="m-auto align-self-center">
+          <Card style={{ width: "40rem" }}>
+            <Card.Title className="fw-bold">
+              Your Username: {restaurantId}
+            </Card.Title>
+            <Card
+              className="m-auto align-self-center"
+              style={{ width: "30rem" }}
+            >
+              <nobr className="fw-bold"></nobr>
+              <Card.Img variant="top" src={res} />
+              {count.map((temp) => {
+                return (
+                  <div>
+                    <Card.Body>
+                      <Card.Title>
+                        <nobr className="fw-bold">
+                          {temp["customerName"]}'s order
+                        </nobr>
+                        <br></br>Order Date/Time:{" "}
+                        <nobr className="fw-bold">{temp["dateTime"]}</nobr>
+                      </Card.Title>
+                      <Card.Text>
+                        <Table responsive>
+                          <thead>
+                            <tr>
+                              <th>Item</th>
+                              <th>Quantity</th>
+                              <th>Price</th>
+                              <th> </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {temp["menuItems"].map((current) => {
+                              return (
+                                <tr key={current["foodName"]}>
+                                  <td>{current["foodName"]}</td>
+                                  <td>{current["quantity"]}</td>
+                                  <td>${current["priceEach"]}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </Table>
+                        <nobr
+                          className="fw-bold border-0"
+                          style={{ background: "white" }}
+                        >
+                          {" "}
+                          Total Cost: ${temp["totalCost"]}
+                        </nobr>
+                      </Card.Text>
+                    </Card.Body>
+                  </div>
+                );
+              })}
             </Card>
-            })
-          }
-      </div>
+          </Card>
+        </Row>
+      </Container>
     </>
   );
-
 }
 export default ViewOrder;

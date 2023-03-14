@@ -43,7 +43,7 @@ function ReviewForm({ show, handleClose, userId, name }) {
     <>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Write a review</Modal.Title>
+          <Modal.Title className="ms-auto">Write a Review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
