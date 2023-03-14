@@ -101,7 +101,7 @@ function ViewWebpage() {
     userAction();
   }, [id]);
 
-  const bucketUrl = "https://nuorderbucket.s3.us-west-2.amazonaws.com/" + resdata["mainImageUrl"];
+  const bucketUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/" + resdata["mainImageUrl"];
 
   return (
     <>
