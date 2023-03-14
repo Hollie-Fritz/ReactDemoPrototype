@@ -34,10 +34,10 @@ const Search = () => {
     <div>
       <SearchBox
         onChangeHandler={onSearchChange}
-        placeholder="Search Restaurant or Cuisine Type"
+        placeholder="Search by Restaurant, Cuisine or City"
       />
       {notFound ? (
-        <h2>Restaurant cannot be found</h2>
+        <h2 style={{color: "#fff"}}>Restaurant cannot be found</h2>
       ) : (
         <CardList restaurants={restaurants} className="card-grid" />
       )}

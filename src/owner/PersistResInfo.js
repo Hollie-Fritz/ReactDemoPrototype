@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row, Button, Col } from "react-bootstrap";
+import { Form, InputGroup, Row, Button, Container } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect } from "react";
 
@@ -39,7 +39,7 @@ function PersistResInfo({ formData, setFormData }) {
 
   return (
     //using ‘container’ and ‘mb-3’ bootstrap classes
-    <>
+    <Container>
       <Form className="container mt-3 mb-3">
         {/* React-Bootstrap Row component to align particular components horizontally */}
         <Row className="mb-3">
@@ -285,27 +285,16 @@ function PersistResInfo({ formData, setFormData }) {
             />
           </Form.Group>
         </Row>
-        
-        <Row className="d-flex align-items-end">
-        <Form id="imageForm" className="col col-sm-6">
-            <input id="imageInput" type="file" accept="image/*"/>
-            <Button className="col col-sm-6" type="submit">Upload</Button>
-        </Form> 
-       </Row>
-        {/* <Row className="d-flex align-items-end">
-          <Form.Group id="imageForm" className="col col-sm-6">
-            <Col>
-              <Form.Label>Restaurant Image</Form.Label>
-              <Form.Control id="imageInput" type="file" accept="image/*" />
-            </Col>
-
-            <Button className="col col-sm-6" type="submit">
-              Upload
-            </Button>
-          </Form.Group>
-        </Row> */}
       </Form>
-    </>
+      <Row className="d-flex align-items-end">
+        <Form id="imageForm" className="col col-sm-6">
+          <input id="imageInput" type="file" accept="image/*" />
+          <Button className="col col-sm-6" type="submit">
+            Upload
+          </Button>
+        </Form>
+      </Row>
+    </Container>
   );
 }
 

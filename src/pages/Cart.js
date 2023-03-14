@@ -77,7 +77,7 @@ function Cart(props) {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal dialogClassName="modal-90w" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Your Current Order</Modal.Title>
       </Modal.Header>
@@ -96,7 +96,7 @@ function Cart(props) {
             {fooddata.map((item, index) => {
               const quantity = cart[item.foodId] || 0;
               if (quantity > 0) {
-                const total = quantity * item.foodPrice;
+                const total = (quantity * item.foodPrice).toFixed(2);
                 return (
                   <tr key={item.foodId}>
                     <td>{item.foodName}</td>

@@ -16,3 +16,8 @@
 .logo-button:focus {
   border: none;
 }
+
+/* Cart.js modal width "Your Current Order"  */
+.modal-90w{
+  max-width: 60% !important;
+}

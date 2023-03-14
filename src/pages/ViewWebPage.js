@@ -53,7 +53,7 @@ function ViewWebpage() {
     fetchAverageRating();
     console.log(resdata["name"] + " is name");
 
-    var frame = $('#abc')[0];  
+    var frame = $('#abc')[0];
     frame.contentWindow.location.replace(`https://maps.google.com/maps?q=${address.replace(' ', '%20')}&t=k&z=17&ie=UTF8&iwloc=&output=embed`);
   }, [id, resdata]);
 
@@ -113,7 +113,7 @@ function ViewWebpage() {
             <Card className="mb-3" border="dark">
               <Card.Header
                 border="light"
-                style={{ 
+                style={{
                   backgroundImage: `url(${bucketUrl})`,
                   backgroundSize: "cover",
                   backgroundPostion: "center",
@@ -125,7 +125,7 @@ function ViewWebpage() {
                   position: "relative"
                 }}
               >
-                <h1 style={{ 
+                <h1 style={{
                   position: "absolute",
                   bottom: 0,
                   marginBottom: "0.5rem",
@@ -308,4 +308,3 @@ function ViewWebpage() {
 }
 
 export default ViewWebpage;
-
