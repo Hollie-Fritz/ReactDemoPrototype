@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 //form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
+  // eslint-disable-next-line
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
     const imageInput = document.querySelector("#imageInput");
@@ -27,6 +28,8 @@ function PersistResInfo({ formData, setFormData }) {
         }
       ).then(() => {
         setFormData({ ...formData, mainImageUrl: imageName });
+        const mainImage = document.querySelector("#mainImage");
+        mainImage.src = file;
       });
     };
 
@@ -35,6 +38,7 @@ function PersistResInfo({ formData, setFormData }) {
     return () => {
       imageForm.removeEventListener("submit", handleSubmit);
     };
+    // eslint-disable-next-line
   }, [formData]);
 
   return (
@@ -294,6 +298,17 @@ function PersistResInfo({ formData, setFormData }) {
           </Button>
         </Form>
       </Row>
+      {
+        formData["mainImageUrl"]?
+        <img id="mainImage"
+        src={
+          `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
+          formData["mainImageUrl"]
+        }
+        alt=""
+        />
+        :""
+      }
     </Container>
   );
 }

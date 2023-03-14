@@ -56,7 +56,7 @@ function FormEdit() {
     //data to be sent in the format of our DynamoDB table
     const data = {
       Food: newMenu,
-      phone: formData.phoneNo,
+      phone: formatPhoneNumber(formData.phoneNo),
       address1: formData.address1,
       address2: formData.address2,
       city: formData.city,
@@ -168,6 +168,17 @@ function FormEdit() {
       return <ReviewEdit formData={formData} menuItems={menuItems} />;
     }
   };
+
+  function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    if(cleaned == null || phoneNumberString.length<10)return "";
+
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match != null && match.length>=3) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+    return "";
+  }
 
   return (
     <div className="createform">

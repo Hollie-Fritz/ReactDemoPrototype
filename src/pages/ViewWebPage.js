@@ -155,7 +155,7 @@ function ViewWebpage() {
                         {resdata["zipCode"]}
                       </Card.Text>
                       <Card.Text>
-                        <nobr className="fw-bold">Phone:</nobr> 1-
+                        <nobr className="fw-bold">Phone: </nobr>
                         {resdata["phone"]}
                       </Card.Text>
                       <Card.Text>
@@ -232,7 +232,7 @@ function ViewWebpage() {
                 </Row>
                 <br></br>
                 <Card.Title as="h4"></Card.Title>
-                <Row xs={1} md={3} className="g-4">
+                <Row md={1} lg={3} className="g-4">
                   {fooddata.map((item, test) => {
                     return (
                       <Col className="d-flex align-items-stretch">

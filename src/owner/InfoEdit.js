@@ -27,6 +27,8 @@ function InfoEdit({ formData, setFormData }) {
         }
       ).then(() => {
         setFormData({ ...formData, mainImageUrl: imageName });
+        const mainImage = document.querySelector("#mainImage");
+        mainImage.src = file;
       });
     };
 
@@ -35,11 +37,12 @@ function InfoEdit({ formData, setFormData }) {
     return () => {
       imageForm.removeEventListener("submit", handleSubmit);
     };
+    // eslint-disable-next-line
   }, [formData]);
 
   return (
     <Container>
-      //using ‘container’ and ‘mb-3’ bootstrap classes
+      {/* //using ‘container’ and ‘mb-3’ bootstrap classes */}
       <Form className="container mt-3 mb-3">
         {/* React-Bootstrap Row component to align particular components horizontally */}
         <Row className="mb-3">
@@ -294,14 +297,18 @@ function InfoEdit({ formData, setFormData }) {
           </Button>
         </Form>
       </Row>
-      <img
+      {
+        formData["mainImageUrl"]?
+        <img id="mainImage"
         src={
           `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
           formData["mainImageUrl"]
         }
-        alt="current restaurant mainImage"
-      />
-      <Button onClick={() => console.log(JSON.stringify(formData))}>log</Button>
+        alt=""
+        />
+        :""
+      } 
+      {/* <Button onClick={() => console.log(JSON.stringify(formData))}>log</Button> */}
     </Container>
   );
 }
