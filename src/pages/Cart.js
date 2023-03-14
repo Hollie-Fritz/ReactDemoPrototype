@@ -6,6 +6,7 @@ function Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
   // const [cart, setCart] = useState(cart);
   const [customerName, setCustomerName] = useState("anonymous");
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleDecrement = (foodId) => {
     const temp = { ...cart };
@@ -48,6 +49,11 @@ function Cart(props) {
           quantity: quantity,
         });
       }
+      setShowMessage(true);
+      // set a timeout for how long you want the message to show up for
+      setTimeout(()=>{
+        setShowMessage(false);
+      }, 7000) // 7 seconds
     });
 
     const converted = {
@@ -78,6 +84,12 @@ function Cart(props) {
 
   return (
     <Modal dialogClassName="modal-90w" show={show} onHide={handleClose}>
+      {showMessage ? (
+        <Modal.Body>
+          <h3>Your order is completed!</h3>
+        </Modal.Body>
+      ) : (
+      <>
       <Modal.Header closeButton>
         <Modal.Title>Your Current Order</Modal.Title>
       </Modal.Header>
@@ -156,6 +168,8 @@ function Cart(props) {
           Checkout
         </Button>
       </Modal.Footer>
+      </>
+      )}
     </Modal>
   );
 }

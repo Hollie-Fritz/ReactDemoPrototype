@@ -86,6 +86,8 @@ function FormEdit() {
       //check if data was correctly sent in console log
       .then((response) => response.json())
       .then((data) => {
+        const submitOrNextButton = document.querySelector("#submitOrNext");
+        submitOrNextButton.innerHTML = "Success!";
         console.log(data);
       });
     };
@@ -199,6 +201,7 @@ function FormEdit() {
           Prev
         </Button>{" "}
         <Button
+          id = "submitOrNext"
           onClick={() => {
             if (page === FormTitles.length - 1) {
               //logs the data

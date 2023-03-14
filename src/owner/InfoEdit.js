@@ -301,7 +301,7 @@ function InfoEdit({ formData, setFormData }) {
         formData["mainImageUrl"]?
         <img id="mainImage"
         src={
-          `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
+          `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
           formData["mainImageUrl"]
         }
         alt=""
