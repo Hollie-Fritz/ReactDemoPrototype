@@ -23,14 +23,7 @@ let ChooseCard = () => {
   return (
     <Container variant="sm">
       <Row>
-        <h1 style={{ color: "white" }}>Authentic food on your table</h1>
-      </Row>
-      <Row>
-        <Col md={4}>
-          <p style={{ color: "white" }}>
-            Various options to choose from the list of local restaurants:
-          </p>
-        </Col>
+        <h2 style={{ color: "white" }}>Simplifying online ordering for<br></br> restaurant owners and customers alike.</h2>
       </Row>
       <Row>
         <Col md={4}>
