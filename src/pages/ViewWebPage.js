@@ -101,7 +101,7 @@ function ViewWebpage() {
     userAction();
   }, [id]);
 
-  const bucketUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/" + resdata["mainImageUrl"];
+  const bucketUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + resdata["mainImageUrl"];
 
   return (
     <>
@@ -114,10 +114,10 @@ function ViewWebpage() {
               <Card.Header
                 border="light"
                 style={{
-                  backgroundImage: `url(${bucketUrl})`,
+                  backgroundImage: resdata["mainImageUrl"]? `url(${bucketUrl})` : "",
                   backgroundSize: "cover",
                   backgroundPostion: "center",
-                  color: "white",
+                  color: "#FBFAF5",
                   height: "200px",
                   display: "flex",
                   justifyContent: "left",
