@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Row, Button } from "react-bootstrap";
+import { v4 as uuidv4 } from "uuid";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function PersistResMenu({ menuItems, setMenuItems }) {
@@ -16,6 +17,33 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     setMenuItems(updatedMenuItems);
   };
 
+  const handleSubmitImage = async (index) => {//
+    console.log("you pressed the upload image button")
+    const imageInput = document.querySelector("#imageInput"+index);
+
+    const file = imageInput.files[0];
+    const imageName = uuidv4();
+
+    await fetch(
+      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/s3/nuorderbucket/" +
+        imageName,
+      {
+        method: "PUT",
+        body: file,
+        headers: {
+          "Content-type": file.type,
+        },
+      }
+    ).then(() => {
+      const updatedMenuItems = [...menuItems];
+      updatedMenuItems[index]["menuImageUrl"] = imageName;
+      setMenuItems(updatedMenuItems); //
+
+      // const mainImage = document.querySelector("#mainImage");
+      // mainImage.src = file;
+    });
+  }
+
   //function to add form items
   const handleAddItem = () => {
     setMenuItems([
@@ -25,6 +53,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
         menuPrice: "",
         menuDesc: "",
         menuType: "",
+        menuImageUrl:""
       },
     ]);
   };
@@ -42,7 +71,10 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     setMenuItems(temp);
   };
 
+
+
   return (
+    <>
     <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
       {menuItems.map((menu, index) => (
         <Row className="mb-3" key={index}>
@@ -101,6 +133,15 @@ function PersistResMenu({ menuItems, setMenuItems }) {
               <option value="Dessert">Dessert</option>
             </Form.Select>
           </Form.Group>
+
+          <Form id={"imageForm"+index} className="col col-sm-6">
+            <input id={"imageInput"+index} type="file" accept="image/*" />
+            <Button className="col col-sm-6" onClick={()=> handleSubmitImage(index)}>
+              Upload
+            </Button>
+          </Form>
+
+
           <Form.Group>
             {menuItems.length !== 1 && (
               <Button
@@ -119,6 +160,23 @@ function PersistResMenu({ menuItems, setMenuItems }) {
       {/* button to remove iteration of the form */}
       {/* onClick calls upon handleRemoveItem to remove an iteration */}
     </Form>
+    {/* {
+      menuItems.forEach((menuItem) => {
+        if(menuItem["menuImageUrl"]){
+          return (
+            <img id="mainImage"
+            src={
+              `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
+              menuItem["menuImageUrl"]
+            }
+            alt=""
+            />
+          )
+        }
+        // return arr[index] = num * 2;
+      })
+    } */}
+    </>
   );
 }
 

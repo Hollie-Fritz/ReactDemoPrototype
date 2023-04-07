@@ -103,6 +103,9 @@ function ViewWebpage() {
 
   const bucketUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + resdata["mainImageUrl"];
 
+
+  //fooddata["menuImageUrl"]? `url(${bucketUrl2})` : "",
+
   return (
     <>
       <NavBarHome />
@@ -238,6 +241,7 @@ function ViewWebpage() {
                       <Col className="d-flex align-items-stretch">
                         {/* inner card two */}
                         <Card key={test} style={{ width: "37rem" }}>
+                          <Card.Img variant="top" src= {item.foodImageUrl? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
                           <Card.Body>
                             <Card.Text
                               style={{ fontSize: "18px" }}
