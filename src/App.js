@@ -15,6 +15,7 @@ import PersistResForm from "./owner/PersistResForm";
 import ViewOrders from "./pages/ViewOrders";
 import ViewWebpage from './pages/ViewWebPage';
 import FormEdit from './owner/FormEdit';
+import PopUp from './PopUp';
 
 let App = () => {
   return (
@@ -23,6 +24,7 @@ let App = () => {
       minBreakpoint="xxs"
     >
       <div>
+        <PopUp/>
         <Authenticator.Provider>
           <Routes>
             <Route path="/" element={<Home />} />
