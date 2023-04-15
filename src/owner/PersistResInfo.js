@@ -287,6 +287,8 @@ function PersistResInfo({ formData, setFormData }) {
                 setFormData({ ...formData, resCuisine: event.target.value })
               }
             />
+            <br/>
+            <Button >Choose template</Button>
           </Form.Group>
         </Row>
       </Form>
