@@ -1,10 +1,21 @@
-import React from "react";
-import { Modal, Col, Row, Container, Form, Image, Button } from "react-bootstrap";
+import { React } from "react";
+import { Modal, Col, Row, Container, Form, Image, Button } from "react-bootstrap"; // prettier-ignore
 import square from "./square.jpg"; // placeholder image, needs to be removed from final file
 
-const ChooseTemplate = ({ show, handleClose }) => {
+const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
+  // save the value of the selected template
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // find radio button selection
+    const selectedTemplateRadio = document.querySelector(
+      'input[name="template"]:checked'
+    );
+    // if the radio button is selected, then save the value
+    if (selectedTemplateRadio) {
+      const selectedTemplate = selectedTemplateRadio.value;
+      handleTemplateSelect(selectedTemplate);
+    }
+    handleClose();
   };
 
   return (
@@ -20,59 +31,59 @@ const ChooseTemplate = ({ show, handleClose }) => {
             {/* template selection in the form of images and radio buttons */}
             <Row>
               <Col>
-              {/* label tag enables users to click on image or button to make selection */}
-              <label>
-                <Image src={square} rounded width="150" height="150" />
-                <Form.Check
-                  type="radio"
-                  id="default-radio"
-                  label="default template"
-                  name="test"
-                />
+                <label>
+                  <Image src={square} rounded width="150" height="150" />
+                  <Form.Check
+                    type="radio"
+                    id="default-radio"
+                    label="template1"
+                    name="template"
+                    value="template1"
+                  />
                 </label>
               </Col>
               <Col>
-              <label>
-                <Image src={square} rounded width="150" height="150" />
-                <Form.Check
-                  type="radio"
-                  id="default-radio"
-                  label="template 2"
-                  name="test"
-                />
+                <label>
+                  <Image src={square} rounded width="150" height="150" />
+                  <Form.Check
+                    type="radio"
+                    id="default-radio"
+                    label="template2"
+                    name="template"
+                    value="template2"
+                  />
                 </label>
               </Col>
             </Row>
             <Row>
               <Col>
-              <label>
-                <Image src={square} rounded width="150" height="150" />
-                <Form.Check
-                  type="radio"
-                  id="default-radio"
-                  label="template 3"
-                  name="test"
-                />
+                <label>
+                  <Image src={square} rounded width="150" height="150" />
+                  <Form.Check
+                    type="radio"
+                    id="default-radio"
+                    label="template3"
+                    name="template"
+                    value="template3"
+                  />
                 </label>
               </Col>
               <Col>
-              <label>
-                <Image src={square} rounded width="150" height="150" />
-                <Form.Check
-                  type="radio"
-                  id="default-radio"
-                  label="template 4"
-                  name="test"
-                />
+                <label>
+                  <Image src={square} rounded width="150" height="150" />
+                  <Form.Check
+                    type="radio"
+                    id="default-radio"
+                    label="template4"
+                    name="template"
+                    value="template4"
+                  />
                 </label>
               </Col>
             </Row>
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          {" "}
-          {/* submit needs to be handled, the choice needs to be pushed to the database */}
-          {/* const [formData, setFormData] = useState({ template: "", }); */}
           <Button onClick={handleSubmit}>Submit</Button>
         </Modal.Footer>
       </Modal>

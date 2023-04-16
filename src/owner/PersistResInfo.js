@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row, Button, Container } from "react-bootstrap";
+import { Form, InputGroup, Row, Button, Container, FormControl } from "react-bootstrap"; // prettier-ignore
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import ChooseTemplate from "../components/ChooseTemplate";
@@ -17,6 +17,20 @@ function PersistResInfo({ formData, setFormData }) {
   // show the Template modal
   const handleChooseTemplateClose = () => {
     setShowChooseTemplate(false);
+  };
+
+  // save the template selection
+  const handleTemplateSelect = (template) => {
+    setFormData({ ...formData, template: template });
+  };
+
+  const [selectedFile, setSelectedFile] = useState("");
+
+  // save the uploaded image name to display
+  const handleFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0].name);
+    }
   };
 
   // eslint-disable-next-line
@@ -174,54 +188,18 @@ function PersistResInfo({ formData, setFormData }) {
               }
             >
               <option value="Choose...">Choose...</option>
-              <option value="0:00">00:00</option>
-              <option value="0:30">00:30</option>
-              <option value="1:00">01:00</option>
-              <option value="1:30">01:30</option>
-              <option value="2:00">02:00</option>
-              <option value="2:30">02:30</option>
-              <option value="3:00">03:00</option>
-              <option value="3:30">03:30</option>
-              <option value="4:00">04:00</option>
-              <option value="4:30">04:30</option>
-              <option value="5:00">05:00</option>
-              <option value="5:30">05:30</option>
-              <option value="6:00">06:00</option>
-              <option value="6:30">06:30</option>
-              <option value="7:00">07:00</option>
-              <option value="7:30">07:30</option>
-              <option value="8:00">08:00</option>
-              <option value="8:30">08:30</option>
-              <option value="9:00">09:00</option>
-              <option value="9:30">09:30</option>
-              <option value="10:00">10:00</option>
-              <option value="10:30">10:30</option>
-              <option value="11:00">11:00</option>
-              <option value="11:30">11:30</option>
-              <option value="12:00">12:00</option>
-              <option value="12:30">12:30</option>
-              <option value="13:00">13:00</option>
-              <option value="13:30">13:30</option>
-              <option value="14:00">14:00</option>
-              <option value="14:30">14:30</option>
-              <option value="15:00">15:00</option>
-              <option value="15:30">15:30</option>
-              <option value="16:00">16:00</option>
-              <option value="16:30">16:30</option>
-              <option value="17:00">17:00</option>
-              <option value="17:30">17:30</option>
-              <option value="18:00">18:00</option>
-              <option value="18:30">18:30</option>
-              <option value="19:00">19:00</option>
-              <option value="19:30">19:30</option>
-              <option value="20:00">20:00</option>
-              <option value="20:30">20:30</option>
-              <option value="21:00">21:00</option>
-              <option value="21:30">21:30</option>
-              <option value="22:00">22:00</option>
-              <option value="22:30">22:30</option>
-              <option value="23:00">23:00</option>
-              <option value="23:30">23:30</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
             </Form.Select>
           </Form.Group>
 
@@ -237,100 +215,106 @@ function PersistResInfo({ formData, setFormData }) {
               }
             >
               <option value="Choose...">Choose...</option>
-              <option value="0:00">00:00</option>
-              <option value="0:30">00:30</option>
-              <option value="1:00">01:00</option>
-              <option value="1:30">01:30</option>
-              <option value="2:00">02:00</option>
-              <option value="2:30">02:30</option>
-              <option value="3:00">03:00</option>
-              <option value="3:30">03:30</option>
-              <option value="4:00">04:00</option>
-              <option value="4:30">04:30</option>
-              <option value="5:00">05:00</option>
-              <option value="5:30">05:30</option>
-              <option value="6:00">06:00</option>
-              <option value="6:30">06:30</option>
-              <option value="7:00">07:00</option>
-              <option value="7:30">07:30</option>
-              <option value="8:00">08:00</option>
-              <option value="8:30">08:30</option>
-              <option value="9:00">09:00</option>
-              <option value="9:30">09:30</option>
-              <option value="10:00">10:00</option>
-              <option value="10:30">10:30</option>
-              <option value="11:00">11:00</option>
-              <option value="11:30">11:30</option>
-              <option value="12:00">12:00</option>
-              <option value="12:30">12:30</option>
-              <option value="13:00">13:00</option>
-              <option value="13:30">13:30</option>
-              <option value="14:00">14:00</option>
-              <option value="14:30">14:30</option>
-              <option value="15:00">15:00</option>
-              <option value="15:30">15:30</option>
-              <option value="16:00">16:00</option>
-              <option value="16:30">16:30</option>
-              <option value="17:00">17:00</option>
-              <option value="17:30">17:30</option>
-              <option value="18:00">18:00</option>
-              <option value="18:30">18:30</option>
-              <option value="19:00">19:00</option>
-              <option value="19:30">19:30</option>
-              <option value="20:00">20:00</option>
-              <option value="20:30">20:30</option>
-              <option value="21:00">21:00</option>
-              <option value="21:30">21:30</option>
-              <option value="22:00">22:00</option>
-              <option value="22:30">22:30</option>
-              <option value="23:00">23:00</option>
-              <option value="23:30">23:30</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
             </Form.Select>
           </Form.Group>
-
+        </Row>
+        <Row className="mb-3">
           <Form.Group controlId="formCuisine" className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
             <Form.Control
-              className="form-control" //className- Bootstrap classes used
-              type="cuisine" //type – declares the type of input we want
-              name="resCuisine" //name – ID of the component used by JSX
+              className="form-control"
+              type="cuisine"
+              name="resCuisine"
               value={formData.resCuisine}
               onChange={(event) =>
                 setFormData({ ...formData, resCuisine: event.target.value })
               }
             />
-            <br />
-            <Button variant="info" onClick={handleChooseTemplate}>
-              Choose template
-            </Button>{" "}
-            <ChooseTemplate
-              show={showChooseTemplate}
-              handleClose={handleChooseTemplateClose}
-            />
+          </Form.Group>
+          <Form.Group
+            controlId="template"
+            className="col col-sm-6 d-flex flex-column justify-content-between"
+          >
+            <div className="d-flex align-items-end">
+              <Button
+                variant="primary"
+                onClick={handleChooseTemplate}
+                className="me-2"
+              >
+                Choose a template
+              </Button>
+              <div>
+                <Form.Label>Selected Template</Form.Label>
+                <FormControl
+                  type="text"
+                  value={
+                    formData.template
+                      ? formData.template
+                      : "No Template Selected"
+                  }
+                  readOnly
+                />
+              </div>
+            </div>
           </Form.Group>
         </Row>
+
+        <Row className="d-flex align-items-end">
+          <Form id="imageForm" className="col col-sm-6 d-flex">
+            <input
+              id="imageInput"
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleFileChange}
+            />
+            <FormControl
+              type="text"
+              value={selectedFile}
+              placeholder="No File Selected"
+              readOnly
+              className="mx-2"
+            />
+            <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
+              Browse
+            </label>
+            <Button type="submit">Upload</Button>
+          </Form>
+
+          {formData["mainImageUrl"] ? (
+            <img
+              id="mainImage"
+              src={
+                `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
+                formData["mainImageUrl"]
+              }
+              alt=""
+            />
+          ) : (
+            ""
+          )}
+        </Row>
+        <Row className="d-flex align-items-end"></Row>
       </Form>
-      <Row className="d-flex align-items-end">
-        <Form id="imageForm" className="col col-sm-6">
-          <input id="imageInput" type="file" accept="image/*" />
-          <Button className="col col-sm-6" type="submit">
-            Upload
-          </Button>
-        </Form>
-      </Row>
-      {formData["mainImageUrl"] ? (
-        <img
-          id="mainImage"
-          src={
-            `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
-            formData["mainImageUrl"]
-          }
-          alt=""
-        />
-      ) : (
-        ""
-      )}
+
+      <ChooseTemplate
+        show={showChooseTemplate}
+        handleClose={handleChooseTemplateClose}
+        handleTemplateSelect={handleTemplateSelect}
+      />
     </Container>
   );
 }
