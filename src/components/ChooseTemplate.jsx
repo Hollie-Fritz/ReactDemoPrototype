@@ -1,6 +1,9 @@
 import { React } from "react";
 import { Modal, Col, Row, Container, Form, Image, Button } from "react-bootstrap"; // prettier-ignore
-import square from "./square.jpg"; // placeholder image, needs to be removed from final file
+import template1 from "../assests/template1.JPG"
+import template2 from "../assests/template2.JPG"
+import template3 from "../assests/template3.JPG"
+import template4 from "../assests/template4.JPG"
 
 const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
   // save the value of the selected template
@@ -32,7 +35,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src={square} rounded width="150" height="150" />
+                  <Image src={template1} rounded width="150" height="150" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -44,7 +47,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src={square} rounded width="150" height="150" />
+                  <Image src={template2} rounded width="150" height="150" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -58,7 +61,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src={square} rounded width="150" height="150" />
+                  <Image src={template3} rounded width="150" height="150" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -70,7 +73,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src={square} rounded width="150" height="150" />
+                  <Image src={template4} rounded width="150" height="150" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
