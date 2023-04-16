@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Row, Button, Container } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect } from "react";
+import ChooseTemplate from "../components/ChooseTemplate";
 
 //form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
