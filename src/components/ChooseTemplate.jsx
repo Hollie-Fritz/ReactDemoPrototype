@@ -35,7 +35,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src={template1} rounded width="150" height="150" />
+                  <Image src={template1} rounded width="153" height="72" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -47,7 +47,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src={template2} rounded width="150" height="150" />
+                  <Image src={template2} rounded width="153" height="72" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -61,7 +61,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src={template3} rounded width="150" height="150" />
+                  <Image src={template3}rounded width="153" height="72" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -73,7 +73,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src={template4} rounded width="150" height="150" />
+                  <Image src={template4} rounded width="153" height="72" />
                   <Form.Check
                     type="radio"
                     id="default-radio"

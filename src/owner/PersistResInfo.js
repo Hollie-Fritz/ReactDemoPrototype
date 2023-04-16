@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import ChooseTemplate from "../components/ChooseTemplate";
 
-//form for restaurant info such as name, phone number and address
+// form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
 
