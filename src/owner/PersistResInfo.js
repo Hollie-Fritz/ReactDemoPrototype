@@ -8,13 +8,17 @@ import ChooseTemplate from "../components/ChooseTemplate";
 //form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
-  const handleChooseTemplate = (event) => {
+
+  // show the ChooseTemplate modal
+  const handleChooseTemplate = () => {
     setShowChooseTemplate(true);
   };
 
-  const handleChooseTemplateClose = (event) => {
+  // show the Template modal
+  const handleChooseTemplateClose = () => {
     setShowChooseTemplate(false);
   };
+
   // eslint-disable-next-line
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
@@ -296,12 +300,14 @@ function PersistResInfo({ formData, setFormData }) {
                 setFormData({ ...formData, resCuisine: event.target.value })
               }
             />
-            <br/>
-            <Button
-                    variant ="info"
-                    onClick={handleChooseTemplate}>Choose template
-            </Button> {" "}
-            <ChooseTemplate show={showChooseTemplate} handleClose={handleChooseTemplateClose}/>
+            <br />
+            <Button variant="info" onClick={handleChooseTemplate}>
+              Choose template
+            </Button>{" "}
+            <ChooseTemplate
+              show={showChooseTemplate}
+              handleClose={handleChooseTemplateClose}
+            />
           </Form.Group>
         </Row>
       </Form>
@@ -313,17 +319,18 @@ function PersistResInfo({ formData, setFormData }) {
           </Button>
         </Form>
       </Row>
-      {
-        formData["mainImageUrl"]?
-        <img id="mainImage"
-        src={
-          `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
-          formData["mainImageUrl"]
-        }
-        alt=""
+      {formData["mainImageUrl"] ? (
+        <img
+          id="mainImage"
+          src={
+            `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
+            formData["mainImageUrl"]
+          }
+          alt=""
         />
-        :""
-      }
+      ) : (
+        ""
+      )}
     </Container>
   );
 }
