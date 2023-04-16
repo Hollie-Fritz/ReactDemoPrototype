@@ -49,6 +49,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
           <Form.Group controlId="formItem" className="col col-sm-3">
             <Form.Label>Menu Item</Form.Label>
             <Form.Control
+            id="validation"
               required
               className="form-control"
               type="text"
@@ -62,6 +63,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             <Form.Label>Price</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
+              id="validation"
+              required
                 className="form-control"
                 type="text"
                 name="menuPrice"
@@ -75,6 +78,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             <Form.Label>Description</Form.Label>
             <InputGroup>
               <Form.Control
+              id="validation"
+              required
                 as="textarea"
                 aria-label="Menu Description"
                 className="form-control"
@@ -89,13 +94,15 @@ function PersistResMenu({ menuItems, setMenuItems }) {
           <Form.Group controlId="formItemType" className="col col-sm-3">
             <Form.Label>Menu Item Type</Form.Label>
             <Form.Select
+            id="validation"
+            required
               placeholder="Choose..."
               className="form-control"
               name="menuType"
               value={menu.menuType}
               onChange={(e) => handleChange(index, e)}
             >
-              <option value="Choose...">Choose...</option>
+              <option value="">Choose...</option>
               <option value="Appetizer">Appetizer</option>
               <option value="Entree">Entree</option>
               <option value="Dessert">Dessert</option>

@@ -79,7 +79,7 @@ function PersistResInfo({ formData, setFormData }) {
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Name</Form.Label>
             <Form.Control
-              id = "resName"
+              id = "validation"
               type="resName" //type – declares the type of input we want
               name="resName" //name – ID of the component used by JSX, must be the same as the value
               value={formData.resName}
@@ -97,12 +97,14 @@ function PersistResInfo({ formData, setFormData }) {
               {/* country code 1 for US */}
               <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
               <Form.Control
+                id = "validation"
                 aria-label="Phone Number"
                 type="phone"
                 aria-describedby="basic-addon1"
                 className="form-control"
                 name="phoneNo"
                 value={formData.phoneNo}
+                required
                 onChange={(event) =>
                   setFormData({ ...formData, phoneNo: event.target.value })
                 }
@@ -114,6 +116,8 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
             <Form.Label>Address</Form.Label>
             <Form.Control
+              id = "validation"
+              required
               className="form-control"
               type="text"
               name="address1"
@@ -140,6 +144,8 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group controlId="formGridCity" className="col col-sm-4">
             <Form.Label>City</Form.Label>
             <Form.Control
+              id = "validation"
+              required
               className="form-control"
               type="text"
               name="city"
@@ -152,6 +158,8 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group controlId="formGridState" className="col col-sm-4">
             <Form.Label>State</Form.Label>
             <Form.Select
+            id = "validation"
+            required
               placeholder="Choose..."
               className="form-control"
               name="usstate"
@@ -160,13 +168,15 @@ function PersistResInfo({ formData, setFormData }) {
                 setFormData({ ...formData, usstate: event.target.value })
               }
             >
-              <option value="Choose...">Choose...</option>
+              <option value="">Choose...</option>
               <option value="WA">WA</option>
             </Form.Select>
           </Form.Group>
           <Form.Group controlId="formGridzip" className="col col-sm-4">
             <Form.Label>Zip Code</Form.Label>
             <Form.Control
+            id = "validation"
+            required
               className="form-control"
               type="zip"
               name="zip"
@@ -181,6 +191,8 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group controlId="formOpenHours" className="col col-sm-4">
             <Form.Label>Opening Hours</Form.Label>
             <Form.Select
+            id = "validation"
+            required
               placeholder="Choose..."
               className="form-control"
               name="openhours"
@@ -189,7 +201,7 @@ function PersistResInfo({ formData, setFormData }) {
                 setFormData({ ...formData, openhours: event.target.value })
               }
             >
-              <option value="Choose...">Choose...</option>
+              <option value="">Choose...</option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -208,6 +220,8 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group controlId="formCloseHours" className="col col-sm-4">
             <Form.Label>Closing Hours</Form.Label>
             <Form.Select
+            id = "validation"
+            required
               placeholder="Choose..."
               className="form-control"
               name="closehours"
@@ -216,7 +230,7 @@ function PersistResInfo({ formData, setFormData }) {
                 setFormData({ ...formData, closehours: event.target.value })
               }
             >
-              <option value="Choose...">Choose...</option>
+              <option value="">Choose...</option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -237,6 +251,8 @@ function PersistResInfo({ formData, setFormData }) {
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
             <Form.Control
+            id = "validation"
+            required
               className="form-control"
               type="cuisine"
               name="resCuisine"
@@ -261,6 +277,8 @@ function PersistResInfo({ formData, setFormData }) {
               <div>
                 <Form.Label>Selected Template</Form.Label>
                 <FormControl
+                id = "validation"
+                required
                   type="text"
                   value={
                     formData.template
