@@ -1,13 +1,10 @@
 import React from "react";
-import { Card, ListGroup, Container, Navbar } from "react-bootstrap";
+import { Card, ListGroup} from "react-bootstrap";
 import "../components/Grid.css";
-import { useNavigate } from "react-router-dom";
 import "../pages/About.css";
-import logo from "../assests/NuOrderLogoLarge.png";
 import NavBarHome from "../components/NavBarHome";
 
 const Contact = () => {
-  let navigate = useNavigate();
   const cardInfo = [
     {
       image:
