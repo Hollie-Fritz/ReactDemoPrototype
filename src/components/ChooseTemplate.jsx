@@ -2,11 +2,16 @@ import React, {useState} from 'react'
 import {Modal, Col, Row, Container} from 'react-bootstrap'
 
 
-const ChooseTemplate = () => {
+const ChooseTemplate = (show, handleClose) => {
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+    };
 
   return (
     <>
-        <Modal>
+        <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
                 <Modal.Title>Template Options</Modal.Title>
             </Modal.Header>
