@@ -152,6 +152,7 @@ function PersistResForm() {
         <Button
           id = "submitOrNext"
           onClick={() => {
+            const FormControl = document.getElementById("resName");
             if (page === FormTitles.length - 1) {
               //logs the data
               console.log(formData);
@@ -159,8 +160,13 @@ function PersistResForm() {
               //sends the data to DynamoDB by invoking userAction();
               userAction();
             } else {
-              // enables next button to work by incrementing
-              setPage((currPage) => currPage + 1);
+              if(FormControl.checkValidity()) {
+                   // enables next button to work by incrementing
+                   setPage((currPage) => currPage + 1);
+              }
+              else {
+                FormControl.reportValidity();
+              }
             }
           }}
         >

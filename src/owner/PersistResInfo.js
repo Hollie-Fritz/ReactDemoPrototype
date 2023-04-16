@@ -79,9 +79,11 @@ function PersistResInfo({ formData, setFormData }) {
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Name</Form.Label>
             <Form.Control
+              id = "resName"
               type="resName" //type – declares the type of input we want
               name="resName" //name – ID of the component used by JSX, must be the same as the value
               value={formData.resName}
+              required
               // persist the entered information by saving the entered data
               onChange={(event) =>
                 setFormData({ ...formData, resName: event.target.value })
