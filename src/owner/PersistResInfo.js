@@ -2,11 +2,19 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Row, Button, Container } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ChooseTemplate from "../components/ChooseTemplate";
 
 //form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
+  const [showChooseTemplate, setShowChooseTemplate] = useState(false);
+  const handleChooseTemplate = (event) => {
+    setShowChooseTemplate(true);
+  };
+
+  const handleChooseTemplateClose = (event) => {
+    setShowChooseTemplate(false);
+  };
   // eslint-disable-next-line
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
@@ -289,7 +297,11 @@ function PersistResInfo({ formData, setFormData }) {
               }
             />
             <br/>
-            <Button >Choose template</Button>
+            <Button
+                    variant ="info"
+                    onClick={handleChooseTemplate}>Choose template
+            </Button> {" "}
+            <ChooseTemplate show={showChooseTemplate} handleClose={handleChooseTemplateClose}/>
           </Form.Group>
         </Row>
       </Form>
