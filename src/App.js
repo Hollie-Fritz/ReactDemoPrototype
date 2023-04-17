@@ -1,6 +1,8 @@
 import React from 'react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import { ThemeProvider } from "react-bootstrap"
-import { Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -8,7 +10,6 @@ import Contact from './pages/Contact';
 import { Customer } from './components/customer/Customer';
 import { Login } from './components/Login';
 import Owner  from './components/Owner';
-import { Authenticator } from '@aws-amplify/ui-react';
 import PageNotFound from './pages/PageNotFound';
 import Search from "./pages/Search";
 import PersistResForm from "./owner/PersistResForm";
@@ -17,7 +18,8 @@ import ViewWebpage from './pages/ViewWebPage';
 import FormEdit from './owner/FormEdit';
 import PopUp from './PopUp';
 
-let App = () => {
+const App = () => {
+
   return (
     <ThemeProvider
       breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
@@ -39,7 +41,7 @@ let App = () => {
             <Route path="/customer" element={<Customer />} />
             <Route path="/vp" element={<ViewWebpage />} />
             <Route path="/r/:id" element={<ViewWebpage />}/>
-             <Route path="*" element={<PageNotFound/>} />
+            <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Authenticator.Provider>
       </div>

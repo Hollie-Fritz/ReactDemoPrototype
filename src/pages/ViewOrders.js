@@ -1,13 +1,37 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Auth from "@aws-amplify/auth";
 import React, { useState, useEffect } from "react";
-import { Card, Table, Container, Row } from "react-bootstrap";
+import { Card, Table, Container, Row, Form, Button } from "react-bootstrap";
 import res from "../assests/SmallDumpling.png";
 import NavBarHome from "../components/NavBarHome";
+import OrderProgress from "./OrderProgress";
 
 function ViewOrder() {
   const [count, setCount] = useState([]);
   const [restaurantId, setRestaurantId] = useState([""]);
+
+  async function updateOrderStatus(orderId, status) {
+    const body = {
+      orderId: orderId,
+      updateKey: "progress",
+      updateValue: status,
+    };
+
+    await fetch(
+      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
 
   useEffect(() => {
     async function userAction() {
@@ -53,7 +77,7 @@ function ViewOrder() {
             >
               <nobr className="fw-bold"></nobr>
               <Card.Img variant="top" src={res} />
-              {count.map((temp) => {
+              {count.map((temp, index) => {
                 return (
                   <div>
                     <Card.Body>
@@ -91,8 +115,47 @@ function ViewOrder() {
                           style={{ background: "white" }}
                         >
                           {" "}
+                          Note: {temp["note"]}
+                        </nobr>
+                        <br></br>
+                        <nobr
+                          className="fw-bold border-0"
+                          style={{ background: "white" }}
+                        >
+                          {" "}
+                          Utensils: {temp["utensils"] ? "yes" : "no"}
+                        </nobr>
+                        <br></br>
+                        <nobr
+                          className="fw-bold border-0"
+                          style={{ background: "white" }}
+                        >
+                          {" "}
                           Total Cost: ${temp["totalCost"]}
                         </nobr>
+                        <br></br>
+                        <Form.Label>Progress: </Form.Label>
+                        <Form.Select
+                          className="form-control"
+                          name="progress"
+                          defaultValue={temp["progress"]}
+                          id={"form" + index}
+                        >
+                          <option value="Order placed"> Order Placed </option>
+                          <option value="Preparing"> Preparing </option>
+                          <option value="Ready"> Ready </option>
+                        </Form.Select>
+                        <Button
+                          onClick={async () => {
+                            const form = document.getElementById(
+                              "form" + index
+                            );
+                            await updateOrderStatus(temp["id"], form.value);
+                          }}
+                        >
+                          Submit Stage
+                        </Button>
+                        <OrderProgress stage={temp["progress"]} />
                       </Card.Text>
                     </Card.Body>
                   </div>
