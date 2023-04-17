@@ -40,3 +40,4 @@ const OrderProgress = ({ stage }) => {
 };
 
 export default OrderProgress;
+

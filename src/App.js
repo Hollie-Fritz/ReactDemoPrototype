@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import { ThemeProvider } from "react-bootstrap"
-import { Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import Home from './pages/Home';
@@ -9,7 +10,6 @@ import Contact from './pages/Contact';
 import { Customer } from './components/customer/Customer';
 import { Login } from './components/Login';
 import Owner  from './components/Owner';
-import { Authenticator } from '@aws-amplify/ui-react';
 import PageNotFound from './pages/PageNotFound';
 import Search from "./pages/Search";
 import PersistResForm from "./owner/PersistResForm";
@@ -17,12 +17,9 @@ import ViewOrders from "./pages/ViewOrders";
 import ViewWebpage from './pages/ViewWebPage';
 import FormEdit from './owner/FormEdit';
 import PopUp from './PopUp';
-import OrderProgress from './pages/OrderProgress';
-import ViewStatus from './pages/ViewStatus';
 
-let App = () => {
+const App = () => {
 
-  const [stage, setStage] = useState('Order placed');
   return (
     <ThemeProvider
       breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
@@ -45,8 +42,6 @@ let App = () => {
             <Route path="/vp" element={<ViewWebpage />} />
             <Route path="/r/:id" element={<ViewWebpage />}/>
             <Route path="*" element={<PageNotFound/>} />
-            <Route path="/progress" element={<OrderProgress stage={stage} />} />
-            <Route path="/status" element={<ViewStatus stage={stage} />} />
           </Routes>
         </Authenticator.Provider>
       </div>

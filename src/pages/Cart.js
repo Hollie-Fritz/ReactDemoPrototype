@@ -187,18 +187,20 @@ function Cart(props) {
               <Form.Control type="Name" placeholder="Enter your name" />
             </FloatingLabel>
           </Form>
-          </div>
+        </div>
+
           <div>
             <Form>
-              <FloatingLabel controlId="floatingTextarea2" label="Note for Restaurant">
-              <Form.Control
-                as="textarea"
-                placeholder="Enter a note"
-                onChange={handleNote} 
-                style={{ height: "100px" }}
-              />
+             {/* NOTE */}
+              <FloatingLabel controlId="floatingTextarea2" label="note for Restaurant">
+                <Form.Control
+                  as="textarea"
+                  placeholder="Enter a note"
+                  onChange={handleNote} 
+                  style={{ height: "100px" }}
+                />
               </FloatingLabel>
-
+              {/* Utensils */}
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check onChange={handleUtensils} type="checkbox" label="toggle for utensils" />
               </Form.Group>

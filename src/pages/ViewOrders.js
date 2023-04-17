@@ -12,10 +12,10 @@ function ViewOrder() {
 
   async function updateOrderStatus(orderId, status) {
     const body = {
-      "orderId": orderId,
-      "updateKey": "progress",
-      "updateValue": status
-    }
+      orderId: orderId,
+      updateKey: "progress",
+      updateValue: status,
+    };
 
     await fetch(
       "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order",
@@ -24,13 +24,13 @@ function ViewOrder() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       }
     )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-    });
+      });
   }
 
   useEffect(() => {
@@ -123,7 +123,7 @@ function ViewOrder() {
                           style={{ background: "white" }}
                         >
                           {" "}
-                          Utensils: {temp["utensils"]?"yes":"no"}
+                          Utensils: {temp["utensils"] ? "yes" : "no"}
                         </nobr>
                         <br></br>
                         <nobr
@@ -139,17 +139,21 @@ function ViewOrder() {
                           className="form-control"
                           name="progress"
                           defaultValue={temp["progress"]}
-                          id = {"form" + index}
+                          id={"form" + index}
                         >
                           <option value="Order placed"> Order Placed </option>
                           <option value="Preparing"> Preparing </option>
                           <option value="Ready"> Ready </option>
                         </Form.Select>
-                        <Button onClick={async () => {
-                          const form = document.getElementById("form" + index);
-                          await updateOrderStatus(temp["id"], form.value);
-                        }}> 
-                          Submit Stage 
+                        <Button
+                          onClick={async () => {
+                            const form = document.getElementById(
+                              "form" + index
+                            );
+                            await updateOrderStatus(temp["id"], form.value);
+                          }}
+                        >
+                          Submit Stage
                         </Button>
                         <OrderProgress stage={temp["progress"]} />
                       </Card.Text>
