@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from "react-bootstrap"
 import { Route, Routes } from 'react-router-dom';
+
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -16,8 +17,12 @@ import ViewOrders from "./pages/ViewOrders";
 import ViewWebpage from './pages/ViewWebPage';
 import FormEdit from './owner/FormEdit';
 import PopUp from './PopUp';
+import OrderProgress from './pages/OrderProgress';
+import ViewStatus from './pages/ViewStatus';
 
 let App = () => {
+
+  const [stage, setStage] = useState('Order placed');
   return (
     <ThemeProvider
       breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
@@ -39,7 +44,9 @@ let App = () => {
             <Route path="/customer" element={<Customer />} />
             <Route path="/vp" element={<ViewWebpage />} />
             <Route path="/r/:id" element={<ViewWebpage />}/>
-             <Route path="*" element={<PageNotFound/>} />
+            <Route path="*" element={<PageNotFound/>} />
+            <Route path="/progress" element={<OrderProgress stage={stage} />} />
+            <Route path="/status" element={<ViewStatus stage={stage} />} />
           </Routes>
         </Authenticator.Provider>
       </div>
