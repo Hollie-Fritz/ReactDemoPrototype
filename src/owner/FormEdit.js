@@ -31,7 +31,7 @@ function FormEdit() {
 
   //state object that contains all the fields for ResMenu
   const [menuItems, setMenuItems] = useState([
-    { menuItem: "", menuPrice: "", menuDesc: "", menuType: "" },
+    { menuItem: "", menuPrice: "", menuDesc: "", menuType: "", menuImageUrl: ""},
   ]);
 
   const userAction = async () => {
@@ -49,7 +49,8 @@ function FormEdit() {
         foodName: menuItems[i]["menuItem"],
         foodType: menuItems[i]["menuType"],
         foodPrice: menuItems[i]["menuPrice"],
-        foodDesc: menuItems[i]["menuDesc"]
+        foodDesc: menuItems[i]["menuDesc"],
+        foodImageUrl: menuItems[i]["menuImageUrl"]
       };
     }
 
@@ -135,6 +136,7 @@ function FormEdit() {
                   "menuType": current["foodType"],
                   "menuPrice": current["foodPrice"],
                   "menuDesc": current["foodDesc"],
+                  "menuImageUrl": current["foodImageUrl"]
                 });
               });
               console.log("menuItems below");

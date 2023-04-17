@@ -30,7 +30,7 @@ function PersistResForm() {
 
   //state object that contains all the fields for ResMenu
   const [menuItems, setMenuItems] = useState([
-    { menuItem: "", menuPrice: "", menuDesc: "", menuType: "" },
+    { menuItem: "", menuPrice: "", menuDesc: "", menuType: "", menuImageUrl: ""},
   ]);
 
   const userAction = async () => {
@@ -49,6 +49,7 @@ function PersistResForm() {
         foodType: menuItems[i]["menuType"],
         foodPrice: menuItems[i]["menuPrice"],
         foodDesc: menuItems[i]["menuDesc"],
+        foodImageUrl: menuItems[i]["menuImageUrl"]
       };
     }
 
