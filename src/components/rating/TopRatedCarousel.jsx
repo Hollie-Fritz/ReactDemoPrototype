@@ -6,18 +6,24 @@ function TopRatedCarousel({ id }) {
 
   useEffect(() => {
     const fetchRestaurants = async () => {
+      // fetching reviews by restaurant id
         const reviewUrl = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review?userId=${id}`;
         const reviewResponse = await fetch(reviewUrl);
         const reviewData = await reviewResponse.json();
-      
+
         const restaurantNames = Array.from(new Set(reviewData.map(review => review.resName)));
-      
+
+
         const restaurantUrl = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant?name=${restaurantNames.join(',')}`;
         const restaurantResponse = await fetch(restaurantUrl);
         const restaurantData = await restaurantResponse.json();
-      
+        // console.log(JSON.stringify(restaurantData))
+
         // Group reviews by restaurant name and calculate average rating for each restaurant
         const restaurants = {};
+
+        // calculate average ratings for each restaurant
+        // restaurants: name, rating, count
         reviewData.forEach((review) => {
           const { resName, rating } = review;
           if (!restaurants[resName]) {
@@ -31,26 +37,29 @@ function TopRatedCarousel({ id }) {
             restaurants[resName].count += 1;
           }
         });
-      
+
+        //console.log(JSON.stringify(restaurants))
+        // empty object
         // Merge restaurant information with review data
         Object.values(restaurants).forEach((restaurant) => {
           const matchedRestaurant = restaurantData.find((res) => res.name === restaurant.name);
+          // if it exists
           if (matchedRestaurant) {
             restaurant.image = matchedRestaurant.resImageUrl;
             restaurant.address = `${matchedRestaurant.address1}, ${matchedRestaurant.city}, ${matchedRestaurant.state} ${matchedRestaurant.zipCode}`;
           }
         });
-      
+
         // Sort the restaurants by rating in descending order
         const sortedRestaurants = Object.values(restaurants).sort(
           (a, b) => b.rating / b.count - a.rating / a.count
         );
-      
+
         // Get the top three restaurants
         const topRated = sortedRestaurants.slice(0, 3);
-      
+
         setTopRatedRestaurants(topRated);
-      };      
+      };
 
     fetchRestaurants();
   }, [id]);
