@@ -75,7 +75,7 @@ function PersistResInfo({ formData, setFormData }) {
         {/* React-Bootstrap Row component to align particular components horizontally */}
         <Row className="mb-3">
           {/* Form.Group to group individual components into one component.  */}
-          <Form.Group controlId="formResName" className="col col-sm-6">
+          <Form.Group className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Name</Form.Label>
             <Form.Control
@@ -91,7 +91,7 @@ function PersistResInfo({ formData, setFormData }) {
               className="form-control" //className- Bootstrap classes used
             />
           </Form.Group>
-          <Form.Group controlId="phone" className="col col-sm-6">
+          <Form.Group  className="col col-sm-6">
             <Form.Label>Phone Number</Form.Label>
             <InputGroup>
               {/* country code 1 for US */}
@@ -113,7 +113,7 @@ function PersistResInfo({ formData, setFormData }) {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
+          <Form.Group className=" col col-sm-6" >
             <Form.Label>Address</Form.Label>
             <Form.Control
               id = "validation"
@@ -127,7 +127,7 @@ function PersistResInfo({ formData, setFormData }) {
               }
             />
           </Form.Group>
-          <Form.Group className="col col-sm-6" controlId="formGridAddress2">
+          <Form.Group className="col col-sm-6" >
             <Form.Label>Address 2</Form.Label>
             <Form.Control
               className="form-control"
@@ -141,7 +141,7 @@ function PersistResInfo({ formData, setFormData }) {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group controlId="formGridCity" className="col col-sm-4">
+          <Form.Group className="col col-sm-4">
             <Form.Label>City</Form.Label>
             <Form.Control
               id = "validation"
@@ -155,7 +155,7 @@ function PersistResInfo({ formData, setFormData }) {
               }
             />
           </Form.Group>
-          <Form.Group controlId="formGridState" className="col col-sm-4">
+          <Form.Group className="col col-sm-4">
             <Form.Label>State</Form.Label>
             <Form.Select
             id = "validation"
@@ -172,7 +172,7 @@ function PersistResInfo({ formData, setFormData }) {
               <option value="WA">WA</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group controlId="formGridzip" className="col col-sm-4">
+          <Form.Group className="col col-sm-4">
             <Form.Label>Zip Code</Form.Label>
             <Form.Control
             id = "validation"
@@ -188,7 +188,7 @@ function PersistResInfo({ formData, setFormData }) {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group controlId="formOpenHours" className="col col-sm-4">
+          <Form.Group className="col col-sm-4">
             <Form.Label>Opening Hours</Form.Label>
             <Form.Select
             id = "validation"
@@ -217,7 +217,7 @@ function PersistResInfo({ formData, setFormData }) {
             </Form.Select>
           </Form.Group>
 
-          <Form.Group controlId="formCloseHours" className="col col-sm-4">
+          <Form.Group className="col col-sm-4">
             <Form.Label>Closing Hours</Form.Label>
             <Form.Select
             id = "validation"
@@ -247,7 +247,7 @@ function PersistResInfo({ formData, setFormData }) {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group controlId="formCuisine" className="col col-sm-6">
+          <Form.Group className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
             <Form.Control
@@ -263,7 +263,6 @@ function PersistResInfo({ formData, setFormData }) {
             />
           </Form.Group>
           <Form.Group
-            controlId="template"
             className="col col-sm-6 d-flex flex-column justify-content-between"
           >
             <div className="d-flex align-items-end">

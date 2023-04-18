@@ -7,7 +7,7 @@ const CardList = ({ restaurants }) => (
     <Container fluid>
       <Row xs={2} md={3} lg={4} >
         {restaurants.map((restaurant) => {
-          return <Card restaurant={restaurant} />;
+          return <Card key={restaurant.userId}restaurant={restaurant} />;
         })}
       </Row>
     </Container>

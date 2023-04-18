@@ -13,16 +13,16 @@ const ViewReview = ({ show, handleClose, name, reviews }) => {
           <Table responsive="lg" hover size="sm">
             <thead>
               <tr>
-                <th width='25%'>Author</th>
-                <th width='20%'>Rating</th>
-                <th width='18%'>Date</th>
-                <th  width='40%'>Comment</th>
+                <th width="25%">Author</th>
+                <th width="20%">Rating</th>
+                <th width="18%">Date</th>
+                <th width="40%">Comment</th>
               </tr>
             </thead>
             <tbody>
-              {reviews.map((current) => {
+              {reviews.map((current, index) => {
                 return (
-                  <>
+                  <React.Fragment key={index}>
                     <tr key={current["author"]}>
                       <td>{current["author"]}</td>
                       <td>
@@ -37,7 +37,7 @@ const ViewReview = ({ show, handleClose, name, reviews }) => {
                       <td>{current["date"]}</td>
                       <td>{current["comment"]}</td>
                     </tr>
-                  </>
+                  </React.Fragment>
                 );
               })}
             </tbody>

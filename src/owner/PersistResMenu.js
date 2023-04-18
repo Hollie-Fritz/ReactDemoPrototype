@@ -29,13 +29,6 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     ]);
   };
 
-  //function to remove form items unless there is only one remaining
-  // const handleRemoveItem = () => {
-  //   const values = [...menuItems];
-  //   if (values.length > 1) values.pop();
-  //   setMenuItems(values);
-  // };
-
   const handleRemove = (index) => {
     const temp = [...menuItems];
     temp.splice(index, 1);
@@ -78,8 +71,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             <Form.Label>Description</Form.Label>
             <InputGroup>
               <Form.Control
-              id="validation"
-              required
+
                 as="textarea"
                 aria-label="Menu Description"
                 className="form-control"

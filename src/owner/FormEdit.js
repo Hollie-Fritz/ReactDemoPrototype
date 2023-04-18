@@ -27,6 +27,7 @@ function FormEdit() {
     openhours: "",
     closehours: "",
     mainImageUrl:"",
+    template:"",
   });
 
   //state object that contains all the fields for ResMenu
@@ -68,6 +69,7 @@ function FormEdit() {
       openHours: formData.openhours,
       closeHours: formData.closehours,
       mainImageUrl: formData.mainImageUrl,
+      template: formData.template,
     };
 
     console.log("submitting, json listed below");
@@ -126,7 +128,8 @@ function FormEdit() {
                 zip: data[0]["zipCode"],
                 openhours: data[0]["openHours"],
                 closehours: data[0]["closeHours"],
-                mainImageUrl: data[0]["mainImageUrl"]
+                mainImageUrl: data[0]["mainImageUrl"],
+                template: data[0]["template"]
               });
               data[0]["Food"].forEach(current => {
                 console.log(current["foodName"] + " is foodName");
@@ -203,6 +206,7 @@ function FormEdit() {
         <Button
           id = "submitOrNext"
           onClick={() => {
+            const FormControl = document.querySelectorAll('[id*="validation"]');
             if (page === FormTitles.length - 1) {
               //logs the data
               console.log(formData);
@@ -210,8 +214,17 @@ function FormEdit() {
               //sends the data to DynamoDB by invoking userAction();
               userAction();
             } else {
-              // enables next button to work by incrementing
-              setPage((currPage) => currPage + 1);
+              let isValid = true;
+              FormControl.forEach((FormControl) => {
+                if (!FormControl.checkValidity()) {
+                  isValid = false;
+                  FormControl.reportValidity();
+                }
+              });
+              if (isValid) {
+                // enables next button to work by incrementing
+                setPage((currPage) => currPage + 1);
+              }
             }
           }}
         >
