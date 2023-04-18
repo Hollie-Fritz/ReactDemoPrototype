@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Table } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 
-const ViewReview = ({ show, handleClose, userId, name, reviews }) => {
+const ViewReview = ({ show, handleClose, name, reviews }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose} centered>

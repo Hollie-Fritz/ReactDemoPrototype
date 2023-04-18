@@ -16,7 +16,6 @@ const AverageRating = ({ reviews }) => {
   }, [reviews]);
 
   const roundedRating = Math.round(averageRating * 2) / 2;
-  // const wholeRating = Math.round(roundedRating * 2);
 
   return (
     <>
@@ -32,24 +31,6 @@ const AverageRating = ({ reviews }) => {
         fullIcon={<i className="fa fa-star"></i>}
         activeColor="#ffd700"
       />
-
-      {/* <ReactStars
-          count={5}
-          size={24}
-          isHalf={true}
-          emptyIcon={<i className="far fa-star"></i>}
-          halfIcon={<i className="fa fa-star-half-alt"></i>}
-          fullIcon={<i className="fa fa-star"></i>}
-          activeColor="#ffd700"
-      />
-      <Rating
-        initialRating={roundedRating}
-        emptySymbol={<i className="far fa-star"></i>}
-        fullSymbol={<i className="fas fa-star"></i>}
-        readonly
-      />
-      <br/>
-      <span style={{ marginLeft: "10px" }}><strong>Rating:</strong> {roundedRating.toFixed(1)}/5</span> */}
     </>
   );
 };
