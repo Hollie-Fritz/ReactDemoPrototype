@@ -28,6 +28,7 @@ function FormEdit() {
     closehours: "",
     mainImageUrl:"",
     template:"",
+    averageRating: -1
   });
 
   //state object that contains all the fields for ResMenu
@@ -70,6 +71,7 @@ function FormEdit() {
       closeHours: formData.closehours,
       mainImageUrl: formData.mainImageUrl,
       template: formData.template,
+      averageRating: formData.averageRating
     };
 
     console.log("submitting, json listed below");
@@ -129,7 +131,8 @@ function FormEdit() {
                 openhours: data[0]["openHours"],
                 closehours: data[0]["closeHours"],
                 mainImageUrl: data[0]["mainImageUrl"],
-                template: data[0]["template"]
+                template: data[0]["template"],
+                averageRating: data[0]["averageRating"]
               });
               data[0]["Food"].forEach(current => {
                 console.log(current["foodName"] + " is foodName");

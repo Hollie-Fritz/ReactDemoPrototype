@@ -18,7 +18,9 @@ export function ViewWebPage() {
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [address, setAddress] = useState("");
+  const [averageRating, setAverageRating] = useState(0);
 
+  
   // write reviews handlers
   const handleWriteReviewClick = (event) => {
     event.stopPropagation();
@@ -91,6 +93,7 @@ export function ViewWebPage() {
         .then((response) => response.json())
         .then((data) => {
           if (data.length !== 0) {
+            setAverageRating(data[0]["averageRating"]);
             setresdata(data[0]);
             setfooddata(data[0]["Food"]);
             setAddress(
@@ -108,7 +111,8 @@ export function ViewWebPage() {
           // console.log("data is below");
           // console.log(JSON.stringify(data));
         });
-        console.log(JSON.stringify(resdata))
+        console.log(JSON.stringify(averageRating))
+
     }
     userAction();
   }, [id]);
@@ -137,6 +141,7 @@ export function ViewWebPage() {
     bucketUrl,
     id,
     frameRef,
+    averageRating,
   };
 
   // return the WebPageContext.Provider component with the object of all the variables and handlers

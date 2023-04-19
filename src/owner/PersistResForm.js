@@ -27,6 +27,7 @@ function PersistResForm() {
     closehours: "",
     mainImageUrl: "",
     template: "",
+    averageRating: -1,
   });
 
   //state object that contains all the fields for ResMenu
@@ -69,6 +70,7 @@ function PersistResForm() {
       closeHours: formData.closehours,
       mainImageUrl: formData.mainImageUrl,
       template: formData.template,
+      averageRating: -1,
     };
 
     // "resImageUrl": "null",

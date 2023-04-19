@@ -5,7 +5,7 @@ import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 
-// Template2 component
+// Template1 component
 function Template2(props) {
   const {
     resdata,
@@ -25,6 +25,7 @@ function Template2(props) {
     bucketUrl,
     id,
     frameRef,
+    averageRating,
   } = props.data;
 
   return (
@@ -70,7 +71,7 @@ function Template2(props) {
               <Card.Body style={{ overflow: "hidden" }}>
                 <Card.Title as="h4" className="text-center">
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <AverageRating reviews={reviews} />
+                    <AverageRating averageRating={averageRating} />
                   </div>
                   <br />
                 </Card.Title>
@@ -227,7 +228,7 @@ function Template2(props) {
               {/* View Cart */}
               <Button
                 className="mb-2"
-                variant="primary"
+                variant="danger"
                 type="submit"
                 onClick={handleShowCart}
               >

@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from "react";
 import Rating from "react-rating-stars-component";
 
-const AverageRating = ({ reviews }) => {
-  const [averageRating, setAverageRating] = useState(0);
-
-  useEffect(() => {
-    if (reviews.length > 0) {
-      let total = 0;
-      for (let i = 0; i < reviews.length; i++) {
-        total += reviews[i].rating;
-      }
-      const avg = total / reviews.length;
-      setAverageRating(avg);
-    }
-  }, [reviews]);
-
-  const roundedRating = Math.round(averageRating * 2) / 2;
+const AverageRating = (props) => {
+  const roundedRating = Math.round(props.averageRating * 2) / 2;
 
   return (
     <>
       <Rating
         key={`stars_${roundedRating}`}
-        value={averageRating}
+        value={props.averageRating}
         edit={false}
         count={5}
         size={20}
@@ -31,6 +17,8 @@ const AverageRating = ({ reviews }) => {
         fullIcon={<i className="fa fa-star"></i>}
         activeColor="#ffd700"
       />
+      {/* <br/> <br/>
+      <h1>{props.averageRating}</h1> */}
     </>
   );
 };

@@ -25,6 +25,7 @@ function Template1(props) {
     bucketUrl,
     id,
     frameRef,
+    averageRating,
   } = props.data;
 
   return (
@@ -70,7 +71,7 @@ function Template1(props) {
               <Card.Body style={{ overflow: "hidden" }}>
                 <Card.Title as="h4" className="text-center">
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <AverageRating reviews={reviews} />
+                    <AverageRating averageRating={averageRating} />
                   </div>
                   <br />
                 </Card.Title>
