@@ -144,10 +144,10 @@ export function ViewWebPage() {
     averageRating,
   };
 
+
   // return the WebPageContext.Provider component with the object of all the variables and handlers
   // so that all the templates will have access to it
-
-  function handleTemplate(resdata){
+function handleTemplate(resdata){
       //resdata["template"] is what value is stored in dynamodb
       switch(resdata["template"]) {
         case "template1":
@@ -162,10 +162,6 @@ export function ViewWebPage() {
         case "template4":
           return <> <NavBarHome/> <Template4 data={webPageVars} /> </>
 
-        default:
-          return "";
-      }
-  }
 
   return (
     <>
