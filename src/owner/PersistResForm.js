@@ -26,6 +26,8 @@ function PersistResForm() {
     openhours: "",
     closehours: "",
     mainImageUrl: "",
+    template: "",
+    averageRating: -1,
   });
 
   //state object that contains all the fields for ResMenu
@@ -68,6 +70,8 @@ function PersistResForm() {
       openHours: formData.openhours,
       closeHours: formData.closehours,
       mainImageUrl: formData.mainImageUrl,
+      template: formData.template,
+      averageRating: -1,
     };
 
     // "resImageUrl": "null",
@@ -120,12 +124,12 @@ function PersistResForm() {
   };
 
   function formatPhoneNumber(phoneNumberString) {
-    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
-    if(cleaned == null || phoneNumberString.length<10)return "";
+    var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
+    if (cleaned == null || phoneNumberString.length < 10) return "";
 
     var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-    if (match != null && match.length>=3) {
-      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    if (match != null && match.length >= 3) {
+      return "(" + match[1] + ") " + match[2] + "-" + match[3];
     }
     return "";
   }
@@ -149,8 +153,9 @@ function PersistResForm() {
           Prev
         </Button>{" "}
         <Button
-          id = "submitOrNext"
+          id="submitOrNext"
           onClick={() => {
+            const FormControl = document.querySelectorAll('[id*="validation"]');
             if (page === FormTitles.length - 1) {
               //logs the data
               console.log(formData);
@@ -158,8 +163,17 @@ function PersistResForm() {
               //sends the data to DynamoDB by invoking userAction();
               userAction();
             } else {
-              // enables next button to work by incrementing
-              setPage((currPage) => currPage + 1);
+              let isValid = true;
+              FormControl.forEach((FormControl) => {
+                if (!FormControl.checkValidity()) {
+                  isValid = false;
+                  FormControl.reportValidity();
+                }
+              });
+              if (isValid) {
+                // enables next button to work by incrementing
+                setPage((currPage) => currPage + 1);
+              }
             }
           }}
         >

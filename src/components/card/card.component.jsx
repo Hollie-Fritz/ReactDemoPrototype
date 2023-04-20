@@ -15,11 +15,11 @@ const CardComponent = ({
     city,
     state,
     zipCode,
+    averageRating,
   },
 }) => {
   const navigate = useNavigate();
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
-  const [reviews, setReviews] = useState([]);
 
   const handleShowReviewClick = (event) => {
     event.stopPropagation();
@@ -31,16 +31,6 @@ const CardComponent = ({
     setShowViewReviewForm(false);
   };
 
-  useEffect(() => {
-    const fetchAverageRating = async () => {
-      let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review?userId=${userId}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setReviews(data);
-    };
-    fetchAverageRating();
-  }, [userId]);
-
   return (
     <>
       <CardGroup className="my-1">
@@ -51,9 +41,9 @@ const CardComponent = ({
           <Card.Body  key={userId}
           onClick={() => navigate(`/r/${userId}`)}>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
-            {reviews.length !== 0 ?
+            {averageRating !== 0 ?
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <AverageRating reviews={reviews} />
+              <AverageRating averageRating={averageRating} />
             </div>
             :
             ""
@@ -75,13 +65,13 @@ const CardComponent = ({
                 View Reviews
               </Button>{" "}
             </div>
-            <ViewReview
+            {/* <ViewReview
               show={showViewReviewForm}
               handleClose={handleViewReviewFormClose}
               userId={userId}
               name={name}
               reviews={reviews}
-            />
+            /> */}
           </Card.Footer>
         </Card>
       </CardGroup>

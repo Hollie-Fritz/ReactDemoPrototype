@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import CardList from "../card-list/card-list.component";
 import SearchBox from "../search-box/search-box.component";
 import NavBarHome from "../NavBarHome";
+import TopRatedCarousel from "../rating/TopRatedCarousel";
 
 const Search = () => {
   const [searchField, setSearchField] = useState("");
@@ -53,7 +54,12 @@ export function Customer() {
       <Container fluid="md">
         <Row className="justify-content-center">
           <Col>
-
+          <TopRatedCarousel/>
+          </Col>
+        </Row>
+        <br/><br/><br/><br/><br/>
+        <Row className="justify-content-center">
+          <Col>
           <Search  />
           </Col>
         </Row>

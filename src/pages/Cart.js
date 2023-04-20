@@ -174,9 +174,10 @@ function Cart(props) {
             })}
           </tbody>
         </Table>
+        <div>
         <p className="text-right font-weight-bold">
           Total: ${totalPrice.toFixed(2)}
-        </p>
+        </p></div>
         <div>
           <Form>
             <FloatingLabel
