@@ -1,12 +1,15 @@
 import React from "react";
 import { Modal, Button, Table, Form, FloatingLabel } from "react-bootstrap";
 import { useState } from "react";
+import Auth from "@aws-amplify/auth";
 
 function Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
   // const [cart, setCart] = useState(cart);
   const [customerName, setCustomerName] = useState("anonymous");
+  const [note, setNote] = useState("");
   const [showMessage, setShowMessage] = useState(false);
+  const [utensils, setUtensils] = useState(false);
 
   const handleDecrement = (foodId) => {
     const temp = { ...cart };
@@ -37,6 +40,14 @@ function Cart(props) {
     setCustomerName(event.target.value);
   };
 
+  const handleNote = (event) => {
+    setNote(event.target.value);
+  };
+
+  const handleUtensils = (event) => {
+    setUtensils(event.target.value === "on" ? true: false);
+  };
+
   const handleSubmit = async () => {
     const items = [];
     fooddata.forEach((item) => {
@@ -56,11 +67,26 @@ function Cart(props) {
       }, 7000) // 7 seconds
     });
 
+    let customerId = "";
+    
+    try {
+      let nameJson = await Auth.currentUserInfo();
+      customerId = nameJson["username"];
+      console.log(JSON.stringify(nameJson));
+    } catch {
+
+    }
+    
+
     const converted = {
       customerName: customerName,
+      customerId: customerId,
       menuItems: items,
       restaurantId: userId,
       restaurantName: name,
+      note: note,
+      utensils: utensils,
+      progress: "Order placed",
       totalCost: totalPrice,
     };
     await fetch(
@@ -148,9 +174,10 @@ function Cart(props) {
             })}
           </tbody>
         </Table>
+        <div>
         <p className="text-right font-weight-bold">
           Total: ${totalPrice.toFixed(2)}
-        </p>
+        </p></div>
         <div>
           <Form>
             <FloatingLabel
@@ -158,10 +185,28 @@ function Cart(props) {
               label="Name"
               onChange={handleCustomerName}
             >
-              <Form.Control type="name" placeholder="Enter your name" />
+              <Form.Control type="Name" placeholder="Enter your name" />
             </FloatingLabel>
           </Form>
         </div>
+
+          <div>
+            <Form>
+             {/* NOTE */}
+              <FloatingLabel controlId="floatingTextarea2" label="note for Restaurant">
+                <Form.Control
+                  as="textarea"
+                  placeholder="Enter a note"
+                  onChange={handleNote} 
+                  style={{ height: "100px" }}
+                />
+              </FloatingLabel>
+              {/* Utensils */}
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check onChange={handleUtensils} type="checkbox" label="toggle for utensils" />
+              </Form.Group>
+            </Form>
+          </div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleSubmit} type="submit">

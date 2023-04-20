@@ -1,27 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { Modal, Container, Row, Col, Table } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 
-const ViewReview = ({ show, handleClose, userId, name, reviews }) => {
-  // const [reviews, setReviews] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review?userId=${userId}`;
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setReviews(data);
-  //     console.log(JSON.stringify(data));
-  //   };
-  //   fetchData();
-  // }, [userId]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    handleClose();
-  };
-
+const ViewReview = ({ show, handleClose, name, reviews }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose} centered>
@@ -32,16 +13,16 @@ const ViewReview = ({ show, handleClose, userId, name, reviews }) => {
           <Table responsive="lg" hover size="sm">
             <thead>
               <tr>
-                <th width='25%'>Author</th>
-                <th width='20%'>Rating</th>
-                <th width='18%'>Date</th>
-                <th  width='40%'>Comment</th>
+                <th width="25%">Author</th>
+                <th width="20%">Rating</th>
+                <th width="18%">Date</th>
+                <th width="40%">Comment</th>
               </tr>
             </thead>
             <tbody>
-              {reviews.map((current) => {
+              {reviews.map((current, index) => {
                 return (
-                  <>
+                  <React.Fragment key={index}>
                     <tr key={current["author"]}>
                       <td>{current["author"]}</td>
                       <td>
@@ -56,7 +37,7 @@ const ViewReview = ({ show, handleClose, userId, name, reviews }) => {
                       <td>{current["date"]}</td>
                       <td>{current["comment"]}</td>
                     </tr>
-                  </>
+                  </React.Fragment>
                 );
               })}
             </tbody>
