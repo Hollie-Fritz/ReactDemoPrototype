@@ -4,8 +4,10 @@ import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
+import styles from "./Template3.module.css";
+import { useEffect } from "react";
 
-// Template1 component
+// Template4 component
 function Template3(props) {
   const {
     resdata,
@@ -30,11 +32,13 @@ function Template3(props) {
 
   return (
     <>
-      <Container className="d-flex vh-50">
+      <Container className={`d-flex`} style={{ marginTop: "2rem" }}>
         <Row className="m-auto align-self-center">
           <div className="row no-gutters">
             {/* outer card */}
-            <Card className="mb-3" border="dark">
+            <Card
+              className={`mb-3 border=dark ${styles.cardText} ${styles.card}`}
+            >
               {/* restaurant banner image */}
               <Card.Header
                 border="light"
@@ -54,6 +58,7 @@ function Template3(props) {
               >
                 {/* restaurant name (displayed on banner) */}
                 <h1
+                  className={styles.bubbleLetters}
                   style={{
                     position: "absolute",
                     bottom: 0,
@@ -69,17 +74,11 @@ function Template3(props) {
 
               {/* restaurant rating */}
               <Card.Body style={{ overflow: "hidden" }}>
-                <Card.Title as="h4" className="text-center">
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <AverageRating averageRating={averageRating} />
-                  </div>
-                  <br />
-                </Card.Title>
-                {/* inner card one */}
+                {/* inner card one -- restaurant info */}
                 <Row className="d-flex justify-content-between">
                   <Col xs={1} md={5} className="mb-4">
                     <Card
-                      className="border-0 ml-auto mr-3"
+                      className={`border-0 ml-auto mr-3 ${styles.cardText} ${styles.card}`}
                       style={{ display: "inline-block", alignItems: "left" }}
                     >
                       {/* restaurant address */}
@@ -104,12 +103,17 @@ function Template3(props) {
                         <nobr className="fw-bold">Cuisine Type: </nobr>
                         {resdata["cuisine"]}
                       </Card.Text>
-
+                      <Card.Text>
+                        <div style={{display: "flex", alignItems: "center" }}>
+                          <span className="fw-bold">Rating:  </span>
+                          <AverageRating averageRating={averageRating} />
+                        </div>
+                      </Card.Text>
                       <Card.Text>
                         <Stack direction="horizontal" gap={2}>
                           {/* leave review */}
                           <Button
-                            variant="info"
+                            className={`mb-2 ${styles.reviewButton}`}
                             type="submit"
                             onClick={handleWriteReviewClick}
                           >
@@ -117,7 +121,7 @@ function Template3(props) {
                           </Button>{" "}
                           {/* view review */}
                           <Button
-                            variant="info"
+                            className={`mb-2 ${styles.reviewButton}`}
                             type="submit"
                             onClick={handleShowReviewClick}
                           >
@@ -139,7 +143,7 @@ function Template3(props) {
                           name={resdata["name"]}
                         />
                       </Card.Text>
-                      {/* end inner card one */}
+                      {/* end inner card one -- restaurant info */}
                     </Card>
                   </Col>
 
@@ -149,7 +153,7 @@ function Template3(props) {
                     className="mb-4"
                     style={{ display: "inline-block", alignItems: "right" }}
                   >
-                    {/* inner card two */}
+                    {/* inner card two -- google maps */}
                     <Card className="border-0 mr-0">
                       {/* Google Maps card display */}
                       <div
@@ -169,7 +173,7 @@ function Template3(props) {
                           style={{ border: "0", marginTop: "-150px" }}
                         />
                       </div>
-                      {/* end inner card two */}
+                      {/* end inner card two -- google maps*/}
                     </Card>
                   </Col>
                 </Row>
@@ -180,29 +184,33 @@ function Template3(props) {
                   {fooddata.map((item, test) => {
                     return (
                       <Col className="d-flex align-items-stretch">
-                        {/* inner card three */}
-                        <Card key={test} style={{ width: "37rem" }}>
+                        {/* inner card three -- menu card*/}
+                        <Card
+                          className={` ${styles.cardText} ${styles.card}`}
+                          key={test}
+                          style={{ width: "37rem" }}
+                        >
                           <Card.Body>
-                            <Card.Text
-                              style={{ fontSize: "18px" }}
-                              as="h5"
-                              className="text-center font-size: 10px"
-                            >
-                              <nobr as="h1" className="fw-bold">
-                                {item.foodName}
-                              </nobr>
-                            </Card.Text>
-                            <Card.Text>${item.foodPrice}</Card.Text>
+                            <div className={styles.menuItem}>
+                              <Card.Text
+                                as="h5"
+                                className={`${styles.menuItemTitle}`}
+                              >
+                                <h5 className={`fw-bold ${styles.cardText}`
+                              } >{item.foodName}</h5>
+                              </Card.Text>
+                              <Card.Text as="h5">${item.foodPrice}</Card.Text>
+                            </div>
                             <Card.Text>{item.foodDesc}</Card.Text>
                           </Card.Body>
                           <Card.Footer
-                            className="border-0"
-                            style={{ background: "white" }}
+                            className={`border-0 ${styles.cardFooter}`}
                           >
                             <br></br>
                             <br></br>
                             {/* Add to the cart button */}
                             <Button
+                              className={` ${styles.addButton}`}
                               style={{
                                 position: "absolute",
                                 bottom: 5,
@@ -227,8 +235,8 @@ function Template3(props) {
               </Card.Body>
               {/* View Cart */}
               <Button
-                className="mb-2"
-                variant="danger"
+                className={`mb-2 ${styles.cartButton}`}
+                variant="custom"
                 type="submit"
                 onClick={handleShowCart}
               >

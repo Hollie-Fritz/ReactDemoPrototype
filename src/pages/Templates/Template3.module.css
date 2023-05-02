@@ -1,0 +1,95 @@
+:root {
+    --lime: #91c11e;
+    --grass: #659a41;
+    /* --biscuit: #e8e1db; */
+    --white: #ffffff;
+    --neon-green: #1fb91c;
+    --limerick: #9ece1a;
+    --citrine: #f8f4bb;
+    --milk: #f7f4d0;
+    --teal: #249c8e;
+    --mint:#d4ecd4;
+    --lavander: #96abeb;
+    --matcha: #4e5a35;
+  }
+  
+  /* restaurant name styling */
+  .bubbleLetters {
+    color: var(--neon-green);
+  }
+  
+  /* card styling */
+  .card {
+    background-color: var(--white);
+    border-color: var(--grass);
+    border-width: 3px !important;
+  }
+  
+  .cardHeader {
+    background-color: var(--matcha);
+  }
+  
+  .cardTitle,
+  .cardText {
+    color: var(--matcha);
+  }
+  
+  .menuItemTitle {
+      flex: 1;
+      text-align: center;
+    }
+  
+  /* wrap text on restaurant menu item names and put price on top right of card */
+  .menuItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+  
+    }
+  
+  .cardFooter {
+    background-color: var(--white);
+    border-color: var(--white);
+  }
+  
+  /* button styling for "Leave Review" and "View Reviews" */
+  .reviewButton {
+    background-color: var(--white) !important;
+    color: var(--grass) !important;
+    border-color: var(--matcha) !important;
+    font-weight: bold;
+  }
+  
+  .reviewButton:hover {
+    background-color: var(--citrine) !important;
+    color: var(--grass) !important;
+  }
+  
+  /* button styling for "Add" on menu cards */
+  .addButton {
+    background-color: var(--milk) !important;
+    color: var(--grass) !important;
+    border-color: var(--matcha) !important;
+    border-width: 2px !important;
+    font-weight: bold;
+  }
+  
+  .addButton:hover {
+    background-color: var(--grass) !important;
+    color: var(--white) !important;
+  }
+  
+  /* button styling for "View Cart" */
+  .cartButton {
+    background-color: var(--mint) !important;
+    color: var(--matcha) !important;
+    font-weight: bold;
+    border-color: var(--matcha) !important;
+    border-width: 4px !important;
+  }
+  
+  .cartButton:hover {
+    background-color: var(--teal) !important;
+    color: var(--white) !important;
+    outline: none;
+  }
