@@ -1,17 +1,15 @@
 :root {
   --teal: #809c9a;
-  --frosting: #629f9b;
+  --frosting: #80ae8e;
   /* --biscuit: #e8e1db; */
-  --milk-tea: #d8b79c;
+  --berry: #ae80a0;
   --butter-milk: #fdf9e7;
   --marshmallow: #e5dad5;
-  --milk-coffee: #ae8e80;
+  --raspberry:  #b3709f;
   --coffee: #574740;
   --matcha-latte: #86945e;
   --matcha: #49592a;
 }
-
-
 
 /* restaurant name styling */
 .bubbleLetters {
@@ -21,7 +19,7 @@
 /* card styling */
 .card {
   background-color: var(--butter-milk);
-  border-color: var(--milk-coffee);
+  border-color: var(--raspberry);
   border-width: 3px !important;
 }
 
@@ -49,7 +47,7 @@
 
 .cardFooter {
   background-color: var(--butter-milk);
-  border-color: var(--milk-coffee);
+  border-color: var(--raspberry);
 }
 
 /* button styling for "Leave Review" and "View Reviews" */
@@ -79,14 +77,14 @@
 
 /* button styling for "View Cart" */
 .cartButton {
-  background-color: var(--milk-tea) !important;
+  background-color: var(--berry) !important;
   color: var(--butter-milk) !important;
-  border-color: var(--milk-coffee) !important;
+  border-color: var(--raspberry) !important;
   border-width: 4px !important;
 }
 
 .cartButton:hover {
-  background-color: var(--milk-coffee) !important;
+  background-color: var(--raspberry) !important;
   color: var(--butter-milk) !important;
   outline: none;
   box-shadow: none;
