@@ -5,7 +5,6 @@ import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template4.module.css";
-import { useEffect } from "react";
 
 // Template4 component
 function Template4(props) {
@@ -37,7 +36,7 @@ function Template4(props) {
           <div className="row no-gutters">
             {/* outer card */}
             <Card
-              className={`mb-3" border="dark ${styles.cardText} ${styles.card}`}
+              className={`mb-3 border=dark ${styles.cardText} ${styles.card}`}
             >
               {/* restaurant banner image */}
               <Card.Header
