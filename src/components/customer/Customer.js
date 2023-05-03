@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardList from "../card-list/card-list.component";
 import SearchBox from "../search-box/search-box.component";
-import NavBarHome from "../NavBarHome";
 
 const Search = () => {
   const [searchField, setSearchField] = useState("");
@@ -49,7 +48,6 @@ const Search = () => {
 export function Customer() {
   return (
      <div className="bg">
-      <NavBarHome />
       <Container fluid="md">
         <Row className="justify-content-center">
           <Col>

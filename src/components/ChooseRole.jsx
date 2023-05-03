@@ -4,10 +4,8 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Container, Col, Button, Row, Card } from "react-bootstrap";
 import "../pages/Home.css";
 import "@aws-amplify/ui-react/styles.css";
-//Hello Hollie
 
-
-let ChooseCard = () => {
+let ChooseRole = () => {
   const { route, signOut } = useAuthenticator((context) => [
     context.route,
     context.signOut,
@@ -79,4 +77,4 @@ let ChooseCard = () => {
   );
 };
 
-export default ChooseCard;
+export default ChooseRole;

@@ -58,13 +58,30 @@ let NavBarHome = () => {
                         >
                           Login or Signup
                         </NavDropdown.Item>
+
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="/customer">
                           Search Restaurant
                         </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item onClick={() => {
+                          navigate("/owner");
+                          }} style={{fontWeight: "bold"}}
+                        > Merchant Portal
+                        </NavDropdown.Item>
                       </>
                     )}
                   </NavDropdown>
+                  
+                  <Nav.Link onClick={() => {
+                    navigate("/login");
+                    }} style={{fontWeight: "bold"}}
+                  > Create Account/Login </Nav.Link>
+                  
+                  <Nav.Link onClick={() => {
+                    navigate("/owner");
+                    }} style={{fontWeight: "bold"}}
+                  > Merchant Portal </Nav.Link>
 
                   {user && (
                     <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>

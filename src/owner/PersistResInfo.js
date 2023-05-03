@@ -149,131 +149,60 @@ function PersistResInfo({ formData, setFormData }) {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group controlId="formOpenHours" className="col col-sm-4">
-            <Form.Label>Opening Hours</Form.Label>
-            <Form.Select
-              placeholder="Choose..."
-              className="form-control"
-              name="openhours"
-              value={formData.openhours}
-              onChange={(event) =>
-                setFormData({ ...formData, openhours: event.target.value })
-              }
-            >
-              <option value="Choose...">Choose...</option>
-              <option value="0:00">00:00</option>
-              <option value="0:30">00:30</option>
-              <option value="1:00">01:00</option>
-              <option value="1:30">01:30</option>
-              <option value="2:00">02:00</option>
-              <option value="2:30">02:30</option>
-              <option value="3:00">03:00</option>
-              <option value="3:30">03:30</option>
-              <option value="4:00">04:00</option>
-              <option value="4:30">04:30</option>
-              <option value="5:00">05:00</option>
-              <option value="5:30">05:30</option>
-              <option value="6:00">06:00</option>
-              <option value="6:30">06:30</option>
-              <option value="7:00">07:00</option>
-              <option value="7:30">07:30</option>
-              <option value="8:00">08:00</option>
-              <option value="8:30">08:30</option>
-              <option value="9:00">09:00</option>
-              <option value="9:30">09:30</option>
-              <option value="10:00">10:00</option>
-              <option value="10:30">10:30</option>
-              <option value="11:00">11:00</option>
-              <option value="11:30">11:30</option>
-              <option value="12:00">12:00</option>
-              <option value="12:30">12:30</option>
-              <option value="13:00">13:00</option>
-              <option value="13:30">13:30</option>
-              <option value="14:00">14:00</option>
-              <option value="14:30">14:30</option>
-              <option value="15:00">15:00</option>
-              <option value="15:30">15:30</option>
-              <option value="16:00">16:00</option>
-              <option value="16:30">16:30</option>
-              <option value="17:00">17:00</option>
-              <option value="17:30">17:30</option>
-              <option value="18:00">18:00</option>
-              <option value="18:30">18:30</option>
-              <option value="19:00">19:00</option>
-              <option value="19:30">19:30</option>
-              <option value="20:00">20:00</option>
-              <option value="20:30">20:30</option>
-              <option value="21:00">21:00</option>
-              <option value="21:30">21:30</option>
-              <option value="22:00">22:00</option>
-              <option value="22:30">22:30</option>
-              <option value="23:00">23:00</option>
-              <option value="23:30">23:30</option>
-            </Form.Select>
-          </Form.Group>
-
-          <Form.Group controlId="formCloseHours" className="col col-sm-4">
-            <Form.Label>Closing Hours</Form.Label>
-            <Form.Select
-              placeholder="Choose..."
-              className="form-control"
-              name="closehours"
-              value={formData.closehours}
-              onChange={(event) =>
-                setFormData({ ...formData, closehours: event.target.value })
-              }
-            >
-              <option value="Choose...">Choose...</option>
-              <option value="0:00">00:00</option>
-              <option value="0:30">00:30</option>
-              <option value="1:00">01:00</option>
-              <option value="1:30">01:30</option>
-              <option value="2:00">02:00</option>
-              <option value="2:30">02:30</option>
-              <option value="3:00">03:00</option>
-              <option value="3:30">03:30</option>
-              <option value="4:00">04:00</option>
-              <option value="4:30">04:30</option>
-              <option value="5:00">05:00</option>
-              <option value="5:30">05:30</option>
-              <option value="6:00">06:00</option>
-              <option value="6:30">06:30</option>
-              <option value="7:00">07:00</option>
-              <option value="7:30">07:30</option>
-              <option value="8:00">08:00</option>
-              <option value="8:30">08:30</option>
-              <option value="9:00">09:00</option>
-              <option value="9:30">09:30</option>
-              <option value="10:00">10:00</option>
-              <option value="10:30">10:30</option>
-              <option value="11:00">11:00</option>
-              <option value="11:30">11:30</option>
-              <option value="12:00">12:00</option>
-              <option value="12:30">12:30</option>
-              <option value="13:00">13:00</option>
-              <option value="13:30">13:30</option>
-              <option value="14:00">14:00</option>
-              <option value="14:30">14:30</option>
-              <option value="15:00">15:00</option>
-              <option value="15:30">15:30</option>
-              <option value="16:00">16:00</option>
-              <option value="16:30">16:30</option>
-              <option value="17:00">17:00</option>
-              <option value="17:30">17:30</option>
-              <option value="18:00">18:00</option>
-              <option value="18:30">18:30</option>
-              <option value="19:00">19:00</option>
-              <option value="19:30">19:30</option>
-              <option value="20:00">20:00</option>
-              <option value="20:30">20:30</option>
-              <option value="21:00">21:00</option>
-              <option value="21:30">21:30</option>
-              <option value="22:00">22:00</option>
-              <option value="22:30">22:30</option>
-              <option value="23:00">23:00</option>
-              <option value="23:30">23:30</option>
-            </Form.Select>
-          </Form.Group>
+  <Form.Group controlId="formOpenTime" className="col col-sm-4">
+    <Form.Label>Opening Time</Form.Label>
+    <Form.Control
+      type="text"
+      placeholder="HH:mm"
+      className="form-control"
+      name="opentime"
+      value={formData.opentime}
+      onChange={(event) =>
+        setFormData({ ...formData, opentime: event.target.value })
+      }
+    />
+  </Form.Group>
+  <Form.Group controlId="formOpenTimeAMPM" className="col col-sm-4">
+    <Form.Label>&nbsp;</Form.Label>
+    <Form.Select
+      className="form-control"
+      name="opentimeampm"
+      value={formData.opentimeampm}
+      onChange={(event) =>
+        setFormData({ ...formData, opentimeampm: event.target.value })
+      }
+    >
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </Form.Select>
+  </Form.Group>
+  <Form.Group controlId="formCloseTime" className="col col-sm-4">
+    <Form.Label>Closing Time</Form.Label>
+    <Form.Control
+      type="text"
+      placeholder="HH:mm"
+      className="form-control"
+      name="closetime"
+      value={formData.closetime}
+      onChange={(event) =>
+        setFormData({ ...formData, closetime: event.target.value })
+      }
+    />
+  </Form.Group>
+  <Form.Group controlId="formCloseTimeAMPM" className="col col-sm-4">
+    <Form.Label>&nbsp;</Form.Label>
+    <Form.Select
+      className="form-control"
+      name="closetimeampm"
+      value={formData.closetimeampm}
+      onChange={(event) =>
+        setFormData({ ...formData, closetimeampm: event.target.value })
+      }
+    >
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </Form.Select>
+  </Form.Group>
 
           <Form.Group controlId="formCuisine" className="col col-sm-6">
             {/* provide a text label as a component */}
