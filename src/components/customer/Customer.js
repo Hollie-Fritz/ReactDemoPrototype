@@ -54,7 +54,9 @@ export function Customer() {
       <Container fluid="md">
         <Row className="justify-content-center">
           <Col>
+          <div style={{ display: "flex", justifyContent: "center" }}>
           <TopRatedCarousel/>
+          </div>
           </Col>
         </Row>
         <br/><br/><br/><br/><br/>
