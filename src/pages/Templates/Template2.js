@@ -104,8 +104,8 @@ function Template2(props) {
                         {resdata["cuisine"]}
                       </Card.Text>
                       <Card.Text>
-                        <div style={{display: "flex", alignItems: "center" }}>
-                          <span className="fw-bold">Rating:  </span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <span className="fw-bold">Rating: </span>
                           <AverageRating averageRating={averageRating} />
                         </div>
                       </Card.Text>
@@ -185,19 +185,20 @@ function Template2(props) {
                     return (
                       <Col className="d-flex align-items-stretch">
                         {/* inner card three -- menu card*/}
-                        <Card
-                          className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
+                        <Card className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
                           key={test}
                           style={{ width: "37rem" }}
                         >
+                          <Card.Img variant="top" src={item.foodImageUrl ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
                           <Card.Body>
                             <div className={styles.menuItem}>
                               <Card.Text
                                 as="h5"
                                 className={`${styles.menuItemTitle}`}
                               >
-                                <h5 className={`fw-bold ${styles.cardText}`
-                              } >{item.foodName}</h5>
+                                <h5 className={`fw-bold ${styles.cardText}`}>
+                                  {item.foodName}
+                                </h5>
                               </Card.Text>
                               <Card.Text as="h5">${item.foodPrice}</Card.Text>
                             </div>

@@ -1,105 +1,104 @@
 :root {
-    --dark: #0e0e0d;
-    --night: #3f3d3d;
-    --biscuit: #e8e1db;
-    --white: #ffffff;
-    --dark-red: #6d3249;
-    --dark-mint: #326d56;
-    --cardboard: #4c4a2b;
-    --milk: #f7f4d0;
-    --teal: #9adbd4;
-    --mint:#d4ecd4;
-    --lavander: #96abeb;
-    --matcha: #4e5a35;
-  }
-  
-  /* restaurant name styling */
-  .bubbleLetters {
-    color: var(--biscuit);
-  }
-  
-  /* card styling */
-  .card {
-    background-color: var(--dark);
-    border-color: var(--milk);
-    border-width: 3px !important;
-    color: var(--milk)
-  }
+  --dark: #0e0e0d;
+  --night: #3f3d3d;
+  --biscuit: #e8e1db;
+  --white: #ffffff;
+  --dark-red: #6d3249;
+  --dark-mint: #326d56;
+  --cardboard: #4c4a2b;
+  --milk: #f7f4d0;
+  --teal: #9adbd4;
+  --mint: #d4ecd4;
+  --lavander: #96abeb;
+  --matcha: #4e5a35;
+}
 
-  .cardItem {
-    background-color: var(--night);
+/* restaurant name styling */
+.bubbleLetters {
+  color: var(--biscuit);
+}
 
-  }
-  .cardItem:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #a5a3a3;
-  }
-  
-  .cardHeader {
-    background-color: var(--dark-red);
-  }
-  
-  .cardTitle,
-  .cardText {
-    color: var(--biscuit);
-  }
-  
-  .menuItemTitle {
-      flex: 1;
-      text-align: center;
-    }
-  
-  /* wrap text on restaurant menu item names and put price on top right of card */
-  .menuItem {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-  
-    }
-  
-  .cardFooter {
-    background-color: var(--night);
-    border-color: var(--white);
-  }
-  
-  /* button styling for "Leave Review" and "View Reviews" */
-  .reviewButton {
-    background-color: var(--white) !important;
-    color: var(--dark) !important;
-    border-color: var(--biscuit) !important;
-    font-weight: bold;
-  }
-  
-  .reviewButton:hover {
-    background-color: var(--mint) !important;
-    color: var(--night) !important;
-  }
-  
-  /* button styling for "Add" on menu cards */
-  .addButton {
-    background-color: var(--white) !important;
-    color: var(--dark) !important;
-    border-color: var(--biscuit) !important;
-    border-width: 2px !important;
-    font-weight: bold;
-  }
-  
-  .addButton:hover {
-    background-color: var(--teal) !important;
-    color: var(--dark) !important;
-  }
-  
-  /* button styling for "View Cart" */
-  .cartButton {
-    background-color: var(--dark) !important;
-    color: var(--biscuit) !important;
-    font-weight: bold;
-    border-color: var(--biscuit) !important;
-    border-width: 4px !important;
-  }
-  
-  .cartButton:hover {
-    background-color: var(--cardboard) !important;
-    color: var(--biscuit) !important;
-    outline: none;
-  }
+/* card styling */
+.card {
+  background-color: var(--dark);
+  border-color: var(--milk);
+  border-width: 3px !important;
+  color: var(--milk);
+}
+
+.cardItem {
+  background-color: var(--night);
+}
+
+.cardItem:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #a5a3a3;
+}
+
+.cardHeader {
+  background-color: var(--dark-red);
+}
+
+.cardTitle,
+.cardText {
+  color: var(--biscuit);
+}
+
+.menuItemTitle {
+  flex: 1;
+  text-align: center;
+}
+
+/* wrap text on restaurant menu item names and put price on top right of card */
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cardFooter {
+  background-color: var(--night);
+  border-color: var(--white);
+}
+
+/* button styling for "Leave Review" and "View Reviews" */
+.reviewButton {
+  background-color: var(--white) !important;
+  color: var(--dark) !important;
+  border-color: var(--biscuit) !important;
+  font-weight: bold;
+}
+
+.reviewButton:hover {
+  background-color: var(--mint) !important;
+  color: var(--night) !important;
+}
+
+/* button styling for "Add" on menu cards */
+.addButton {
+  background-color: var(--white) !important;
+  color: var(--dark) !important;
+  border-color: var(--biscuit) !important;
+  border-width: 2px !important;
+  font-weight: bold;
+}
+
+.addButton:hover {
+  background-color: var(--teal) !important;
+  color: var(--dark) !important;
+}
+
+/* button styling for "View Cart" */
+.cartButton {
+  background-color: var(--dark) !important;
+  color: var(--biscuit) !important;
+  font-weight: bold;
+  border-color: var(--biscuit) !important;
+  border-width: 4px !important;
+}
+
+.cartButton:hover {
+  background-color: var(--cardboard) !important;
+  color: var(--biscuit) !important;
+  outline: none;
+}

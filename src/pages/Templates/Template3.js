@@ -190,6 +190,7 @@ function Template3(props) {
                           key={test}
                           style={{ width: "37rem" }}
                         >
+                           <Card.Img variant="top" src= {item.foodImageUrl? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
                           <Card.Body>
                             <div className={styles.menuItem}>
                               <Card.Text

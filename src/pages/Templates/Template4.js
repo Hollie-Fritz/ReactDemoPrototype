@@ -70,7 +70,6 @@ function Template4(props) {
                   {resdata["name"]}
                 </h1>
               </Card.Header>
-
               {/* restaurant rating */}
               <Card.Body style={{ overflow: "hidden" }}>
                 {/* inner card one -- restaurant info */}
@@ -189,6 +188,7 @@ function Template4(props) {
                           key={test}
                           style={{ width: "37rem" }}
                         >
+                           <Card.Img variant="top" src= {item.foodImageUrl? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
                           <Card.Body>
                             <div className={styles.menuItem}>
                               <Card.Text

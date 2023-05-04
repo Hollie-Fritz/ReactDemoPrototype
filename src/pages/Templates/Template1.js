@@ -182,6 +182,7 @@ function Template1(props) {
                       <Col className="d-flex align-items-stretch">
                         {/* inner card three */}
                         <Card key={test} style={{ width: "37rem" }}>
+                        <Card.Img variant="top" src= {item.foodImageUrl? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
                           <Card.Body>
                             <Card.Text
                               style={{ fontSize: "18px" }}
