@@ -68,7 +68,7 @@ function Cart(props) {
     });
 
     let customerId = "";
-    
+
     try {
       let nameJson = await Auth.currentUserInfo();
       customerId = nameJson["username"];
@@ -76,7 +76,7 @@ function Cart(props) {
     } catch {
 
     }
-    
+
 
     const converted = {
       customerName: customerName,
@@ -189,21 +189,22 @@ function Cart(props) {
             </FloatingLabel>
           </Form>
         </div>
-
+<br></br>
           <div>
             <Form>
              {/* NOTE */}
-              <FloatingLabel controlId="floatingTextarea2" label="note for Restaurant">
+              <FloatingLabel controlId="floatingTextarea2" label="Note">
                 <Form.Control
                   as="textarea"
                   placeholder="Enter a note"
-                  onChange={handleNote} 
+                  onChange={handleNote}
                   style={{ height: "100px" }}
                 />
               </FloatingLabel>
+              <br></br>
               {/* Utensils */}
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check onChange={handleUtensils} type="checkbox" label="toggle for utensils" />
+                <Form.Check onChange={handleUtensils} type="checkbox" label="Utensils" />
               </Form.Group>
             </Form>
           </div>
