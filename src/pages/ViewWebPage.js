@@ -7,6 +7,7 @@ import ViewReview from "../components/rating/ViewReview";
 import AverageRating from "../components/rating/AverageRating";
 import NavBarHome from "../components/NavBarHome";
 import $ from 'jquery';
+import pic from "../assests/cartSymbol.jpeg"
 
 function ViewWebpage() {
   const { id } = useParams();
@@ -18,6 +19,8 @@ function ViewWebpage() {
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [address, setAddress] = useState("");
+  const [showAddedMessage, setShowAddedMessage] = useState(false);
+
   const handleWriteReviewClick = (event) => {
     event.stopPropagation();
     setShowReviewForm(true);
@@ -37,6 +40,16 @@ function ViewWebpage() {
   //   event.preventDefault();
   //   setShowReviewForm(false);
   // };
+
+const handleAddClick = (foodId) => {
+  var temp = cart;
+  temp[foodId] = (temp[foodId] || 0) + 1;
+  setcart(temp);
+  setShowAddedMessage({ ...showAddedMessage, [foodId]: true });
+  setTimeout(() => {
+    setShowAddedMessage({ ...showAddedMessage, [foodId]: false });
+  }, 600);
+};
 
   const handleViewReviewFormClose = (event) => {
     // event.stopPropagation();
@@ -101,7 +114,11 @@ function ViewWebpage() {
     userAction();
   }, [id]);
 
+  const cartItemCount = Object.values(cart).reduce((acc, curr) => acc + curr, 0);
+
   const bucketUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + resdata["mainImageUrl"];
+
+
 
   return (
     <>
@@ -263,14 +280,9 @@ function ViewWebpage() {
                                 bottom: 5,
                                 left: 5,
                               }}
-                              onClick={() => {
-                                var temp = cart;
-                                temp[item.foodId] =
-                                  (temp[item.foodId] || 0) + 1;
-                                setcart(temp);
-                              }}
+                              onClick={() =>  handleAddClick(item.foodId)}
                             >
-                              Add
+                            {showAddedMessage[item.foodId] && cart[item.foodId] > 0 ? "✓" : "ADD"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card two */}
@@ -288,7 +300,8 @@ function ViewWebpage() {
                 type="submit"
                 onClick={handleShowCart}
               >
-                View Cart
+                
+                View Cart ({cartItemCount})
               </Button>
               <Cart
                 show={showCart}

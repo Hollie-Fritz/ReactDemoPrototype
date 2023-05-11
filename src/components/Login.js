@@ -14,7 +14,7 @@ export function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
   const location = useLocation();
   const navigate = useNavigate();
-  let from = location.state?.from?.pathname || "/owner"; //redirects to "/" if successful
+  let from = location.state?.from?.pathname || "/"; //redirects to "/" if successful - /owner is original 
   useEffect(() => {
     if (route === "authenticated") {
       navigate(from, { replace: true });
