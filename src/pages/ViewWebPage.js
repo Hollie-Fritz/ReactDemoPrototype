@@ -7,7 +7,6 @@ import ViewReview from "../components/rating/ViewReview";
 import AverageRating from "../components/rating/AverageRating";
 import NavBarHome from "../components/NavBarHome";
 import $ from 'jquery';
-import pic from "../assests/cartSymbol.jpeg"
 
 function ViewWebpage() {
   const { id } = useParams();
