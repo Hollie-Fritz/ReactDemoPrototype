@@ -176,7 +176,7 @@ function Cart(props) {
           Total*: ${totalPrice.toFixed(2)}
         </p>
         <i> *10 cent/bag fee is not included </i>
-        <p></p>
+        <p></p> 
         <div>
           <Form>
             <FloatingLabel
@@ -195,7 +195,7 @@ function Cart(props) {
                 <Form.Control
                   as="textarea"
                   placeholder="Enter a note"
-                  onChange={handleNote}
+                  onChange={handleNote} 
                   style={{ height: "100px" }}
                 />
               </FloatingLabel>
@@ -204,7 +204,6 @@ function Cart(props) {
                 <Form.Check onChange={handleUtensils} type="checkbox" label="toggle for utensils" />
               </Form.Group>
             </Form>
-          </div>
           </div>
       </Modal.Body>
       <Modal.Footer>
