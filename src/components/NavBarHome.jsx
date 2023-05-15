@@ -84,9 +84,12 @@ let NavBarHome = () => {
                   > Merchant Portal </Nav.Link>
 
                   {user && (
+                    <>
+                    <Nav.Link href="/orderStatus" style={{ fontWeight: "bold" }}>My Orders</Nav.Link>
                     <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
                       Welcome, {user.username}
                     </Navbar.Text>
+                    </>
                   )}
                 </Nav>
               </Navbar.Collapse>
