@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
+import { Row, Container, Button, Card, Stack, Col, Modal } from "react-bootstrap";
 import Cart from "./Cart";
 import ReviewForm from "../components/rating/ReviewForm";
 import ViewReview from "../components/rating/ViewReview";
 import AverageRating from "../components/rating/AverageRating";
 import NavBarHome from "../components/NavBarHome";
 import $ from 'jquery';
+
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+function CurrentHours({ allHours }) {
+  const currentDate = new Date();
+  const currentDay = days[currentDate.getDay()];
+  const hours = allHours[currentDay] || "Closed";
+  return {hours};
+}
 
 function ViewWebpage() {
   const { id } = useParams();
@@ -20,6 +28,8 @@ function ViewWebpage() {
   const [address, setAddress] = useState("");
   const [showAddedMessage, setShowAddedMessage] = useState(false);
 
+  
+  
   const handleWriteReviewClick = (event) => {
     event.stopPropagation();
     setShowReviewForm(true);
@@ -55,6 +65,17 @@ const handleAddClick = (foodId) => {
     setShowViewReviewForm(false);
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [showHoursModal, setShowHoursModal] = useState(false);
+
+  const handleHoursModalClose = () => {
+    setShowHoursModal(false);
+  };
+
+  const handleHoursModalOpen = () => {
+    setShowHoursModal(true);
+  };
+
   useEffect(() => {
     const fetchAverageRating = async () => {
       let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review?userId=${id}`;
@@ -63,6 +84,15 @@ const handleAddClick = (foodId) => {
       setReviews(data);
     };
     fetchAverageRating();
+    if (resdata.hours) {
+      const hours = resdata.hours;
+      const currentDate = new Date();
+      const currentDay = days[currentDate.getDay()];
+      const currentHours = hours[currentDay];
+      const [openTime, closeTime] = currentHours.split('-').map(time => new Date(`1970-01-01T${time.trim()}:00`));
+      setIsOpen(currentDate >= openTime && currentDate <= closeTime);
+    }
+
     console.log(resdata["name"] + " is name");
 
     var frame = $('#abc')[0];
@@ -116,8 +146,6 @@ const handleAddClick = (foodId) => {
   const cartItemCount = Object.values(cart).reduce((acc, curr) => acc + curr, 0);
 
   const bucketUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + resdata["mainImageUrl"];
-
-
 
   return (
     <>
@@ -175,9 +203,29 @@ const handleAddClick = (foodId) => {
                         {resdata["phone"]}
                       </Card.Text>
                       <Card.Text>
-                        <nobr className="fw-bold">Hours: </nobr>
-                        {resdata["openHours"]} - {resdata["closeHours"]}
-                      </Card.Text>
+                      <nobr className="fw-bold">Hours: </nobr>
+                      <CurrentHours allHours={resdata["hours"]} />
+                      {' '}
+                      {isOpen ? <span className="text-success">(Open)</span> : <span className="text-danger">(Closed)</span>}
+                      <Button variant="link" onClick={handleHoursModalOpen}>
+                        More Info
+                      </Button>
+                      <Modal show={showHoursModal} onHide={handleHoursModalClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Hours</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          {Object.entries(resdata["hours"]).map(([day, hours]) => (
+                            <p key={day}><strong>{day}:</strong> {hours}</p>
+                          ))}
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleHoursModalClose}>
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </Card.Text>
                       <Card.Text>
                         <nobr className="fw-bold">Cuisine Type: </nobr>
                         {resdata["cuisine"]}
