@@ -6,15 +6,12 @@ import "@aws-amplify/ui-react/styles.css";
 
 import { useNavigate, useLocation } from "react-router";
 import NavBarHome from "./NavBarHome";
-// import 
-
-
 
 export function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
   const location = useLocation();
   const navigate = useNavigate();
-  let from = location.state?.from?.pathname || "/"; //redirects to "/" if successful - /owner is original 
+  let from = location.state?.from?.pathname || "/owner"; //redirects to "/" if successful
   useEffect(() => {
     if (route === "authenticated") {
       navigate(from, { replace: true });

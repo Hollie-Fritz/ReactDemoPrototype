@@ -68,6 +68,7 @@ function Cart(props) {
     });
 
     let customerId = "";
+
     try {
       let nameJson = await Auth.currentUserInfo();
       customerId = nameJson["username"];
@@ -75,6 +76,8 @@ function Cart(props) {
     } catch {
 
     }
+
+
     const converted = {
       customerName: customerName,
       customerId: customerId,
@@ -173,10 +176,8 @@ function Cart(props) {
         </Table>
         <div>
         <p className="text-right font-weight-bold">
-          Total*: ${totalPrice.toFixed(2)}
-        </p>
-        <i> *10 cent/bag fee is not included </i>
-        <p></p> 
+          Total: ${totalPrice.toFixed(2)}
+        </p></div>
         <div>
           <Form>
             <FloatingLabel
@@ -188,20 +189,22 @@ function Cart(props) {
             </FloatingLabel>
           </Form>
         </div>
+<br></br>
           <div>
             <Form>
              {/* NOTE */}
-              <FloatingLabel controlId="floatingTextarea2" label="note for Restaurant">
+              <FloatingLabel controlId="floatingTextarea2" label="Note">
                 <Form.Control
                   as="textarea"
                   placeholder="Enter a note"
-                  onChange={handleNote} 
+                  onChange={handleNote}
                   style={{ height: "100px" }}
                 />
               </FloatingLabel>
+              <br></br>
               {/* Utensils */}
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check onChange={handleUtensils} type="checkbox" label="toggle for utensils" />
+                <Form.Check onChange={handleUtensils} type="checkbox" label="Utensils" />
               </Form.Group>
             </Form>
           </div>
