@@ -1,17 +1,16 @@
 import React from "react";
 import "./Home.css";
-import ChooseCard from "../components/ChooseCard";
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import NavBarHome from "../components/NavBarHome";
+import { Customer } from '../components/customer/Customer';
+
 const Home = () => {
   return (
     <>
     <div className="home_bg_image">
     <NavBarHome />
       <Container variant="sm">
-        <Row>
-          <ChooseCard />
-        </Row>
+        <Customer/> 
       </Container>
     </div>
     </>

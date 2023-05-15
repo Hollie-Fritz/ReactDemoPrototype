@@ -3,13 +3,11 @@ import OrderProgress from "./OrderProgress";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Auth from "@aws-amplify/auth";
 import { Card, Table, Container, Row } from "react-bootstrap";
-import res from "../assests/SmallDumpling.png";
+import food from "../assests/FOOD.jpeg";
 import NavBarHome from "../components/NavBarHome";
 
 function ViewStatus() {
   const [orders, setOrders] = useState([]);
-
-
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -39,7 +37,7 @@ function ViewStatus() {
         >
           <nobr className="fw-bold"></nobr>
 
-          <Card.Img variant="top" src={res} />
+          <Card.Img variant="top" src={food} />
               {orders.map((temp) => {
                 return (
                   <div>
@@ -136,5 +134,3 @@ export default ViewStatus;
 //     </div>
 //   );
 // }
-
-
