@@ -68,7 +68,6 @@ function Cart(props) {
     });
 
     let customerId = "";
-    
     try {
       let nameJson = await Auth.currentUserInfo();
       customerId = nameJson["username"];
@@ -76,8 +75,6 @@ function Cart(props) {
     } catch {
 
     }
-    
-
     const converted = {
       customerName: customerName,
       customerId: customerId,
@@ -174,6 +171,7 @@ function Cart(props) {
             })}
           </tbody>
         </Table>
+        <div>
         <p className="text-right font-weight-bold">
           Total*: ${totalPrice.toFixed(2)}
         </p>
@@ -190,7 +188,6 @@ function Cart(props) {
             </FloatingLabel>
           </Form>
         </div>
-
           <div>
             <Form>
              {/* NOTE */}

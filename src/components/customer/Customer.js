@@ -1,8 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+
 import CardList from "../card-list/card-list.component";
 import SearchBox from "../search-box/search-box.component";
+import NavBarHome from "../NavBarHome";
+import TopRatedCarousel from "../rating/TopRatedCarousel";
 
 const Search = () => {
   const [searchField, setSearchField] = useState("");
@@ -51,7 +54,14 @@ export function Customer() {
       <Container fluid="md">
         <Row className="justify-content-center">
           <Col>
-
+          <div style={{ display: "flex", justifyContent: "center" }}>
+          <TopRatedCarousel/>
+          </div>
+          </Col>
+        </Row>
+        <br/><br/><br/><br/><br/>
+        <Row className="justify-content-center">
+          <Col>
           <Search  />
           </Col>
         </Row>

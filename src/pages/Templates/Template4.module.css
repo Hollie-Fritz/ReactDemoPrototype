@@ -1,0 +1,91 @@
+:root {
+  --teal: #809c9a;
+  --frosting: #80ae8e;
+  /* --biscuit: #e8e1db; */
+  --berry: #ae80a0;
+  --butter-milk: #fdf9e7;
+  --marshmallow: #e5dad5;
+  --raspberry:  #b3709f;
+  --coffee: #574740;
+  --matcha-latte: #86945e;
+  --matcha: #49592a;
+}
+
+/* restaurant name styling */
+.bubbleLetters {
+  color: var(--frosting);
+}
+
+/* card styling */
+.card {
+  background-color: var(--butter-milk);
+  border-color: var(--raspberry);
+  border-width: 3px !important;
+}
+
+.cardHeader {
+  background-color: var(--primary-color);
+}
+
+.cardTitle,
+.cardText {
+  color: var(--coffee);
+}
+
+.menuItemTitle {
+    flex: 1;
+    text-align: center;
+  }
+
+/* wrap text on restaurant menu item names and put price on top right of card */
+.menuItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+  }
+
+.cardFooter {
+  background-color: var(--butter-milk);
+  border-color: var(--raspberry);
+}
+
+/* button styling for "Leave Review" and "View Reviews" */
+.reviewButton {
+  background-color: var(--teal) !important;
+  color: var(--butter-milk) !important;
+  border-color: var(--frosting) !important;
+}
+
+.reviewButton:hover {
+  background-color: var(--frosting) !important;
+  color: var(--butter-milk) !important;
+}
+
+/* button styling for "Add" on menu cards */
+.addButton {
+  background-color: var(--matcha-latte) !important;
+  color: var(--butter-milk) !important;
+  border-color: var(--matcha) !important;
+  border-width: 2px !important;
+}
+
+.addButton:hover {
+  background-color: var(--matcha) !important;
+  color: var(--butter-milk) !important;
+}
+
+/* button styling for "View Cart" */
+.cartButton {
+  background-color: var(--berry) !important;
+  color: var(--butter-milk) !important;
+  border-color: var(--raspberry) !important;
+  border-width: 4px !important;
+}
+
+.cartButton:hover {
+  background-color: var(--raspberry) !important;
+  color: var(--butter-milk) !important;
+  outline: none;
+  box-shadow: none;
+}

@@ -1,11 +1,37 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row, Button, Container } from "react-bootstrap";
+import {
+  Form,
+  InputGroup,
+  Row,
+  Button,
+  Container,
+  FormControl,
+} from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect } from "react";
+
+import ChooseTemplate from "../components/ChooseTemplate";
+import { useEffect, useState } from "react";
 
 //form for restaurant info such as name, phone number and address
 function InfoEdit({ formData, setFormData }) {
+  const [showChooseTemplate, setShowChooseTemplate] = useState(false);
+
+  // show the ChooseTemplate modal
+  const handleChooseTemplate = () => {
+    setShowChooseTemplate(true);
+  };
+
+  // show the Template modal
+  const handleChooseTemplateClose = () => {
+    setShowChooseTemplate(false);
+  };
+
+  // save the template selection
+  const handleTemplateSelect = (template) => {
+    setFormData({ ...formData, template: template });
+  };
+
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
     const imageInput = document.querySelector("#imageInput");
@@ -51,6 +77,8 @@ function InfoEdit({ formData, setFormData }) {
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Name</Form.Label>
             <Form.Control
+              id="validation"
+              required
               type="resName" //type – declares the type of input we want
               name="resName" //name – ID of the component used by JSX, must be the same as the value
               value={formData.resName}
@@ -67,6 +95,8 @@ function InfoEdit({ formData, setFormData }) {
               {/* country code 1 for US */}
               <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
               <Form.Control
+                id="validation"
+                required
                 aria-label="Phone Number"
                 type="phone"
                 aria-describedby="basic-addon1"
@@ -84,6 +114,8 @@ function InfoEdit({ formData, setFormData }) {
           <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
             <Form.Label>Address</Form.Label>
             <Form.Control
+              id="validation"
+              required
               className="form-control"
               type="text"
               name="address1"
@@ -110,6 +142,8 @@ function InfoEdit({ formData, setFormData }) {
           <Form.Group controlId="formGridCity" className="col col-sm-4">
             <Form.Label>City</Form.Label>
             <Form.Control
+              id="validation"
+              required
               className="form-control"
               type="text"
               name="city"
@@ -122,6 +156,8 @@ function InfoEdit({ formData, setFormData }) {
           <Form.Group controlId="formGridState" className="col col-sm-4">
             <Form.Label>State</Form.Label>
             <Form.Select
+              id="validation"
+              required
               placeholder="Choose..."
               className="form-control"
               name="usstate"
@@ -130,13 +166,15 @@ function InfoEdit({ formData, setFormData }) {
                 setFormData({ ...formData, usstate: event.target.value })
               }
             >
-              <option value="Choose...">Choose...</option>
+              <option value="">Choose...</option>
               <option value="WA">WA</option>
             </Form.Select>
           </Form.Group>
           <Form.Group controlId="formGridzip" className="col col-sm-4">
             <Form.Label>Zip Code</Form.Label>
             <Form.Control
+              id="validation"
+              required
               className="form-control"
               type="zip"
               name="zip"
@@ -151,6 +189,8 @@ function InfoEdit({ formData, setFormData }) {
           <Form.Group controlId="formOpenHours" className="col col-sm-4">
             <Form.Label>Opening Hours</Form.Label>
             <Form.Select
+              id="validation"
+              required
               placeholder="Choose..."
               className="form-control"
               name="openhours"
@@ -159,61 +199,27 @@ function InfoEdit({ formData, setFormData }) {
                 setFormData({ ...formData, openhours: event.target.value })
               }
             >
-              <option value="Choose...">Choose...</option>
-              <option value="0:00">00:00</option>
-              <option value="0:30">00:30</option>
-              <option value="1:00">01:00</option>
-              <option value="1:30">01:30</option>
-              <option value="2:00">02:00</option>
-              <option value="2:30">02:30</option>
-              <option value="3:00">03:00</option>
-              <option value="3:30">03:30</option>
-              <option value="4:00">04:00</option>
-              <option value="4:30">04:30</option>
-              <option value="5:00">05:00</option>
-              <option value="5:30">05:30</option>
-              <option value="6:00">06:00</option>
-              <option value="6:30">06:30</option>
-              <option value="7:00">07:00</option>
-              <option value="7:30">07:30</option>
-              <option value="8:00">08:00</option>
-              <option value="8:30">08:30</option>
-              <option value="9:00">09:00</option>
-              <option value="9:30">09:30</option>
-              <option value="10:00">10:00</option>
-              <option value="10:30">10:30</option>
-              <option value="11:00">11:00</option>
-              <option value="11:30">11:30</option>
-              <option value="12:00">12:00</option>
-              <option value="12:30">12:30</option>
-              <option value="13:00">13:00</option>
-              <option value="13:30">13:30</option>
-              <option value="14:00">14:00</option>
-              <option value="14:30">14:30</option>
-              <option value="15:00">15:00</option>
-              <option value="15:30">15:30</option>
-              <option value="16:00">16:00</option>
-              <option value="16:30">16:30</option>
-              <option value="17:00">17:00</option>
-              <option value="17:30">17:30</option>
-              <option value="18:00">18:00</option>
-              <option value="18:30">18:30</option>
-              <option value="19:00">19:00</option>
-              <option value="19:30">19:30</option>
-              <option value="20:00">20:00</option>
-              <option value="20:30">20:30</option>
-              <option value="21:00">21:00</option>
-              <option value="21:30">21:30</option>
-              <option value="22:00">22:00</option>
-              <option value="22:30">22:30</option>
-              <option value="23:00">23:00</option>
-              <option value="23:30">23:30</option>
+              <option value="">Choose...</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
             </Form.Select>
           </Form.Group>
 
           <Form.Group controlId="formCloseHours" className="col col-sm-4">
             <Form.Label>Closing Hours</Form.Label>
             <Form.Select
+              id="validation"
+              required
               placeholder="Choose..."
               className="form-control"
               name="closehours"
@@ -222,55 +228,19 @@ function InfoEdit({ formData, setFormData }) {
                 setFormData({ ...formData, closehours: event.target.value })
               }
             >
-              <option value="Choose...">Choose...</option>
-              <option value="0:00">00:00</option>
-              <option value="0:30">00:30</option>
-              <option value="1:00">01:00</option>
-              <option value="1:30">01:30</option>
-              <option value="2:00">02:00</option>
-              <option value="2:30">02:30</option>
-              <option value="3:00">03:00</option>
-              <option value="3:30">03:30</option>
-              <option value="4:00">04:00</option>
-              <option value="4:30">04:30</option>
-              <option value="5:00">05:00</option>
-              <option value="5:30">05:30</option>
-              <option value="6:00">06:00</option>
-              <option value="6:30">06:30</option>
-              <option value="7:00">07:00</option>
-              <option value="7:30">07:30</option>
-              <option value="8:00">08:00</option>
-              <option value="8:30">08:30</option>
-              <option value="9:00">09:00</option>
-              <option value="9:30">09:30</option>
-              <option value="10:00">10:00</option>
-              <option value="10:30">10:30</option>
-              <option value="11:00">11:00</option>
-              <option value="11:30">11:30</option>
-              <option value="12:00">12:00</option>
-              <option value="12:30">12:30</option>
-              <option value="13:00">13:00</option>
-              <option value="13:30">13:30</option>
-              <option value="14:00">14:00</option>
-              <option value="14:30">14:30</option>
-              <option value="15:00">15:00</option>
-              <option value="15:30">15:30</option>
-              <option value="16:00">16:00</option>
-              <option value="16:30">16:30</option>
-              <option value="17:00">17:00</option>
-              <option value="17:30">17:30</option>
-              <option value="18:00">18:00</option>
-              <option value="18:30">18:30</option>
-              <option value="19:00">19:00</option>
-              <option value="19:30">19:30</option>
-              <option value="20:00">20:00</option>
-              <option value="20:30">20:30</option>
-              <option value="21:00">21:00</option>
-              <option value="21:30">21:30</option>
-              <option value="22:00">22:00</option>
-              <option value="22:30">22:30</option>
-              <option value="23:00">23:00</option>
-              <option value="23:30">23:30</option>
+              <option value="">Choose...</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
             </Form.Select>
           </Form.Group>
 
@@ -278,6 +248,8 @@ function InfoEdit({ formData, setFormData }) {
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
             <Form.Control
+              id="validation"
+              required
               className="form-control" //className- Bootstrap classes used
               type="cuisine" //type – declares the type of input we want
               name="resCuisine" //name – ID of the component used by JSX
@@ -286,6 +258,34 @@ function InfoEdit({ formData, setFormData }) {
                 setFormData({ ...formData, resCuisine: event.target.value })
               }
             />
+          </Form.Group>
+          <Form.Group
+            controlId="template"
+            className="col col-sm-6 d-flex flex-column justify-content-between"
+          >
+            <div className="d-flex align-items-end">
+              <Button
+                variant="primary"
+                onClick={handleChooseTemplate}
+                className="me-2"
+              >
+                Choose a template
+              </Button>
+              <div>
+                <Form.Label>Selected Template</Form.Label>
+                <FormControl
+                  id="validation"
+                  required
+                  type="text"
+                  value={
+                    formData.template
+                      ? formData.template
+                      : "No Template Selected"
+                  }
+                  readOnly
+                />
+              </div>
+            </div>
           </Form.Group>
         </Row>
       </Form>
@@ -297,18 +297,24 @@ function InfoEdit({ formData, setFormData }) {
           </Button>
         </Form>
       </Row>
-      {
-        formData["mainImageUrl"]?
-        <img id="mainImage"
-        src={
-          `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
-          formData["mainImageUrl"]
-        }
-        alt=""
+      {formData["mainImageUrl"] ? (
+        <img
+          id="mainImage"
+          src={
+            `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
+            formData["mainImageUrl"]
+          }
+          alt=""
         />
-        :""
-      } 
+      ) : (
+        ""
+      )}
       {/* <Button onClick={() => console.log(JSON.stringify(formData))}>log</Button> */}
+      <ChooseTemplate
+        show={showChooseTemplate}
+        handleClose={handleChooseTemplateClose}
+        handleTemplateSelect={handleTemplateSelect}
+      />
     </Container>
   );
 }
