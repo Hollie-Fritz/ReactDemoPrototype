@@ -4,11 +4,20 @@ import NavBarHome from "./NavBarHome";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import './Owner.css'; // you should create this file
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 
 function Owner() {
   const [userId, setUserId] = useState("");
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
+  const navigate = useNavigate();
 
-  useEffect(() => {                                         
+  useEffect(() => {              
+    if(!user){
+      navigate("/login")
+    }                           
     async function get(){
       const nameJson = await Auth.currentUserInfo();
       const name = nameJson["username"];
@@ -41,6 +50,13 @@ function Owner() {
               </Col>
             </Row>
           </Stack>
+          <Row>
+            <Col xs={12} md={6} className="mb-2">
+              <Button variant="outline-light" block className="Owner-btn" href="./orders">
+                Check Orders
+              </Button>
+            </Col>
+          </Row>
           <Row>
             <Col xs={12} md={6} className="mb-2">
               <Button variant="outline-light" block className="Owner-btn" href="./orders">

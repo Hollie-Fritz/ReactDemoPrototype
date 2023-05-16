@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
 import logo from "../assests/NuOrderLogoLarge.png";
 import "../pages/Home.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
 let NavBarHome = () => {
@@ -12,12 +12,12 @@ let NavBarHome = () => {
     context.user, 
   ]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   function logOut() {
     signOut();
     navigate("/");
   }
-
   return (
     <>
       <Container className="mt-1" fluid>
@@ -46,7 +46,11 @@ let NavBarHome = () => {
                     style={{fontWeight: "bold"}}
                   >
                     {user ? (
-                      <NavDropdown.Item onClick={() => logOut()}>
+                      <NavDropdown.Item onClick={() => {
+                          logOut()
+                          navigate(location.pathname === "/owner" ? "/":location.pathname);
+                          }
+                        }>
                         Logout
                       </NavDropdown.Item>
                     ) : (
