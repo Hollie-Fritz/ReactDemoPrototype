@@ -9,7 +9,6 @@ import NavBarHome from "../components/NavBarHome";
 function ViewStatus() {
   const [orders, setOrders] = useState([]);
 
-
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -24,6 +23,7 @@ function ViewStatus() {
       }
     };
     fetchOrder();
+
     // eslint-disable-next-line
   }, []);
 
