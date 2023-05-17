@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
 import {
   Form,
   InputGroup,
@@ -7,6 +8,7 @@ import {
   Button,
   OverlayTrigger,
   Tooltip,
+  FormControl,
 } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
@@ -23,6 +25,9 @@ function MenuEdit({ menuItems, setMenuItems }) {
     updatedMenuItems[index][e.target.name] = e.target.value;
     setMenuItems(updatedMenuItems);
   };
+
+  const [selectedFile, setSelectedFile] = useState([]);
+  const [uploadStatus, setUploadStatus] = useState([]);
 
   const handleSubmitImage = async (index) => {
     //
@@ -45,7 +50,11 @@ function MenuEdit({ menuItems, setMenuItems }) {
     ).then(() => {
       const updatedMenuItems = [...menuItems];
       updatedMenuItems[index]["menuImageUrl"] = imageName;
-      setMenuItems(updatedMenuItems); //
+      setMenuItems(updatedMenuItems);
+      const newUploadStatus = [...uploadStatus];
+
+      newUploadStatus[index] = "Success!";
+      setUploadStatus(newUploadStatus);
 
       // const mainImage = document.querySelector("#mainImage");
       // mainImage.src = file;
@@ -156,13 +165,40 @@ function MenuEdit({ menuItems, setMenuItems }) {
             </Form.Group>
 
             <Form id={"imageForm" + index} className="col col-sm-6">
-              <input id={"imageInput" + index} type="file" accept="image/*" />
-              <Button
-                className="col col-sm-6"
-                onClick={() => handleSubmitImage(index)}
-              >
-                Upload
-              </Button>
+              <Form.Group className="col col-sm-6 d-flex align-items-center">
+                <input
+                  id={"imageInput" + index}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={(e) => {
+                    const newSelectedFile = [...selectedFile];
+                    newSelectedFile[index] = e.target.files[0]?.name;
+                    setSelectedFile(newSelectedFile);
+
+                    const newUploadStatus = [...uploadStatus];
+                    newUploadStatus[index] = "Upload";
+                    setUploadStatus(newUploadStatus);
+                  }}
+                />
+                <FormControl
+                  type="text"
+                  value={selectedFile[index] ?? "No File Selected"}
+                  placeholder="No File Selected"
+                  readOnly
+                  className="mx-2"
+                />
+                <label
+                  htmlFor={"imageInput" + index}
+                  className="btn btn-primary"
+                  style={{ marginRight: "10px" }}
+                >
+                  Browse
+                </label>
+                <Button onClick={() => handleSubmitImage(index)}>
+                  {uploadStatus[index] ?? "Upload"}
+                </Button>
+              </Form.Group>
             </Form>
 
             <Form.Group>

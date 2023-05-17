@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Form,
@@ -7,6 +8,7 @@ import {
   Button,
   OverlayTrigger,
   Tooltip,
+  FormControl,
 } from "react-bootstrap";
 
 import { v4 as uuidv4 } from "uuid";
@@ -24,6 +26,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     updatedMenuItems[index][e.target.name] = e.target.value;
     setMenuItems(updatedMenuItems);
   };
+
+  const [uploadStatus, setUploadStatus] = useState([]);
 
   const handleSubmitImage = async (index) => {
     console.log("you pressed the upload image button");
@@ -47,8 +51,9 @@ function PersistResMenu({ menuItems, setMenuItems }) {
       updatedMenuItems[index]["menuImageUrl"] = imageName;
       setMenuItems(updatedMenuItems); //
 
-      // const mainImage = document.querySelector("#mainImage");
-      // mainImage.src = file;
+      const newUploadStatus = [...uploadStatus];
+      newUploadStatus[index] = "Success!";
+      setUploadStatus(newUploadStatus);
     });
   };
 
@@ -79,6 +84,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
       entree first and desserts second.
     </Tooltip>
   );
+
+  const [selectedFile, setSelectedFile] = useState([]);
 
   return (
     <>
@@ -157,15 +164,43 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             {/* MENU ITEM TYPE */}
 
             <Form id={"imageForm" + index} className="col col-sm-6">
-              <input id={"imageInput" + index} type="file" accept="image/*" />
-              <Button
-                className="col col-sm-6"
-                onClick={() => handleSubmitImage(index)}
-              >
-                Upload
-              </Button>
-            </Form>
+              <Form.Group className="col col-sm-6 d-flex align-items-center">
+                <input
+                  id={"imageInput" + index}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={(e) => {
+                    const newSelectedFile = [...selectedFile];
+                    newSelectedFile[index] = e.target.files[0]?.name;
+                    setSelectedFile(newSelectedFile);
 
+                    const newUploadStatus = [...uploadStatus];
+                    newUploadStatus[index] = "Upload";
+                    setUploadStatus(newUploadStatus);
+                  }}
+                />
+                <FormControl
+                  type="text"
+                  value={selectedFile[index] ?? "No File Selected"}
+                  placeholder="No File Selected"
+                  readOnly
+                  className="mx-2"
+                />
+                <label
+                  htmlFor={"imageInput" + index}
+                  className="btn btn-primary"
+                  style={{ marginRight: "10px" }}
+                >
+                  Browse
+                </label>
+                <Button onClick={() => handleSubmitImage(index)}>
+                  {uploadStatus[index] ?? "Upload"}
+                </Button>
+              </Form.Group>
+            </Form>
+            {/* onClick calls upon handleRemoveItem to remove an iteration */}
+            {/* button to remove iteration of the form */}
             <Form.Group>
               {menuItems.length !== 1 && (
                 <Button variant="danger" onClick={() => handleRemove(index)}>
@@ -175,8 +210,6 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             </Form.Group>
           </Row>
         ))}
-        {/* onClick calls upon handleRemoveItem to remove an iteration */}
-        {/* button to remove iteration of the form */}
         <Button variant="primary" onClick={handleAddItem}>
           Add Item
         </Button>
