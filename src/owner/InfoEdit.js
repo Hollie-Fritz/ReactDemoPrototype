@@ -73,6 +73,7 @@ function InfoEdit({ formData, setFormData }) {
         {/* React-Bootstrap Row component to align particular components horizontally */}
         <Row className="mb-3">
           {/* Form.Group to group individual components into one component.  */}
+          {/* RES NAME */}
           <Form.Group controlId="formResName" className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Name</Form.Label>
@@ -89,6 +90,9 @@ function InfoEdit({ formData, setFormData }) {
               className="form-control" //className- Bootstrap classes used
             />
           </Form.Group>
+          {/* RES NAME */}
+
+          {/* PHONE */}
           <Form.Group controlId="phone" className="col col-sm-6">
             <Form.Label>Phone Number</Form.Label>
             <InputGroup>
@@ -96,21 +100,23 @@ function InfoEdit({ formData, setFormData }) {
               <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
               <Form.Control
                 id="validation"
-                required
                 aria-label="Phone Number"
                 type="phone"
-                aria-describedby="basic-addon1"
+                title="Enter a 10 digit number"
                 className="form-control"
                 name="phoneNo"
                 value={formData.phoneNo}
+                required
                 onChange={(event) =>
-                  setFormData({ ...formData, phoneNo: event.target.value })
+                  setFormData({ ...formData, phoneNo: event.target.value})
                 }
               />
             </InputGroup>
           </Form.Group>
+          {/* PHONE */}
         </Row>
         <Row className="mb-3">
+          {/* ADDRESS */}
           <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
             <Form.Label>Address</Form.Label>
             <Form.Control
@@ -176,16 +182,25 @@ function InfoEdit({ formData, setFormData }) {
               id="validation"
               required
               className="form-control"
-              type="zip"
+              type="text"
               name="zip"
+              pattern="[0-9]{5}"
               value={formData.zip}
               onChange={(event) =>
-                setFormData({ ...formData, zip: event.target.value })
+                setFormData({ ...formData, zip: event.target.value.replace(/\D/g, "") })
               }
+              onInvalid={(event) => {
+                event.target.setCustomValidity("Please enter a valid 5 digit zipcode");
+              }}
+              onInput={(event) => {
+                event.target.setCustomValidity("");
+              }}
             />
           </Form.Group>
+          {/* ADDRESS */}
         </Row>
         <Row className="mb-3">
+          {/* HOURS */}
           <Form.Group controlId="formOpenHours" className="col col-sm-4">
             <Form.Label>Opening Hours</Form.Label>
             <Form.Select
@@ -243,7 +258,9 @@ function InfoEdit({ formData, setFormData }) {
               })}
             </Form.Select>
           </Form.Group>
+          {/* HOURS */}
 
+          {/* CUISINE */}
           <Form.Group controlId="formCuisine" className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
@@ -259,6 +276,9 @@ function InfoEdit({ formData, setFormData }) {
               }
             />
           </Form.Group>
+          {/* CUISINE */}
+
+          {/* TEMPLATE */}
           <Form.Group
             controlId="template"
             className="col col-sm-6 d-flex flex-column justify-content-between"
@@ -287,8 +307,10 @@ function InfoEdit({ formData, setFormData }) {
               </div>
             </div>
           </Form.Group>
+          {/* TEMPLATE */}
         </Row>
       </Form>
+      {/* RES IMAGE */}
       <Row className="d-flex align-items-end">
         <Form id="imageForm" className="col col-sm-6">
           <input id="imageInput" type="file" accept="image/*" />
@@ -309,7 +331,7 @@ function InfoEdit({ formData, setFormData }) {
       ) : (
         ""
       )}
-      {/* <Button onClick={() => console.log(JSON.stringify(formData))}>log</Button> */}
+      {/* RES IMAGE */}
       <ChooseTemplate
         show={showChooseTemplate}
         handleClose={handleChooseTemplateClose}

@@ -77,9 +77,10 @@ function PersistResInfo({ formData, setFormData }) {
           {/* Form.Group to group individual components into one component.  */}
           <Form.Group className="col col-sm-6">
             {/* provide a text label as a component */}
+            {/* RES NAME */}
             <Form.Label>Restaurant Name</Form.Label>
             <Form.Control
-              id = "validation"
+              id="validation"
               type="resName" //type – declares the type of input we want
               name="resName" //name – ID of the component used by JSX, must be the same as the value
               value={formData.resName}
@@ -91,32 +92,49 @@ function PersistResInfo({ formData, setFormData }) {
               className="form-control" //className- Bootstrap classes used
             />
           </Form.Group>
-          <Form.Group  className="col col-sm-6">
+          {/* RES NAME */}
+
+          {/* PHONE */}
+          <Form.Group className="col col-sm-6">
             <Form.Label>Phone Number</Form.Label>
             <InputGroup>
               {/* country code 1 for US */}
               <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
               <Form.Control
-                id = "validation"
+                id="validation"
                 aria-label="Phone Number"
                 type="phone"
-                aria-describedby="basic-addon1"
+                title="Enter a 10 digit number"
                 className="form-control"
                 name="phoneNo"
+                pattern="[0-9]{10}"
                 value={formData.phoneNo}
                 required
                 onChange={(event) =>
-                  setFormData({ ...formData, phoneNo: event.target.value })
+                  setFormData({
+                    ...formData,
+                    phoneNo: event.target.value.replace(/\D/g, ""),
+                  })
                 }
+                onInvalid={(event) => {
+                  event.target.setCustomValidity(
+                    "Please enter a valid 10 digit phone number"
+                  );
+                }}
+                onInput={(event) => {
+                  event.target.setCustomValidity("");
+                }}
               />
             </InputGroup>
           </Form.Group>
+          {/* PHONE */}
         </Row>
         <Row className="mb-3">
-          <Form.Group className=" col col-sm-6" >
+          {/* ADDRESS */}
+          <Form.Group className=" col col-sm-6">
             <Form.Label>Address</Form.Label>
             <Form.Control
-              id = "validation"
+              id="validation"
               required
               className="form-control"
               type="text"
@@ -127,7 +145,7 @@ function PersistResInfo({ formData, setFormData }) {
               }
             />
           </Form.Group>
-          <Form.Group className="col col-sm-6" >
+          <Form.Group className="col col-sm-6">
             <Form.Label>Address 2</Form.Label>
             <Form.Control
               className="form-control"
@@ -144,7 +162,7 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group className="col col-sm-4">
             <Form.Label>City</Form.Label>
             <Form.Control
-              id = "validation"
+              id="validation"
               required
               className="form-control"
               type="text"
@@ -158,8 +176,8 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group className="col col-sm-4">
             <Form.Label>State</Form.Label>
             <Form.Select
-            id = "validation"
-            required
+              id="validation"
+              required
               placeholder="Choose..."
               className="form-control"
               name="usstate"
@@ -175,24 +193,38 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group className="col col-sm-4">
             <Form.Label>Zip Code</Form.Label>
             <Form.Control
-            id = "validation"
-            required
+              id="validation"
+              required
               className="form-control"
-              type="zip"
+              type="text"
               name="zip"
+              pattern="[0-9]{5}"
               value={formData.zip}
               onChange={(event) =>
-                setFormData({ ...formData, zip: event.target.value })
+                setFormData({
+                  ...formData,
+                  zip: event.target.value.replace(/\D/g, ""),
+                })
               }
+              onInvalid={(event) => {
+                event.target.setCustomValidity(
+                  "Please enter a valid 5 digit zipcode"
+                );
+              }}
+              onInput={(event) => {
+                event.target.setCustomValidity("");
+              }}
             />
           </Form.Group>
+          {/* ADDRESS */}
         </Row>
         <Row className="mb-3">
+          {/* HOURS */}
           <Form.Group className="col col-sm-4">
             <Form.Label>Opening Hours</Form.Label>
             <Form.Select
-            id = "validation"
-            required
+              id="validation"
+              required
               placeholder="Choose..."
               className="form-control"
               name="openhours"
@@ -220,8 +252,8 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group className="col col-sm-4">
             <Form.Label>Closing Hours</Form.Label>
             <Form.Select
-            id = "validation"
-            required
+              id="validation"
+              required
               placeholder="Choose..."
               className="form-control"
               name="closehours"
@@ -245,14 +277,16 @@ function PersistResInfo({ formData, setFormData }) {
               })}
             </Form.Select>
           </Form.Group>
+          {/* HOURS */}
         </Row>
         <Row className="mb-3">
+          {/* CUISINE */}
           <Form.Group className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
             <Form.Control
-            id = "validation"
-            required
+              id="validation"
+              required
               className="form-control"
               type="cuisine"
               name="resCuisine"
@@ -262,9 +296,10 @@ function PersistResInfo({ formData, setFormData }) {
               }
             />
           </Form.Group>
-          <Form.Group
-            className="col col-sm-6 d-flex flex-column justify-content-between"
-          >
+          {/* CUISINE */}
+
+          {/* TEMPLATE */}
+          <Form.Group className="col col-sm-6 d-flex flex-column justify-content-between">
             <div className="d-flex align-items-end">
               <Button
                 variant="primary"
@@ -276,8 +311,8 @@ function PersistResInfo({ formData, setFormData }) {
               <div>
                 <Form.Label>Selected Template</Form.Label>
                 <FormControl
-                id = "validation"
-                required
+                  id="validation"
+                  required
                   type="text"
                   value={
                     formData.template
@@ -289,9 +324,11 @@ function PersistResInfo({ formData, setFormData }) {
               </div>
             </div>
           </Form.Group>
+          {/* TEMPLATE */}
         </Row>
 
         <Row className="d-flex align-items-end">
+          {/* RES IMAGE */}
           <Form id="imageForm" className="col col-sm-6 d-flex">
             <input
               id="imageInput"
@@ -328,7 +365,7 @@ function PersistResInfo({ formData, setFormData }) {
         </Row>
         <Row className="d-flex align-items-end"></Row>
       </Form>
-
+      {/* RES IMAGE */}
       <ChooseTemplate
         show={showChooseTemplate}
         handleClose={handleChooseTemplateClose}

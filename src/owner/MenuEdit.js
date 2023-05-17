@@ -30,7 +30,6 @@ function MenuEdit({ menuItems, setMenuItems }) {
   const [uploadStatus, setUploadStatus] = useState([]);
 
   const handleSubmitImage = async (index) => {
-    //
     console.log("you pressed the upload image button");
     const imageInput = document.querySelector("#imageInput" + index);
 
@@ -75,13 +74,6 @@ function MenuEdit({ menuItems, setMenuItems }) {
     ]);
   };
 
-  //function to remove form items unless there is only one remaining
-  // const handleRemoveItem = () => {
-  //   const values = [...menuItems];
-  //   if (values.length > 1) values.pop();
-  //   setMenuItems(values);
-  // };
-
   const handleRemove = (index) => {
     const temp = [...menuItems];
     temp.splice(index, 1);
@@ -101,9 +93,11 @@ function MenuEdit({ menuItems, setMenuItems }) {
       <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
         {menuItems.map((menu, index) => (
           <Row className="mb-3" key={index}>
+            {/* MENU ITEM */}
             <Form.Group controlId="formItem" className="col col-sm-3">
               <Form.Label>Menu Item</Form.Label>
               <Form.Control
+                id="validation"
                 required
                 className="form-control"
                 type="text"
@@ -113,19 +107,34 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>
             </Form.Group>
+            {/* MENU ITEM */}
+
+            {/* MENU ITEM PRICE */}
             <Form.Group controlId="formItemPrice" className="col col-sm-3">
               <Form.Label>Price</Form.Label>
               <InputGroup className="mb-3">
                 <Form.Control
+                  id="validation"
+                  required
                   className="form-control"
                   type="text"
                   name="menuPrice"
                   placeholder="Enter price"
                   value={menu.menuPrice}
                   onChange={(e) => handleChange(index, e)}
+                  pattern="^\d{1,7}$|(?=^.{1,7}$)^\d+\.\d{0,2}$"
+                  onInvalid={(e) => {
+                    e.target.setCustomValidity("Please enter a valid price.");
+                  }}
+                  onInput={(e) => {
+                    e.target.setCustomValidity("");
+                  }}
                 ></Form.Control>
               </InputGroup>
             </Form.Group>
+            {/* MENU ITEM PRICE */}
+
+            {/* MENU ITEM DESCRIPTION */}
             <Form.Group controlId="formItemDesc" className="col col-sm-3">
               <Form.Label>Description</Form.Label>
               <InputGroup>
@@ -141,6 +150,9 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 ></Form.Control>
               </InputGroup>
             </Form.Group>
+            {/* MENU ITEM DESCRIPTION */}
+
+            {/* MENU ITEM TYPE */}
             <Form.Group controlId="formItemType" className="col col-sm-3">
               <Form.Label>
                 Menu Item Type{" "}
@@ -163,7 +175,9 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>
             </Form.Group>
+            {/* MENU ITEM TYPE */}
 
+            {/* MENU IMAGE */}
             <Form id={"imageForm" + index} className="col col-sm-6">
               <Form.Group className="col col-sm-6 d-flex align-items-center">
                 <input
@@ -187,6 +201,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   placeholder="No File Selected"
                   readOnly
                   className="mx-2"
+                  style={{ width: "500px" }}
                 />
                 <label
                   htmlFor={"imageInput" + index}
@@ -200,7 +215,9 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 </Button>
               </Form.Group>
             </Form>
+            {/* MENU IMAGE */}
 
+            {/* button to remove iteration of the form */}
             <Form.Group>
               {menuItems.length !== 1 && (
                 <Button variant="danger" onClick={() => handleRemove(index)}>
@@ -213,7 +230,6 @@ function MenuEdit({ menuItems, setMenuItems }) {
         <Button variant="primary" onClick={handleAddItem}>
           Add Item
         </Button>
-        {/* button to remove iteration of the form */}
       </Form>
       {menuItems.forEach((menuItem) => {
         if (menuItem["menuImageUrl"]) {
@@ -228,7 +244,6 @@ function MenuEdit({ menuItems, setMenuItems }) {
             />
           );
         }
-        // return arr[index] = num * 2;
       })}
     </>
   );
