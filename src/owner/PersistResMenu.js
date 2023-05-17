@@ -1,6 +1,14 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row, Button } from "react-bootstrap";
+import {
+  Form,
+  InputGroup,
+  Row,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
+
 import { v4 as uuidv4 } from "uuid";
 
 //2nd page of restaurant owner's form, contains the form for menu items
@@ -17,9 +25,9 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     setMenuItems(updatedMenuItems);
   };
 
-  const handleSubmitImage = async (index) => {//
-    console.log("you pressed the upload image button")
-    const imageInput = document.querySelector("#imageInput"+index);
+  const handleSubmitImage = async (index) => {
+    console.log("you pressed the upload image button");
+    const imageInput = document.querySelector("#imageInput" + index);
 
     const file = imageInput.files[0];
     const imageName = uuidv4();
@@ -42,7 +50,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
       // const mainImage = document.querySelector("#mainImage");
       // mainImage.src = file;
     });
-  }
+  };
 
   //function to add form items
   const handleAddItem = () => {
@@ -53,7 +61,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
         menuPrice: "",
         menuDesc: "",
         menuType: "",
-        menuImageUrl:""
+        menuImageUrl: "",
       },
     ]);
   };
@@ -64,117 +72,115 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     setMenuItems(temp);
   };
 
-
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Your menu will be ordered by the order that you input "Menu Item Type".
+      For example, you input "entree" "dessert" "entree", the menu will display
+      entree first and desserts second.
+    </Tooltip>
+  );
 
   return (
     <>
-    <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
-      {menuItems.map((menu, index) => (
-        <Row className="mb-3" key={index}>
-          <Form.Group controlId="formItem" className="col col-sm-3">
-            <Form.Label>Menu Item</Form.Label>
-            <Form.Control
-            id="validation"
-              required
-              className="form-control"
-              type="text"
-              name="menuItem"
-              placeholder="Enter menu item name"
-              value={menu.menuItem}
-              onChange={(e) => handleChange(index, e)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="formItemPrice" className="col col-sm-3">
-            <Form.Label>Price</Form.Label>
-            <InputGroup className="mb-3">
+      <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
+        {menuItems.map((menu, index) => (
+          <Row className="mb-3" key={index}>
+            <Form.Group className="col col-sm-3">
+              <Form.Label>Menu Item</Form.Label>
               <Form.Control
-              id="validation"
-              required
+                id="validation"
+                required
                 className="form-control"
                 type="text"
-                name="menuPrice"
-                placeholder="Enter price"
-                value={menu.menuPrice}
+                name="menuItem"
+                placeholder="Enter menu item name"
+                value={menu.menuItem}
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group controlId="formItemDesc" className="col col-sm-3">
-            <Form.Label>Description</Form.Label>
-            <InputGroup>
-              <Form.Control
+            </Form.Group>
+            <Form.Group className="col col-sm-3">
+              <Form.Label>Price</Form.Label>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  id="validation"
+                  required
+                  className="form-control"
+                  type="text"
+                  name="menuPrice"
+                  placeholder="Enter price"
+                  value={menu.menuPrice}
+                  onChange={(e) => handleChange(index, e)}
+                ></Form.Control>
+              </InputGroup>
+            </Form.Group>
+            <Form.Group className="col col-sm-3">
+              <Form.Label>Description</Form.Label>
+              <InputGroup>
+                <Form.Control
+                  as="textarea"
+                  aria-label="Menu Description"
+                  className="form-control"
+                  type="text"
+                  name="menuDesc"
+                  placeholder="Enter menu item description"
+                  value={menu.menuDesc}
+                  onChange={(e) => handleChange(index, e)}
+                ></Form.Control>
+              </InputGroup>
+            </Form.Group>
 
-                as="textarea"
-                aria-label="Menu Description"
+            {/* MENU ITEM TYPE */}
+
+            <Form.Group className="col col-sm-3">
+              <Form.Label>
+                Menu Item Type{" "}
+                <OverlayTrigger
+                  placement="top"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip}
+                >
+                  <Button variant="info">?</Button>
+                </OverlayTrigger>
+              </Form.Label>
+              <Form.Control
+                id="validation"
+                required
                 className="form-control"
                 type="text"
-                name="menuDesc"
-                placeholder="Enter menu item description"
-                value={menu.menuDesc}
+                name="menuType"
+                placeholder="Enter menu item name"
+                value={menu.menuType}
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group controlId="formItemType" className="col col-sm-3">
-            <Form.Label>Menu Item Type</Form.Label>
-            <Form.Select
-            id="validation"
-            required
-              placeholder="Choose..."
-              className="form-control"
-              name="menuType"
-              value={menu.menuType}
-              onChange={(e) => handleChange(index, e)}
-            >
-              <option value="">Choose...</option>
-              <option value="Appetizer">Appetizer</option>
-              <option value="Entree">Entree</option>
-              <option value="Dessert">Dessert</option>
-            </Form.Select>
-          </Form.Group>
+            </Form.Group>
 
-          <Form id={"imageForm"+index} className="col col-sm-6">
-            <input id={"imageInput"+index} type="file" accept="image/*" />
-            <Button className="col col-sm-6" onClick={()=> handleSubmitImage(index)}>
-              Upload
-            </Button>
-          </Form>
+            {/* MENU ITEM TYPE */}
 
-
-          <Form.Group>
-            {menuItems.length !== 1 && (
+            <Form id={"imageForm" + index} className="col col-sm-6">
+              <input id={"imageInput" + index} type="file" accept="image/*" />
               <Button
-              variant="danger"
-              onClick={() => handleRemove(index)}
+                className="col col-sm-6"
+                onClick={() => handleSubmitImage(index)}
               >
-                Remove
+                Upload
               </Button>
-            )}
-          </Form.Group>
-        </Row>
-      ))}
-      <Button variant="primary" onClick={handleAddItem}>
-        Add Item
-      </Button>
-      {/* button to remove iteration of the form */}
-      {/* onClick calls upon handleRemoveItem to remove an iteration */}
-    </Form>
-    {/* {
-      menuItems.forEach((menuItem) => {
-        if(menuItem["menuImageUrl"]){
-          return (
-            <img id="mainImage"
-            src={
-              `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
-              menuItem["menuImageUrl"]
-            }
-            alt=""
-            />
-          )
-        }
-        // return arr[index] = num * 2;
-      })
-    } */}
+            </Form>
+
+            <Form.Group>
+              {menuItems.length !== 1 && (
+                <Button variant="danger" onClick={() => handleRemove(index)}>
+                  Remove
+                </Button>
+              )}
+            </Form.Group>
+          </Row>
+        ))}
+        {/* onClick calls upon handleRemoveItem to remove an iteration */}
+        {/* button to remove iteration of the form */}
+        <Button variant="primary" onClick={handleAddItem}>
+          Add Item
+        </Button>
+      </Form>
     </>
   );
 }
