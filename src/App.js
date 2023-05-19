@@ -26,8 +26,8 @@ const App = () => {
       minBreakpoint="xxs"
     >
       <div>
-        <PopUp/>
         <Authenticator.Provider>
+          <PopUp/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
