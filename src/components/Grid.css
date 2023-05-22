@@ -1,11 +1,13 @@
 body {
-  background-image: linear-gradient(
+  background-color: black !important;
+  /* background-image: linear-gradient(
     to right,
+    
     rgb(0,47,108),
     rgb(1, 67, 155),
     rgb(5, 88, 197),
     rgb(5, 100, 224)
-  ) !important;
+  ) !important; */
 }
 
 .boxes {
