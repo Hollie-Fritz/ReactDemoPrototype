@@ -12,8 +12,9 @@
   z-index: 0;
 }
 
+
 .logoHome:hover {
-  box-shadow: 0 0 20px #514f4f;
+  filter: drop-shadow(0 0 5px #8a8989);
 }
 
 .logoHome {

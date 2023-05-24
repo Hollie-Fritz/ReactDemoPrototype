@@ -2,13 +2,12 @@ import React from "react";
 import { useEffect } from "react";
 import { Auth } from "aws-amplify";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
 import { Hub } from "aws-amplify";
+function PopUp(){
 
-
-function PopUp() {
-  // eslint-disable-next-line
-  var ws;
+    // const dispatch = useDispatch();
+    const ws = null;
 
   useEffect(() => {
     console.log("rerendering popup");
@@ -40,7 +39,7 @@ function PopUp() {
           break;
       }
     });
-    
+
     async function setup() {
       try {
         let nameJson = await Auth.currentUserInfo();
