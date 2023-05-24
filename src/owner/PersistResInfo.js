@@ -24,6 +24,7 @@ function PersistResInfo({ formData, setFormData }) {
     setFormData({ ...formData, template: template });
   };
 
+  // save the file name
   const [selectedFile, setSelectedFile] = useState("");
 
   // save the uploaded image name to display
@@ -33,6 +34,7 @@ function PersistResInfo({ formData, setFormData }) {
     }
   };
 
+  // handles form submission and image upload
   // eslint-disable-next-line
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
@@ -43,6 +45,7 @@ function PersistResInfo({ formData, setFormData }) {
       const file = imageInput.files[0];
       const imageName = uuidv4();
 
+      //PUT request to upload res image banner
       await fetch(
         "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/s3/nuorderbucket/" +
           imageName,
@@ -365,6 +368,7 @@ function PersistResInfo({ formData, setFormData }) {
         </Row>
         <Row className="d-flex align-items-end"></Row>
       </Form>
+
       {/* RES IMAGE */}
       <ChooseTemplate
         show={showChooseTemplate}

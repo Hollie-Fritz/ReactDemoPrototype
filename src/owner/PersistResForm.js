@@ -32,7 +32,13 @@ function PersistResForm() {
 
   //state object that contains all the fields for ResMenu
   const [menuItems, setMenuItems] = useState([
-    { menuItem: "", menuPrice: "", menuDesc: "", menuType: "", menuImageUrl: ""},
+    {
+      menuItem: "",
+      menuPrice: "",
+      menuDesc: "",
+      menuType: "",
+      menuImageUrl: "",
+    },
   ]);
 
   const userAction = async () => {
@@ -51,7 +57,7 @@ function PersistResForm() {
         foodType: menuItems[i]["menuType"],
         foodPrice: menuItems[i]["menuPrice"],
         foodDesc: menuItems[i]["menuDesc"],
-        foodImageUrl: menuItems[i]["menuImageUrl"]
+        foodImageUrl: menuItems[i]["menuImageUrl"],
       };
     }
 
@@ -164,12 +170,13 @@ function PersistResForm() {
               userAction();
             } else {
               let isValid = true;
-              FormControl.forEach((FormControl) => {
-                if (!FormControl.checkValidity()) {
+              // force validity to go in descending order instead of ascending order
+              for (let index = FormControl.length - 1; index >= 0; index--) {
+                if (!FormControl[index].checkValidity()) {
                   isValid = false;
-                  FormControl.reportValidity();
+                  FormControl[index].reportValidity();
                 }
-              });
+              }
               if (isValid) {
                 // enables next button to work by incrementing
                 setPage((currPage) => currPage + 1);

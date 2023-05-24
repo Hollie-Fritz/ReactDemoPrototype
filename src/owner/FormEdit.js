@@ -220,12 +220,14 @@ function FormEdit() {
               userAction();
             } else {
               let isValid = true;
-              FormControl.forEach((FormControl) => {
-                if (!FormControl.checkValidity()) {
+
+              // force validity to go in descending order instead of ascending order
+              for (let index = FormControl.length - 1; index >= 0; index--) {
+                if (!FormControl[index].checkValidity()) {
                   isValid = false;
-                  FormControl.reportValidity();
+                  FormControl[index].reportValidity();
                 }
-              });
+              }
               if (isValid) {
                 // enables next button to work by incrementing
                 setPage((currPage) => currPage + 1);

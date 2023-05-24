@@ -169,7 +169,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 className="form-control"
                 type="text"
                 name="menuType"
-                placeholder="Enter menu item name"
+                placeholder="Enter menu item type"
                 value={menu.menuType}
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>

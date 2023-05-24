@@ -32,6 +32,15 @@ function InfoEdit({ formData, setFormData }) {
     setFormData({ ...formData, template: template });
   };
 
+  const [selectedFile, setSelectedFile] = useState("");
+
+  // save the uploaded image name to display
+  const handleFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0].name);
+    }
+  };
+
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
     const imageInput = document.querySelector("#imageInput");
@@ -108,7 +117,7 @@ function InfoEdit({ formData, setFormData }) {
                 value={formData.phoneNo}
                 required
                 onChange={(event) =>
-                  setFormData({ ...formData, phoneNo: event.target.value})
+                  setFormData({ ...formData, phoneNo: event.target.value })
                 }
               />
             </InputGroup>
@@ -187,10 +196,15 @@ function InfoEdit({ formData, setFormData }) {
               pattern="[0-9]{5}"
               value={formData.zip}
               onChange={(event) =>
-                setFormData({ ...formData, zip: event.target.value.replace(/\D/g, "") })
+                setFormData({
+                  ...formData,
+                  zip: event.target.value.replace(/\D/g, ""),
+                })
               }
               onInvalid={(event) => {
-                event.target.setCustomValidity("Please enter a valid 5 digit zipcode");
+                event.target.setCustomValidity(
+                  "Please enter a valid 5 digit zipcode"
+                );
               }}
               onInput={(event) => {
                 event.target.setCustomValidity("");
@@ -312,13 +326,27 @@ function InfoEdit({ formData, setFormData }) {
       </Form>
       {/* RES IMAGE */}
       <Row className="d-flex align-items-end">
-        <Form id="imageForm" className="col col-sm-6">
-          <input id="imageInput" type="file" accept="image/*" />
-          <Button className="col col-sm-6" type="submit">
-            Upload
-          </Button>
+        <Form id="imageForm" className="col col-sm-6 d-flex">
+          <input
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileChange}
+          />
+          <FormControl
+            type="text"
+            value={selectedFile}
+            placeholder="No File Selected"
+            readOnly
+            className="mx-2"
+          />
+          <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
+            Browse
+          </label>
+          <Button type="submit">Upload</Button>
         </Form>
-      </Row>
+
       {formData["mainImageUrl"] ? (
         <img
           id="mainImage"
@@ -331,12 +359,14 @@ function InfoEdit({ formData, setFormData }) {
       ) : (
         ""
       )}
+      </Row>
       {/* RES IMAGE */}
       <ChooseTemplate
         show={showChooseTemplate}
         handleClose={handleChooseTemplateClose}
         handleTemplateSelect={handleTemplateSelect}
       />
+      <br></br>
     </Container>
   );
 }
