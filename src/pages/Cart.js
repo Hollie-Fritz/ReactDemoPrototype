@@ -77,7 +77,6 @@ function Cart(props) {
 
     }
     
-
     const converted = {
       customerName: customerName,
       customerId: customerId,
@@ -174,10 +173,11 @@ function Cart(props) {
             })}
           </tbody>
         </Table>
-        <div>
         <p className="text-right font-weight-bold">
-          Total: ${totalPrice.toFixed(2)}
-        </p></div>
+          Total*: ${totalPrice.toFixed(2)}
+        </p>
+        <i> *10 cent/bag fee is not included </i>
+        <p></p> 
         <div>
           <Form>
             <FloatingLabel

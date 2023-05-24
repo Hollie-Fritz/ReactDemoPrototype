@@ -17,7 +17,7 @@ import ViewOrders from "./pages/ViewOrders";
 import ViewWebpage from './pages/ViewWebPage';
 import FormEdit from './owner/FormEdit';
 import PopUp from './PopUp';
-
+import ViewStatus from './pages/ViewStatus';
 const App = () => {
 
   return (
@@ -26,8 +26,8 @@ const App = () => {
       minBreakpoint="xxs"
     >
       <div>
-        <PopUp/>
         <Authenticator.Provider>
+          <PopUp/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -40,6 +40,7 @@ const App = () => {
             <Route path="/orders" element={<ViewOrders />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/vp" element={<ViewWebpage />} />
+            <Route path="/orderStatus" element={<ViewStatus />} />
             <Route path="/r/:id" element={<ViewWebpage />}/>
             <Route path="*" element={<PageNotFound/>} />
           </Routes>

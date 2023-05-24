@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
+import bg from "../../assests/bg.png";
+
 
 function TopRatedCarousel() {
   const [topRatedRestaurants, setTopRatedRestaurants] = useState([]);
@@ -28,7 +30,7 @@ function TopRatedCarousel() {
           <Carousel.Item key={restaurant.name}>
             <img
               className="d-block w-100"
-              src={imageUrl}
+              src={restaurant["mainImageUrl"] === ""? bg:imageUrl}
               alt={restaurant.name}
               style={{ height: "400px", width: "600px", objectFit: "cover" }}
             />

@@ -1,92 +1,99 @@
 import React from "react";
-import { Hub } from 'aws-amplify';
-import { useEffect, useRef } from 'react';
+import { useEffect } from "react";
 import { Auth } from "aws-amplify";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-function PopUp(){
+import "react-toastify/dist/ReactToastify.css";
+import { Hub } from "aws-amplify";
 
-    // const dispatch = useDispatch();
-    const ws = useRef(null);;
 
-    useEffect(() => {
-        let counter = 0;
-        async function setup(){
-        try{
-            let nameJson = await Auth.currentUserInfo();
-            let userId = nameJson["username"];
-            console.log("logged in");
-            // eslint-disable-next-line
-            if (!ws.current) {
-                ws.current = new WebSocket(`wss://odxljrpppb.execute-api.us-west-2.amazonaws.com/prod/?userId=` + userId);
-                ws.current.onmessage = function (evt) {
-                    let message = JSON.parse(evt.data);
-                    // addMessageToList(message);
-                    console.log(message + " is message data");
-                    console.log("you have a new customer: " + message["customerName"])
-                    toast("You have a new order from " + message["customerName"] + "!")
-                };
-            }
-        }catch{
-            console.log("no user");
-            if (ws.current) {
-                ws.current.close();
-                ws.current = null;
-            }
+function PopUp() {
+  // eslint-disable-next-line
+  var ws;
 
-        }
-      }
-      setup();
-      async function handle(data) {
-        switch (data.payload.event) {
+  useEffect(() => {
+    console.log("rerendering popup");
+
+    Hub.listen('auth', (data) => {
+      switch (data.payload.event) {
         case 'signIn':
+            window.location.reload();
             console.log('user signed in');
-            if(!ws.current){
-                ws.current = new WebSocket(`wss://odxljrpppb.execute-api.us-west-2.amazonaws.com/prod/?userId=`+ data.payload.data.username)
-                ws.current.onmessage = function (evt) {
-                    let message = JSON.parse(evt.data);
-                    // addMessageToList(message);
-                    console.log(message + " is message data");
-                    console.log("you have a new customer: " + message["customerName"])
-                    toast("You have a new order from " + message["customerName"] + "!")
-                };
-            }
             break;
         case 'signUp':
+            window.location.reload();
             console.log('user signed up');
             break;
         case 'signOut':
+            window.location.reload();
             console.log('user signed out');
-            if(ws.current){
-                ws.current.close();
-                ws.current=null;
-            }
             break;
         case 'signIn_failure':
+            window.location.reload();
             console.log('user sign in failed');
             break;
         case 'configured':
+            window.location.reload();
             console.log('the Auth module is configured');
             break;
         default:
-            console.log('default case');
-            break;
+            console.log("nothing happened");
+          break;
+      }
+    });
+    
+    async function setup() {
+      try {
+        let nameJson = await Auth.currentUserInfo();
+        let userId = nameJson["username"];
+          if (!ws) {
+            // eslint-disable-next-line
+            ws = new WebSocket(
+              `wss://odxljrpppb.execute-api.us-west-2.amazonaws.com/prod/?userId=` +
+                userId
+            );
+            console.log("logged in with and established with " + userId);
+              ws.onmessage = function (evt) {
+                let message = JSON.parse(evt.data);
+                // addMessageToList(message);
+                console.log(message + " is message data");
+                console.log("you have a new customer: " + message["customerName"]);                if (message["updateType"] === "Order") {
+                  toast(
+                  "You have a new order from " + message["customerName"] + "!"
+                  );
+                } else if (message["updateType"] === "Progress") {
+                  toast(
+                    "Your order from " +
+                      message["restaurantName"] +
+                      " has a new update!"
+                  );
+                }
+              };
+              ws.onclose = function (evt){
+                ws = null;
+                console.log('Socket is closed. Reconnect will be attempted in 1 second.', evt.reason);
+                setTimeout(function() {
+                  setup();
+                }, 1000);
+              }
+            }
+       } catch {
+        console.log("no user");
+          if (ws) {
+            ws.close();
+              ws = null;
+            }
+          }
         }
-    };
-    const handleListen = Hub.listen('auth', handle);
-    counter++;
-    console.log("this should only run once"+ counter);
-    console.log(ws.current + " is ws");
-    return () => { handleListen() }
-    }, []);
+        setup();
+  }, []);
 
-    return (
-      <>  
+  return (
+    <>
       <div>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
-      </>
-    );
-};
+    </>
+  );
+}
 
 export default PopUp;
