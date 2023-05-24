@@ -5,6 +5,7 @@ import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template2.module.css";
+import { useEffect } from "react";
 
 // Template4 component
 function Template2(props) {
@@ -152,7 +153,7 @@ function Template2(props) {
                     className="mb-4 d-flex justify-content-center"
                     style={{ display: "inline-block", alignItems: "right" }}
                   >
-                    {/* inner card two -- google maps */}
+                    {/* inner card two */}
                     <Card className="border-0">
                       {/* Google Maps card display */}
                       <div

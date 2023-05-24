@@ -21,7 +21,7 @@ const CardComponent = ({
   const navigate = useNavigate();
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
-  
+
   const handleShowReviewClick = (event) => {
     event.stopPropagation();
     getReviews();
@@ -43,8 +43,15 @@ const CardComponent = ({
   return (
     <>
       <CardGroup className="my-1">
-        <Card style={{ width: "18rem" }} className="card-container">
-          <Card.Body key={userId} onClick={() => navigate(`/r/${userId}`)}>
+        <Card style={{ width: "18rem" }}
+        className="card-container"
+        >
+          <Card.Body key={userId}
+          onClick={() => {
+            navigate(`/r/${userId}`)
+            window.location.reload()
+          }
+          }>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
             {averageRating !== 0 ? (
               <div style={{ display: "flex", justifyContent: "center" }}>

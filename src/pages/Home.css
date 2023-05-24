@@ -1,6 +1,16 @@
-body {
-  background-color: beige !important;
-}  
+.home_bg_image {
+  background-image: url(/src/assests/NuOrderHomeBG.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 250vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
 
 
 .logoHome:hover {
@@ -18,3 +28,4 @@ body {
 #shadow {
   box-shadow: none !important;
 }
+

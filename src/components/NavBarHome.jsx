@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
 import logo from "../assests/DarkLogo.png";
 import "../pages/Home.css";
+// import { useNavigate, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
@@ -16,7 +17,10 @@ let NavBarHome = () => {
   function logOut() {
     signOut();
     navigate("/");
+    window.location.reload();
+    navigate(-1);
   }
+
 
   return (
     <>
@@ -26,9 +30,7 @@ let NavBarHome = () => {
             <Col md="auto">
               <Navbar.Brand>
                 <Nav.Link
-                  onClick={() => {
-                    navigate("/");
-                  }}
+                  href="/"
                 >
                   <img src={logo} alt="logo" className="logoHome" />
                 </Nav.Link>
@@ -40,37 +42,58 @@ let NavBarHome = () => {
                 <Nav className="mr-auto">
                   <Nav.Link href="/about" style={{fontWeight: "bold"}}>About</Nav.Link>
                   <Nav.Link href="/contact" style={{fontWeight: "bold"}}>Contacts</Nav.Link>
-                  <NavDropdown
-                    title="Action"
+                  {user?
+                  <>
+                  {/* <NavDropdown
+                    title="Customer"
                     id="basic-nav-dropdown"
                     style={{fontWeight: "bold"}}
                   >
-                    {user ? (
-                      <NavDropdown.Item onClick={() => logOut()}>
-                        Logout
-                      </NavDropdown.Item>
-                    ) : (
-                      <>
-                        <NavDropdown.Item
-                          onClick={() => {
-                            navigate("/login");
-                          }}
+                    <NavDropdown.Item 
+                          href="/orderStatus"
                         >
-                          Login or Signup
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="/customer">
-                          Search Restaurant
-                        </NavDropdown.Item>
-                      </>
-                    )}
-                  </NavDropdown>
+                        My Orders
+                    </NavDropdown.Item>
+                  </NavDropdown> */}
+                  <Nav.Link 
+                    href="/orderStatus"  
+                    style={{fontWeight: "bold"}}
+                  > My Orders </Nav.Link>
+                  <Nav.Link 
+                    href="/owner"  
+                    style={{fontWeight: "bold"}}
+                  > Merchant Portal </Nav.Link>
+                  </>
+                  :
+                  ""
+                  }
+                  
 
-                  {user && (
-                    <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
+                  {user? 
+                    <>
+                    {/* <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
                       Welcome, {user.username}
-                    </Navbar.Text>
-                  )}
+                    </Navbar.Text> */}
+                    <NavDropdown
+                    title= {"Welcome, " + user.username}
+                    id="basic-nav-dropdown"
+                    className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}
+                  >
+                    <NavDropdown.Item 
+                          onClick={() => {
+                            logOut()
+                            }} style={{fontWeight: "bold"}}
+                        >
+                        Sign Out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                    </>
+                    :
+                    <Nav.Link onClick={() => {
+                      navigate("/login");
+                      }} style={{position: "absolute", right: 15, fontWeight: "bold"}}
+                      > Signup/Login </Nav.Link>
+                  }
                 </Nav>
               </Navbar.Collapse>
             </Col>
@@ -82,3 +105,4 @@ let NavBarHome = () => {
 };
 
 export default NavBarHome;
+
