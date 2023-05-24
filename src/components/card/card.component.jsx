@@ -39,7 +39,11 @@ const CardComponent = ({
           className="card-container"
         >
           <Card.Body  key={userId}
-          onClick={() => navigate(`/r/${userId}`)}>
+          onClick={() => {
+            navigate(`/r/${userId}`)
+            window.location.reload()
+          }
+          }>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
             {averageRating !== 0 ?
             <div style={{ display: "flex", justifyContent: "center" }}>

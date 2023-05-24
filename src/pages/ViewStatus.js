@@ -5,12 +5,20 @@ import Auth from "@aws-amplify/auth";
 import { Card, Table, Container, Row } from "react-bootstrap";
 import res from "../assests/SmallDumpling.png";
 import NavBarHome from "../components/NavBarHome";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 
 function ViewStatus() {
   const [orders, setOrders] = useState([]);
-
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if(!user){
+      navigate("/login")
+    }        
     const fetchOrder = async () => {
       try {
         let nameJson = await Auth.currentUserInfo();
@@ -24,6 +32,7 @@ function ViewStatus() {
       }
     };
     fetchOrder();
+
     // eslint-disable-next-line
   }, []);
 
