@@ -18,6 +18,8 @@ import ViewWebpage from './pages/ViewWebPage';
 import FormEdit from './owner/FormEdit';
 import PopUp from './PopUp';
 import ViewStatus from './pages/ViewStatus';
+import Chat from './pages/Chat';
+
 const App = () => {
 
   return (
@@ -41,6 +43,8 @@ const App = () => {
             <Route path="/customer" element={<Customer />} />
             <Route path="/vp" element={<ViewWebpage />} />
             <Route path="/orderStatus" element={<ViewStatus />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat/:userId/:toUserId" element={<Chat />} />
             <Route path="/r/:id" element={<ViewWebpage />}/>
             <Route path="*" element={<PageNotFound/>} />
           </Routes>
