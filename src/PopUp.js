@@ -7,7 +7,7 @@ import { Hub } from "aws-amplify";
 function PopUp(){
 
     // const dispatch = useDispatch();
-    const ws = useRef(null);
+    const ws = null;
 
   useEffect(() => {
     console.log("rerendering popup");
