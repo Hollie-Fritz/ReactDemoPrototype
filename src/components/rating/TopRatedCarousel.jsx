@@ -18,9 +18,9 @@ function TopRatedCarousel() {
   return (
     <Carousel style={{ height: "400px", width: "1000px" }}>
       {topRatedRestaurants.map((restaurant) => {
-        const imageUrl = `https://images.pexels.com/photos/3338537/pexels-photo-3338537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`;
+        const imageUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + restaurant["mainImageUrl"];
 
-        //To get the image from the S3 the url should be sth like this
+        //const bucketUrl ="https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" +resdata["mainImageUrl"];
         //const imageUrl = `https://<domain>/<image-path>/${restaurant.resImageUrl}`;
 
 
