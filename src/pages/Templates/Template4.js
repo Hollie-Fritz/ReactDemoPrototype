@@ -31,7 +31,7 @@ function Template4(props) {
 
   return (
     <>
-      <Container className={`d-flex`} style={{ marginTop: "2rem" }}>
+      <Container className="justify-content-center" style={{ marginTop: "2rem" }} fluid>
         <Row className="m-auto align-self-center">
           <div className="row no-gutters">
             {/* outer card */}
@@ -157,6 +157,8 @@ function Template4(props) {
                       <div
                         style={{
                           overflow: "hidden",
+                          position: "relative",
+                          padding: "56.25%",
                           height: "200px",
                           width: "500px",
                         }}
@@ -166,9 +168,9 @@ function Template4(props) {
                           id="abc"
                           title="Google Map"
                           width="100%"
-                          height="600"
+                          height="100%"
                           frameBorder="0"
-                          style={{ border: "0", marginTop: "-150px" }}
+                          style={{ border: "0", position: "absolute", top: "0", left: "0" }}
                         />
                       </div>
                       {/* end inner card two -- google maps*/}

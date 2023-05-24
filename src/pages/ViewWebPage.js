@@ -63,7 +63,6 @@ export function ViewWebPage() {
       setReviews(data);
     };
     fetchAverageRating();
-    console.log(resdata["name"] + " is name");
 
     updateiframeLocation();
   }, [id, resdata, updateiframeLocation]);
@@ -111,7 +110,7 @@ export function ViewWebPage() {
           // console.log("data is below");
           // console.log(JSON.stringify(data));
         });
-        console.log(JSON.stringify(averageRating))
+        // console.log(JSON.stringify(averageRating))
 
     }
     userAction();

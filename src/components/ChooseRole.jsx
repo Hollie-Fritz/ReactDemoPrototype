@@ -23,7 +23,7 @@ let ChooseCard = () => {
   return (
     <Container variant="sm">
       <Row>
-        <h2 style={{ color: "white" }}>Simplifying online ordering for<br></br> restaurant owners and customers alike.</h2>
+        <h2 >Simplifying online ordering for<br></br> restaurant owners and customers alike.</h2>
       </Row>
       <Row>
         <Col md={4}>

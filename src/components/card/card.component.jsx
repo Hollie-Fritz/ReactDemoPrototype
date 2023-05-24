@@ -20,11 +20,20 @@ const CardComponent = ({
 }) => {
   const navigate = useNavigate();
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
+  const [reviews, setReviews] = useState([]);
 
   const handleShowReviewClick = (event) => {
     event.stopPropagation();
+    getReviews();
     setShowViewReviewForm(true);
   };
+
+  async function getReviews(){
+    let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review?userId=${userId}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setReviews(data);
+  }
 
   const handleViewReviewFormClose = (event) => {
     // event.stopPropagation();
@@ -34,20 +43,23 @@ const CardComponent = ({
   return (
     <>
       <CardGroup className="my-1">
-        <Card
-          style={{ width: "18rem" }}
-          className="card-container"
+        <Card style={{ width: "18rem" }}
+        className="card-container"
         >
-          <Card.Body  key={userId}
-          onClick={() => navigate(`/r/${userId}`)}>
+          <Card.Body key={userId}
+          onClick={() => {
+            navigate(`/r/${userId}`)
+            window.location.reload()
+          }
+          }>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
-            {averageRating !== 0 ?
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <AverageRating averageRating={averageRating} />
-            </div>
-            :
-            ""
-            }
+            {averageRating !== 0 ? (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <AverageRating averageRating={averageRating} />
+              </div>
+            ) : (
+              ""
+            )}
             <Card.Text style={{ textAlign: "center" }}>{cuisine}</Card.Text>
             <ListGroup className="list-group-flush">
               <ListGroup.Item style={{ textAlign: "center" }}>
@@ -56,7 +68,7 @@ const CardComponent = ({
             </ListGroup>
           </Card.Body>
           <Card.Footer className="border-0" style={{ background: "white" }}>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 variant="primary"
                 type="submit"
@@ -65,13 +77,13 @@ const CardComponent = ({
                 View Reviews
               </Button>{" "}
             </div>
-            {/* <ViewReview
+            <ViewReview
               show={showViewReviewForm}
               handleClose={handleViewReviewFormClose}
               userId={userId}
               name={name}
               reviews={reviews}
-            /> */}
+            />
           </Card.Footer>
         </Card>
       </CardGroup>
