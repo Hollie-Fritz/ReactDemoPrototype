@@ -3,6 +3,7 @@ import { Carousel } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 import bg from "../../assests/bg.png";
 
+
 function TopRatedCarousel() {
   const [topRatedRestaurants, setTopRatedRestaurants] = useState([]);
 
@@ -50,8 +51,8 @@ function TopRatedCarousel() {
                 />
               </div>
               <h4>
-                Address: {restaurant.address1}, {restaurant.address2},{" "}
-                {restaurant.city}, {restaurant.state} {restaurant.zipCode}
+                {restaurant.address1? restaurant.address1 + ", ": ""} {restaurant.address2? restaurant.address2 + ", ": ""} {" "}
+                {restaurant.city? restaurant.city + ", ": ""} {restaurant.state? restaurant.state + ", ": ""} {restaurant.zipCode? restaurant.zipCode: ""}
               </h4>
             </Carousel.Caption>
           </Carousel.Item>
