@@ -13,7 +13,7 @@ const OurStory = () => {
           <Accordion.Header onClick={handleOnClick} className="header-accr">
             Our Story
           </Accordion.Header>
-          <Accordion.Body className="acc-body"> 
+          <Accordion.Body className="acc-body">
             We offer restaurant owners a website for free to present their own
             restaurant page on the site as well as take in orders and requests.
             No prior experience is needed to use NuOrder for creating the
@@ -44,7 +44,7 @@ const OurStory = () => {
             2. What makes NuOrder different from other ordering websites?
           </Accordion.Header>
           <Accordion.Body className="acc-body">
-            A restaurant has complete control and choice over over their prices
+            A restaurant has complete control and choice over their prices
             and will not give up a percentage to to be hosted.
           </Accordion.Body>
         </Accordion.Item>

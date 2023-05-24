@@ -12,16 +12,16 @@ function Owner() {
   const [hasRestaurant, setHasRestaurant] = useState(false);
 
   const { user } = useAuthenticator((context) => [
-    context.user, 
+    context.user,
   ]);
   const navigate = useNavigate();
 
-  useEffect(() => {              
+  useEffect(() => {
     if(!user){
       navigate("/login")
       return;
     }
-    
+
     async function get(){
       const nameJson = await Auth.currentUserInfo();
       const name = nameJson["username"];
@@ -47,7 +47,7 @@ function Owner() {
             setHasRestaurant(true);
           }
         }
-      ); 
+      );
     }
     checkRestaurantOwner();
   }, []);
@@ -67,7 +67,7 @@ function Owner() {
               {
                 hasRestaurant?
                 <>
-                  <Col xs={12} md={6} className="mb-2">
+                  <Col xl={12} md={6} className="mb-2">
                     <Button variant="outline-light" block className="Owner-btn" href="./edit">
                       Edit Restaurant Webpage
                     </Button>
