@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
@@ -27,24 +27,11 @@ function Template4(props) {
     id,
     frameRef,
     averageRating,
+    showAddedMessage,
+    setShowAddedMessage,
+    handleAddClick,
+    cartItemCount
   } = props.data;
-
-  const [showAddedMessage, setShowAddedMessage] = useState(null);
-
-  const handleAddClick = (foodId) => {
-    var temp = cart;
-    temp[foodId] = (temp[foodId] || 0) + 1;
-    setcart(temp);
-    setShowAddedMessage(foodId);
-    setTimeout(() => {
-      setShowAddedMessage(null);
-    }, 600);
-  };
-
-  const cartItemCount = Object.values(cart).reduce(
-    (acc, curr) => acc + curr,
-    0
-  );
 
   return (
     <>
@@ -243,6 +230,9 @@ function Template4(props) {
                             <br></br>
                             <br></br>
                             {/* Add to the cart button */}
+                             <br></br>
+                            <br></br>
+                            {/* Add to the cart button */}
                             <Button
                               className={` ${styles.addButton}`}
                               style={{
@@ -251,12 +241,12 @@ function Template4(props) {
                                 left: 5,
                               }}
                               onClick={() => handleAddClick(item.foodId)}
-                            >
-                              {showAddedMessage === item.foodId &&
-                              cart[item.foodId] > 0
-                                ? "✓"
-                                : "Add"}
-                            </Button>
+                              >
+                                {showAddedMessage === item.foodId &&
+                                cart[item.foodId] > 0
+                                  ? "✓"
+                                  : "Add"}
+                              </Button>
                           </Card.Footer>
                           {/* end inner card three */}
                         </Card>
@@ -267,14 +257,13 @@ function Template4(props) {
               </Card.Body>
               {/* View Cart */}
               <Button
-                className={` ${styles.cartButton}`}
+                className={`mb-2 ${styles.cartButton}`}
                 variant="primary"
                 type="submit"
                 onClick={handleShowCart}
               >
                 View Cart ({cartItemCount})
               </Button>
-
               <Cart
                 show={showCart}
                 handleClose={handleShowCartClose}

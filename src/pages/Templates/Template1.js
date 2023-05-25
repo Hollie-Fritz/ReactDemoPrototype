@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
@@ -26,21 +26,11 @@ function Template1(props) {
     id,
     frameRef,
     averageRating,
+    showAddedMessage,
+    setShowAddedMessage,
+    handleAddClick,
+    cartItemCount
   } = props.data;
-
-  const [showAddedMessage, setShowAddedMessage] = useState(null);
-
-  const handleAddClick = (foodId) => {
-    var temp = cart;
-    temp[foodId] = (temp[foodId] || 0) + 1;
-    setcart(temp);
-    setShowAddedMessage(foodId);
-    setTimeout(() => {
-      setShowAddedMessage(null);
-    }, 600);
-  };
-
-  const cartItemCount = Object.values(cart).reduce((acc, curr) => acc + curr, 0);
 
   return (
     <>
@@ -227,7 +217,7 @@ function Template1(props) {
                               }}
                               onClick={() =>  handleAddClick(item.foodId)}
                             >
-                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "ADD"}
+                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "Add"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card three */}
