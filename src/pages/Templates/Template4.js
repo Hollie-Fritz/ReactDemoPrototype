@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
@@ -32,8 +32,6 @@ function Template4(props) {
     handleAddClick,
     cartItemCount
   } = props.data;
-
-
 
   return (
     <>
@@ -232,19 +230,18 @@ function Template4(props) {
                             <br></br>
                             <br></br>
                             {/* Add to the cart button */}
+                             <br></br>
+                            <br></br>
+                            {/* Add to the cart button */}
                             <Button
-                              className={` ${styles.addButton}`}
                               style={{
-                                position: "absolute",
-                                bottom: 5,
-                                left: 5,
+                              position: "absolute",
+                              bottom: 5,
+                              left: 5,
                               }}
-                              onClick={() => handleAddClick(item.foodId)}
+                              onClick={() =>  handleAddClick(item.foodId)}
                             >
-                              {showAddedMessage === item.foodId &&
-                              cart[item.foodId] > 0
-                                ? "✓"
-                                : "Add"}
+                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "Add"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card three */}
@@ -263,7 +260,6 @@ function Template4(props) {
               >
                 View Cart ({cartItemCount})
               </Button>
-
               <Cart
                 show={showCart}
                 handleClose={handleShowCartClose}

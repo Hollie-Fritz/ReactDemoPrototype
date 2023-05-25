@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
