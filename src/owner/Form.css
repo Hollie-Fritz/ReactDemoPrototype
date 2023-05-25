@@ -1,8 +1,12 @@
-/* ensures that the "Remove Image" button text stays on one line */
+/*ensures that the "Remove Image" button text stays on one line */
 .remove-button {
-  min-width: 131px;
+  min-width: 137px;
 }
-
+/*
 .remove-item {
   min-width: 20px;
+} */
+
+body {
+  font-family: 'Open Sans', sans-serif;
 }
