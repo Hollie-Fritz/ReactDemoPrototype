@@ -45,7 +45,7 @@ function Cart(props) {
   };
 
   const handleUtensils = (event) => {
-    setUtensils(event.target.value === "on" ? true: false);
+    setUtensils(event.target.value === "on" ? true : false);
   };
 
   const handleSubmit = async () => {
@@ -62,9 +62,9 @@ function Cart(props) {
       }
       setShowMessage(true);
       // set a timeout for how long you want the message to show up for
-      setTimeout(()=>{
+      setTimeout(() => {
         setShowMessage(false);
-      }, 7000) // 7 seconds
+      }, 7000); // 7 seconds
     });
 
     let customerId = "";
@@ -73,9 +73,7 @@ function Cart(props) {
       let nameJson = await Auth.currentUserInfo();
       customerId = nameJson["username"];
       console.log(JSON.stringify(nameJson));
-    } catch {
-
-    }
+    } catch {}
 
     const converted = {
       customerName: customerName,
@@ -114,107 +112,115 @@ function Cart(props) {
           <h3>Your order is completed!</h3>
         </Modal.Body>
       ) : (
-      <>
-      <Modal.Header closeButton>
-        <Modal.Title>Your Current Order</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Table responsive>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody>
-            {fooddata.map((item, index) => {
-              const quantity = cart[item.foodId] || 0;
-              if (quantity > 0) {
-                const total = (quantity * item.foodPrice).toFixed(2);
-                return (
-                  <tr key={item.foodId}>
-                    <td>{item.foodName}</td>
-                    <td>${item.foodPrice}</td>
-                    <td>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => handleDecrement(item.foodId)}
-                      >
-                        -
-                      </Button>{" "}
-                      {quantity}{" "}
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => handleIncrement(item.foodId)}
-                      >
-                        +
-                      </Button>
-                    </td>
-                    <td>${total}</td>
-                    <td>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleRemove(item.foodId)}
-                      >
-                        X
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              } else {
-                return null;
-              }
-            })}
-          </tbody>
-        </Table>
-        <p className="text-right font-weight-bold">
-          Total*: ${totalPrice.toFixed(2)}
-        </p>
-        <i> *10 cent/bag fee is not included </i>
-        <p></p>
-        <div>
-          <Form>
-            <FloatingLabel
-              controlId="floatingName"
-              label="Name"
-              onChange={handleCustomerName}
-            >
-              <Form.Control type="Name" placeholder="Enter your name" />
-            </FloatingLabel>
-          </Form>
-        </div>
-<br></br>
-          <div>
-            <Form>
-             {/* NOTE */}
-              <FloatingLabel controlId="floatingTextarea2" label="Note">
-                <Form.Control
-                  as="textarea"
-                  placeholder="Enter a note"
-                  onChange={handleNote}
-                  style={{ height: "100px" }}
-                />
-              </FloatingLabel>
-              <br></br>
-              {/* Utensils */}
-              <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check onChange={handleUtensils} type="checkbox" label="Utensils" />
-              </Form.Group>
-            </Form>
-          </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={handleSubmit} type="submit">
-          Checkout
-        </Button>
-      </Modal.Footer>
-      </>
+        <>
+          <Modal.Header closeButton>
+            <Modal.Title>Your Current Order</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Table responsive>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody>
+                {fooddata.map((item, index) => {
+                  const quantity = cart[item.foodId] || 0;
+                  if (quantity > 0) {
+                    const total = (quantity * item.foodPrice).toFixed(2);
+                    return (
+                      <tr key={item.foodId}>
+                        <td>{item.foodName}</td>
+                        <td>${item.foodPrice}</td>
+                        <td>
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => handleDecrement(item.foodId)}
+                          >
+                            -
+                          </Button>{" "}
+                          {quantity}{" "}
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => handleIncrement(item.foodId)}
+                          >
+                            +
+                          </Button>
+                        </td>
+                        <td>${total}</td>
+                        <td>
+                          <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={() => handleRemove(item.foodId)}
+                          >
+                            X
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </tbody>
+            </Table>
+            <p className="text-right font-weight-bold">
+              Total*: ${totalPrice.toFixed(2)}
+            </p>
+            <i> *10 cent/bag fee is not included </i>
+            <p></p>
+            <div>
+              <Form>
+                <FloatingLabel
+                  controlId="floatingName"
+                  label="Name"
+                  onChange={handleCustomerName}
+                >
+                  <Form.Control type="Name" placeholder="Enter your name" />
+                </FloatingLabel>
+              </Form>
+            </div>
+            <br></br>
+            <div>
+              <Form>
+                {/* NOTE */}
+                <FloatingLabel controlId="floatingTextarea2" label="Note">
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Enter a note"
+                    onChange={handleNote}
+                    style={{ height: "100px" }}
+                    maxLength="250"
+                  />
+                  <div style={{ textAlign: "left" }}>
+                    {250 - note.length} characters
+                  </div>
+                </FloatingLabel>
+                <br></br>
+                {/* Utensils */}
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                  <Form.Check
+                    onChange={handleUtensils}
+                    type="checkbox"
+                    label="Utensils"
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleSubmit} type="submit">
+              Checkout
+            </Button>
+          </Modal.Footer>
+        </>
       )}
     </Modal>
   );

@@ -52,6 +52,8 @@ function InfoEdit({ formData, setFormData }) {
     </Tooltip>
   );
 
+  const [uploadStatus, setUploadStatus] = useState("Upload");
+
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
     const imageInput = document.querySelector("#imageInput");
@@ -75,6 +77,7 @@ function InfoEdit({ formData, setFormData }) {
         setFormData({ ...formData, mainImageUrl: imageName });
         const mainImage = document.querySelector("#mainImage");
         mainImage.src = file;
+        setUploadStatus("Success!"); // Update the upload status here
       });
     };
 
@@ -367,7 +370,7 @@ function InfoEdit({ formData, setFormData }) {
             Browse
           </label>
           <Button className="mb-0 mx-2" type="submit">
-            Upload
+            {uploadStatus}
           </Button>
           <Button className="mb-0 mx-2 remove-button" variant="danger">
             Remove Image
