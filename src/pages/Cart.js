@@ -193,14 +193,18 @@ function Cart(props) {
           <div>
             <Form>
              {/* NOTE */}
-              <FloatingLabel controlId="floatingTextarea2" label="Note">
-                <Form.Control
-                  as="textarea"
-                  placeholder="Enter a note"
-                  onChange={handleNote}
-                  style={{ height: "100px" }}
-                />
-              </FloatingLabel>
+             <FloatingLabel controlId="floatingTextarea2" label="Note">
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Enter a note"
+                    onChange={handleNote}
+                    style={{ height: "100px" }}
+                    maxLength="250"
+                  />
+                  <div style={{ textAlign: "left" }}>
+                    {250 - note.length} characters
+                  </div>
+                </FloatingLabel>
               <br></br>
               {/* Utensils */}
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
