@@ -213,6 +213,9 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 <Button onClick={() => handleSubmitImage(index)}>
                   {uploadStatus[index] ?? "Upload"}
                 </Button>
+                <Button className="mb-0 mx-2 remove-button" variant="danger">
+                  Remove Image
+                </Button>
               </Form.Group>
             </Form>
             {/* MENU IMAGE */}
@@ -220,15 +223,19 @@ function MenuEdit({ menuItems, setMenuItems }) {
             {/* button to remove iteration of the form */}
             <Form.Group>
               {menuItems.length !== 1 && (
-                <Button variant="danger" onClick={() => handleRemove(index)}>
-                  Remove
+                <Button
+                  variant="danger"
+                  className="mt-2"
+                  onClick={() => handleRemove(index)}
+                >
+                  Remove Menu Item
                 </Button>
               )}
             </Form.Group>
           </Row>
         ))}
         <Button variant="primary" onClick={handleAddItem}>
-          Add Item
+          Add Menu Item
         </Button>
       </Form>
       {menuItems.forEach((menuItem) => {

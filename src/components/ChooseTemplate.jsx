@@ -1,9 +1,9 @@
 import { React } from "react";
 import { Modal, Col, Row, Container, Form, Image, Button } from "react-bootstrap"; // prettier-ignore
-import template1 from "../assests/template1.JPG"
-import template2 from "../assests/template2.JPG"
-import template3 from "../assests/template3.JPG"
-import template4 from "../assests/template4.JPG"
+import template1 from "../assests/template1.jpeg"
+import template2 from "../assests/template2.jpeg"
+import template3 from "../assests/template3.jpeg"
+import template4 from "../assests/template4.jpeg"
 
 const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
   // save the value of the selected template

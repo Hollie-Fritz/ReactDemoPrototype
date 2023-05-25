@@ -1,11 +1,8 @@
-.createform {
-  color: #ffffff;
+/* ensures that the "Remove Image" button text stays on one line */
+.remove-button {
+  min-width: 131px;
 }
 
-.blacktext {
-  color: black;
-}
-
-.OwnerCheck{
-  color: RGB(240, 178, 109)
+.remove-item {
+  min-width: 20px;
 }

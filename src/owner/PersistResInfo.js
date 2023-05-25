@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row, Button, Container, FormControl } from "react-bootstrap"; // prettier-ignore
+import { Form, InputGroup, Row, Button, Container, FormControl, Tooltip, OverlayTrigger } from "react-bootstrap"; // prettier-ignore
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import ChooseTemplate from "../components/ChooseTemplate";
@@ -33,6 +33,15 @@ function PersistResInfo({ formData, setFormData }) {
       setSelectedFile(e.target.files[0].name);
     }
   };
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The restaurant banner looks best with the following dimensions:<br></br>
+      ?x?<br></br>
+      It will be displayed at the top of your web page with your restaurant name
+      over it.
+    </Tooltip>
+  );
 
   // handles form submission and image upload
   // eslint-disable-next-line
@@ -329,45 +338,59 @@ function PersistResInfo({ formData, setFormData }) {
           </Form.Group>
           {/* TEMPLATE */}
         </Row>
-
-        <Row className="d-flex align-items-end">
-          {/* RES IMAGE */}
-          <Form id="imageForm" className="col col-sm-6 d-flex">
-            <input
-              id="imageInput"
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={handleFileChange}
-            />
-            <FormControl
-              type="text"
-              value={selectedFile}
-              placeholder="No File Selected"
-              readOnly
-              className="mx-2"
-            />
-            <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
-              Browse
-            </label>
-            <Button type="submit">Upload</Button>
-          </Form>
-
-          {formData["mainImageUrl"] ? (
-            <img
-              id="mainImage"
-              src={
-                `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
-                formData["mainImageUrl"]
-              }
-              alt=""
-            />
-          ) : (
-            ""
-          )}
-        </Row>
-        <Row className="d-flex align-items-end"></Row>
       </Form>
+      <Row className="d-flex align-items-end">
+        {/* RES IMAGE */}
+        <Form.Label>
+          Restaurant Banner Image{" "}
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip}
+          >
+            <Button variant="info">?</Button>
+          </OverlayTrigger>
+        </Form.Label>
+        <Form id="imageForm" className="col col-sm-6 d-flex">
+          <input
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileChange}
+          />
+          <FormControl
+            type="text"
+            value={selectedFile}
+            placeholder="No File Selected"
+            readOnly
+            className="mx-2"
+          />
+          <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
+            Browse
+          </label>
+          <Button type="submit" className="mb-0 mx-2">
+            Upload
+          </Button>
+          <Button className="mb-0 mx-2 remove-button" variant="danger">
+            Remove Image
+          </Button>
+        </Form>
+
+        {formData["mainImageUrl"] ? (
+          <img
+            id="mainImage"
+            src={
+              `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
+              formData["mainImageUrl"]
+            }
+            alt=""
+          />
+        ) : (
+          ""
+        )}
+      </Row>
+      <Row className="d-flex align-items-end"></Row>
 
       {/* RES IMAGE */}
       <ChooseTemplate
@@ -375,6 +398,7 @@ function PersistResInfo({ formData, setFormData }) {
         handleClose={handleChooseTemplateClose}
         handleTemplateSelect={handleTemplateSelect}
       />
+      <br></br>
     </Container>
   );
 }

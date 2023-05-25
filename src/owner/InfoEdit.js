@@ -7,6 +7,8 @@ import {
   Button,
   Container,
   FormControl,
+  Tooltip,
+  OverlayTrigger,
 } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
@@ -40,6 +42,15 @@ function InfoEdit({ formData, setFormData }) {
       setSelectedFile(e.target.files[0].name);
     }
   };
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The restaurant banner looks best with the following dimensions:<br></br>
+      ?x?<br></br>
+      It will be displayed at the top of your web page with your restaurant name
+      over it.
+    </Tooltip>
+  );
 
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
@@ -273,7 +284,8 @@ function InfoEdit({ formData, setFormData }) {
             </Form.Select>
           </Form.Group>
           {/* HOURS */}
-
+        </Row>
+        <Row className="mb-3">
           {/* CUISINE */}
           <Form.Group controlId="formCuisine" className="col col-sm-6">
             {/* provide a text label as a component */}
@@ -326,6 +338,16 @@ function InfoEdit({ formData, setFormData }) {
       </Form>
       {/* RES IMAGE */}
       <Row className="d-flex align-items-end">
+        <Form.Label>
+          Restaurant Banner Image{" "}
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip}
+          >
+            <Button variant="info">?</Button>
+          </OverlayTrigger>
+        </Form.Label>
         <Form id="imageForm" className="col col-sm-6 d-flex">
           <input
             id="imageInput"
@@ -344,21 +366,26 @@ function InfoEdit({ formData, setFormData }) {
           <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
             Browse
           </label>
-          <Button type="submit">Upload</Button>
+          <Button className="mb-0 mx-2" type="submit">
+            Upload
+          </Button>
+          <Button className="mb-0 mx-2 remove-button" variant="danger">
+            Remove Image
+          </Button>
         </Form>
 
-      {formData["mainImageUrl"] ? (
-        <img
-          id="mainImage"
-          src={
-            `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
-            formData["mainImageUrl"]
-          }
-          alt=""
-        />
-      ) : (
-        ""
-      )}
+        {formData["mainImageUrl"] ? (
+          <img
+            id="mainImage"
+            src={
+              `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
+              formData["mainImageUrl"]
+            }
+            alt=""
+          />
+        ) : (
+          ""
+        )}
       </Row>
       {/* RES IMAGE */}
       <ChooseTemplate
