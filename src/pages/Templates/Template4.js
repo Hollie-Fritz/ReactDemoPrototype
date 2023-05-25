@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
@@ -27,25 +27,19 @@ function Template4(props) {
     id,
     frameRef,
     averageRating,
+    showAddedMessage,
+    setShowAddedMessage,
+    handleAddClick,
+    cartItemCount
   } = props.data;
-
-  const [showAddedMessage, setShowAddedMessage] = useState(null);
-
-  const handleAddClick = (foodId) => {
-    var temp = cart;
-    temp[foodId] = (temp[foodId] || 0) + 1;
-    setcart(temp);
-    setShowAddedMessage(foodId);
-    setTimeout(() => {
-      setShowAddedMessage(null);
-    }, 600);
-  };
-
-  const cartItemCount = Object.values(cart).reduce((acc, curr) => acc + curr, 0);
 
   return (
     <>
-      <Container className="justify-content-center" style={{ marginTop: "2rem" }} fluid>
+      <Container
+        className="justify-content-center"
+        style={{ marginTop: "2rem" }}
+        fluid
+      >
         <Row className="m-auto align-self-center">
           <div className="row no-gutters">
             {/* outer card */}
@@ -116,8 +110,8 @@ function Template4(props) {
                         {resdata["cuisine"]}
                       </Card.Text>
                       <Card.Text>
-                        <div style={{display: "flex", alignItems: "center" }}>
-                          <span className="fw-bold">Rating:  </span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <span className="fw-bold">Rating: </span>
                           <AverageRating averageRating={averageRating} />
                         </div>
                       </Card.Text>
@@ -184,7 +178,12 @@ function Template4(props) {
                           width="100%"
                           height="100%"
                           frameBorder="0"
-                          style={{ border: "0", position: "absolute", top: "0", left: "0" }}
+                          style={{
+                            border: "0",
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                          }}
                         />
                       </div>
                       {/* end inner card two -- google maps*/}
@@ -204,7 +203,15 @@ function Template4(props) {
                           key={test}
                           style={{ width: "37rem" }}
                         >
-                           <Card.Img variant="top" src= {item.foodImageUrl? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
+                          <Card.Img
+                            variant="top"
+                            src={
+                              item.foodImageUrl
+                                ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                  item.foodImageUrl
+                                : ""
+                            }
+                          />
                           <Card.Body>
                             <div className={styles.menuItem}>
                               <Card.Text
@@ -223,6 +230,9 @@ function Template4(props) {
                             <br></br>
                             <br></br>
                             {/* Add to the cart button */}
+                             <br></br>
+                            <br></br>
+                            {/* Add to the cart button */}
                             <Button
                               style={{
                               position: "absolute",
@@ -231,7 +241,7 @@ function Template4(props) {
                               }}
                               onClick={() =>  handleAddClick(item.foodId)}
                             >
-                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "ADD"}
+                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "Add"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card three */}
@@ -243,14 +253,13 @@ function Template4(props) {
               </Card.Body>
               {/* View Cart */}
               <Button
-                className="mb-2"
+                className={`mb-2 ${styles.cartButton}`}
                 variant="primary"
                 type="submit"
                 onClick={handleShowCart}
               >
                 View Cart ({cartItemCount})
               </Button>
-              
               <Cart
                 show={showCart}
                 handleClose={handleShowCartClose}
