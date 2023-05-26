@@ -1,9 +1,11 @@
 import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
+import styles from "./Template1.module.css";
 
 // Template1 component
 function Template1(props) {
@@ -29,7 +31,10 @@ function Template1(props) {
     showAddedMessage,
     setShowAddedMessage,
     handleAddClick,
-    cartItemCount
+    cartItemCount,
+    handleShowCartClick,
+    viewCartClicked,
+    setViewCartClicked,
   } = props.data;
 
   return (
@@ -172,7 +177,12 @@ function Template1(props) {
                           width="100%"
                           height="100%"
                           frameBorder="0"
-                          style={{ border: "0", position: "absolute", top: "0", left: "0" }}
+                          style={{
+                            border: "0",
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                          }}
                         />
                       </div>
                       {/* end inner card two */}
@@ -188,7 +198,15 @@ function Template1(props) {
                       <Col className="d-flex align-items-stretch">
                         {/* inner card three */}
                         <Card key={test} style={{ width: "37rem" }}>
-                        <Card.Img variant="top" src= {item.foodImageUrl? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
+                          <Card.Img
+                            variant="top"
+                            src={
+                              item.foodImageUrl
+                                ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                  item.foodImageUrl
+                                : ""
+                            }
+                          />
                           <Card.Body>
                             <Card.Text
                               style={{ fontSize: "18px" }}
@@ -211,13 +229,16 @@ function Template1(props) {
                             {/* Add to the cart button */}
                             <Button
                               style={{
-                              position: "absolute",
-                              bottom: 5,
-                              left: 5,
+                                position: "absolute",
+                                bottom: 5,
+                                left: 5,
                               }}
-                              onClick={() =>  handleAddClick(item.foodId)}
+                              onClick={() => handleAddClick(item.foodId)}
                             >
-                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "Add"}
+                              {showAddedMessage === item.foodId &&
+                              cart[item.foodId] > 0
+                                ? "✓"
+                                : "Add"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card three */}
@@ -229,12 +250,17 @@ function Template1(props) {
               </Card.Body>
               {/* View Cart */}
               <Button
-                className="mb-2"
+                className={`${styles["button-class"]} mb-2`}
                 variant="primary"
                 type="submit"
-                onClick={handleShowCart}
+                onClick={handleShowCartClick}
               >
                 View Cart ({cartItemCount})
+                <FaShoppingCart
+                  className={`${styles["cart-icon"]} ${
+                    viewCartClicked ? styles["roll-off"] : ""
+                  }`}
+                />
               </Button>
               <Cart
                 show={showCart}

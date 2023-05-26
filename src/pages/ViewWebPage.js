@@ -7,6 +7,7 @@ import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
 
+
 export function ViewWebPage() {
   // variables to be shared across all the templates
   const { id } = useParams();
@@ -19,7 +20,8 @@ export function ViewWebPage() {
   const [reviews, setReviews] = useState([]);
   const [address, setAddress] = useState("");
   const [averageRating, setAverageRating] = useState(0);
-
+  const [viewCartClicked, setViewCartClicked] = useState(false);
+  const [showAddedMessage, setShowAddedMessage] = useState(null);
 
   // write reviews handlers
   const handleWriteReviewClick = (event) => {
@@ -40,6 +42,7 @@ export function ViewWebPage() {
     setShowViewReviewForm(false);
   };
 
+
   // reference for iframe
   const frameRef = useRef(null);
   // function to update the iframe location for Google Maps
@@ -54,8 +57,6 @@ export function ViewWebPage() {
     }
   }, [address]);
 
-  // Add button for menu items
-  const [showAddedMessage, setShowAddedMessage] = useState(null);
 
   //handler for Add button
   const handleAddClick = (foodId) => {
@@ -68,13 +69,24 @@ export function ViewWebPage() {
     }, 600);
   };
 
+
+  //view and close cart
+  const handleShowCart = () => {
+    setShowCart(true);
+  };
+  const handleShowCartClose = () => {
+    setShowCart(false);
+  };
+
   //count for the items that have been added to cart
   const cartItemCount = Object.values(cart).reduce(
     (acc, curr) => acc + curr,
     0
   );
 
-  // fetch reviews and update the Google Maps iframe location
+
+
+  //fetch reviews and update the Google Maps iframe location
   useEffect(() => {
     const fetchAverageRating = async () => {
       let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/review?userId=${id}`;
@@ -87,13 +99,7 @@ export function ViewWebPage() {
     updateiframeLocation();
   }, [id, resdata, updateiframeLocation]);
 
-  // view and close cart
-  const handleShowCart = () => {
-    setShowCart(true);
-  };
-  const handleShowCartClose = () => {
-    setShowCart(false);
-  };
+
 
   // fetch restaurant data and update the state
   useEffect(() => {
@@ -136,6 +142,18 @@ export function ViewWebPage() {
     userAction();
   }, [id]);
 
+  useEffect(() => {
+    console.log(viewCartClicked);
+}, [viewCartClicked]);
+
+const handleShowCartClick = () => {
+    handleShowCart();
+    setViewCartClicked(true);
+    setTimeout(() => {
+        setViewCartClicked(false);
+    }, 1000);
+};
+
   // url for restaurant's main image (banner image)
   const bucketUrl =
     "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" +
@@ -164,7 +182,11 @@ export function ViewWebPage() {
     showAddedMessage,
     setShowAddedMessage,
     handleAddClick,
-    cartItemCount
+    cartItemCount,
+    viewCartClicked,
+    handleShowCartClick,
+    viewCartClicked,
+    setViewCartClicked
   };
 
   // return the WebPageContext.Provider component with the object of all the variables and handlers
