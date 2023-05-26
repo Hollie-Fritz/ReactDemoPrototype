@@ -4,15 +4,17 @@ import { useEffect, useState, useRef } from "react";
 import { Auth } from "aws-amplify";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import "./Chat.css"; // Import the custom CSS file
+import { useNavigate } from "react-router-dom";
 
 function Chat() {
-  const params = useParams();
-  const [currentUserId, setCurrentUserId] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [listChat, setListChat] = useState([]);
-  const [ws, setWs] = useState(null);
-  const messageInput = useRef(null);
-  const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
+    const params = useParams();
+    const [currentUserId, setCurrentUserId] = useState(null);
+    const [messages, setMessages] = useState([]);
+    const [listChat, setListChat] = useState([]);
+    const [ws, setWs] = useState(null);
+    const messageInput = useRef(null);
+    const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
+    const navigate = useNavigate();
 
   useEffect(() => {
     async function get() {
@@ -118,7 +120,9 @@ function Chat() {
             <h4>Users:</h4>
             {listChat.map((user, index) => {
               return (
-                <Button variant="light" key={index} block>
+                <Button variant="light" key={index} block onClick={()=>{
+                    navigate(`/chat/${currentUserId}/${user}`)
+                }}>
                   {user}
                 </Button>
               );
