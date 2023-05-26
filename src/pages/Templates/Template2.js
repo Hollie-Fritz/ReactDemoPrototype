@@ -1,4 +1,6 @@
+import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
@@ -29,6 +31,9 @@ function Template2(props) {
     showAddedMessage,
     handleAddClick,
     cartItemCount,
+    handleShowCartClick,
+    viewCartClicked,
+    setViewCartClicked,
   } = props.data;
 
   return (
@@ -234,11 +239,11 @@ function Template2(props) {
                             <Button
                               className={`${styles.addButton}`}
                               style={{
-                                backgroundColor: 'var(--white)',
-                                color: 'var(--dark)',
-                                borderColor: 'var(--biscuit)',
-                                borderWidth: '2px',
-                                fontWeight: 'bold',
+                                backgroundColor: "var(--white)",
+                                color: "var(--dark)",
+                                borderColor: "var(--biscuit)",
+                                borderWidth: "2px",
+                                fontWeight: "bold",
                                 position: "absolute",
                                 bottom: 5,
                                 left: 5,
@@ -260,13 +265,18 @@ function Template2(props) {
               </Card.Body>
               {/* View Cart */}
               <Button
-                className={` ${styles.cartButton}`}
-                variant="primary"
+                className={`${styles["button-class"]} ${styles.cartButton} mb-2`}
                 type="submit"
-                onClick={handleShowCart}
+                onClick={handleShowCartClick}
               >
                 View Cart ({cartItemCount})
+                <FaShoppingCart
+                  className={`${styles["cart-icon"]} ${
+                    viewCartClicked ? styles["roll-off"] : ""
+                  }`}
+                />
               </Button>
+
               <Cart
                 show={showCart}
                 handleClose={handleShowCartClose}

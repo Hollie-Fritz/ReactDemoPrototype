@@ -89,3 +89,21 @@
   outline: none;
   box-shadow: none;
 }
+
+.cart-icon {
+  color: #70B384;
+  transition: transform 1s ease-in-out;
+  position: relative;
+  margin-left: 10px;
+}
+
+.roll-off {
+  /* moves the icon to the right */
+  transform: translateX(5600%);
+}
+
+.button-class {
+  /* makes cart appear to dissapear into button border */
+  overflow: hidden;
+  position: relative;
+}

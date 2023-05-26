@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
@@ -31,6 +32,9 @@ function Template3(props) {
     setShowAddedMessage,
     handleAddClick,
     cartItemCount,
+    handleShowCartClick,
+    viewCartClicked,
+    setViewCartClicked,
   } = props.data;
 
   return (
@@ -256,12 +260,16 @@ function Template3(props) {
               </Card.Body>
               {/* View Cart */}
               <Button
-                className={`mb-2 ${styles.cartButton}`}
-                variant="primary"
+                className={`${styles["button-class"]} ${styles.cartButton} mb-2`}
                 type="submit"
-                onClick={handleShowCart}
+                onClick={handleShowCartClick}
               >
                 View Cart ({cartItemCount})
+                <FaShoppingCart
+                  className={`${styles["cart-icon"]} ${
+                    viewCartClicked ? styles["roll-off"] : ""
+                  }`}
+                />
               </Button>
               <Cart
                 show={showCart}
