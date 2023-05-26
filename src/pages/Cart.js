@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Table, Form, FloatingLabel } from "react-bootstrap";
-import { useState } from "react";
 import Auth from "@aws-amplify/auth";
 
 function Cart(props) {
@@ -8,9 +7,32 @@ function Cart(props) {
   // const [cart, setCart] = useState(cart);
   const [customerName, setCustomerName] = useState("anonymous");
   const [note, setNote] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState(null);
   const [utensils, setUtensils] = useState(false);
-
+  
+  useEffect(() => {
+    if (show) {
+      const items = [];
+      fooddata.forEach((item) => {
+        const quantity = cart[item.foodId] || 0;
+        if (quantity > 0) {
+          items.push({
+            foodId: item.foodId,
+            foodName: item.foodName,
+            priceEach: item.foodPrice,
+            quantity: quantity,
+          });
+        }
+      });
+    
+      if (items.length === 0) {
+        setMessage("No items in the cart. Please add some items before checking out!");
+      } else {
+        setMessage(null);
+      }
+    }
+  }, [show, fooddata, cart]);
+  
   const handleDecrement = (foodId) => {
     const temp = { ...cart };
     if (temp[foodId] > 1) {
@@ -60,12 +82,16 @@ function Cart(props) {
           quantity: quantity,
         });
       }
-      setShowMessage(true);
-      // set a timeout for how long you want the message to show up for
-      setTimeout(()=>{
-        setShowMessage(false);
-      }, 7000) // 7 seconds
     });
+  
+    if (items.length === 0) {
+      return; // Don't proceed if no items in the cart.
+    }
+    
+    setMessage("Your order is completed!");
+    setTimeout(() => {
+      setMessage(null);
+    }, 7000); // 7 seconds
 
     let customerId = "";
 
@@ -105,13 +131,14 @@ function Cart(props) {
         console.log(data);
       });
     handleClose();
+    
   };
 
   return (
     <Modal dialogClassName="modal-90w" show={show} onHide={handleClose}>
-      {showMessage ? (
+      {message ? (
         <Modal.Body>
-          <h3>Your order is completed!</h3>
+          <h3>{message}</h3>
         </Modal.Body>
       ) : (
       <>
