@@ -29,3 +29,11 @@
     color: #fff;
   }
   
+  .suggestions-card {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    width: 200px;
+    z-index: 999;
+  }
+  

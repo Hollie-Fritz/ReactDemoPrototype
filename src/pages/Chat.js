@@ -4,17 +4,15 @@ import { useEffect, useState, useRef } from "react";
 import { Auth } from "aws-amplify";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import "./Chat.css"; // Import the custom CSS file
-import { useNavigate } from "react-router-dom";
 
 function Chat() {
-    const params = useParams();
-    const [currentUserId, setCurrentUserId] = useState(null);
-    const [messages, setMessages] = useState([]);
-    const [listChat, setListChat] = useState([]);
-    const [ws, setWs] = useState(null);
-    const messageInput = useRef(null);
-    const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
-    const navigate = useNavigate();
+  const params = useParams();
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [listChat, setListChat] = useState([]);
+  const [ws, setWs] = useState(null);
+  const messageInput = useRef(null);
+  const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
 
   useEffect(() => {
     async function get() {
@@ -48,7 +46,6 @@ function Chat() {
         },
       }
     )
-      //check if data was correctly sent in console log
       .then((response) => response.json())
       .then((data) => {
         if (data.length !== 0) {
@@ -68,18 +65,14 @@ function Chat() {
     const newWs = new WebSocket(
       url + "?userId=" + params["userId"] + "&toUserId=" + params["toUserId"]
     );
-    setWs(newWs); // set the new WebSocket object as ws
-    initWebSocketsEvents(newWs); // pass the new WebSocket object as an argument
+    setWs(newWs);
+    initWebSocketsEvents(newWs);
     console.log("successfully connected");
   }
 
   function initWebSocketsEvents(ws) {
     ws.onopen = function () {};
 
-    // ws.onmessage = function (evt) {
-    //     let message = evt.data;
-    //     addMessageToList(message);
-    // };
     ws.onmessage = function (evt) {
       let data = JSON.parse(evt.data);
       let message = {
@@ -100,9 +93,11 @@ function Chat() {
     let message = messageInput.current.value;
     if (message.trim() && ws) {
       ws.send(JSON.stringify({ action: "onmessage", message }));
+      // Clear the input field
+      messageInput.current.value = "";
     }
   }
-
+  
   function addMessageToList(message) {
     setMessages((prevMessages) => [...prevMessages, message]);
   }
@@ -120,9 +115,7 @@ function Chat() {
             <h4>Users:</h4>
             {listChat.map((user, index) => {
               return (
-                <Button variant="light" key={index} block onClick={()=>{
-                    navigate(`/chat/${currentUserId}/${user}`)
-                }}>
+                <Button variant="light" key={index} block>
                   {user}
                 </Button>
               );
@@ -137,9 +130,9 @@ function Chat() {
                   const isCurrentUserMessage =
                     message.user === currentUserId;
                   const messageAlignment = isCurrentUserMessage
-                    ? "message-left"
-                    : "message-right";
-
+                    ? "message-right"
+                    : "message-left";
+  
                   return (
                     <div
                       key={index}
@@ -154,25 +147,33 @@ function Chat() {
               </Card.Body>
             </Card>
             <br />
-            <Form inline>
-              <Form.Control
-                ref={messageInput}
-                type="text"
-                placeholder="Message"
-                className="mr-sm-2"
-              />
-              <Button
-                variant="outline-success"
-                onClick={() => sendMessage()}
-              >
-                Send message
-              </Button>
+            <Form>
+              <Row>
+                <Col md={9}>
+                  <Form.Control
+                    ref={messageInput}
+                    type="text"
+                    placeholder="Message"
+                    className="mr-sm-2"
+                  />
+                </Col>
+                <Col md={3}>
+                  <Button
+                    variant="outline-success"
+                    onClick={() => sendMessage()}
+                    block
+                  >
+                    Send message
+                  </Button>
+                </Col>
+              </Row>
             </Form>
           </Col>
         </Row>
       </Container>
     </>
-  );
-}
+  ); //close return
+
+} //close function
 
 export default Chat;
