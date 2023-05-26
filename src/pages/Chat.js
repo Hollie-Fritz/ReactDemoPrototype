@@ -1,208 +1,174 @@
-import React from "react";
 import NavBarHome from "../components/NavBarHome";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { Auth } from "aws-amplify";
+import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
+import "./Chat.css"; // Import the custom CSS file
 
 function Chat() {
-    const params = useParams();
-    const [messages, setMessages] = useState([]);
+  const params = useParams();
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [listChat, setListChat] = useState([]);
+  const [ws, setWs] = useState(null);
+  const messageInput = useRef(null);
+  const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
 
-    let ws;
-    let connected = false;
-    let statusElement = document.querySelector('#status');
-    let messageInput = document.querySelector('#message');
-    const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
+  useEffect(() => {
+    async function get() {
+      const nameJson = await Auth.currentUserInfo();
+      const name = nameJson["username"];
+      setCurrentUserId(name);
+    }
+    get();
+  }, []);
 
-    useEffect(() => {
-        initWebSocket();
-        console.log("here we go")
-    },[])
+  useEffect(() => {
+    if (currentUserId) {
+      getChatUsers();
+    }
+    console.log("here we go");
+    console.log("list user chat is" + listChat);
+  }, [currentUserId]);
 
-    function initWebSocket() {
-        if(ws){
-            ws.close();
+  useEffect(() => {
+    initWebSocket();
+  }, [params]);
+
+  async function getChatUsers() {
+    console.log(currentUserId);
+    await fetch(
+      `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/getChatUsers/${currentUserId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      //check if data was correctly sent in console log
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length !== 0) {
+          for (const val of data) {
+            console.log(val);
+            setListChat((prev) => [...prev, val]);
+          }
         }
-        clearMessageList();
-        ws = null;
-        setStatus('Connecting...');
-        ws = new WebSocket(url+"?userId="+ params["userId"] + "&toUserId=" + params["toUserId"]);
-        initWebSocketsEvents();
-        console.log("successfully connected");
+      });
+  }
+
+  function initWebSocket() {
+    if (ws) {
+      ws.close();
     }
-
-    function initWebSocketsEvents() {
-        ws.onopen = function () {
-            setStatus('Connection is opened (connected...)');
-            connected = true;
-        };
-
-        ws.onmessage = function (evt) {
-            let message = evt.data;
-            addMessageToList(message);
-            console.log("message is" +message);
-        };
-
-        ws.onclose = function () {
-            connected = false;
-            setStatus('Connection is closed...');
-        };
-
-        ws.onerror = function (error) {
-            console.error(error);
-            setStatus('Error occurred, check the console!');
-        };
-    }
-
-    function setStatus(status) {
-        if(statusElement){
-            statusElement.textContent = status;
-        }
-    }
-
-    function sendMessage() {
-        let message = messageInput.value;
-        if (message.trim()) {
-            ws.send(JSON.stringify({action: 'onmessage', message}));
-        }
-    }
-
-    function addMessageToList(message) {
-        let result = JSON.parse(JSON.stringify(messages));
-        console.log("messages is" + JSON.stringify(messages));
-        result = [...result, message]
-        setMessages(result);
-    }
-
-    function clearMessageList(){
-        setMessages([]);
-    }
-
-    return (
-        <>
-            <NavBarHome />
-            <div id="ws-container">
-                <br />
-                <h1>Testing AWS API Gateway WebSockets</h1>
-                <input type="text" size="50" id="wsUrl" placeholder="WebSocket server address" />
-                <button onClick={() => initWebSocket()}>Connect to WebSocket server</button>
-                <hr />
-                Status: <span id="status" textContent="Not Initialized"></span>
-                <hr />
-                <input type="text" size="50" id="message" placeholder="Message" />
-                <button onClick={() => sendMessage()}>Send message</button>
-                <div id="messageList" style={{border: "1px solid #C0C0C0", marginTop: "10px", padding: "10px"}} innerHTML="">
-                    List is Empty
-                </div>
-                {
-                    messages.map((message, index)=>{
-                        console.log(messages)
-                        return(<div>{message}</div>)
-                    })
-                }
-            </div>
-        </>
+    clearMessageList();
+    const newWs = new WebSocket(
+      url + "?userId=" + params["userId"] + "&toUserId=" + params["toUserId"]
     );
+    setWs(newWs); // set the new WebSocket object as ws
+    initWebSocketsEvents(newWs); // pass the new WebSocket object as an argument
+    console.log("successfully connected");
+  }
+
+  function initWebSocketsEvents(ws) {
+    ws.onopen = function () {};
+
+    // ws.onmessage = function (evt) {
+    //     let message = evt.data;
+    //     addMessageToList(message);
+    // };
+    ws.onmessage = function (evt) {
+      let data = JSON.parse(evt.data);
+      let message = {
+        user: data.sentBy,
+        text: data.text,
+      };
+      addMessageToList(message);
+    };
+
+    ws.onclose = function () {};
+
+    ws.onerror = function (error) {
+      console.error(error);
+    };
+  }
+
+  function sendMessage() {
+    let message = messageInput.current.value;
+    if (message.trim() && ws) {
+      ws.send(JSON.stringify({ action: "onmessage", message }));
+    }
+  }
+
+  function addMessageToList(message) {
+    setMessages((prevMessages) => [...prevMessages, message]);
+  }
+
+  function clearMessageList() {
+    setMessages([]);
+  }
+
+  return (
+    <>
+      <NavBarHome />
+      <Container fluid>
+        <Row>
+          <Col md={4} id="ws-container">
+            <h4>Users:</h4>
+            {listChat.map((user, index) => {
+              return (
+                <Button variant="light" key={index} block>
+                  {user}
+                </Button>
+              );
+            })}
+          </Col>
+          <Col md={8}>
+            <h4>Talking to {params["toUserId"]}</h4>
+            <hr />
+            <Card className="conversation-box">
+              <Card.Body>
+                {messages.map((message, index) => {
+                  const isCurrentUserMessage =
+                    message.user === currentUserId;
+                  const messageAlignment = isCurrentUserMessage
+                    ? "message-left"
+                    : "message-right";
+
+                  return (
+                    <div
+                      key={index}
+                      className={`message-item ${messageAlignment}`}
+                    >
+                      <div className="message-content">
+                        <div className="message-text">{message.text}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </Card.Body>
+            </Card>
+            <br />
+            <Form inline>
+              <Form.Control
+                ref={messageInput}
+                type="text"
+                placeholder="Message"
+                className="mr-sm-2"
+              />
+              <Button
+                variant="outline-success"
+                onClick={() => sendMessage()}
+              >
+                Send message
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 }
 
 export default Chat;
-
-
-
-
-
-/*
-function Chat() {
-    const { userId } = useParams();
-    const { toUserId } = useParams();
-    const [ status, setStatus ] = useState('Not Initialized');
-    const [ messages, setMessages ] = useState([]);
-
-    let ws;
-    let connected = false;
-    let messageInput = document.querySelector('#message');
-    const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
-
-    useEffect(() => {
-        initWebSocket();
-    },[])
-
-    function initWebSocket() {
-        if(ws){
-            ws.close();
-        }
-        clearMessageList();
-        ws = null;
-        setStatus('Connecting...');
-        ws = new WebSocket(url+"?userId="+ userId + "&toUserId=" + toUserId);
-        initWebSocketsEvents();
-        console.log("successfully connected");
-    }
-
-    function initWebSocketsEvents() {
-        ws.onopen = function () {
-            setStatus('Connection is opened (connected...)');
-            connected = true;
-        };
-
-        ws.onmessage = function (evt) {
-            let message = evt.data;
-            addMessageToList(message);
-        };
-
-        ws.onclose = function () {
-            connected = false;
-            setStatus('Connection is closed...');
-        };
-
-        ws.onerror = function (error) {
-            console.error(error);
-            setStatus('Error occurred, check the console!');
-        };
-    }
-
-    function sendMessage() {
-        if (connected) {
-            let message = messageInput.value;
-            if (message.trim()) {
-                ws.send(JSON.stringify({action: 'onmessage', message}));
-            }
-        }
-    }
-
-    function addMessageToList(message) {
-        let result = messages;
-        result.push(message);
-        setMessages(result);
-    }
-
-    function clearMessageList(){
-        setMessages([]);
-    }
-
-    return (
-        <>
-        <NavBarHome />
-        <div id="ws-container">
-            <br />
-            <h1>Testing AWS API Gateway WebSockets</h1>
-            <button onClick={()=> initWebSocket()}>Connect to WebSocket server</button>
-            <hr/>
-            Status: <span>{status}</span>
-            <hr/>
-            <input type="text" size="50" id="message" placeholder="Message"/>
-            <button onClick={()=> sendMessage()}>Send message</button>
-            {  
-                messages.map((message) => { 
-                    console.log(message);
-                    return (<div>{message}</div>);
-                }
-                )
-            }
-        </div>
-
-        </>
-    );
-}
-
-*/
