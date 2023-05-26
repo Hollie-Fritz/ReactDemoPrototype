@@ -92,6 +92,12 @@
   outline: none;
 }
 
+/* spin upon hover */
+.cart-icon:hover {
+  transform: rotateY(180deg);
+  transition: transform 1s linear;
+}
+
 .cart-icon {
   color: matcha;
   transition: transform 1s ease-in-out;

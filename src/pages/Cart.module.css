@@ -43,3 +43,11 @@
 .iconRemove{
   color: red;
 }
+
+.incrementButton {
+  margin-left: 9px; /* Adjust this value to your liking */
+}
+
+.decrementButton {
+  margin-right: 5px; /* Adjust this value to your liking */
+}

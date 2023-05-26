@@ -90,6 +90,7 @@
   box-shadow: none;
 }
 
+/* icon styling for cart */
 .cart-icon {
   color: #70B384;
   transition: transform 1s ease-in-out;
@@ -97,13 +98,20 @@
   margin-left: 10px;
 }
 
+/* spin upon hover */
+.cart-icon:hover {
+  transform: rotateY(180deg);
+  transition: transform 1s linear;
+}
+
+/* moves the cart to the right */
 .roll-off {
-  /* moves the icon to the right */
   transform: translateX(5600%);
 }
 
-.button-class {
   /* makes cart appear to dissapear into button border */
+.button-class {
   overflow: hidden;
   position: relative;
 }
+

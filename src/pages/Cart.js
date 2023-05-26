@@ -191,7 +191,6 @@ function Cart(props) {
             <Modal.Title>Your Current Pickup Order</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             {/* TABLE */}
             {/* table that displays order items */}
             <Table responsive>
@@ -205,7 +204,6 @@ function Cart(props) {
                 </tr>
               </thead>
               <tbody>
-
                 {/* map over the food data and display each item in a table row */}
                 {fooddata.map((item, index) => {
                   const quantity = cart[item.foodId] || 0;
@@ -226,17 +224,14 @@ function Cart(props) {
                               padding: 0,
                               outline: "none",
                             }}
-                            className={`${styles.buttonIcon} ${styles.buttonMinus}`}
+                            className={`${styles.buttonIcon} ${styles.buttonMinus} ${styles.decrementButton}`}
                           >
-                            {/* decrement icon */}
                             <AiOutlineMinus
                               size={20}
                               className={`${styles.iconMinus}`}
                             />
-                          </Button>
-                          {" "}
+                          </Button>{" "}
                           {quantity}
-
                           {/* increment item */}
                           <Button
                             size="sm"
@@ -247,9 +242,8 @@ function Cart(props) {
                               padding: 0,
                               outline: "none",
                             }}
-                            className={`${styles.buttonIcon} ${styles.buttonPlus}`}
+                            className={`${styles.buttonIcon} ${styles.buttonPlus} ${styles.incrementButton}`}
                           >
-                            {/* increment icon */}
                             <AiOutlinePlus
                               size={20}
                               className={styles.iconPlus}
@@ -336,7 +330,7 @@ function Cart(props) {
                   </div>
                 </FloatingLabel>
                 <br />
-                 {/* NOTE */}
+                {/* NOTE */}
 
                 {/* UTENSIL TOGGLE */}
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -347,7 +341,6 @@ function Cart(props) {
                   />
                 </Form.Group>
                 {/* UTENSIL TOGGLE */}
-
               </Form>
             </div>
           </Modal.Body>

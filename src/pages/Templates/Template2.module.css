@@ -110,13 +110,19 @@
   margin-left: 10px;
 }
 
-.roll-off {
+/* spin upon hover */
+.cart-icon:hover {
+  transform: rotateY(180deg);
+  transition: transform 1s linear;
+}
+
   /* moves the icon to the right */
+.roll-off {
   transform: translateX(5600%);
 }
 
-.button-class {
   /* makes cart appear to dissapear into button border */
+.button-class {
   overflow: hidden;
   position: relative;
 }
