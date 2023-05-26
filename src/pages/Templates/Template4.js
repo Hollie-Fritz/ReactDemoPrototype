@@ -30,7 +30,7 @@ function Template4(props) {
     showAddedMessage,
     setShowAddedMessage,
     handleAddClick,
-    cartItemCount
+    cartItemCount,
   } = props.data;
 
   return (
@@ -230,18 +230,22 @@ function Template4(props) {
                             <br></br>
                             <br></br>
                             {/* Add to the cart button */}
-                             <br></br>
+                            <br></br>
                             <br></br>
                             {/* Add to the cart button */}
                             <Button
+                              className={styles.addButton} // Added this line
                               style={{
-                              position: "absolute",
-                              bottom: 5,
-                              left: 5,
+                                position: "absolute",
+                                bottom: 5,
+                                left: 5,
                               }}
-                              onClick={() =>  handleAddClick(item.foodId)}
+                              onClick={() => handleAddClick(item.foodId)}
                             >
-                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "Add"}
+                              {showAddedMessage === item.foodId &&
+                              cart[item.foodId] > 0
+                                ? "✓"
+                                : "Add"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card three */}

@@ -1,4 +1,3 @@
-import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import Cart from "../Cart";
 import AverageRating from "../../components/rating/AverageRating";
@@ -28,9 +27,8 @@ function Template2(props) {
     frameRef,
     averageRating,
     showAddedMessage,
-    setShowAddedMessage,
     handleAddClick,
-    cartItemCount
+    cartItemCount,
   } = props.data;
 
   return (
@@ -234,8 +232,13 @@ function Template2(props) {
                             <br></br>
                             {/* Add to the cart button */}
                             <Button
-                              className={` ${styles.addButton}`}
+                              className={`${styles.addButton}`}
                               style={{
+                                backgroundColor: 'var(--white)',
+                                color: 'var(--dark)',
+                                borderColor: 'var(--biscuit)',
+                                borderWidth: '2px',
+                                fontWeight: 'bold',
                                 position: "absolute",
                                 bottom: 5,
                                 left: 5,
@@ -257,7 +260,7 @@ function Template2(props) {
               </Card.Body>
               {/* View Cart */}
               <Button
-                className={`mb-2 ${styles.cartButton}`}
+                className={` ${styles.cartButton}`}
                 variant="primary"
                 type="submit"
                 onClick={handleShowCart}

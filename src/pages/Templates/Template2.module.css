@@ -80,7 +80,7 @@
   color: var(--dark) !important;
   border-color: var(--biscuit) !important;
   border-width: 2px !important;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .addButton:hover {
