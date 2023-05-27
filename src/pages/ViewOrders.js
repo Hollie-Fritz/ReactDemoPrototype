@@ -5,10 +5,16 @@ import { Card, Table, Container, Row, Form, Button } from "react-bootstrap";
 import res from "../assests/SmallDumpling.png";
 import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 
 function ViewOrder() {
   const [count, setCount] = useState([]);
   const [restaurantId, setRestaurantId] = useState([""]);
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
+  const navigate = useNavigate();
 
   async function updateOrderStatus(orderId, status) {
     const body = {
@@ -156,6 +162,20 @@ function ViewOrder() {
                           Submit Stage
                         </Button>
                         <OrderProgress stage={temp["progress"]} />
+                        {
+                            user
+                            &&
+                            temp["customerId"] !== ""
+                            &&
+                            <Button 
+                            onClick={()=> navigate(`/chat/${user.getUsername()}/${temp["customerId"]}`, 
+                            {
+                              state:{
+                                      name: temp["customerName"],
+                                    }
+                            })
+                            }>Chat</Button>
+                        }
                       </Card.Text>
                     </Card.Body>
                   </div>

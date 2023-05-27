@@ -6,6 +6,8 @@ import Template1 from "./Templates/Template1";
 import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
+import { Auth } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
 
 export function ViewWebPage() {
   // variables to be shared across all the templates
@@ -19,7 +21,8 @@ export function ViewWebPage() {
   const [reviews, setReviews] = useState([]);
   const [address, setAddress] = useState("");
   const [averageRating, setAverageRating] = useState(0);
-
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const navigate = useNavigate();
 
   // write reviews handlers
   const handleWriteReviewClick = (event) => {
@@ -75,6 +78,14 @@ export function ViewWebPage() {
     setShowCart(false);
   };
 
+  useEffect(() => {
+    async function get() {
+      const nameJson = await Auth.currentUserInfo();
+      const name = nameJson["username"];
+      setCurrentUserId(name);
+    }
+    get();
+  }, []);
   // fetch restaurant data and update the state
   useEffect(() => {
     let username = id;
@@ -141,6 +152,8 @@ export function ViewWebPage() {
     id,
     frameRef,
     averageRating,
+    currentUserId,
+    navigate
   };
 
   // return the WebPageContext.Provider component with the object of all the variables and handlers

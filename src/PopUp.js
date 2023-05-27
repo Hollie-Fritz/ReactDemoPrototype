@@ -7,7 +7,7 @@ import { Hub } from "aws-amplify";
 function PopUp(){
 
     // const dispatch = useDispatch();
-    const ws = null;
+    var ws = null;
 
   useEffect(() => {
     console.log("rerendering popup");
@@ -75,7 +75,8 @@ function PopUp(){
                 }, 1000);
               }
             }
-       } catch {
+       } catch (err){
+        console.log(err);
         console.log("no user");
           if (ws) {
             ws.close();

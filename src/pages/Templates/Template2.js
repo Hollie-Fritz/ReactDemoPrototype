@@ -5,7 +5,6 @@ import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template2.module.css";
-import { useEffect } from "react";
 
 // Template4 component
 function Template2(props) {
@@ -28,7 +27,10 @@ function Template2(props) {
     id,
     frameRef,
     averageRating,
+    currentUserId,
+    navigate
   } = props.data;
+
 
   return (
     <>
@@ -127,6 +129,18 @@ function Template2(props) {
                           >
                             View Reviews
                           </Button>{" "}
+                          {
+                            currentUserId
+                            &&
+                            <Button 
+                            onClick={()=> navigate(`/chat/${currentUserId}/${id}`, 
+                            {
+                              state:{
+                                      name: resdata["name"],
+                                    }
+                            })
+                            }>Chat</Button>
+                          }
                         </Stack>
 
                         <ViewReview

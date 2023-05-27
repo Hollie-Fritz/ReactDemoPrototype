@@ -4,16 +4,20 @@ import { useEffect, useState, useRef } from "react";
 import { Auth } from "aws-amplify";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import "./Chat.css"; // Import the custom CSS file
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Chat() {
-  const params = useParams();
-  const [currentUserId, setCurrentUserId] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [listChat, setListChat] = useState([]);
-  const [ws, setWs] = useState(null);
-  const messageInput = useRef(null);
-  const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
-
+    const params = useParams();
+    const [currentUserId, setCurrentUserId] = useState(null);
+    const [messages, setMessages] = useState([]);
+    const [listChat, setListChat] = useState([]);
+    const [ws, setWs] = useState(null);
+    const messageInput = useRef(null);
+    const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
+    const navigate = useNavigate();
+    const location = useLocation();
+    
   useEffect(() => {
     async function get() {
       const nameJson = await Auth.currentUserInfo();
@@ -29,7 +33,7 @@ function Chat() {
     }
     console.log("here we go");
     console.log("list user chat is" + listChat);
-  }, [currentUserId]);
+  }, [currentUserId, navigate]);
 
   useEffect(() => {
     initWebSocket();
@@ -46,8 +50,10 @@ function Chat() {
         },
       }
     )
+      //check if data was correctly sent in console log
       .then((response) => response.json())
       .then((data) => {
+        setListChat((prev) => []);
         if (data.length !== 0) {
           for (const val of data) {
             console.log(val);
@@ -65,8 +71,8 @@ function Chat() {
     const newWs = new WebSocket(
       url + "?userId=" + params["userId"] + "&toUserId=" + params["toUserId"]
     );
-    setWs(newWs);
-    initWebSocketsEvents(newWs);
+    setWs(newWs); // set the new WebSocket object as ws
+    initWebSocketsEvents(newWs); // pass the new WebSocket object as an argument
     console.log("successfully connected");
   }
 
@@ -93,11 +99,9 @@ function Chat() {
     let message = messageInput.current.value;
     if (message.trim() && ws) {
       ws.send(JSON.stringify({ action: "onmessage", message }));
-      // Clear the input field
-      messageInput.current.value = "";
     }
   }
-  
+
   function addMessageToList(message) {
     setMessages((prevMessages) => [...prevMessages, message]);
   }
@@ -113,16 +117,27 @@ function Chat() {
         <Row>
           <Col md={4} id="ws-container">
             <h4>Users:</h4>
-            {listChat.map((user, index) => {
-              return (
-                <Button variant="light" key={index} block>
-                  {user}
-                </Button>
-              );
-            })}
+            {
+              listChat.map((user, index) => {
+                return (
+                  <Button variant="light" key={index} block onClick={()=>{
+                      navigate(`/chat/${currentUserId}/${user["id"]}`, 
+                      {
+                        state: {
+                          name: user["name"]? user["name"]:user["id"],
+                        }
+                      }
+                      )
+                  }}>
+                    {user["name"]? user["name"]: user["id"]}
+                  </Button>
+                );
+              })
+            }
+
           </Col>
           <Col md={8}>
-            <h4>Talking to {params["toUserId"]}</h4>
+            <h4>Talking to {location.state? location.state.name:params["toUserId"]}</h4>
             <hr />
             <Card className="conversation-box">
               <Card.Body>
@@ -132,7 +147,6 @@ function Chat() {
                   const messageAlignment = isCurrentUserMessage
                     ? "message-right"
                     : "message-left";
-  
                   return (
                     <div
                       key={index}
@@ -147,33 +161,25 @@ function Chat() {
               </Card.Body>
             </Card>
             <br />
-            <Form>
-              <Row>
-                <Col md={9}>
-                  <Form.Control
-                    ref={messageInput}
-                    type="text"
-                    placeholder="Message"
-                    className="mr-sm-2"
-                  />
-                </Col>
-                <Col md={3}>
-                  <Button
-                    variant="outline-success"
-                    onClick={() => sendMessage()}
-                    block
-                  >
-                    Send message
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
+              <Form inline>
+                <Form.Control
+                  ref={messageInput}
+                  type="text"
+                  placeholder="Message"
+                  className="mr-sm-2"
+                />
+                <Button
+                  variant="outline-success"
+                  onClick={() => sendMessage()}
+                >
+                  Send message
+                </Button>
+              </Form>
           </Col>
         </Row>
       </Container>
     </>
-  ); //close return
-
-} //close function
+  );
+}
 
 export default Chat;

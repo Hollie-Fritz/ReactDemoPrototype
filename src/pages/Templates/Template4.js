@@ -27,7 +27,10 @@ function Template4(props) {
     id,
     frameRef,
     averageRating,
+    currentUserId,
+    navigate
   } = props.data;
+
 
   return (
     <>
@@ -125,6 +128,18 @@ function Template4(props) {
                           >
                             View Reviews
                           </Button>{" "}
+                          {
+                            currentUserId
+                            &&
+                            <Button 
+                            onClick={()=> navigate(`/chat/${currentUserId}/${id}`, 
+                            {
+                              state:{
+                                      name: resdata["name"],
+                                    }
+                            })
+                            }>Chat</Button>
+                          }
                         </Stack>
 
                         <ViewReview
