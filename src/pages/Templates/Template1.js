@@ -29,7 +29,9 @@ function Template1(props) {
     showAddedMessage,
     setShowAddedMessage,
     handleAddClick,
-    cartItemCount
+    cartItemCount,
+    currentUserId,
+    navigate
   } = props.data;
 
   return (
@@ -70,7 +72,6 @@ function Template1(props) {
                   {resdata["name"]}
                 </h1>
               </Card.Header>
-
               {/* restaurant rating */}
               <Card.Body style={{ overflow: "hidden" }}>
                 <Card.Title as="h4" className="text-center">
@@ -127,6 +128,18 @@ function Template1(props) {
                           >
                             View Reviews
                           </Button>{" "}
+                          {
+                            currentUserId
+                            &&
+                            <Button 
+                            onClick={()=> navigate(`/chat/${currentUserId}/${id}`, 
+                            {
+                              state:{
+                                      name: resdata["name"],
+                                    }
+                            })
+                            }>Chat</Button>
+                          }
                         </Stack>
 
                         <ViewReview

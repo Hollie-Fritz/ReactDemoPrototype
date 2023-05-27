@@ -30,9 +30,10 @@ function Template3(props) {
     showAddedMessage,
     setShowAddedMessage,
     handleAddClick,
-    cartItemCount
+    cartItemCount,
+    currentUserId,
+    navigate
   } = props.data;
-  
   return (
     <>
       <Container
@@ -134,6 +135,18 @@ function Template3(props) {
                           >
                             View Reviews
                           </Button>{" "}
+                          {
+                            currentUserId
+                            &&
+                            <Button 
+                            onClick={()=> navigate(`/chat/${currentUserId}/${id}`, 
+                            {
+                              state:{
+                                      name: resdata["name"],
+                                    }
+                            })
+                            }>Chat</Button>
+                          }
                         </Stack>
 
                         <ViewReview

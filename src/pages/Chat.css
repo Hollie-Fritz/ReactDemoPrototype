@@ -1,0 +1,39 @@
+.message-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .message-item.message-left {
+    justify-content: flex-start;
+  }
+  
+  .message-item.message-right {
+    justify-content: flex-end;
+  }
+  
+  .message-content {
+    display: inline-block;
+    background-color: #e2e2e2;
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  
+  .message-left .message-content {
+    margin-right: auto;
+  }
+  
+  .message-right .message-content {
+    margin-left: auto;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .suggestions-card {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    width: 200px;
+    z-index: 999;
+  }
+  

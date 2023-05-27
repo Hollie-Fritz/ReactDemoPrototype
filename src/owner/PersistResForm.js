@@ -6,12 +6,15 @@ import { Button } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "../components/NavBarHome";
 import "./Form.css";
+import { useNavigate } from "react-router-dom";
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
 function PersistResForm() {
   //page keeps track of which step we are on
   //will mutate the variable setPage
   //useState(0) = ResInfo
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(0);
   //state object that contains all the different fields for ResInfo
   const [formData, setFormData] = useState({
@@ -96,6 +99,7 @@ function PersistResForm() {
         const submitOrNextButton = document.querySelector("#submitOrNext");
         submitOrNextButton.innerHTML = "Success!";
         console.log(data);
+        navigate("/owner");
       });
   };
 
