@@ -1,8 +1,7 @@
 
 
-
 .logoHome:hover {
-  filter: drop-shadow(0 0 5px #8a8989);
+  filter: drop-shadow(0 0 10px #f5f4f4);
 }
 
 .logoHome {

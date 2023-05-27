@@ -67,7 +67,7 @@ function Owner() {
               {
                 hasRestaurant?
                 <>
-                  <Col xs={12} md={6} className="mb-2">
+                  <Col className="col mb-2">
                     <Button variant="outline-light" block className="Owner-btn" href="./edit">
                       Edit Restaurant Webpage
                     </Button>

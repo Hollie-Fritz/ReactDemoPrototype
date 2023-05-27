@@ -25,9 +25,6 @@ const PageNotFound = () => {
                     <Link to="/">Home Page</Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <Link to="/customer">Search Restaurant</Link>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
                     <Link to="/about">About</Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
