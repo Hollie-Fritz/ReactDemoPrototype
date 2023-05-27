@@ -24,7 +24,7 @@ function PopUp(){
             console.log('user signed in');
             break;
         case 'signUp':
-            window.location.reload();
+            // window.location.reload();
             console.log('user signed up');
             break;
         case 'signOut':
@@ -32,11 +32,11 @@ function PopUp(){
             console.log('user signed out');
             break;
         case 'signIn_failure':
-            window.location.reload();
+            // window.location.reload();
             console.log('user sign in failed');
             break;
         case 'configured':
-            window.location.reload();
+            // window.location.reload();
             console.log('the Auth module is configured');
             break;
         default:

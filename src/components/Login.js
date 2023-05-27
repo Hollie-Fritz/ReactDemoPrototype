@@ -14,7 +14,8 @@ export function Login() {
   let from = location.state?.from?.pathname || "/owner"; //redirects to "/" if successful
   useEffect(() => {
     if (route === "authenticated") {
-      navigate(-1);
+      console.log("redirecting");
+      // navigate(-1);
     }
   }, [route, navigate, from]);
   return (
