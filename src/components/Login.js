@@ -15,7 +15,7 @@ export function Login() {
   useEffect(() => {
     if (route === "authenticated") {
       console.log("redirecting");
-      // navigate(-1);
+      navigate(-1);
     }
   }, [route, navigate, from]);
   return (
