@@ -10,9 +10,11 @@ const OurStory = () => {
     <div>
       <Accordion defaultActiveKey="1">
         <Accordion.Item className="accr">
+          <div className="containerAcc">
           <Accordion.Header onClick={handleOnClick} className="header-accr">
             Our Story
           </Accordion.Header>
+          </div>
           <Accordion.Body className="acc-body">
             We offer restaurant owners a website for free to present their own
             restaurant page on the site as well as take in orders and requests.

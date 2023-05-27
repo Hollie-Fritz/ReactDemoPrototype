@@ -6,6 +6,12 @@
   background-color: transparent !important;
 }
 
+.containerAcc {
+  display: flex;
+  justify-content: center; 
+   align-items: center;
+}
+
 .acc-body{
-  color: white;
+  color: black;
 }
