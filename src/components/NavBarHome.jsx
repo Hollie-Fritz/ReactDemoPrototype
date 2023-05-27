@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
-import logo from "../assests/DarkLogo.png";
+import logo from "../assests/NuOrderLogoLarge.png";
 import "../pages/Home.css";
 // import { useNavigate, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -24,8 +24,9 @@ let NavBarHome = () => {
 
   return (
     <>
-      <Container className="mt-1" fluid>
-        <Navbar bg="transparent" expand="lg" variant="light" style={{fontSize: "22px"}}>
+      
+        <Navbar bg="dark" expand="lg" variant="dark" style={{fontSize: "22px"}}>
+        <Container className="mt-1" fluid>
           <Row>
             <Col md="auto">
               <Navbar.Brand>
@@ -95,11 +96,11 @@ let NavBarHome = () => {
               </Navbar.Collapse>
             </Col>
           </Row>
+          </Container>
         </Navbar>
-      </Container>
+      
     </>
   );
 };
 
 export default NavBarHome;
-

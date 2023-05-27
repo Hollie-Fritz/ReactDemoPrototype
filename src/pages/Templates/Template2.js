@@ -6,7 +6,7 @@ import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template2.module.css";
 
-// Template4 component
+// Template2 component
 function Template2(props) {
   const {
     resdata,
@@ -27,6 +27,10 @@ function Template2(props) {
     id,
     frameRef,
     averageRating,
+    showAddedMessage,
+    setShowAddedMessage,
+    handleAddClick,
+    cartItemCount,
     currentUserId,
     navigate
   } = props.data;
@@ -34,7 +38,11 @@ function Template2(props) {
 
   return (
     <>
-      <Container className="justify-content-center" style={{ marginTop: "2rem"}} fluid>
+      <Container
+        className="justify-content-center"
+        style={{ marginTop: "2rem" }}
+        fluid
+      >
         <Row className="m-auto align-self-center">
           <div className="row no-gutters">
             {/* outer card */}
@@ -186,7 +194,12 @@ function Template2(props) {
                           width="100%"
                           height="100%"
                           frameBorder="0"
-                          style={{ border: "0", position: "absolute", top: "0", left: "0" }}
+                          style={{
+                            border: "0",
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                          }}
                         />
                       </div>
                       {/* end inner card two -- google maps*/}
@@ -201,11 +214,20 @@ function Template2(props) {
                     return (
                       <Col className="d-flex align-items-stretch">
                         {/* inner card three -- menu card*/}
-                        <Card className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
+                        <Card
+                          className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
                           key={test}
                           style={{ width: "37rem" }}
                         >
-                          <Card.Img variant="top" src={item.foodImageUrl ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
+                          <Card.Img
+                            variant="top"
+                            src={
+                              item.foodImageUrl
+                                ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                  item.foodImageUrl
+                                : ""
+                            }
+                          />
                           <Card.Body>
                             <div className={styles.menuItem}>
                               <Card.Text
@@ -233,14 +255,12 @@ function Template2(props) {
                                 bottom: 5,
                                 left: 5,
                               }}
-                              onClick={() => {
-                                var temp = cart;
-                                temp[item.foodId] =
-                                  (temp[item.foodId] || 0) + 1;
-                                setcart(temp);
-                              }}
+                              onClick={() => handleAddClick(item.foodId)}
                             >
-                              Add
+                              {showAddedMessage === item.foodId &&
+                              cart[item.foodId] > 0
+                                ? "✓"
+                                : "Add"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card three */}
@@ -253,11 +273,11 @@ function Template2(props) {
               {/* View Cart */}
               <Button
                 className={`mb-2 ${styles.cartButton}`}
-                variant="custom"
+                variant="primary"
                 type="submit"
                 onClick={handleShowCart}
               >
-                View Cart
+                View Cart ({cartItemCount})
               </Button>
               <Cart
                 show={showCart}

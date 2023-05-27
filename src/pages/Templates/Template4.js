@@ -27,6 +27,10 @@ function Template4(props) {
     id,
     frameRef,
     averageRating,
+    showAddedMessage,
+    setShowAddedMessage,
+    handleAddClick,
+    cartItemCount,
     currentUserId,
     navigate
   } = props.data;
@@ -34,7 +38,11 @@ function Template4(props) {
 
   return (
     <>
-      <Container className="justify-content-center" style={{ marginTop: "2rem" }} fluid>
+      <Container
+        className="justify-content-center"
+        style={{ marginTop: "2rem" }}
+        fluid
+      >
         <Row className="m-auto align-self-center">
           <div className="row no-gutters">
             {/* outer card */}
@@ -105,8 +113,8 @@ function Template4(props) {
                         {resdata["cuisine"]}
                       </Card.Text>
                       <Card.Text>
-                        <div style={{display: "flex", alignItems: "center" }}>
-                          <span className="fw-bold">Rating:  </span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <span className="fw-bold">Rating: </span>
                           <AverageRating averageRating={averageRating} />
                         </div>
                       </Card.Text>
@@ -185,7 +193,12 @@ function Template4(props) {
                           width="100%"
                           height="100%"
                           frameBorder="0"
-                          style={{ border: "0", position: "absolute", top: "0", left: "0" }}
+                          style={{
+                            border: "0",
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                          }}
                         />
                       </div>
                       {/* end inner card two -- google maps*/}
@@ -205,7 +218,15 @@ function Template4(props) {
                           key={test}
                           style={{ width: "37rem" }}
                         >
-                           <Card.Img variant="top" src= {item.foodImageUrl? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" + item.foodImageUrl : ""}/>
+                          <Card.Img
+                            variant="top"
+                            src={
+                              item.foodImageUrl
+                                ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                  item.foodImageUrl
+                                : ""
+                            }
+                          />
                           <Card.Body>
                             <div className={styles.menuItem}>
                               <Card.Text
@@ -224,21 +245,18 @@ function Template4(props) {
                             <br></br>
                             <br></br>
                             {/* Add to the cart button */}
+                             <br></br>
+                            <br></br>
+                            {/* Add to the cart button */}
                             <Button
-                              className={` ${styles.addButton}`}
                               style={{
-                                position: "absolute",
-                                bottom: 5,
-                                left: 5,
+                              position: "absolute",
+                              bottom: 5,
+                              left: 5,
                               }}
-                              onClick={() => {
-                                var temp = cart;
-                                temp[item.foodId] =
-                                  (temp[item.foodId] || 0) + 1;
-                                setcart(temp);
-                              }}
+                              onClick={() =>  handleAddClick(item.foodId)}
                             >
-                              Add
+                              {showAddedMessage === item.foodId && cart[item.foodId] > 0 ? "✓" : "Add"}
                             </Button>
                           </Card.Footer>
                           {/* end inner card three */}
@@ -251,11 +269,11 @@ function Template4(props) {
               {/* View Cart */}
               <Button
                 className={`mb-2 ${styles.cartButton}`}
-                variant="custom"
+                variant="primary"
                 type="submit"
                 onClick={handleShowCart}
               >
-                View Cart
+                View Cart ({cartItemCount})
               </Button>
               <Cart
                 show={showCart}

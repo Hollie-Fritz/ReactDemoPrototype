@@ -61,6 +61,26 @@ export function ViewWebPage() {
     }
   }, [address]);
 
+  // Add button for menu items
+  const [showAddedMessage, setShowAddedMessage] = useState(null);
+
+  //handler for Add button
+  const handleAddClick = (foodId) => {
+    var temp = cart;
+    temp[foodId] = (temp[foodId] || 0) + 1;
+    setcart(temp);
+    setShowAddedMessage(foodId);
+    setTimeout(() => {
+      setShowAddedMessage(null);
+    }, 600);
+  };
+
+  //count for the items that have been added to cart
+  const cartItemCount = Object.values(cart).reduce(
+    (acc, curr) => acc + curr,
+    0
+  );
+
   // fetch reviews and update the Google Maps iframe location
   useEffect(() => {
     const fetchAverageRating = async () => {
@@ -157,6 +177,10 @@ export function ViewWebPage() {
     id,
     frameRef,
     averageRating,
+    showAddedMessage,
+    setShowAddedMessage,
+    handleAddClick,
+    cartItemCount,
     currentUserId,
     navigate
   };
