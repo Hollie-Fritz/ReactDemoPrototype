@@ -49,7 +49,7 @@ function Cart(props) {
   };
 
   const handleSubmit = async () => {
-    const items = [];
+    var items = [];
     fooddata.forEach((item) => {
       const quantity = cart[item.foodId] || 0;
       if (quantity > 0) {
@@ -60,21 +60,25 @@ function Cart(props) {
           quantity: quantity,
         });
       }
-      setShowMessage(true);
-      // set a timeout for how long you want the message to show up for
-      setTimeout(()=>{
-        setShowMessage(false);
-      }, 7000) // 7 seconds
     });
 
+    if(items.length == 0){
+      console.log("cannot order with empty cart")
+      return; //cannot order with empty cart
+    }
+    setShowMessage(true);
+    // set a timeout for how long you want the message to show up for
+    setTimeout(()=>{
+      setShowMessage(false);
+    }, 7000) // 7 seconds
     let customerId = "";
 
     try {
       let nameJson = await Auth.currentUserInfo();
       customerId = nameJson["username"];
       console.log(JSON.stringify(nameJson));
-    } catch {
-
+    } catch (err){
+      console.log(err);
     }
 
     const converted = {
@@ -88,6 +92,7 @@ function Cart(props) {
       progress: "Order placed",
       totalCost: totalPrice,
     };
+
     await fetch(
       "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order",
       {
@@ -104,6 +109,7 @@ function Cart(props) {
         console.log("order data submitted");
         console.log(data);
       });
+
     handleClose();
   };
 

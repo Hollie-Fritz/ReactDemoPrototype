@@ -1,10 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Hub } from "aws-amplify";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+
 function PopUp(){
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
 
     // const dispatch = useDispatch();
     var ws = null;
@@ -41,16 +46,20 @@ function PopUp(){
     });
 
     async function setup() {
-      try {
-        let nameJson = await Auth.currentUserInfo();
-        let userId = nameJson["username"];
+      // console.log(user.getUsername() + " is username");
+      // try {
+        // let nameJson = await Auth.currentUserInfo();
+        // let userId = nameJson["username"];
+        // if(!user)console.log("no user");
+        var userId = user.getUsername();
           if (!ws) {
             // eslint-disable-next-line
             ws = new WebSocket(
               `wss://odxljrpppb.execute-api.us-west-2.amazonaws.com/prod/?userId=` +
-                userId
+              userId
             );
             console.log("logged in with and established with " + userId);
+            console.log("established connection");
               ws.onmessage = function (evt) {
                 let message = JSON.parse(evt.data);
                 // addMessageToList(message);
@@ -74,18 +83,18 @@ function PopUp(){
                   setup();
                 }, 1000);
               }
-            }
-       } catch (err){
-        console.log(err);
-        console.log("no user");
-          if (ws) {
-            ws.close();
-              ws = null;
-            }
           }
-        }
+      //  } catch (err){
+      //   console.log(err);
+      //   console.log("no user");
+      //     if (ws) {
+      //       ws.close();
+      //         ws = null;
+      //     }
+      //     }
+      }
         setup();
-  }, []);
+  }, [user]);
 
   return (
     <>

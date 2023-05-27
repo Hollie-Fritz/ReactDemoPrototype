@@ -6,8 +6,9 @@ import Template1 from "./Templates/Template1";
 import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 export function ViewWebPage() {
   // variables to be shared across all the templates
@@ -23,7 +24,10 @@ export function ViewWebPage() {
   const [averageRating, setAverageRating] = useState(0);
   const [currentUserId, setCurrentUserId] = useState(null);
   const navigate = useNavigate();
-
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
+  
   // write reviews handlers
   const handleWriteReviewClick = (event) => {
     event.stopPropagation();
@@ -80,12 +84,13 @@ export function ViewWebPage() {
 
   useEffect(() => {
     async function get() {
-      const nameJson = await Auth.currentUserInfo();
-      const name = nameJson["username"];
+      // const nameJson = await Auth.currentUserInfo();
+      // const name = nameJson["username"];
+      let name = user.getUsername();
       setCurrentUserId(name);
     }
     get();
-  }, []);
+  }, [user]);
   // fetch restaurant data and update the state
   useEffect(() => {
     let username = id;

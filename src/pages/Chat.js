@@ -1,11 +1,12 @@
 import NavBarHome from "../components/NavBarHome";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import "./Chat.css"; // Import the custom CSS file
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 function Chat() {
     const params = useParams();
@@ -17,15 +18,19 @@ function Chat() {
     const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
     const navigate = useNavigate();
     const location = useLocation();
-    
+    const { user } = useAuthenticator((context) => [
+      context.user, 
+    ]);
+
   useEffect(() => {
     async function get() {
-      const nameJson = await Auth.currentUserInfo();
-      const name = nameJson["username"];
+      // const nameJson = await Auth.currentUserInfo();
+      // const name = nameJson["username"];
+      let name = user.getUsername();
       setCurrentUserId(name);
     }
     get();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (currentUserId) {

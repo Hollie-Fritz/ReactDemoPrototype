@@ -63,19 +63,15 @@ let NavBarHome = () => {
                     href="/owner"  
                     style={{fontWeight: "bold"}}
                   > Merchant Portal </Nav.Link>
-                  </>
-                  :
-                  ""
-                  }
-                  
-
-                  {user? 
-                    <>
-                    {/* <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
+                  {/* <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
                       Welcome, {user.username}
                     </Navbar.Text> */}
+                  <Nav.Link 
+                    href="/chat"
+                    style={{fontWeight: "bold", position: "absolute", right: 200}}
+                  > Chat </Nav.Link>
                     <NavDropdown
-                    title= {"Welcome, " + user.username}
+                    title= {user.username}
                     id="basic-nav-dropdown"
                     className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}
                   >
@@ -87,13 +83,14 @@ let NavBarHome = () => {
                         Sign Out
                     </NavDropdown.Item>
                   </NavDropdown>
-                    </>
-                    :
-                    <Nav.Link onClick={() => {
-                      navigate("/login");
-                      }} style={{position: "absolute", right: 15, fontWeight: "bold"}}
-                      > Signup/Login </Nav.Link>
+                  </>
+                  :
+                  <Nav.Link onClick={() => {
+                    navigate("/login");
+                    }} style={{position: "absolute", right: 15, fontWeight: "bold"}}
+                    > Signup/Login </Nav.Link>
                   }
+                
                 </Nav>
               </Navbar.Collapse>
             </Col>
