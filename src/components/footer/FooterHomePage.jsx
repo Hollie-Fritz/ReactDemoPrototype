@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 let FooterHomePage = () => {
   return (
     <>
-      <footer className="bg-dark text-light">
+      <footer className="bg-dark text-light" style={{marginTop: "auto"}}>
         <Container>
           <Row>
             <Col md={6}>
