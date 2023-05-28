@@ -23,7 +23,7 @@ function PersistResInfo({ formData, setFormData }) {
 
   // save the template selection
   const handleTemplateSelect = (template) => {
-    setFormData({ ...formData, template: template });
+    setFormData({ ...formData, template: template || "template1" });
   };
 
   // save the file name
@@ -318,10 +318,12 @@ function PersistResInfo({ formData, setFormData }) {
               <Button
                 variant="primary"
                 onClick={handleChooseTemplate}
-                className="me-2"
+                className={styles.templatebutton}
               >
                 Choose a template
               </Button>
+
+
               <div>
                 <Form.Label>Selected Template</Form.Label>
                 <FormControl

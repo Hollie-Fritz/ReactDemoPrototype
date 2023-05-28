@@ -10,7 +10,7 @@ let NavBarHome = () => {
   const { signOut, user } = useAuthenticator((context) => [
     context.route,
     context.signOut,
-    context.user, 
+    context.user,
   ]);
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ let NavBarHome = () => {
 
   return (
     <>
-      
+
         <Navbar bg="dark" expand="lg" variant="dark" style={{fontSize: "22px"}}>
         <Container className="mt-1" fluid>
           <Row>
@@ -50,24 +50,24 @@ let NavBarHome = () => {
                     id="basic-nav-dropdown"
                     style={{fontWeight: "bold"}}
                   >
-                    <NavDropdown.Item 
+                    <NavDropdown.Item
                           href="/orderStatus"
                         >
                         My Orders
                     </NavDropdown.Item>
                   </NavDropdown> */}
-                  <Nav.Link 
-                    href="/orderStatus"  
+                  <Nav.Link
+                    href="/orderStatus"
                     style={{fontWeight: "bold"}}
                   > My Orders </Nav.Link>
-                  <Nav.Link 
-                    href="/owner"  
+                  <Nav.Link
+                    href="/owner"
                     style={{fontWeight: "bold"}}
                   > Merchant Portal </Nav.Link>
                   {/* <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
                       Welcome, {user.username}
                     </Navbar.Text> */}
-                  <Nav.Link 
+                  <Nav.Link
                     href="/chat"
                     style={{fontWeight: "bold", position: "absolute", right: 200}}
                   > Chat </Nav.Link>
@@ -76,7 +76,7 @@ let NavBarHome = () => {
                     id="basic-nav-dropdown"
                     className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}
                   >
-                    <NavDropdown.Item 
+                    <NavDropdown.Item
                           onClick={() => {
                             logOut()
                             }} style={{fontWeight: "bold"}}
@@ -91,14 +91,14 @@ let NavBarHome = () => {
                     }} style={{position: "absolute", right: 15, fontWeight: "bold"}}
                     > Signup/Login </Nav.Link>
                   }
-                
+
                 </Nav>
               </Navbar.Collapse>
             </Col>
           </Row>
           </Container>
         </Navbar>
-      
+
     </>
   );
 };

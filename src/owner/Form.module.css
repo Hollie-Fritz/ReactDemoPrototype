@@ -14,6 +14,11 @@ adds width so words don't wrap and margin for improved spacing */
   margin-left:8px;
 }
 
+.templatebutton {
+  min-width: 166px;
+  margin-right:8px;
+}
+
 /* information tooltip */
 .info-button {
   background: transparent;
@@ -39,5 +44,4 @@ adds width so words don't wrap and margin for improved spacing */
 
 .imageupload {
   margin-top: 20px;
-
 }
