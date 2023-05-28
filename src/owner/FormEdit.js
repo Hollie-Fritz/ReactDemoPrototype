@@ -6,6 +6,7 @@ import { Button,  FormControl } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "../components/NavBarHome";
 import { useNavigate } from "react-router-dom";
+import "./Form.css";
 
 
 

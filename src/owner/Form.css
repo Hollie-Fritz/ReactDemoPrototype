@@ -1,5 +1,5 @@
 .createform {
-  color: #ffffff;
+  color: #000000;
 }
 
 .blacktext {
@@ -21,4 +21,5 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+  color: black;
 }
