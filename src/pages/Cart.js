@@ -23,6 +23,7 @@ function Cart(props) {
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null);
   const [utensils, setUtensils] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   //useEffect hook to handle message display based on cart items
   useEffect(() => {
