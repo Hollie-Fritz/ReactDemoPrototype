@@ -237,11 +237,7 @@ function Template3(props) {
                             {/* Add to the cart button */}
                             <Button
                               className={` ${styles.addButton}`}
-                              style={{
-                                position: "absolute",
-                                bottom: 5,
-                                left: 5,
-                              }}
+
                               onClick={() => handleAddClick(item.foodId)}
                             >
                               {showAddedMessage === item.foodId &&
