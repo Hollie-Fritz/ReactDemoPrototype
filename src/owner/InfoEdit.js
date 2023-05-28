@@ -1,21 +1,16 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Form,
-  InputGroup,
-  Row,
-  Button,
-  Container,
-  FormControl,
-} from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
-
-import ChooseTemplate from "../components/ChooseTemplate";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import ChooseTemplate from "../components/ChooseTemplate";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form, InputGroup, Row, Button, Container, FormControl,  Tooltip, OverlayTrigger, } from "react-bootstrap"; // prettier-ignore
 
 //form for restaurant info such as name, phone number and address
 function InfoEdit({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
+  const [selectedFile, setSelectedFile] = useState("");
+  const [uploadStatus, setUploadStatus] = useState("Upload");
 
   // show the ChooseTemplate modal
   const handleChooseTemplate = () => {
@@ -31,6 +26,22 @@ function InfoEdit({ formData, setFormData }) {
   const handleTemplateSelect = (template) => {
     setFormData({ ...formData, template: template });
   };
+
+  // save the uploaded image name to display
+  const handleFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0].name);
+    }
+  };
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The restaurant banner looks best with the following dimensions:<br></br>
+      ?x?<br></br>
+      It will be displayed at the top of your web page with your restaurant name
+      over it.
+    </Tooltip>
+  );
 
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
@@ -55,6 +66,7 @@ function InfoEdit({ formData, setFormData }) {
         setFormData({ ...formData, mainImageUrl: imageName });
         const mainImage = document.querySelector("#mainImage");
         mainImage.src = file;
+        setUploadStatus("Success!"); // Update the upload status here
       });
     };
 
@@ -73,6 +85,7 @@ function InfoEdit({ formData, setFormData }) {
         {/* React-Bootstrap Row component to align particular components horizontally */}
         <Row className="mb-3">
           {/* Form.Group to group individual components into one component.  */}
+          {/* RES NAME */}
           <Form.Group controlId="formResName" className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Name</Form.Label>
@@ -89,6 +102,9 @@ function InfoEdit({ formData, setFormData }) {
               className="form-control" //className- Bootstrap classes used
             />
           </Form.Group>
+          {/* RES NAME */}
+
+          {/* PHONE */}
           <Form.Group controlId="phone" className="col col-sm-6">
             <Form.Label>Phone Number</Form.Label>
             <InputGroup>
@@ -96,21 +112,23 @@ function InfoEdit({ formData, setFormData }) {
               <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
               <Form.Control
                 id="validation"
-                required
                 aria-label="Phone Number"
                 type="phone"
-                aria-describedby="basic-addon1"
+                title="Enter a 10 digit number"
                 className="form-control"
                 name="phoneNo"
                 value={formData.phoneNo}
+                required
                 onChange={(event) =>
                   setFormData({ ...formData, phoneNo: event.target.value })
                 }
               />
             </InputGroup>
           </Form.Group>
+          {/* PHONE */}
         </Row>
         <Row className="mb-3">
+          {/* ADDRESS */}
           <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
             <Form.Label>Address</Form.Label>
             <Form.Control
@@ -176,16 +194,30 @@ function InfoEdit({ formData, setFormData }) {
               id="validation"
               required
               className="form-control"
-              type="zip"
+              type="text"
               name="zip"
+              pattern="[0-9]{5}"
               value={formData.zip}
               onChange={(event) =>
-                setFormData({ ...formData, zip: event.target.value })
+                setFormData({
+                  ...formData,
+                  zip: event.target.value.replace(/\D/g, ""),
+                })
               }
+              onInvalid={(event) => {
+                event.target.setCustomValidity(
+                  "Please enter a valid 5 digit zipcode"
+                );
+              }}
+              onInput={(event) => {
+                event.target.setCustomValidity("");
+              }}
             />
           </Form.Group>
+          {/* ADDRESS */}
         </Row>
         <Row className="mb-3">
+          {/* HOURS */}
           <Form.Group controlId="formOpenHours" className="col col-sm-4">
             <Form.Label>Opening Hours</Form.Label>
             <Form.Select
@@ -243,7 +275,10 @@ function InfoEdit({ formData, setFormData }) {
               })}
             </Form.Select>
           </Form.Group>
-
+          {/* HOURS */}
+        </Row>
+        <Row className="mb-3">
+          {/* CUISINE */}
           <Form.Group controlId="formCuisine" className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
@@ -259,6 +294,9 @@ function InfoEdit({ formData, setFormData }) {
               }
             />
           </Form.Group>
+          {/* CUISINE */}
+
+          {/* TEMPLATE */}
           <Form.Group
             controlId="template"
             className="col col-sm-6 d-flex flex-column justify-content-between"
@@ -287,34 +325,67 @@ function InfoEdit({ formData, setFormData }) {
               </div>
             </div>
           </Form.Group>
+          {/* TEMPLATE */}
         </Row>
       </Form>
+      {/* RES IMAGE */}
       <Row className="d-flex align-items-end">
-        <Form id="imageForm" className="col col-sm-6">
-          <input id="imageInput" type="file" accept="image/*" />
-          <Button className="col col-sm-6" type="submit">
-            Upload
+        <Form.Label>
+          Restaurant Banner Image{" "}
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip}
+          >
+            <Button variant="info">?</Button>
+          </OverlayTrigger>
+        </Form.Label>
+        <Form id="imageForm" className="col col-sm-6 d-flex">
+          <input
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileChange}
+          />
+          <FormControl
+            type="text"
+            value={selectedFile}
+            placeholder="No File Selected"
+            readOnly
+            className="mx-2"
+          />
+          <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
+            Browse
+          </label>
+          <Button className="mb-0 mx-2" type="submit">
+            {uploadStatus}
+          </Button>
+          <Button className="mb-0 mx-2 remove-button" variant="danger">
+            Remove Image
           </Button>
         </Form>
+
+        {formData["mainImageUrl"] ? (
+          <img
+            id="mainImage"
+            src={
+              `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
+              formData["mainImageUrl"]
+            }
+            alt=""
+          />
+        ) : (
+          ""
+        )}
       </Row>
-      {formData["mainImageUrl"] ? (
-        <img
-          id="mainImage"
-          src={
-            `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
-            formData["mainImageUrl"]
-          }
-          alt=""
-        />
-      ) : (
-        ""
-      )}
-      {/* <Button onClick={() => console.log(JSON.stringify(formData))}>log</Button> */}
+      {/* RES IMAGE */}
       <ChooseTemplate
         show={showChooseTemplate}
         handleClose={handleChooseTemplateClose}
         handleTemplateSelect={handleTemplateSelect}
       />
+      <br></br>
     </Container>
   );
 }

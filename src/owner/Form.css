@@ -9,3 +9,16 @@
 .OwnerCheck{
   color: RGB(240, 178, 109)
 }
+
+
+.remove-button {
+  min-width: 137px;
+}
+/*
+.remove-item {
+  min-width: 20px;
+} */
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
