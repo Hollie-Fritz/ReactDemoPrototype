@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import ChooseTemplate from "../components/ChooseTemplate";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Row, Button, Container, FormControl,  Tooltip, OverlayTrigger, } from "react-bootstrap"; // prettier-ignore
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import styles from "./Form.module.css";
 
 //form for restaurant info such as name, phone number and address
 function InfoEdit({ formData, setFormData }) {
@@ -337,7 +339,9 @@ function InfoEdit({ formData, setFormData }) {
             delay={{ show: 250, hide: 400 }}
             overlay={renderTooltip}
           >
-            <Button variant="info">?</Button>
+            <span className={styles.removeimage}>
+              <AiOutlineInfoCircle size={20} className={styles.icon} />
+            </span>
           </OverlayTrigger>
         </Form.Label>
         <Form id="imageForm" className="col col-sm-6 d-flex">
@@ -361,7 +365,7 @@ function InfoEdit({ formData, setFormData }) {
           <Button className="mb-0 mx-2" type="submit">
             {uploadStatus}
           </Button>
-          <Button className="mb-0 mx-2 remove-button" variant="danger">
+          <Button  className={styles.removebutton} variant="danger">
             Remove Image
           </Button>
         </Form>

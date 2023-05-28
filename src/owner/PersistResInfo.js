@@ -4,6 +4,8 @@ import { Form, InputGroup, Row, Button, Container, FormControl, Tooltip, Overlay
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import ChooseTemplate from "../components/ChooseTemplate";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import styles from "./Form.module.css";
 
 // form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
@@ -348,7 +350,9 @@ function PersistResInfo({ formData, setFormData }) {
             delay={{ show: 250, hide: 400 }}
             overlay={renderTooltip}
           >
-            <Button variant="info">?</Button>
+            <span className={styles.removeimage}>
+              <AiOutlineInfoCircle size={20} className={styles.icon} />
+            </span>
           </OverlayTrigger>
         </Form.Label>
         <Form id="imageForm" className="col col-sm-6 d-flex">
@@ -372,7 +376,7 @@ function PersistResInfo({ formData, setFormData }) {
           <Button type="submit" className="mb-0 mx-2">
             Upload
           </Button>
-          <Button className="mb-0 mx-2 remove-button" variant="danger">
+          <Button  className={styles.removebutton} variant="danger">
             Remove Image
           </Button>
         </Form>

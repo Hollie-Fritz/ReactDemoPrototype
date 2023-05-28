@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } from "react-bootstrap"; // prettier-ignore
 import { v4 as uuidv4 } from "uuid";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import styles from "./Form.module.css";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function MenuEdit({ menuItems, setMenuItems }) {
@@ -153,7 +155,9 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   delay={{ show: 250, hide: 400 }}
                   overlay={renderTooltip}
                 >
-                  <Button variant="info">?</Button>
+                  <span className={styles.infoButton}>
+                    <AiOutlineInfoCircle size={20} className={styles.icon} />
+                  </span>
                 </OverlayTrigger>
               </Form.Label>
               <Form.Control
@@ -192,12 +196,11 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   value={selectedFile[index] ?? "No File Selected"}
                   placeholder="No File Selected"
                   readOnly
-                  className="mx-2"
-                  style={{ width: "500px" }}
+                  className="col col-sm-6 d-flex"
                 />
                 <label
                   htmlFor={"imageInput" + index}
-                  className="btn btn-primary"
+                  className="btn btn-primary mx-2"
                   style={{ marginRight: "10px" }}
                 >
                   Browse
@@ -205,9 +208,9 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 <Button onClick={() => handleSubmitImage(index)}>
                   {uploadStatus[index] ?? "Upload"}
                 </Button>
-                <Button className="mb-0 mx-2 remove-button" variant="danger">
-                  Remove Image
-                </Button>
+                <Button  className={styles.removebutton} variant="danger">
+            Remove Image
+          </Button>
               </Form.Group>
             </Form>
             {/* MENU IMAGE */}

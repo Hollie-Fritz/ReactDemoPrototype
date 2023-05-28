@@ -1,17 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Form,
-  InputGroup,
-  Row,
-  Button,
-  OverlayTrigger,
-  Tooltip,
-  FormControl,
-} from "react-bootstrap";
-
+import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } from "react-bootstrap"; // prettier-ignore
 import { v4 as uuidv4 } from "uuid";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import styles from "./Form.module.css";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function PersistResMenu({ menuItems, setMenuItems }) {
@@ -160,7 +153,9 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                   delay={{ show: 250, hide: 400 }}
                   overlay={renderTooltip}
                 >
-                  <Button variant="info">?</Button>
+                  <span className={styles.infoButton}>
+                    <AiOutlineInfoCircle size={20} className={styles.icon} />
+                  </span>
                 </OverlayTrigger>
               </Form.Label>
               <Form.Control
@@ -212,7 +207,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 <Button onClick={() => handleSubmitImage(index)}>
                   {uploadStatus[index] ?? "Upload"}
                 </Button>
-                <Button className="mb-0 mx-2 remove-button" variant="danger">
+                <Button className={styles.removebutton} variant="danger">
                   Remove Image
                 </Button>
               </Form.Group>
