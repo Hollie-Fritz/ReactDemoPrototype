@@ -21,9 +21,8 @@ function Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
   const [customerName, setCustomerName] = useState("anonymous");
   const [note, setNote] = useState("");
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null); //empty or order completed
   const [utensils, setUtensils] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
 
   //useEffect hook to handle message display based on cart items
   useEffect(() => {
@@ -108,15 +107,6 @@ function Cart(props) {
       }
     });
 
-    if(items.length == 0){
-      console.log("cannot order with empty cart")
-      return; //cannot order with empty cart
-    }
-    setShowMessage(true);
-    // set a timeout for how long you want the message to show up for
-    setTimeout(()=>{
-      setShowMessage(false);
-    }, 7000) // 7 seconds
     let customerId = "";
 
     try {
