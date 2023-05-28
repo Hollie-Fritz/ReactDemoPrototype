@@ -159,16 +159,15 @@ function Template1(props) {
                     style={{ display: "inline-block", alignItems: "right" }}
                   >
                     {/* inner card two */}
-                    <Card className="border-0 mr-0">
+                    <Card className="border-0 mr-0" >
                       {/* Google Maps card display */}
-                      <div
-                        style={{
-                          overflow: "hidden",
-                          position: "relative",
-                          padding: "56.25%",
-                          height: "200px",
-                          width: "500px",
-                        }}
+                      <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100px", 
+                        height: "400px", 
+                      }}
                       >
                         <iframe
                           ref={frameRef}
@@ -184,8 +183,8 @@ function Template1(props) {
                             left: "0",
                           }}
                         />
-                      </div>
-                      {/* end inner card two */}
+                        </div>
+                      {/* end inner card two -- google maps*/}
                     </Card>
                   </Col>
                 </Row>

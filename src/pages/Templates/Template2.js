@@ -170,7 +170,7 @@ function Template2(props) {
                         style={{
                           overflow: "hidden",
                           position: "relative",
-                          padding: "56.25%",
+                          padding: "40%",
                           height: "200px",
                           width: "500px",
                         }}
@@ -180,7 +180,7 @@ function Template2(props) {
                           id="abc"
                           title="Google Map"
                           width="100%"
-                          height="100%"
+                          height="400px"
                           frameBorder="0"
                           style={{
                             border: "0",
