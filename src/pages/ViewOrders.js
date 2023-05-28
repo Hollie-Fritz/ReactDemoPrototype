@@ -1,191 +1,203 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Auth from "@aws-amplify/auth";
 import React, { useState, useEffect } from "react";
-import { Card, Table, Container, Row, Form, Button } from "react-bootstrap";
-import res from "../assests/SmallDumpling.png";
+import { Card, Table, Container, Row, Form, Button, Col, Accordion, } from "react-bootstrap";
 import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineCheck } from "react-icons/ai";
 
 function ViewOrder() {
-  const [count, setCount] = useState([]);
-  const [restaurantId, setRestaurantId] = useState([""]);
-  const { user } = useAuthenticator((context) => [
-    context.user, 
-  ]);
+  const [orders, setOrders] = useState([]);
+  const [loadingState, setLoadingState] = useState({});
+  const { user } = useAuthenticator((context) => [context.user]);
   const navigate = useNavigate();
 
+  async function fetchOrders() {
+    const { username } = await Auth.currentUserInfo();
+    const response = await fetch(
+      `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order?name=${username}`,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const data = await response.json();
+    setOrders(data);
+  }
+
   async function updateOrderStatus(orderId, status) {
-    const body = {
-      orderId: orderId,
-      updateKey: "progress",
-      updateValue: status,
-    };
+    setLoadingState((prevState) => ({ ...prevState, [orderId]: true }));
+
+    const body = { orderId, updateKey: "progress", updateValue: status };
 
     await fetch(
       "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order",
       {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
+    );
+
+    setTimeout(
+      () =>
+        setLoadingState((prevState) => ({ ...prevState, [orderId]: false })),
+      800
+    );
   }
 
   useEffect(() => {
-    async function userAction() {
-      // let user = await Auth.currentSession()
-      // let token = user.getAccessToken().getJwtToken()
-      let nameJson = await Auth.currentUserInfo();
-      let name = nameJson["username"];
-      console.log(JSON.stringify(nameJson));
-
-      await fetch(
-        "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order?name=" +
-          name,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // body: token
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setCount(data);
-          setRestaurantId(name);
-        });
-    }
-    userAction();
+    fetchOrders();
   }, []);
 
   return (
     <>
       <NavBarHome />
-      <Container className="d-flex vh-50">
-        <Row className="m-auto align-self-center">
-          <Card style={{ width: "40rem" }}>
-            <Card.Title className="fw-bold">
-              Your Username: {restaurantId}
-            </Card.Title>
-            <Card
-              className="m-auto align-self-center"
-              style={{ width: "30rem" }}
-            >
-              <nobr className="fw-bold"></nobr>
-              <Card.Img variant="top" src={res} />
-              {count.map((temp, index) => {
-                return (
-                  <div>
-                    <Card.Body>
-                      <Card.Title>
-                        <nobr className="fw-bold">
-                          {temp["customerName"]}'s order
-                        </nobr>
-                        <br></br>Order Date/Time:{" "}
-                        <nobr className="fw-bold">{temp["dateTime"]}</nobr>
-                      </Card.Title>
-                      <Card.Text>
-                        <Table responsive>
-                          <thead>
-                            <tr>
-                              <th>Item</th>
-                              <th>Quantity</th>
-                              <th>Price</th>
-                              <th> </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {temp["menuItems"].map((current) => {
-                              return (
-                                <tr key={current["foodName"]}>
-                                  <td>{current["foodName"]}</td>
-                                  <td>{current["quantity"]}</td>
-                                  <td>${current["priceEach"]}</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </Table>
-                        <nobr
-                          className="fw-bold border-0"
-                          style={{ background: "white" }}
-                        >
-                          {" "}
-                          Note: {temp["note"]}
-                        </nobr>
-                        <br></br>
-                        <nobr
-                          className="fw-bold border-0"
-                          style={{ background: "white" }}
-                        >
-                          {" "}
-                          Utensils: {temp["utensils"] ? "yes" : "no"}
-                        </nobr>
-                        <br></br>
-                        <nobr
-                          className="fw-bold border-0"
-                          style={{ background: "white" }}
-                        >
-                          {" "}
-                          Total Cost: ${temp["totalCost"]}
-                        </nobr>
-                        <br></br>
-                        <Form.Label>Progress: </Form.Label>
-                        <Form.Select
-                          className="form-control"
-                          name="progress"
-                          defaultValue={temp["progress"]}
-                          id={"form" + index}
-                        >
-                          <option value="Order placed"> Order Placed </option>
-                          <option value="Preparing"> Preparing </option>
-                          <option value="Ready"> Ready </option>
-                        </Form.Select>
-                        <Button
-                          onClick={async () => {
-                            const form = document.getElementById(
-                              "form" + index
-                            );
-                            await updateOrderStatus(temp["id"], form.value);
-                          }}
-                        >
-                          Submit Stage
-                        </Button>
-                        <OrderProgress stage={temp["progress"]} />
-                        {
-                            user
-                            &&
-                            temp["customerId"] !== ""
-                            &&
-                            <Button 
-                            onClick={()=> navigate(`/chat/${user.getUsername()}/${temp["customerId"]}`, 
-                            {
-                              state:{
-                                      name: temp["customerName"],
-                                    }
-                            })
-                            }>Chat</Button>
-                        }
-                      </Card.Text>
-                    </Card.Body>
-                  </div>
-                );
-              })}
-            </Card>
-          </Card>
+      <Container>
+        <Row>
+          {orders.map((order, index) => (
+            <OrderCard
+              order={order}
+              index={index}
+              user={user}
+              loadingState={loadingState}
+              updateOrderStatus={updateOrderStatus}
+              navigate={navigate}
+            />
+          ))}
         </Row>
       </Container>
     </>
   );
 }
+
+function OrderCard({
+  order,
+  index,
+  user,
+  loadingState,
+  updateOrderStatus,
+  navigate,
+}) {
+  const orderDateTime = new Date(order["dateTime"]);
+
+  return (
+    <Col md={5}>
+      <Accordion defaultActiveKey="0">
+        <Card className="mb-3">
+          <Card.Body>
+            <Card.Title>
+              <nobr className="fw-bold">{order["customerName"]}'s order</nobr>
+            </Card.Title>
+            <Card.Text>
+              <nobr className="fw-bold">Order Date:</nobr>{" "}
+              {orderDateTime.toLocaleDateString()}
+              <br></br>
+              <nobr className="fw-bold">Order Time:</nobr>{" "}
+              {orderDateTime.toLocaleTimeString()}
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {order["menuItems"].map((current) => {
+                    return (
+                      <tr key={current["foodName"]}>
+                        <td>{current["foodName"]}</td>
+                        <td>{current["quantity"]}</td>
+                        <td>${current["priceEach"]}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+              <nobr
+                className="fw-bold border-0"
+                style={{ background: "white" }}
+              >
+                {" "}
+                Note: {order["note"]}
+              </nobr>
+              <br></br>
+              <nobr
+                className="fw-bold border-0"
+                style={{ background: "white" }}
+              >
+                {" "}
+                Utensils:{" "}
+              </nobr>
+              {order["utensils"] ? "yes" : "no"}
+              <br></br>
+              <nobr
+                className="fw-bold border-0"
+                style={{ background: "white" }}
+              >
+                {" "}
+                Total Cost:{" "}
+              </nobr>{" "}
+              ${order["totalCost"]}
+              <br></br>
+              <Form.Label className="fw-bold" column sm="2">
+                Progress:
+              </Form.Label>
+              <Form.Group as={Row}>
+                <Col>
+                  <Form.Select
+                    className="form-control"
+                    name="progress"
+                    defaultValue={order["progress"]}
+                    id={"form" + index}
+                  >
+                    <option value="Order placed"> Order Placed </option>
+                    <option value="Preparing"> Preparing </option>
+                    <option value="Ready"> Ready </option>
+                  </Form.Select>
+                </Col>
+                <Col sm="4">
+                  <Button
+                    onClick={async () => {
+                      const form = document.getElementById("form" + index);
+                      await updateOrderStatus(order["id"], form.value);
+                    }}
+                    style={{ marginBottom: "20px" }}
+                  >
+                    {loadingState[order["id"]] ? (
+                      <AiOutlineCheck size={20} />
+                    ) : (
+                      "Submit Stage"
+                    )}
+                  </Button>
+                </Col>
+              </Form.Group>
+              <OrderProgress stage={order["progress"]} />
+              {user && order["customerId"] !== "" && (
+                <Button
+                  style={{ marginTop: "20px" }}
+                  onClick={() =>
+                    navigate(
+                      `/chat/${user.getUsername()}/${order["customerId"]}`,
+                      {
+                        state: {
+                          name: order["customerName"],
+                        },
+                      }
+                    )
+                  }
+                >
+                  Chat
+                </Button>
+              )}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Accordion>
+    </Col>
+  );
+}
+
 export default ViewOrder;
