@@ -32,6 +32,8 @@ function Template3(props) {
     setShowAddedMessage,
     handleAddClick,
     cartItemCount,
+    currentUserId,
+    navigate,
     handleShowCartClick,
     viewCartClicked,
     setViewCartClicked,
@@ -138,6 +140,18 @@ function Template3(props) {
                           >
                             View Reviews
                           </Button>{" "}
+                          {
+                            currentUserId
+                            &&
+                            <Button 
+                            onClick={()=> navigate(`/chat/${currentUserId}/${id}`, 
+                            {
+                              state:{
+                                      name: resdata["name"],
+                                    }
+                            })
+                            }>Chat</Button>
+                          }
                         </Stack>
 
                         <ViewReview

@@ -7,8 +7,10 @@ import res from "../assests/SmallDumpling.png";
 import NavBarHome from "../components/NavBarHome";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function ViewStatus() {
+
   const [orders, setOrders] = useState([]);
   const { user } = useAuthenticator((context) => [
     context.user, 
@@ -101,6 +103,18 @@ function ViewStatus() {
                                 </Card.Body>
                               </Card>
                           </div>
+                          {
+                            user
+                            &&
+                            <Button 
+                            onClick={()=> navigate(`/chat/${user.getUsername()}/${temp["restaurantId"]}`, 
+                            {
+                              state:{
+                                      name: temp["restaurantName"],
+                                    }
+                            })
+                            }>Chat</Button>
+                          }
                         </nobr>
                       </Card.Text>
                     </Card.Body>

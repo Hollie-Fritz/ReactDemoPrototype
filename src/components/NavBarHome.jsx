@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
-import logo from "../assests/DarkLogo.png";
+import logo from "../assests/NuOrderLogoLarge.png";
 import "../pages/Home.css";
 // import { useNavigate, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -24,8 +24,9 @@ let NavBarHome = () => {
 
   return (
     <>
-      <Container className="mt-1" fluid>
-        <Navbar bg="transparent" expand="lg" variant="light" style={{fontSize: "22px"}}>
+      
+        <Navbar bg="dark" expand="lg" variant="dark" style={{fontSize: "22px"}}>
+        <Container className="mt-1" fluid>
           <Row>
             <Col md="auto">
               <Navbar.Brand>
@@ -63,19 +64,15 @@ let NavBarHome = () => {
                     href="/owner"  
                     style={{fontWeight: "bold"}}
                   > Merchant Portal </Nav.Link>
-                  </>
-                  :
-                  ""
-                  }
-                  
-
-                  {user? 
-                    <>
-                    {/* <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
+                  {/* <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
                       Welcome, {user.username}
                     </Navbar.Text> */}
+                  <Nav.Link 
+                    href="/chat"
+                    style={{fontWeight: "bold", position: "absolute", right: 200}}
+                  > Chat </Nav.Link>
                     <NavDropdown
-                    title= {"Welcome, " + user.username}
+                    title= {user.username}
                     id="basic-nav-dropdown"
                     className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}
                   >
@@ -87,22 +84,23 @@ let NavBarHome = () => {
                         Sign Out
                     </NavDropdown.Item>
                   </NavDropdown>
-                    </>
-                    :
-                    <Nav.Link onClick={() => {
-                      navigate("/login");
-                      }} style={{position: "absolute", right: 15, fontWeight: "bold"}}
-                      > Signup/Login </Nav.Link>
+                  </>
+                  :
+                  <Nav.Link onClick={() => {
+                    navigate("/login");
+                    }} style={{position: "absolute", right: 15, fontWeight: "bold"}}
+                    > Signup/Login </Nav.Link>
                   }
+                
                 </Nav>
               </Navbar.Collapse>
             </Col>
           </Row>
+          </Container>
         </Navbar>
-      </Container>
+      
     </>
   );
 };
 
 export default NavBarHome;
-

@@ -94,7 +94,7 @@ function Cart(props) {
 
   //handler for check out
   const handleSubmit = async () => {
-    const items = [];
+    var items = [];
     fooddata.forEach((item) => {
       const quantity = cart[item.foodId] || 0;
       if (quantity > 0) {
@@ -107,25 +107,25 @@ function Cart(props) {
       }
     });
 
-    if (items.length === 0) {
-      return; // Don't proceed if no items in the cart.
+    if(items.length == 0){
+      console.log("cannot order with empty cart")
+      return; //cannot order with empty cart
     }
-
-    //message display upon checkout
-    setMessage("Your order is completed!");
-    setTimeout(() => {
-      setMessage(null);
-    }, 7000); // 7 seconds
-
+    setShowMessage(true);
+    // set a timeout for how long you want the message to show up for
+    setTimeout(()=>{
+      setShowMessage(false);
+    }, 7000) // 7 seconds
     let customerId = "";
 
     try {
       let nameJson = await Auth.currentUserInfo();
       customerId = nameJson["username"];
       console.log(JSON.stringify(nameJson));
-    } catch {}
+    } catch (err){
+      console.log(err);
+    }
 
-    //convert data to be sent serverside
     const converted = {
       customerName: customerName,
       customerId: customerId,

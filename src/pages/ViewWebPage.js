@@ -6,6 +6,10 @@ import Template1 from "./Templates/Template1";
 import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
+// import { Auth } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+
 
 
 export function ViewWebPage() {
@@ -20,9 +24,13 @@ export function ViewWebPage() {
   const [reviews, setReviews] = useState([]);
   const [address, setAddress] = useState("");
   const [averageRating, setAverageRating] = useState(0);
-  const [viewCartClicked, setViewCartClicked] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const navigate = useNavigate();
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);  const [viewCartClicked, setViewCartClicked] = useState(false);
   const [showAddedMessage, setShowAddedMessage] = useState(null);
-
+  
   // write reviews handlers
   const handleWriteReviewClick = (event) => {
     event.stopPropagation();
@@ -101,6 +109,15 @@ export function ViewWebPage() {
 
 
 
+  useEffect(() => {
+    async function get() {
+      // const nameJson = await Auth.currentUserInfo();
+      // const name = nameJson["username"];
+      let name = user.getUsername();
+      setCurrentUserId(name);
+    }
+    get();
+  }, [user]);
   // fetch restaurant data and update the state
   useEffect(() => {
     let username = id;
@@ -183,6 +200,8 @@ const handleShowCartClick = () => {
     setShowAddedMessage,
     handleAddClick,
     cartItemCount,
+    currentUserId,
+    navigate,
     viewCartClicked,
     handleShowCartClick,
     viewCartClicked,
