@@ -1,6 +1,7 @@
 import "./card-list.styles.css";
 import Card from "../card/card.component";
 import { Container, Row } from "react-bootstrap";
+import React from "react";
 
 const CardList = ({ restaurants }) => (
   <>
