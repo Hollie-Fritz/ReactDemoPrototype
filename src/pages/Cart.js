@@ -450,7 +450,7 @@ function Cart(props) {
               </>
             ) : (
               <Button variant="primary" onClick={() => setCheckout(true)}>
-                Checkout
+                Review Order
               </Button>
             )}
           </Modal.Footer>
