@@ -253,7 +253,7 @@ function Cart(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => setCheckout(false)}>
-              Back
+              Edit Order
             </Button>
             <Button variant="primary" onClick={handlePlaceOrder}>
               Place Order
