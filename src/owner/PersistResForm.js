@@ -24,13 +24,15 @@ function PersistResForm() {
     address1: "",
     address2: "",
     city: "",
-    usstate: "",
+    usstate: "WA",
     zip: "",
-    openhours: "",
-    closehours: "",
     mainImageUrl: "",
     template: "",
     averageRating: -1,
+    operatingHours: {
+      openHours: { Monday: "Closed", Tuesday: "Closed", Wednesday: "Closed", Thursday: "Closed", Friday: "Closed", Saturday: "Closed", Sunday: "Closed" },
+      closeHours: { Monday: "Closed", Tuesday: "Closed", Wednesday: "Closed", Thursday: "Closed", Friday: "Closed", Saturday: "Closed", Sunday: "Closed" },
+    },
   });
 
   //state object that contains all the fields for ResMenu
@@ -76,11 +78,10 @@ function PersistResForm() {
       cuisine: formData.resCuisine,
       userId: name,
       name: formData.resName,
-      openHours: formData.openhours,
-      closeHours: formData.closehours,
+      operatingHours: formData.operatingHours,
       mainImageUrl: formData.mainImageUrl,
       template: formData.template,
-      averageRating: -1,
+      averageRating: -1
     };
 
     // "resImageUrl": "null",

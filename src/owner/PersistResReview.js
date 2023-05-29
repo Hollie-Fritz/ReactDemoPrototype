@@ -29,9 +29,42 @@ function PersistResReview({ formData, menuItems }) {
                   <Card.Text>
                     <nobr className="fw-bold">Phone:</nobr> 1-{formData.phoneNo}
                   </Card.Text>
+
                   <Card.Text>
-                    <nobr className="fw-bold">Hours: </nobr>
-                    {formData.openhours} - {formData.closehours}
+                    <nobr className="fw-bold">Hours: Monday </nobr>
+                    {formData["operatingHours"]["openHours"]["Monday"]} -{" "}
+                    {formData["operatingHours"]["closeHours"]["Monday"]}
+                  </Card.Text>
+                  <Card.Text>
+                    <nobr className="fw-bold">Hours: Tuesday</nobr>
+                    {formData["operatingHours"]["openHours"]["Tuesday"]} -{" "}
+                    {formData["operatingHours"]["closeHours"]["Tuesday"]}
+                  </Card.Text>
+                  <Card.Text>
+                    <nobr className="fw-bold">Hours: Wednesday</nobr>
+                    {
+                      formData["operatingHours"]["openHours"]["Wednesday"]
+                    } - {formData["operatingHours"]["closeHours"]["Wednesday"]}
+                  </Card.Text>
+                  <Card.Text>
+                    <nobr className="fw-bold">Hours: Thursday</nobr>
+                    {formData["operatingHours"]["openHours"]["Thursday"]} -{" "}
+                    {formData["operatingHours"]["closeHours"]["Thursday"]}
+                  </Card.Text>
+                  <Card.Text>
+                    <nobr className="fw-bold">Hours: Friday</nobr>
+                    {formData["operatingHours"]["openHours"]["Friday"]} -{" "}
+                    {formData["operatingHours"]["closeHours"]["Friday"]}
+                  </Card.Text>
+                  <Card.Text>
+                    <nobr className="fw-bold">Hours: Saturday</nobr>
+                    {formData["operatingHours"]["openHours"]["Saturday"]} -{" "}
+                    {formData["operatingHours"]["closeHours"]["Saturday"]}
+                  </Card.Text>
+                  <Card.Text>
+                    <nobr className="fw-bold">Hours: Sunday</nobr>
+                    {formData["operatingHours"]["openHours"]["Sunday"]} -{" "}
+                    {formData["operatingHours"]["closeHours"]["Sunday"]}
                   </Card.Text>
                   <Card.Text>
                     <nobr className="fw-bold">Cuisine Type: </nobr>
