@@ -24,6 +24,7 @@ function Cart(props) {
   const [message, setMessage] = useState(null); //empty or order completed
   const [utensils, setUtensils] = useState(false);
   const [checkout, setCheckout] = useState(false); //check out 
+  const [purchased, setPurchased] = useState(false);
 
   //useEffect hook to handle message display based on cart items
   useEffect(() => {
@@ -40,14 +41,23 @@ function Cart(props) {
           });
         }
       });
-      //if cart is empty display message
+
+      //if cart is empty display messages
+      // setMessage(null);
       if (items.length === 0) {
-        setMessage("Your cart is currently empty.");
+          if(!purchased){
+            console.log("purchased is false");
+            setMessage("Your cart is currently empty.");
+          }else{
+            setPurchased(false);
+          }
       } else {
         setMessage(null);
       }
     }
   }, [show, fooddata, cart]);
+
+
 
   //handler to decrement an item in the cart
   const handleDecrement = (foodId) => {
@@ -145,6 +155,7 @@ function Cart(props) {
       .then((data) => {
         console.log("order data submitted");
         console.log(data);
+        setMessage("Order Placed!")
       });
 
     //close cart modal
@@ -159,6 +170,7 @@ function Cart(props) {
     // Clear the cart after order placement
     setCart({});
     setCheckout(false);
+    setPurchased(true);
     // // Close the modal after some delay, for example, 2 seconds
     // setTimeout(() => {
     //   handleClose();
@@ -190,9 +202,9 @@ function Cart(props) {
           }}
         >
           <h3>{message}</h3>
-          <Button variant="secondary" onClick={handleClose}>
+          {/* <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
+          </Button> */}
         </Modal.Title>
       </Modal.Header>
   ): message ? (
@@ -253,7 +265,9 @@ function Cart(props) {
               <Button variant="secondary" onClick={() => setCheckout(false)}>
                 Back
               </Button>
-              <Button variant="primary" onClick={handlePlaceOrder}>
+              <Button variant="primary" onClick={
+                handlePlaceOrder
+              }>
                 Place Order
               </Button>
             </Modal.Footer>
