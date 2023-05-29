@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Button,
-  Table,
-  Form,
-  FloatingLabel,
-  Tooltip,
-  OverlayTrigger,
-} from "react-bootstrap";
-// import Auth from "@aws-amplify/auth";
-import {
-  AiOutlineInfoCircle,
-  AiOutlinePlus,
-  AiOutlineMinus,
-} from "react-icons/ai";
+import { Modal, Button, Table, Form, FloatingLabel, Tooltip, OverlayTrigger, } from "react-bootstrap"; //prettier-ignore
+import { AiOutlineInfoCircle, AiOutlinePlus, AiOutlineMinus, } from "react-icons/ai"; //prettier-ignore
 import styles from "./Cart.module.css";
 import { CiSquareRemove } from "react-icons/ci";
 import { useAuthenticator } from "@aws-amplify/ui-react";
@@ -24,12 +11,10 @@ function Cart(props) {
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null); //empty or order completed
   const [utensils, setUtensils] = useState(false);
-  const [checkout, setCheckout] = useState(false); //check out 
+  const [checkout, setCheckout] = useState(false); //check out
   const [purchased, setPurchased] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { user } = useAuthenticator((context) => [
-    context.user, 
-  ]);
+  const { user } = useAuthenticator((context) => [context.user]);
 
   //useEffect hook to handle message display based on cart items
   useEffect(() => {
@@ -48,14 +33,17 @@ function Cart(props) {
       });
 
       //if cart is empty display messages
-      // setMessage(null);
       if (items.length === 0) {
-          if(!purchased){
-            console.log("purchased is false");
-            setMessage("Your cart is currently empty.");
-          }else{
-            setPurchased(false);
-          }
+        if (!purchased) {
+          console.log("purchased is false");
+          setMessage(
+            <span style={{ fontWeight: "bold" }}>
+              Your cart is currently empty.
+            </span>
+          );
+        } else {
+          setPurchased(false);
+        }
       } else {
         setMessage(null);
       }
@@ -129,11 +117,9 @@ function Cart(props) {
     let customerId = "";
 
     try {
-      // let nameJson = await Auth.currentUserInfo();
-      // customerId = nameJson["username"];
       customerId = user.getUsername();
       console.log(customerId);
-    } catch (err){
+    } catch (err) {
       console.log(err);
     }
 
@@ -147,7 +133,7 @@ function Cart(props) {
       utensils: utensils,
       progress: "Order placed",
       totalCost: totalPrice,
-      phoneNumber: phoneNumber
+      phoneNumber: phoneNumber,
     };
     //send data to server
     await fetch(
@@ -165,59 +151,53 @@ function Cart(props) {
       .then((data) => {
         console.log("order data submitted");
         console.log(data);
-        // setMessage("Your order has been placed! See "My Orders" for status of your orders");
       });
-
-    //close cart modal
-    // handleClose();
   };
-  
+
   const handlePlaceOrder = async () => {
     // Submit the order details to the server
     await handleSubmit();
     // Then, show the "Order completed" message
-    setMessage("Order placed!   See \"My Orders\" for status of your orders");
+    setMessage(
+      <>
+        <p style={{ textAlign: "center", fontWeight: "bold" }}>Order placed!</p>
+        <p style={{ textAlign: "center", fontSize: "18px" }}>
+          See "My Orders" for the current status of your order.
+        </p>
+      </>
+    );
     // Clear the cart after order placement
     setCart({});
     setCheckout(false);
     setPurchased(true);
-    // // Close the modal after some delay, for example, 2 seconds
-    // setTimeout(() => {
-    //   handleClose();
-    //   setCheckout(false);
-    //   setMessage(null);
-    // }, 2000);
   };
 
   //tooltip for total price information
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       10¢/bag fee is not included <br />
-      Tip not included -- please consider a tip upon pick upload
+      Tip not included -- please consider a tip upon pick up!
     </Tooltip>
   );
 
   return (
     // MODAL
     <Modal dialogClassName="modal-90w" show={show} onHide={handleClose}>
-    {message === "Order completed" ? (
-      // if order is completed, display message
-      <Modal.Header closeButton>
-        <Modal.Title
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <h3>{message}</h3>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button> */}
-        </Modal.Title>
-      </Modal.Header>
-  ): message ? (
+      {message === "Order completed" ? (
+        // if order is completed, display message
+        <Modal.Header closeButton>
+          <Modal.Title
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <h3>{message}</h3>
+          </Modal.Title>
+        </Modal.Header>
+      ) : message ? (
         // if cart is empty display error message
         <Modal.Header closeButton>
           <Modal.Title
@@ -231,62 +211,61 @@ function Cart(props) {
             <h3>{message}</h3>
           </Modal.Title>
         </Modal.Header>
-        ) : checkout ? (
-          // if in checkout page, display the order confirmation
-          <>
-            <Modal.Header closeButton>
-              <Modal.Title>Confirm Your Order</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* Order confirmation display here */}
-              {/* TABLE */}
-              {/* table that displays order items */}
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* map over the food data and display each item in a table row */}
-                  {fooddata.map((item, index) => {
-                    const quantity = cart[item.foodId] || 0;
-                    if (quantity > 0) {
-                      const total = (quantity * item.foodPrice).toFixed(2);
-                      return (
-                        <tr key={item.foodId}>
-                          <td>{item.foodName}</td>
-                          <td>${item.foodPrice}</td>
-                          <td>{quantity}</td>
-                          <td>${total}</td>
-                        </tr>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </tbody>
-              </Table>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setCheckout(false)}>
-                Back
-              </Button>
-              <Button variant="primary" onClick={
-                handlePlaceOrder
-              }>
-                Place Order
-              </Button>
-            </Modal.Footer>
-          </>
-        ) : (
+      ) : checkout ? (
+        // if in checkout page, display the order confirmation
+        <>
+          <Modal.Header closeButton>
+            <Modal.Title  style={{ fontWeight: "bold" }}>Confirm Your Order</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Order confirmation display here */}
+            {/* TABLE */}
+            {/* table that displays order items */}
+            <Table responsive>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* map over the food data and display each item in a table row */}
+                {fooddata.map((item, index) => {
+                  const quantity = cart[item.foodId] || 0;
+                  if (quantity > 0) {
+                    const total = (quantity * item.foodPrice).toFixed(2);
+                    return (
+                      <tr key={item.foodId}>
+                        <td>{item.foodName}</td>
+                        <td>${item.foodPrice}</td>
+                        <td>{quantity}</td>
+                        <td>${total}</td>
+                      </tr>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </tbody>
+            </Table>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setCheckout(false)}>
+              Back
+            </Button>
+            <Button variant="primary" onClick={handlePlaceOrder}>
+              Place Order
+            </Button>
+          </Modal.Footer>
+        </>
+      ) : (
         //if not display the cart
         <>
           <Modal.Header closeButton>
-            <Modal.Title>Your Current Pickup Order</Modal.Title>
+          <Modal.Title style={{ fontWeight: "bold" }}>Your Current Pickup Order</Modal.Title>
+
           </Modal.Header>
           <Modal.Body>
             {/* TABLE */}
@@ -431,17 +410,20 @@ function Cart(props) {
                 {/* NOTE */}
                 {/* PHONE NUMBER */}
                 <div>
-                <Form>
-                  <FloatingLabel
-                    controlId="floatingPhoneNumber"
-                    label="Phone Number"
-                    onChange={handlePhoneNumber}
-                  >
-                    <Form.Control type="PhoneNumber" placeholder="Enter your Phone Number" />
-                  </FloatingLabel>
-                </Form>
+                  <Form>
+                    <FloatingLabel
+                      controlId="floatingPhoneNumber"
+                      label="Phone Number"
+                      onChange={handlePhoneNumber}
+                    >
+                      <Form.Control
+                        type="PhoneNumber"
+                        placeholder="Enter your Phone Number"
+                      />
+                    </FloatingLabel>
+                  </Form>
                 </div>
-                <br/>
+                <br />
                 {/* PHONE NUMBER */}
                 {/* UTENSIL TOGGLE */}
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -456,7 +438,7 @@ function Cart(props) {
             </div>
           </Modal.Body>
           <Modal.Footer>
-          {/* button for order submission */}
+            {/* button for order submission */}
             {checkout ? (
               <>
                 <Button variant="secondary" onClick={() => setCheckout(false)}>
@@ -471,7 +453,7 @@ function Cart(props) {
                 Checkout
               </Button>
             )}
-          </Modal.Footer>      
+          </Modal.Footer>
         </>
       )}
     </Modal>
