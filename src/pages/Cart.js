@@ -399,7 +399,7 @@ function Cart(props) {
                     placeholder="Enter a note"
                     onChange={handleNote}
                     style={{ height: "100px" }}
-                    maxLength="40"
+                    maxLength="250"
                   />
                   <div style={{ textAlign: "left" }}>
                     {/* displays the remaining characters left for the note */}
