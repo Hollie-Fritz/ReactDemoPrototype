@@ -1,0 +1,19 @@
+.link {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .link:hover {
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(232, 216, 80, 0.3);
+    color: rgb(238, 238, 146);
+  }
+  
+ .link:active {
+    text-shadow: 0 2px 4px rgba(255, 255, 0, 0.3);
+    color: white;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
