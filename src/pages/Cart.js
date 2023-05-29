@@ -8,7 +8,7 @@ import {
   Tooltip,
   OverlayTrigger,
 } from "react-bootstrap";
-import Auth from "@aws-amplify/auth";
+// import Auth from "@aws-amplify/auth";
 import {
   AiOutlineInfoCircle,
   AiOutlinePlus,
@@ -16,6 +16,7 @@ import {
 } from "react-icons/ai";
 import styles from "./Cart.module.css";
 import { CiSquareRemove } from "react-icons/ci";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 function Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
@@ -25,6 +26,10 @@ function Cart(props) {
   const [utensils, setUtensils] = useState(false);
   const [checkout, setCheckout] = useState(false); //check out 
   const [purchased, setPurchased] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
 
   //useEffect hook to handle message display based on cart items
   useEffect(() => {
@@ -55,9 +60,12 @@ function Cart(props) {
         setMessage(null);
       }
     }
+    // eslint-disable-next-line
   }, [show, fooddata, cart]);
 
-
+  const handlePhoneNumber = (event) => {
+    setPhoneNumber(event.target.value);
+  };
 
   //handler to decrement an item in the cart
   const handleDecrement = (foodId) => {
@@ -121,9 +129,10 @@ function Cart(props) {
     let customerId = "";
 
     try {
-      let nameJson = await Auth.currentUserInfo();
-      customerId = nameJson["username"];
-      console.log(JSON.stringify(nameJson));
+      // let nameJson = await Auth.currentUserInfo();
+      // customerId = nameJson["username"];
+      customerId = user.getUsername();
+      console.log(customerId);
     } catch (err){
       console.log(err);
     }
@@ -138,6 +147,7 @@ function Cart(props) {
       utensils: utensils,
       progress: "Order placed",
       totalCost: totalPrice,
+      phoneNumber: phoneNumber
     };
     //send data to server
     await fetch(
@@ -155,7 +165,7 @@ function Cart(props) {
       .then((data) => {
         console.log("order data submitted");
         console.log(data);
-        setMessage("Order Placed!")
+        // setMessage("Your order has been placed! See "My Orders" for status of your orders");
       });
 
     //close cart modal
@@ -166,7 +176,7 @@ function Cart(props) {
     // Submit the order details to the server
     await handleSubmit();
     // Then, show the "Order completed" message
-    setMessage("Order completed");
+    setMessage("Order placed!   See \"My Orders\" for status of your orders");
     // Clear the cart after order placement
     setCart({});
     setCheckout(false);
@@ -410,7 +420,7 @@ function Cart(props) {
                     placeholder="Enter a note"
                     onChange={handleNote}
                     style={{ height: "100px" }}
-                    maxLength="250"
+                    maxLength="40"
                   />
                   <div style={{ textAlign: "left" }}>
                     {/* displays the remaining characters left for the note */}
@@ -419,7 +429,20 @@ function Cart(props) {
                 </FloatingLabel>
                 <br />
                 {/* NOTE */}
-
+                {/* PHONE NUMBER */}
+                <div>
+                <Form>
+                  <FloatingLabel
+                    controlId="floatingPhoneNumber"
+                    label="Phone Number"
+                    onChange={handlePhoneNumber}
+                  >
+                    <Form.Control type="PhoneNumber" placeholder="Enter your Phone Number" />
+                  </FloatingLabel>
+                </Form>
+                </div>
+                <br/>
+                {/* PHONE NUMBER */}
                 {/* UTENSIL TOGGLE */}
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                   <Form.Check

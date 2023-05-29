@@ -36,6 +36,7 @@ function ReviewForm({ show, handleClose, userId, name }) {
     //Reset form after submission
     setRating(1);
     setReview("");
+    window.location.reload();
     handleClose();
   };
 

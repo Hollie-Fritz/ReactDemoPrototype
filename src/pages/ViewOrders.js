@@ -36,6 +36,7 @@ function ViewOrder() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        window.location.reload();
       });
   }
 
@@ -45,8 +46,7 @@ function ViewOrder() {
       // let token = user.getAccessToken().getJwtToken()
       let nameJson = await Auth.currentUserInfo();
       let name = nameJson["username"];
-      console.log(JSON.stringify(nameJson));
-
+      // console.log(JSON.stringify(nameJson));
       await fetch(
         "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order?name=" +
           name,
@@ -132,6 +132,18 @@ function ViewOrder() {
                           Utensils: {temp["utensils"] ? "yes" : "no"}
                         </nobr>
                         <br></br>
+                        {temp["phoneNumber"] && 
+                        <>
+                          <nobr
+                            className="fw-bold border-0"
+                            style={{ background: "white" }}
+                          >
+                            {" "}
+                            Phone Number:  {temp["phoneNumber"]}
+                          </nobr>
+                          <br></br>
+                        </>
+                        }
                         <nobr
                           className="fw-bold border-0"
                           style={{ background: "white" }}
