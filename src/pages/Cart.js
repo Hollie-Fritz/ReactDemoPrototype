@@ -23,6 +23,7 @@ function Cart(props) {
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null); //empty or order completed
   const [utensils, setUtensils] = useState(false);
+  const [checkout, setCheckout] = useState(false); //check out 
 
   //useEffect hook to handle message display based on cart items
   useEffect(() => {
@@ -147,7 +148,23 @@ function Cart(props) {
       });
 
     //close cart modal
-    handleClose();
+    // handleClose();
+  };
+  
+  const handlePlaceOrder = async () => {
+    // Submit the order details to the server
+    await handleSubmit();
+    // Then, show the "Order completed" message
+    setMessage("Order completed");
+    // Clear the cart after order placement
+    setCart({});
+    setCheckout(false);
+    // // Close the modal after some delay, for example, 2 seconds
+    // setTimeout(() => {
+    //   handleClose();
+    //   setCheckout(false);
+    //   setMessage(null);
+    // }, 2000);
   };
 
   //tooltip for total price information
@@ -161,7 +178,24 @@ function Cart(props) {
   return (
     // MODAL
     <Modal dialogClassName="modal-90w" show={show} onHide={handleClose}>
-      {message ? (
+    {message === "Order completed" ? (
+      // if order is completed, display message
+      <Modal.Header closeButton>
+        <Modal.Title
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <h3>{message}</h3>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Title>
+      </Modal.Header>
+  ): message ? (
         // if cart is empty display error message
         <Modal.Header closeButton>
           <Modal.Title
@@ -175,7 +209,56 @@ function Cart(props) {
             <h3>{message}</h3>
           </Modal.Title>
         </Modal.Header>
-      ) : (
+        ) : checkout ? (
+          // if in checkout page, display the order confirmation
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirm Your Order</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* Order confirmation display here */}
+              {/* TABLE */}
+              {/* table that displays order items */}
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* map over the food data and display each item in a table row */}
+                  {fooddata.map((item, index) => {
+                    const quantity = cart[item.foodId] || 0;
+                    if (quantity > 0) {
+                      const total = (quantity * item.foodPrice).toFixed(2);
+                      return (
+                        <tr key={item.foodId}>
+                          <td>{item.foodName}</td>
+                          <td>${item.foodPrice}</td>
+                          <td>{quantity}</td>
+                          <td>${total}</td>
+                        </tr>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+                </tbody>
+              </Table>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setCheckout(false)}>
+                Back
+              </Button>
+              <Button variant="primary" onClick={handlePlaceOrder}>
+                Place Order
+              </Button>
+            </Modal.Footer>
+          </>
+        ) : (
         //if not display the cart
         <>
           <Modal.Header closeButton>
@@ -336,11 +419,22 @@ function Cart(props) {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            {/* button for order submission */}
-            <Button variant="primary" onClick={handleSubmit} type="submit">
-              Checkout
-            </Button>
-          </Modal.Footer>
+          {/* button for order submission */}
+            {checkout ? (
+              <>
+                <Button variant="secondary" onClick={() => setCheckout(false)}>
+                  Back
+                </Button>
+                <Button variant="primary" onClick={handlePlaceOrder}>
+                  Place Order
+                </Button>
+              </>
+            ) : (
+              <Button variant="primary" onClick={() => setCheckout(true)}>
+                Checkout
+              </Button>
+            )}
+          </Modal.Footer>      
         </>
       )}
     </Modal>
