@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Auth from "@aws-amplify/auth";
 import React, { useState, useEffect } from "react";
-import { Card, Table, Container, Row, Form, Button, Col, Accordion, } from "react-bootstrap";
+import { Card, Table, Container, Row, Form, Button, Col, Accordion, } from "react-bootstrap"; // prettier-ignore
 import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
 import { useAuthenticator } from "@aws-amplify/ui-react";
@@ -40,6 +40,7 @@ function ViewOrder() {
       }
     );
 
+    //set loading state for submit button back to false after a delay
     setTimeout(
       () =>
         setLoadingState((prevState) => ({ ...prevState, [orderId]: false })),
@@ -48,6 +49,7 @@ function ViewOrder() {
   }
 
   useEffect(() => {
+    //fetch orders when the component mounts
     fetchOrders();
   }, []);
 
@@ -80,6 +82,7 @@ function OrderCard({
   updateOrderStatus,
   navigate,
 }) {
+  //convert the order's dateTime string to a Date object
   const orderDateTime = new Date(order["dateTime"]);
 
   return (
