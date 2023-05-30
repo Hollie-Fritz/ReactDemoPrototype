@@ -140,7 +140,7 @@ function OrderCard({
             </nobr>{" "}
             ${order["totalCost"]}
             <br></br>
-            <Form.Label className="fw-bold" column sm="2">
+            <Form.Label className="fw-bold" column sm="3">
               Progress:
             </Form.Label>
             <Form.Group as={Row}>
