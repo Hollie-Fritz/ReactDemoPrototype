@@ -10,8 +10,6 @@ import Template4 from "./Templates/Template4";
 import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
-
-
 export function ViewWebPage() {
   // variables to be shared across all the templates
   const { id } = useParams();
@@ -26,11 +24,10 @@ export function ViewWebPage() {
   const [averageRating, setAverageRating] = useState(0);
   const [currentUserId, setCurrentUserId] = useState(null);
   const navigate = useNavigate();
-  const { user } = useAuthenticator((context) => [
-    context.user, 
-  ]);  const [viewCartClicked, setViewCartClicked] = useState(false);
+  const { user } = useAuthenticator((context) => [context.user]);
+  const [viewCartClicked, setViewCartClicked] = useState(false);
   const [showAddedMessage, setShowAddedMessage] = useState(null);
-  
+
   // write reviews handlers
   const handleWriteReviewClick = (event) => {
     event.stopPropagation();
@@ -50,7 +47,6 @@ export function ViewWebPage() {
     setShowViewReviewForm(false);
   };
 
-
   // reference for iframe
   const frameRef = useRef(null);
   // function to update the iframe location for Google Maps
@@ -65,7 +61,6 @@ export function ViewWebPage() {
     }
   }, [address]);
 
-
   //handler for Add button
   const handleAddClick = (foodId) => {
     var temp = cart;
@@ -76,7 +71,6 @@ export function ViewWebPage() {
       setShowAddedMessage(null);
     }, 600);
   };
-
 
   //view and close cart
   const handleShowCart = () => {
@@ -92,8 +86,6 @@ export function ViewWebPage() {
     0
   );
 
-
-
   //fetch reviews and update the Google Maps iframe location
   useEffect(() => {
     const fetchAverageRating = async () => {
@@ -106,8 +98,6 @@ export function ViewWebPage() {
 
     updateiframeLocation();
   }, [id, resdata, updateiframeLocation]);
-
-
 
   useEffect(() => {
     async function get() {
@@ -153,28 +143,47 @@ export function ViewWebPage() {
           // console.log("data is below");
           // console.log(JSON.stringify(data));
         });
-        // console.log(JSON.stringify(averageRating))
-
+      // console.log(JSON.stringify(averageRating))
     }
     userAction();
   }, [id]);
 
   useEffect(() => {
     console.log(viewCartClicked);
-}, [viewCartClicked]);
+  }, [viewCartClicked]);
 
-const handleShowCartClick = () => {
+  const handleShowCartClick = () => {
     handleShowCart();
     setViewCartClicked(true);
     setTimeout(() => {
-        setViewCartClicked(false);
+      setViewCartClicked(false);
     }, 1000);
-};
+  };
 
   // url for restaurant's main image (banner image)
   const bucketUrl =
     "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" +
     resdata["mainImageUrl"];
+
+  //helper function -- groups food items by foodType
+  function groupByFoodType(foodItems) {
+    //convert to object
+    return foodItems.reduce((foodObj, item) => {
+      const foodType = item.foodType;
+
+      // no foodtype then assign empty array
+      if (!foodObj[foodType]) {
+        foodObj[foodType] = [];
+      }
+
+      //push item to it's foodtype array
+      foodObj[foodType].push(item);
+      return foodObj;
+    }, {});
+  }
+
+  //object of food items grouped by their types
+  const groupedFoodData = groupByFoodType(fooddata);
 
   // object to hold all the variables and handlers
   const webPageVars = {
@@ -205,37 +214,54 @@ const handleShowCartClick = () => {
     viewCartClicked,
     handleShowCartClick,
     viewCartClicked,
-    setViewCartClicked
+    setViewCartClicked,
+    groupedFoodData
   };
 
   // return the WebPageContext.Provider component with the object of all the variables and handlers
   // so that all the templates will have access to it
 
-  function handleTemplate(resdata){
-      //resdata["template"] is what value is stored in dynamodb
-      switch(resdata["template"]) {
-        case "template1":
-            return <> <NavBarHome/> <Template1 data={webPageVars} /> </>
+  function handleTemplate(resdata) {
+    //resdata["template"] is what value is stored in dynamodb
+    switch (resdata["template"]) {
+      case "template1":
+        return (
+          <>
+            {" "}
+            <NavBarHome /> <Template1 data={webPageVars} />{" "}
+          </>
+        );
 
-        case "template2":
-          return <> <NavBarHome/> <Template2 data={webPageVars} /> </>
+      case "template2":
+        return (
+          <>
+            {" "}
+            <NavBarHome /> <Template2 data={webPageVars} />{" "}
+          </>
+        );
 
-        case "template3":
-          return <> <NavBarHome/> <Template3 data={webPageVars} /> </>
+      case "template3":
+        return (
+          <>
+            {" "}
+            <NavBarHome /> <Template3 data={webPageVars} />{" "}
+          </>
+        );
 
-        case "template4":
-          return <> <NavBarHome/> <Template4 data={webPageVars} /> </>
+      case "template4":
+        return (
+          <>
+            {" "}
+            <NavBarHome /> <Template4 data={webPageVars} />{" "}
+          </>
+        );
 
-        default:
-          return "";
-      }
+      default:
+        return "";
+    }
   }
 
-  return (
-    <>
-    {handleTemplate(resdata)}
-    </>
-  );
+  return <>{handleTemplate(resdata)}</>;
 }
 
 export default ViewWebPage;

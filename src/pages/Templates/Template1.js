@@ -22,7 +22,6 @@ function Template1(props) {
     handleShowReviewClick,
     handleReviewFormClose,
     handleViewReviewFormClose,
-    handleShowCart,
     handleShowCartClose,
     bucketUrl,
     id,
@@ -35,28 +34,9 @@ function Template1(props) {
     navigate,
     handleShowCartClick,
     viewCartClicked,
-    setViewCartClicked,
+    groupedFoodData
   } = props.data;
 
-  //helper function -- groups food items by foodType
-  function groupByFoodType(foodItems) {
-    //convert to object
-    return foodItems.reduce((foodObj, item) => {
-      const foodType = item.foodType;
-
-      // no foodtype then assign empty array
-      if (!foodObj[foodType]) {
-        foodObj[foodType] = [];
-      }
-
-      //push item to it's foodtype array
-      foodObj[foodType].push(item);
-      return foodObj;
-    }, {});
-  }
-
-  //object of food items grouped by their types
-  const groupedFoodData = groupByFoodType(fooddata);
 
   return (
     <>
