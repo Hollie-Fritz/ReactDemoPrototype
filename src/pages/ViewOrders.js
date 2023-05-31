@@ -7,6 +7,7 @@ import OrderProgress from "./OrderProgress";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
+import { Pagination } from "react-bootstrap";
 
 //component that displays the orders
 function ViewOrder() {
@@ -14,6 +15,13 @@ function ViewOrder() {
   const [loadingState, setLoadingState] = useState({});
   const { user } = useAuthenticator((context) => [context.user]);
   const navigate = useNavigate();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   //fetches the list of orders
   async function fetchOrders() {
@@ -56,6 +64,120 @@ function ViewOrder() {
     //fetch orders when the component mounts
     fetchOrders();
   }, []);
+  const renderPaginationItems = () => {
+    const totalPages = Math.ceil(orders.length / itemsPerPage);
+    const visiblePages = 3;
+    const pageNeighbours = Math.floor(visiblePages / 2);
+    const pageNumbers = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+
+    if (totalPages <= visiblePages) {
+      return pageNumbers.map((number) => (
+        <Pagination.Item
+          key={number}
+          active={number === currentPage}
+          onClick={() => paginate(number)}
+        >
+          {number}
+        </Pagination.Item>
+      ));
+    }
+
+    const leftOffset = currentPage - pageNeighbours - 1;
+    const rightOffset = currentPage + pageNeighbours - totalPages;
+
+    const hasLeftEllipsis = leftOffset > 1;
+    const hasRightEllipsis = rightOffset > 1;
+
+    let ellipsisLeftCount = Math.min(leftOffset, pageNeighbours);
+    let ellipsisRightCount = Math.min(rightOffset, pageNeighbours);
+
+    const items = [];
+
+    // Previous page
+    items.push(
+      <Pagination.Prev
+        key="prev"
+        onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
+        disabled={currentPage === 1}
+      />
+    );
+
+    // First page
+    items.push(
+      <Pagination.Item
+        key={1}
+        active={1 === currentPage}
+        onClick={() => paginate(1)}
+      >
+        1
+      </Pagination.Item>
+    );
+
+    // Left ellipsis
+    if (hasLeftEllipsis) {
+      items.push(
+        <Pagination.Ellipsis
+          key="ellipsis-left"
+          onClick={() => paginate(currentPage - pageNeighbours - 1)}
+        />
+      );
+    }
+
+    // Page numbers between left and right ellipsis
+    for (
+      let i = currentPage - pageNeighbours;
+      i <= currentPage + pageNeighbours;
+      i++
+    ) {
+      if (i > 1 && i < totalPages) {
+        items.push(
+          <Pagination.Item
+            key={i}
+            active={i === currentPage}
+            onClick={() => paginate(i)}
+          >
+            {i}
+          </Pagination.Item>
+        );
+      }
+    }
+
+    // Right ellipsis
+    if (hasRightEllipsis) {
+      items.push(
+        <Pagination.Ellipsis
+          key="ellipsis-right"
+          onClick={() => paginate(currentPage + pageNeighbours + 1)}
+        />
+      );
+    }
+
+    // Last page
+    items.push(
+      <Pagination.Item
+        key={totalPages}
+        active={totalPages === currentPage}
+        onClick={() => paginate(totalPages)}
+      >
+        {totalPages}
+      </Pagination.Item>
+    );
+
+    // Next page
+    items.push(
+      <Pagination.Next
+        key="next"
+        onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+        disabled={currentPage === totalPages}
+      />
+    );
+
+    return items;
+  };
 
   //rendering the component
   return (
@@ -63,7 +185,7 @@ function ViewOrder() {
       <NavBarHome />
       <Container>
         <Row>
-          {orders.map((order, index) => (
+          {currentItems.map((order, index) => (
             <OrderCard
               order={order}
               index={index}
@@ -74,6 +196,9 @@ function ViewOrder() {
             />
           ))}
         </Row>
+        <div className="d-flex justify-content-center">
+          <Pagination>{renderPaginationItems()}</Pagination>
+        </div>
       </Container>
     </>
   );
