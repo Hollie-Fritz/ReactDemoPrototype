@@ -105,10 +105,44 @@ function Template2(props) {
                         {resdata["phone"]}
                       </Card.Text>
                       {/* restaurant hours */}
+                      {
+                      resdata["operatingHours"] ?
+                      <>
                       <Card.Text>
-                        <nobr className="fw-bold">Hours: </nobr>
-                        {resdata["openHours"]} - {resdata["closeHours"]}
+                        <nobr className="fw-bold">Monday: </nobr>
+                        {resdata["operatingHours"]["openHours"]["Monday"] } - {resdata["operatingHours"]["closeHours"]["Monday"] }
                       </Card.Text>
+                      <Card.Text>
+                        <nobr className="fw-bold">Tuesday: </nobr>
+                        {resdata["operatingHours"]["openHours"]["Tuesday"] } - {resdata["operatingHours"]["closeHours"]["Tuesday"] }
+                      </Card.Text>
+                      <Card.Text>
+                        <nobr className="fw-bold">Wednesday: </nobr>
+                        {resdata["operatingHours"]["openHours"]["Wednesday"] } - {resdata["operatingHours"]["closeHours"]["Wednesday"] }
+                      </Card.Text>
+                      <Card.Text>
+                        <nobr className="fw-bold">Thursday: </nobr>
+                        {resdata["operatingHours"]["openHours"]["Thursday"] } - {resdata["operatingHours"]["closeHours"]["Thursday"] }
+                      </Card.Text>
+                      <Card.Text>
+                        <nobr className="fw-bold">Friday: </nobr>
+                        {resdata["operatingHours"]["openHours"]["Friday"] } - {resdata["operatingHours"]["closeHours"]["Friday"] }
+                      </Card.Text>
+                      <Card.Text>
+                        <nobr className="fw-bold">Saturday: </nobr>
+                        {resdata["operatingHours"]["openHours"]["Saturday"] } - {resdata["operatingHours"]["closeHours"]["Saturday"] }
+                      </Card.Text>
+                      <Card.Text>
+                        <nobr className="fw-bold">Sunday: </nobr>
+                        {resdata["operatingHours"]["openHours"]["Sunday"] } - {resdata["operatingHours"]["closeHours"]["Sunday"] }
+                      </Card.Text>
+                      </>
+                      :
+                      <Card.Text>
+                      <nobr className="fw-bold">Hours: </nobr>
+                      {resdata["openHours"]} - {resdata["closeHours"]}
+                      </Card.Text>
+                      }
                       {/* cuisine type */}
                       <Card.Text>
                         <nobr className="fw-bold">Cuisine Type: </nobr>

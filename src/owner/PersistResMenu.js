@@ -1,7 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row, Button } from "react-bootstrap";
+import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } from "react-bootstrap"; // prettier-ignore
 import { v4 as uuidv4 } from "uuid";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import styles from "./Form.module.css";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function PersistResMenu({ menuItems, setMenuItems }) {
@@ -17,9 +20,11 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     setMenuItems(updatedMenuItems);
   };
 
-  const handleSubmitImage = async (index) => {//
-    console.log("you pressed the upload image button")
-    const imageInput = document.querySelector("#imageInput"+index);
+  const [uploadStatus, setUploadStatus] = useState([]);
+
+  const handleSubmitImage = async (index) => {
+    console.log("you pressed the upload image button");
+    const imageInput = document.querySelector("#imageInput" + index);
 
     const file = imageInput.files[0];
     const imageName = uuidv4();
@@ -37,12 +42,13 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     ).then(() => {
       const updatedMenuItems = [...menuItems];
       updatedMenuItems[index]["menuImageUrl"] = imageName;
-      setMenuItems(updatedMenuItems); //
+      setMenuItems(updatedMenuItems);
 
-      // const mainImage = document.querySelector("#mainImage");
-      // mainImage.src = file;
+      const newUploadStatus = [...uploadStatus];
+      newUploadStatus[index] = "Success!";
+      setUploadStatus(newUploadStatus);
     });
-  }
+  };
 
   //function to add form items
   const handleAddItem = () => {
@@ -53,7 +59,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
         menuPrice: "",
         menuDesc: "",
         menuType: "",
-        menuImageUrl:""
+        menuImageUrl: "",
       },
     ]);
   };
@@ -64,117 +70,169 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     setMenuItems(temp);
   };
 
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Your menu will be ordered by the order that you input "Menu Item Type".
+      For example, you input "entree" "dessert" "entree", the menu will display
+      entree first and desserts second.
+    </Tooltip>
+  );
 
+  const [selectedFile, setSelectedFile] = useState([]);
 
   return (
     <>
-    <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
-      {menuItems.map((menu, index) => (
-        <Row className="mb-3" key={index}>
-          <Form.Group controlId="formItem" className="col col-sm-3">
-            <Form.Label>Menu Item</Form.Label>
-            <Form.Control
-            id="validation"
-              required
-              className="form-control"
-              type="text"
-              name="menuItem"
-              placeholder="Enter menu item name"
-              value={menu.menuItem}
-              onChange={(e) => handleChange(index, e)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="formItemPrice" className="col col-sm-3">
-            <Form.Label>Price</Form.Label>
-            <InputGroup className="mb-3">
+      <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
+        {menuItems.map((menu, index) => (
+          <Row className="mb-3" key={index}>
+            <Form.Group className="col col-sm-3">
+              {/* MENU ITEM */}
+              <Form.Label>Menu Item</Form.Label>
               <Form.Control
-              id="validation"
-              required
+                id="validation"
+                required
                 className="form-control"
                 type="text"
-                name="menuPrice"
-                placeholder="Enter price"
-                value={menu.menuPrice}
+                name="menuItem"
+                placeholder="Enter menu item name"
+                value={menu.menuItem}
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group controlId="formItemDesc" className="col col-sm-3">
-            <Form.Label>Description</Form.Label>
-            <InputGroup>
-              <Form.Control
+            </Form.Group>
+            {/* MENU ITEM */}
 
-                as="textarea"
-                aria-label="Menu Description"
+            {/* MENU ITEM PRICE */}
+            <Form.Group className="col col-sm-3">
+              <Form.Label>Price</Form.Label>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  id="validation"
+                  required
+                  className="form-control"
+                  type="text"
+                  name="menuPrice"
+                  placeholder="Enter price"
+                  value={menu.menuPrice}
+                  onChange={(e) => handleChange(index, e)}
+                  pattern="^\d{1,7}$|(?=^.{1,7}$)^\d+\.\d{0,2}$"
+                  onInvalid={(e) => {
+                    e.target.setCustomValidity("Please enter a valid price.");
+                  }}
+                  onInput={(e) => {
+                    e.target.setCustomValidity("");
+                  }}
+                ></Form.Control>
+              </InputGroup>
+            </Form.Group>
+            {/* MENU ITEM PRICE */}
+
+            {/* MENU ITEM DESCRIPTION */}
+            <Form.Group className="col col-sm-3">
+              <Form.Label>Description</Form.Label>
+              <InputGroup>
+                <Form.Control
+                  as="textarea"
+                  aria-label="Menu Description"
+                  className="form-control"
+                  type="text"
+                  name="menuDesc"
+                  placeholder="Enter menu item description"
+                  value={menu.menuDesc}
+                  onChange={(e) => handleChange(index, e)}
+                ></Form.Control>
+              </InputGroup>
+            </Form.Group>
+            {/* MENU ITEM DESCRIPTION */}
+
+            {/* MENU ITEM TYPE */}
+            <Form.Group className="col col-sm-3">
+              <Form.Label>
+                Menu Item Type{" "}
+                <OverlayTrigger
+                  placement="top"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip}
+                >
+                  <span className={styles.infoButton}>
+                    <AiOutlineInfoCircle size={20} className={styles.icon} />
+                  </span>
+                </OverlayTrigger>
+              </Form.Label>
+              <Form.Control
+                id="validation"
+                required
                 className="form-control"
                 type="text"
-                name="menuDesc"
-                placeholder="Enter menu item description"
-                value={menu.menuDesc}
+                name="menuType"
+                placeholder="Enter menu item type"
+                value={menu.menuType}
                 onChange={(e) => handleChange(index, e)}
               ></Form.Control>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group controlId="formItemType" className="col col-sm-3">
-            <Form.Label>Menu Item Type</Form.Label>
-            <Form.Select
-            id="validation"
-            required
-              placeholder="Choose..."
-              className="form-control"
-              name="menuType"
-              value={menu.menuType}
-              onChange={(e) => handleChange(index, e)}
-            >
-              <option value="">Choose...</option>
-              <option value="Appetizer">Appetizer</option>
-              <option value="Entree">Entree</option>
-              <option value="Dessert">Dessert</option>
-            </Form.Select>
-          </Form.Group>
+            </Form.Group>
+            {/* MENU ITEM TYPE */}
 
-          <Form id={"imageForm"+index} className="col col-sm-6">
-            <input id={"imageInput"+index} type="file" accept="image/*" />
-            <Button className="col col-sm-6" onClick={()=> handleSubmitImage(index)}>
-              Upload
-            </Button>
-          </Form>
+            {/* MENU IMAGE */}
+            <Form id={"imageForm" + index} className="col col-sm-6">
+              <Form.Group className="col col-sm-6 d-flex align-items-center">
+                <input
+                  id={"imageInput" + index}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={(e) => {
+                    const newSelectedFile = [...selectedFile];
+                    newSelectedFile[index] = e.target.files[0]?.name;
+                    setSelectedFile(newSelectedFile);
 
+                    const newUploadStatus = [...uploadStatus];
+                    newUploadStatus[index] = "Upload";
+                    setUploadStatus(newUploadStatus);
+                  }}
+                />
+                <FormControl
+                  type="text"
+                  value={selectedFile[index] ?? "No File Selected"}
+                  placeholder="No File Selected"
+                  readOnly
+                  className="mx-2"
+                  style={{ width: "500px" }}
+                />
+                <label
+                  htmlFor={"imageInput" + index}
+                  className="btn btn-primary"
+                  style={{ marginRight: "10px" }}
+                >
+                  Browse
+                </label>
+                <Button onClick={() => handleSubmitImage(index)}>
+                  {uploadStatus[index] ?? "Upload"}
+                </Button>
+                <Button className={styles.removebutton} variant="danger">
+                  Remove Image
+                </Button>
+              </Form.Group>
+            </Form>
+            {/* MENU IMAGE */}
 
-          <Form.Group>
-            {menuItems.length !== 1 && (
-              <Button
-              variant="danger"
-              onClick={() => handleRemove(index)}
-              >
-                Remove
-              </Button>
-            )}
-          </Form.Group>
-        </Row>
-      ))}
-      <Button variant="primary" onClick={handleAddItem}>
-        Add Item
-      </Button>
-      {/* button to remove iteration of the form */}
-      {/* onClick calls upon handleRemoveItem to remove an iteration */}
-    </Form>
-    {/* {
-      menuItems.forEach((menuItem) => {
-        if(menuItem["menuImageUrl"]){
-          return (
-            <img id="mainImage"
-            src={
-              `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
-              menuItem["menuImageUrl"]
-            }
-            alt=""
-            />
-          )
-        }
-        // return arr[index] = num * 2;
-      })
-    } */}
+            {/* onClick calls upon handleRemoveItem to remove an iteration */}
+            {/* button to remove iteration of the form */}
+            <Form.Group>
+              {menuItems.length !== 1 && (
+                <Button
+                  variant="danger"
+                  className="mt-2"
+                  onClick={() => handleRemove(index)}
+                >
+                  Remove Menu Item
+                </Button>
+              )}
+            </Form.Group>
+          </Row>
+        ))}
+        <Button variant="primary" onClick={handleAddItem}>
+          Add Menu Item
+        </Button>
+      </Form>
     </>
   );
 }

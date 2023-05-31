@@ -1,21 +1,18 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Form,
-  InputGroup,
-  Row,
-  Button,
-  Container,
-  FormControl,
-} from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
-
-import ChooseTemplate from "../components/ChooseTemplate";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import ChooseTemplate from "../components/ChooseTemplate";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form, InputGroup, Row, Button, Container, FormControl,  Tooltip, OverlayTrigger, } from "react-bootstrap"; // prettier-ignore
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import styles from "./Form.module.css";
 
 //form for restaurant info such as name, phone number and address
 function InfoEdit({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
+  const [selectedFile, setSelectedFile] = useState("");
+  const [uploadStatus, setUploadStatus] = useState("Upload");
 
   // show the ChooseTemplate modal
   const handleChooseTemplate = () => {
@@ -31,6 +28,22 @@ function InfoEdit({ formData, setFormData }) {
   const handleTemplateSelect = (template) => {
     setFormData({ ...formData, template: template });
   };
+
+  // save the uploaded image name to display
+  const handleFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0].name);
+    }
+  };
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The restaurant banner looks best with the following dimensions:<br></br>
+      ?x?<br></br>
+      It will be displayed at the top of your web page with your restaurant name
+      over it.
+    </Tooltip>
+  );
 
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
@@ -55,6 +68,7 @@ function InfoEdit({ formData, setFormData }) {
         setFormData({ ...formData, mainImageUrl: imageName });
         const mainImage = document.querySelector("#mainImage");
         mainImage.src = file;
+        setUploadStatus("Success!"); // Update the upload status here
       });
     };
 
@@ -73,6 +87,7 @@ function InfoEdit({ formData, setFormData }) {
         {/* React-Bootstrap Row component to align particular components horizontally */}
         <Row className="mb-3">
           {/* Form.Group to group individual components into one component.  */}
+          {/* RES NAME */}
           <Form.Group controlId="formResName" className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Name</Form.Label>
@@ -89,6 +104,9 @@ function InfoEdit({ formData, setFormData }) {
               className="form-control" //className- Bootstrap classes used
             />
           </Form.Group>
+          {/* RES NAME */}
+
+          {/* PHONE */}
           <Form.Group controlId="phone" className="col col-sm-6">
             <Form.Label>Phone Number</Form.Label>
             <InputGroup>
@@ -96,21 +114,23 @@ function InfoEdit({ formData, setFormData }) {
               <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
               <Form.Control
                 id="validation"
-                required
                 aria-label="Phone Number"
                 type="phone"
-                aria-describedby="basic-addon1"
+                title="Enter a 10 digit number"
                 className="form-control"
                 name="phoneNo"
                 value={formData.phoneNo}
+                required
                 onChange={(event) =>
                   setFormData({ ...formData, phoneNo: event.target.value })
                 }
               />
             </InputGroup>
           </Form.Group>
+          {/* PHONE */}
         </Row>
         <Row className="mb-3">
+          {/* ADDRESS */}
           <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
             <Form.Label>Address</Form.Label>
             <Form.Control
@@ -176,30 +196,49 @@ function InfoEdit({ formData, setFormData }) {
               id="validation"
               required
               className="form-control"
-              type="zip"
+              type="text"
               name="zip"
+              pattern="[0-9]{5}"
               value={formData.zip}
               onChange={(event) =>
-                setFormData({ ...formData, zip: event.target.value })
+                setFormData({
+                  ...formData,
+                  zip: event.target.value.replace(/\D/g, ""),
+                })
               }
+              onInvalid={(event) => {
+                event.target.setCustomValidity(
+                  "Please enter a valid 5 digit zipcode"
+                );
+              }}
+              onInput={(event) => {
+                event.target.setCustomValidity("");
+              }}
             />
           </Form.Group>
+          {/* ADDRESS */}
         </Row>
         <Row className="mb-3">
-          <Form.Group controlId="formOpenHours" className="col col-sm-4">
-            <Form.Label>Opening Hours</Form.Label>
+          {/* HOURS */}
+
+          {/* MONDAY */}
+
+          <Form.Group className="col col-sm-4">
+            <Form.Label>Monday: Opening Hours</Form.Label>
             <Form.Select
               id="validation"
               required
               placeholder="Choose..."
               className="form-control"
               name="openhours"
-              value={formData.openhours}
-              onChange={(event) =>
-                setFormData({ ...formData, openhours: event.target.value })
+              value={formData["operatingHours"]["openHours"]["Monday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Monday: event.target.value}}})
+              }
               }
             >
-              <option value="">Choose...</option>
+              <option key="closed" value="Closed">Closed</option>
+
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -215,7 +254,7 @@ function InfoEdit({ formData, setFormData }) {
             </Form.Select>
           </Form.Group>
 
-          <Form.Group controlId="formCloseHours" className="col col-sm-4">
+          <Form.Group className="col col-sm-4">
             <Form.Label>Closing Hours</Form.Label>
             <Form.Select
               id="validation"
@@ -223,12 +262,45 @@ function InfoEdit({ formData, setFormData }) {
               placeholder="Choose..."
               className="form-control"
               name="closehours"
-              value={formData.closehours}
-              onChange={(event) =>
-                setFormData({ ...formData, closehours: event.target.value })
+              value={formData["operatingHours"]["closeHours"]["Monday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Monday: event.target.value}}})
+              }
               }
             >
-              <option value="">Choose...</option>
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {/* MONDAY */}
+          <br></br>
+          {/* TUESDAY */}
+          <Form.Group className="col col-sm-4">
+          <Form.Label>Tuesday: Opening Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="openhours"
+              value={formData["operatingHours"]["openHours"]["Tuesday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Tuesday: event.target.value}}})
+              }
+              }
+            >
+              <option key="closed" value="Closed">Closed</option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -244,6 +316,360 @@ function InfoEdit({ formData, setFormData }) {
             </Form.Select>
           </Form.Group>
 
+          <Form.Group className="col col-sm-4">
+            <Form.Label>Closing Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="closehours"
+              value={formData["operatingHours"]["closeHours"]["Tuesday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Tuesday: event.target.value}}})
+              }
+              }
+            >
+              <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {/* TUESDAY */}
+          <br></br>
+          {/* WEDNESDAY */}
+          <Form.Group className="col col-sm-4">
+          <Form.Label>Wednesday: Opening Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="openhours"
+              value={formData["operatingHours"]["openHours"]["Wednesday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Wednesday: event.target.value}}})
+              }
+              }
+            >
+              <option key="closed" value="Closed">Closed</option>
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="col col-sm-4">
+            <Form.Label>Closing Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="closehours"
+              value={formData["operatingHours"]["closeHours"]["Wednesday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Wednesday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {/* WEDNESDAY */}
+          <br></br>
+
+          {/* THURSDAY */}
+          <Form.Group className="col col-sm-4">
+          <Form.Label>Thursday: Opening Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="openhours"
+              value={formData["operatingHours"]["openHours"]["Thursday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Thursday: event.target.value}}})
+              }
+              }
+            >
+              <option key="closed" value="Closed">Closed</option>
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="col col-sm-4">
+            <Form.Label>Closing Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="closehours"
+              value={formData["operatingHours"]["closeHours"]["Thursday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Thursday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {/* THURSDAY */}
+          <br></br>
+          {/* FRIDAY */}
+          <Form.Group className="col col-sm-4">
+          <Form.Label>Friday: Opening Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="openhours"
+              value={formData["operatingHours"]["openHours"]["Friday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Friday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="col col-sm-4">
+            <Form.Label>Closing Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="closehours"
+              value={formData["operatingHours"]["closeHours"]["Friday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Friday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {/* FRIDAY */}
+          <br></br>
+          {/* SATURDAY */}
+          <Form.Group className="col col-sm-4">
+          <Form.Label>Saturday: Opening Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="openhours"
+              value={formData["operatingHours"]["openHours"]["Saturday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Saturday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="col col-sm-4">
+            <Form.Label>Closing Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="closehours"
+              value={formData["operatingHours"]["closeHours"]["Saturday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Saturday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {/* SATURDAY */}
+          <br></br>
+          {/* SUNDAY */}
+          <Form.Group className="col col-sm-4">
+          <Form.Label>Sunday: Opening Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="openhours"
+              value={formData["operatingHours"]["openHours"]["Sunday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Sunday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="col col-sm-4">
+            <Form.Label>Closing Hours</Form.Label>
+            <Form.Select
+              id="validation"
+              required
+              placeholder="Choose..."
+              className="form-control"
+              name="closehours"
+              value={formData["operatingHours"]["closeHours"]["Sunday"]}
+              onChange={(event) => {
+                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Sunday: event.target.value}}})
+              }
+              }
+            >
+               <option key="closed" value="Closed">Closed</option>
+              {Array.from({ length: 48 }, (_, i) => {
+                const hours24 = Math.floor(i / 2);
+                const hours12 = hours24 % 12 || 12;
+                const minutes = i % 2 === 0 ? "00" : "30";
+                const period = hours24 < 12 ? "AM" : "PM";
+                const time = `${hours12}:${minutes} ${period}`;
+                return (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {/* SUNDAY */}
+
+          {/* HOURS */}
+
+
+
+
+
+          {/* HOURS */}
+        </Row>
+        <Row className="mb-3">
+          {/* CUISINE */}
           <Form.Group controlId="formCuisine" className="col col-sm-6">
             {/* provide a text label as a component */}
             <Form.Label>Restaurant Cuisine Type</Form.Label>
@@ -259,6 +685,9 @@ function InfoEdit({ formData, setFormData }) {
               }
             />
           </Form.Group>
+          {/* CUISINE */}
+
+          {/* TEMPLATE */}
           <Form.Group
             controlId="template"
             className="col col-sm-6 d-flex flex-column justify-content-between"
@@ -287,34 +716,69 @@ function InfoEdit({ formData, setFormData }) {
               </div>
             </div>
           </Form.Group>
+          {/* TEMPLATE */}
         </Row>
       </Form>
+      {/* RES IMAGE */}
       <Row className="d-flex align-items-end">
-        <Form id="imageForm" className="col col-sm-6">
-          <input id="imageInput" type="file" accept="image/*" />
-          <Button className="col col-sm-6" type="submit">
-            Upload
+        <Form.Label>
+          Restaurant Banner Image{" "}
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip}
+          >
+            <span className={styles.removeimage}>
+              <AiOutlineInfoCircle size={20} className={styles.icon} />
+            </span>
+          </OverlayTrigger>
+        </Form.Label>
+        <Form id="imageForm" className="col col-sm-6 d-flex">
+          <input
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileChange}
+          />
+          <FormControl
+            type="text"
+            value={selectedFile}
+            placeholder="No File Selected"
+            readOnly
+            className="mx-2"
+          />
+          <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
+            Browse
+          </label>
+          <Button className="mb-0 mx-2" type="submit">
+            {uploadStatus}
+          </Button>
+          <Button  className={styles.removebutton} variant="danger">
+            Remove Image
           </Button>
         </Form>
+
+        {formData["mainImageUrl"] ? (
+          <img
+            id="mainImage"
+            src={
+              `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
+              formData["mainImageUrl"]
+            }
+            alt=""
+          />
+        ) : (
+          ""
+        )}
       </Row>
-      {formData["mainImageUrl"] ? (
-        <img
-          id="mainImage"
-          src={
-            `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
-            formData["mainImageUrl"]
-          }
-          alt=""
-        />
-      ) : (
-        ""
-      )}
-      {/* <Button onClick={() => console.log(JSON.stringify(formData))}>log</Button> */}
+      {/* RES IMAGE */}
       <ChooseTemplate
         show={showChooseTemplate}
         handleClose={handleChooseTemplateClose}
         handleTemplateSelect={handleTemplateSelect}
       />
+      <br></br>
     </Container>
   );
 }
