@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import InfoEdit from "./InfoEdit";
 import MenuEdit from "./MenuEdit";
 import ReviewEdit from "./ReviewEdit";
-import { Button,  FormControl } from "react-bootstrap";
+import { Button, FormControl } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "../components/NavBarHome";
 import { useNavigate } from "react-router-dom";
 import "./Form.module.css";
-
-
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
@@ -29,8 +27,26 @@ function FormEdit() {
     city: "",
     usstate: "",
     zip: "",
-    operatingHours: {openHours: { Monday: "Closed", Tuesday: "Closed", Wednesday: "Closed", Thursday: "Closed", Friday: "Closed", Saturday: "Closed", Sunday: "Closed" },
-    closeHours: { Monday: "Closed", Tuesday: "Closed", Wednesday: "Closed", Thursday: "Closed", Friday: "Closed", Saturday: "Closed", Sunday: "Closed" },},
+    operatingHours: {
+      openHours: {
+        Monday: "Closed",
+        Tuesday: "Closed",
+        Wednesday: "Closed",
+        Thursday: "Closed",
+        Friday: "Closed",
+        Saturday: "Closed",
+        Sunday: "Closed",
+      },
+      closeHours: {
+        Monday: "Closed",
+        Tuesday: "Closed",
+        Wednesday: "Closed",
+        Thursday: "Closed",
+        Friday: "Closed",
+        Saturday: "Closed",
+        Sunday: "Closed",
+      },
+    },
     // openhours: "",
     // closehours: "",
     mainImageUrl: "",
@@ -192,12 +208,12 @@ function FormEdit() {
   };
 
   function formatPhoneNumber(phoneNumberString) {
-    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
-    if(cleaned == null || phoneNumberString.length<10)return "";
+    var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
+    if (cleaned == null || phoneNumberString.length < 10) return "";
 
     var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-    if (match != null && match.length>=3) {
-      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    if (match != null && match.length >= 3) {
+      return "(" + match[1] + ") " + match[2] + "-" + match[3];
     }
     return "";
   }
@@ -221,7 +237,7 @@ function FormEdit() {
           Prev
         </Button>{" "}
         <Button
-          id = "submitOrNext"
+          id="submitOrNext"
           onClick={() => {
             const FormControl = document.querySelectorAll('[id*="validation"]');
             if (page === FormTitles.length - 1) {
