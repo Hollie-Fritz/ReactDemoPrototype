@@ -9,7 +9,7 @@ import Banner from "./Banner.js";
 import Info from "./Info.js";
 import GoogleMap from "./GoogleMap.js";
 import Menu from "./Menu.js";
-import Template1Cart from "./Template1Cart.js"
+import Template1Cart from "./Template1Cart.js";
 
 // Template1 component
 function Template1(props) {
@@ -48,11 +48,10 @@ function Template1(props) {
           <div className="row no-gutters">
             {/* outer card */}
             <Card className="mb-3" border="dark">
-    
               {/* RESTAURANT BANNER IMAGE */}
-              <Banner data={{ resdata, bucketUrl }}/>
+              <Banner data={{ resdata, bucketUrl }} />
               {/* RESTAURANT BANNER IMAGE */}
-              
+
               <Card.Body style={{ overflow: "hidden" }}>
                 <Row className="d-flex justify-content-between">
                   <Col xs={1} md={5} className="mb-4">
@@ -61,12 +60,12 @@ function Template1(props) {
                       style={{ display: "inline-block", alignItems: "left" }}
                     >
                       {/* RESTAURANT INFO */}
-                      <Info data={{ resdata, averageRating }}/>
+                      <Info data={{ resdata, averageRating }} />
                       {/* RESTAURANT INFO */}
-                      
+
                       <Card.Text>
                         <Stack direction="horizontal" gap={2}>
-                          {/* REVIEW BUTTONS */ }
+                          {/* REVIEW BUTTONS */}
                           <Button
                             className={`mb-2 ${styles.reviewButton}`}
                             type="submit"
@@ -81,76 +80,61 @@ function Template1(props) {
                           >
                             View Reviews
                           </Button>{" "}
-                          {/* REVIEW BUTTONS */ }
-                          
-                          {/* CHAT */ }
+                          {/* REVIEW BUTTONS */}
+                          {/* CHAT */}
                           {currentUserId && (
                             <Button
                               onClick={() =>
                                 navigate(`/chat/${currentUserId}/${id}`, {
                                   state: {
-                                    name: resdata["name"],
-                                  },
+                                    name: resdata["name"]
+                                  }
                                 })
                               }
                             >
                               Chat
                             </Button>
                           )}
-                           {/* CHAT */ }
+                          {/* CHAT */}
                         </Stack>
                       </Card.Text>
                     </Card>
                   </Col>
-                  <Col xs={12} md={6} className="mb-4 d-flex justify-content-center"
-                      style={{ display: "inline-block", alignItems: "right" }}
+                  <Col
+                    xs={12}
+                    md={6}
+                    className="mb-4 d-flex justify-content-center"
+                    style={{ display: "inline-block", alignItems: "right" }}
                   >
-                  <Card className="border-0">
-                        {/* MAP */}
-                    <GoogleMap data={frameRef}/>
-                        {/* MAP */}
-                  </Card>
+                    <Card className="border-0">
+                      {/* MAP */}
+                      <GoogleMap data={frameRef} />
+                      {/* MAP */}
+                    </Card>
                   </Col>
                 </Row>
               </Card.Body>
-              
+
               <br></br>
 
               <Card.Body style={{ overflow: "hidden" }}>
                 <Card.Title as="h4"></Card.Title>
                 {/* MENU */}
-               <Menu data={{groupedFoodData, handleAddClick, showAddedMessage, cart}}/>
-               
-              </Card.Body>
-              {/* View Cart */}
-              {/* <Button
-                className={`${styles["button-class"]} mb-2`}
-                variant="primary"
-                type="submit"
-                onClick={handleShowCartClick}
-              >
-                View Cart ({cartItemCount})
-                <FaShoppingCart
-                  className={`${styles["cart-icon"]} ${
-                    viewCartClicked ? styles["roll-off"] : ""
-                  }`}
+                <Menu
+                  data={{
+                    groupedFoodData,
+                    handleAddClick,
+                    showAddedMessage,
+                    cart
+                  }}
                 />
-              </Button> */}
+              </Card.Body>
             </Card>
           </div>
         </Row>
       </Container>
-      {/* <Cart
-        show={showCart}
-        handleClose={handleShowCartClose}
-        fooddata={fooddata}
-        cart={cart}
-        setCart={setcart}
-        userId={resdata["userId"]}
-        name={resdata["name"]}
-      /> */}
 
-      {/* REVIEW POPUP */ }
+      {/* REVIEW POPUP */}
       <ViewReview
         show={showViewReviewForm}
         handleClose={handleViewReviewFormClose}
@@ -164,17 +148,20 @@ function Template1(props) {
         userId={id}
         name={resdata["name"]}
       />
-      {/* REVIEW POPUP */ }
-
-  <Col md={3} md={3} className="position-fixed" style={{top: 0, right: 0}}>
-  <Template1Cart
-    fooddata={fooddata}
-    cart={cart}
-    setCart={setcart}
-    userId={resdata["userId"]}
-    name={resdata["name"]}
-  />
-</Col>
+      {/* REVIEW POPUP */}
+      <Col
+        md={3}
+        className="position-fixed"
+        style={{ top: "50%", right: 0, transform: "translateY(-50%)" }}
+      >
+        <Template1Cart
+          fooddata={fooddata}
+          cart={cart}
+          setCart={setcart}
+          userId={resdata["userId"]}
+          name={resdata["name"]}
+        />
+      </Col>
     </>
   );
 }
