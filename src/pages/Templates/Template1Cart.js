@@ -187,9 +187,8 @@ function Template1Cart(props) {
   // Replace Modal with Card component
   return (
     <div className="cart-container">
-      <Card
+    <Card
         className="cart-card"
-        style={{ maxHeight: "500px", overflowY: "auto" }}
       >
         <Card.Title>Your Current Pickup Order</Card.Title>
         {message === "Order completed" ? (

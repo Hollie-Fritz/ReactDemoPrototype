@@ -11,6 +11,7 @@ return(
           return (
             <div key={foodType}>
               <h2>{foodType}</h2>
+              <br></br><br></br>
               <Row md={1} lg={3} className="g-4">
                 {foodItems.map((item, index) => {
                   return (
@@ -67,7 +68,9 @@ return(
                     </Col>
                   );
                 })}
+                
               </Row>
+              <br></br><br></br>
             </div>
           );
         }

@@ -45,6 +45,7 @@ function Template1(props) {
     <>
       <Container className="justify-content-center" fluid>
         <Row className="m-auto align-self-center">
+          <Col className="order-first"  xs={8} md={9}>
           <div className="row no-gutters">
             {/* outer card */}
             <Card className="mb-3" border="dark">
@@ -84,6 +85,7 @@ function Template1(props) {
                           {/* CHAT */}
                           {currentUserId && (
                             <Button
+                            className={`mb-2 ${styles.reviewButton}`}
                               onClick={() =>
                                 navigate(`/chat/${currentUserId}/${id}`, {
                                   state: {
@@ -114,7 +116,6 @@ function Template1(props) {
                   </Col>
                 </Row>
               </Card.Body>
-
               <br></br>
 
               <Card.Body style={{ overflow: "hidden" }}>
@@ -131,6 +132,16 @@ function Template1(props) {
               </Card.Body>
             </Card>
           </div>
+          </Col>
+          <Col className="order-last" xs={4} md={3}>
+          <Template1Cart
+          fooddata={fooddata}
+          cart={cart}
+          setCart={setcart}
+          userId={resdata["userId"]}
+          name={resdata["name"]}
+        />
+          </Col>
         </Row>
       </Container>
 
@@ -154,13 +165,7 @@ function Template1(props) {
         className="position-fixed"
         style={{ top: "50%", right: 0, transform: "translateY(-50%)" }}
       >
-        <Template1Cart
-          fooddata={fooddata}
-          cart={cart}
-          setCart={setcart}
-          userId={resdata["userId"]}
-          name={resdata["name"]}
-        />
+        
       </Col>
     </>
   );

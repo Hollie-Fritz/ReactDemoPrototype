@@ -228,7 +228,9 @@ export function ViewWebPage() {
         return (
           <>
             {" "}
-            <NavBarHome /> <Template1 data={webPageVars} />{" "}
+            <NavBarHome /> 
+            <br></br>
+            <Template1 data={webPageVars} />{" "}
           </>
         );
 
