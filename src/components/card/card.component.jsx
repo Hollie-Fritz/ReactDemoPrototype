@@ -1,5 +1,6 @@
+import React from "react";
 import { Card, CardGroup, ListGroup, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ViewReview from "../rating/ViewReview";
 import AverageRating from "../rating/AverageRating";
 import { useNavigate } from "react-router-dom";

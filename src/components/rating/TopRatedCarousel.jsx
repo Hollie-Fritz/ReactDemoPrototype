@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 import bg from "../../assests/bg.png";
-
+import { useNavigate } from "react-router-dom";
 
 function TopRatedCarousel() {
   const [topRatedRestaurants, setTopRatedRestaurants] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchRestaurants = async () => {
       const restaurantUrl = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/recommendRestaurants`;
@@ -22,12 +22,12 @@ function TopRatedCarousel() {
       {topRatedRestaurants.map((restaurant) => {
         const imageUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + restaurant["mainImageUrl"];
 
-        //const bucketUrl ="https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" +resdata["mainImageUrl"];
-        //const imageUrl = `https://<domain>/<image-path>/${restaurant.resImageUrl}`;
-
-
         return (
-          <Carousel.Item key={restaurant.name}>
+          <Carousel.Item   key={restaurant} onClick={() => {
+            navigate(`/r/${restaurant["userId"]}`)
+            window.location.reload()
+          }
+          }>
             <img
               className="d-block w-100"
               src={restaurant["mainImageUrl"] === ""? bg:imageUrl}
