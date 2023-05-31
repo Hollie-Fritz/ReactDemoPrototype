@@ -36,6 +36,7 @@ function ReviewForm({ show, handleClose, userId, name }) {
     //Reset form after submission
     setRating(1);
     setReview("");
+    window.location.reload();
     handleClose();
   };
 
@@ -74,7 +75,12 @@ function ReviewForm({ show, handleClose, userId, name }) {
                 rows={3}
                 value={review}
                 onChange={(event) => setReview(event.target.value)}
+                style={{ height: "100px" }}
+                maxLength="250"
               />
+              <div style={{ textAlign: "left" }}>
+                {250 - review.length} characters
+              </div>
             </Form.Group>
             <br />
             <Button variant="primary" type="submit">

@@ -54,10 +54,13 @@ const Contact = () => {
         </Card.Body>
         <ListGroup className="list-group-flush">
           <ListGroup.Item style={{ textAlign: "center" }}>
-            Email: <Card.Link href="#"> {card.email}</Card.Link>
+            Email: <Card.Link href={`mailto:${card.email}`}> {card.email}</Card.Link>
           </ListGroup.Item>
           <ListGroup.Item style={{ textAlign: "center" }}>
-            Github: <Card.Link href="#">{card.github}</Card.Link>
+          Github:{" "}
+            <Card.Link href={card.github} target="_blank" rel="noopener noreferrer">
+              {card.github}
+            </Card.Link>
           </ListGroup.Item>
         </ListGroup>
       </Card>

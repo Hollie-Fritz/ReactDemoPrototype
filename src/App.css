@@ -4,3 +4,9 @@
   --font-base: 'Cormorant Upright', serif !important;
   --font-alt: 'Open Sans', sans-serif !important;
 }
+
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

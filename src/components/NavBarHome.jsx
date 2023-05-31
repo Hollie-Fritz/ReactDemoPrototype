@@ -42,32 +42,18 @@ let NavBarHome = () => {
               <Navbar.Collapse id="navbarScroll">
                 <Nav className="mr-auto">
                   <Nav.Link href="/about" style={{fontWeight: "bold"}}>About</Nav.Link>
-                  <Nav.Link href="/contact" style={{fontWeight: "bold"}}>Contacts</Nav.Link>
+                  <Nav.Link href="/contact" style={{fontWeight: "bold"}}>Contact</Nav.Link>
                   {user?
                   <>
-                  {/* <NavDropdown
-                    title="Customer"
-                    id="basic-nav-dropdown"
-                    style={{fontWeight: "bold"}}
-                  >
-                    <NavDropdown.Item
-                          href="/orderStatus"
-                        >
-                        My Orders
-                    </NavDropdown.Item>
-                  </NavDropdown> */}
-                  <Nav.Link
-                    href="/orderStatus"
+                  <Nav.Link 
+                    href="/orderStatus"  
                     style={{fontWeight: "bold"}}
                   > My Orders </Nav.Link>
                   <Nav.Link
                     href="/owner"
                     style={{fontWeight: "bold"}}
                   > Merchant Portal </Nav.Link>
-                  {/* <Navbar.Text className="fw-bold" style={{ position: "absolute", right: 15, fontSize: "20px", color: "#fff" }}>
-                      Welcome, {user.username}
-                    </Navbar.Text> */}
-                  <Nav.Link
+                  <Nav.Link 
                     href="/chat"
                     style={{fontWeight: "bold", position: "absolute", right: 200}}
                   > Chat </Nav.Link>

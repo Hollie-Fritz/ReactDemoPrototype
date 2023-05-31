@@ -70,7 +70,6 @@ const CardList = ({ restaurants }) => {
 
     return paginationItems;
   };
-
   return (
     <>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

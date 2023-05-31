@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect } from "react";
 
 import { Authenticator, useAuthenticator, View } from "@aws-amplify/ui-react";
@@ -11,7 +12,7 @@ export function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
   const location = useLocation();
   const navigate = useNavigate();
-  let from = location.state?.from?.pathname || "/owner"; //redirects to "/" if successful
+  var from = (location.state && location.state.from && location.state.from.pathname) || "/owner";
   useEffect(() => {
     if (route === "authenticated") {
       console.log("redirecting");
