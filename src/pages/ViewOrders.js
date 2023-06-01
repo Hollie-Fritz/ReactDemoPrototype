@@ -179,6 +179,21 @@ function ViewOrder() {
     return items;
   };
 
+  async function deleteOrder(orderId){
+    const body = { orderId: orderId };
+
+    await fetch(
+      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order",
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }
+    ).then(()=>{
+      setOrders(prevState => prevState.filter(order => order.id !== orderId));
+    });
+  }
+
   //rendering the component
   return (
     <>
@@ -193,6 +208,7 @@ function ViewOrder() {
               loadingState={loadingState}
               updateOrderStatus={updateOrderStatus}
               navigate={navigate}
+              deleteOrder={deleteOrder}
             />
           ))}
         </Row>
@@ -211,6 +227,7 @@ function OrderCard({
   loadingState,
   updateOrderStatus,
   navigate,
+  deleteOrder
 }) {
   //convert the order's dateTime string to a Date object
   const orderDateTime = new Date(order["dateTime"]);
@@ -304,6 +321,14 @@ function OrderCard({
               </Col>
             </Form.Group>
             <OrderProgress stage={order["progress"]} />
+            <Button
+                style={{ marginTop: "20px" }}
+                onClick={()=>
+                  deleteOrder(order["id"])
+                }
+              >
+                Delete
+            </Button>
             {user && order["customerId"] !== "" && (
               <Button
                 style={{ marginTop: "20px" }}

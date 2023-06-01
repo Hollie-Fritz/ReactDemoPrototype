@@ -7,7 +7,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 
 function Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
-  const [customerName, setCustomerName] = useState("anonymous");
+  const [customerName, setCustomerName] = useState("");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null); //empty or order completed
   const [utensils, setUtensils] = useState(false);
@@ -384,7 +384,15 @@ function Cart(props) {
                   label="Name"
                   onChange={handleCustomerName}
                 >
-                  <Form.Control type="Name" placeholder="Enter your name" />
+                  <Form.Control type="Name" placeholder="Enter your name" id = "validation"
+                                  required
+                                  onInvalid={(event) => {
+                                    event.target.setCustomValidity(
+                                      "Please enter a name"
+                                    );
+                                  }}
+                                  value ={customerName}
+                  />
                 </FloatingLabel>
                 {/* NAME */}
               </Form>
@@ -449,7 +457,25 @@ function Cart(props) {
                 </Button>
               </>
             ) : (
-              <Button variant="primary" onClick={() => setCheckout(true)}>
+              <Button variant="primary" onClick={() => {
+                const FormControl = document.querySelectorAll('[id*="validation"]');
+                console.log(FormControl.length);
+                let isValid = true;
+                // force validity to go in descending order instead of ascending order
+                for (let index = FormControl.length - 1; index >= 0; index--) {
+                  if (!FormControl[index].checkValidity()) {
+                    console.log("is false");
+                    isValid = false;
+                    FormControl[index].reportValidity();
+                  }
+                }
+                if (!isValid) {
+                  // enables next button to work by incrementing
+                  return;
+                }
+                setCheckout(true)
+              }
+              }>
                 Review Order
               </Button>
             )}

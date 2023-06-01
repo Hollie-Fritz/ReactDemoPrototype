@@ -5,14 +5,16 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Hub } from "aws-amplify";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router";
 
 function PopUp(){
   const { user } = useAuthenticator((context) => [
     context.user, 
   ]);
+  const navigate = useNavigate();
 
     // const dispatch = useDispatch();
-    var ws = null;
+  var ws = null;
 
   useEffect(() => {
     console.log("rerendering popup");
@@ -64,15 +66,14 @@ function PopUp(){
                 let message = JSON.parse(evt.data);
                 // addMessageToList(message);
                 console.log(message + " is message data");
-                console.log("you have a new customer: " + message["customerName"]);                if (message["updateType"] === "Order") {
+                console.log("you have a new customer: " + message["customerName"]);                
+                if (message["updateType"] === "Order") {
                   toast(
-                  "You have a new order from " + message["customerName"] + "!"
+                    <div onClick ={() => navigate("/orders")}>You have a new order from {message["customerName"]}!</div>
                   );
                 } else if (message["updateType"] === "Progress") {
                   toast(
-                    "Your order from " +
-                      message["restaurantName"] +
-                      " has a new update!"
+                    <div onClick ={() => navigate("/orderStatus")}>Your order from {message["customerName"]} has a new update!</div>
                   );
                 }
               };

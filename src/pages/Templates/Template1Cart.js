@@ -7,7 +7,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 
 function Template1Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
-  const [customerName, setCustomerName] = useState("anonymous");
+  const [customerName, setCustomerName] = useState("");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null); //empty or order completed
   const [utensils, setUtensils] = useState(false);
@@ -255,7 +255,15 @@ function Template1Cart(props) {
                       label="Name"
                       onChange={handleCustomerName}
                     >
-                      <Form.Control type="Name" placeholder="Enter your name" />
+                    <Form.Control type="Name" placeholder="Enter your name" class="validation"
+                                    required
+                                    onInvalid={(event) => {
+                                      event.target.setCustomValidity(
+                                        "Please enter a name"
+                                      );
+                                    }}
+                                    value ={customerName}
+                    />
                     </FloatingLabel>
                     {/* NAME */}
                   </Form>
@@ -487,8 +495,27 @@ function Template1Cart(props) {
               ) : (
                 <Button
                   variant="primary"
-                  onClick={() => setCheckout(true)}
-                  disabled={isCartEmpty()}
+                  onClick={() => {
+                    const FormControl = document.querySelectorAll('.validation');
+                    console.log(FormControl.length);
+                    let isValid = true;
+                    // force validity to go in descending order instead of ascending order
+                    for (let index = FormControl.length - 1; index >= 0; index--) {
+                      if (!FormControl[index].checkValidity()) {
+                        console.log("is false");
+                        isValid = false;
+                        FormControl[index].reportValidity();
+                      }
+                    }
+                    if (!isValid) {
+                      // enables next button to work by incrementing
+                      return;
+                    }
+                    setCheckout(true)
+                  }
+                  }
+                  disabled={
+                    isCartEmpty()}
                 >
                   Review Order
                 </Button>
