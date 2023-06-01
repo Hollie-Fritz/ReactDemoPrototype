@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaGithubAlt, FaQuestion} from "react-icons/fa";
 import { AiTwotoneHome,AiTwotonePhone } from "react-icons/ai";
+
 import "./footer.css"
 let FooterHomePage = () => {
   return (
@@ -33,9 +34,9 @@ let FooterHomePage = () => {
                   <a href="/contact" className="link"><AiTwotonePhone size={18} /></a>
                 </li>
                 <li>
-                  <a 
-                  href="https://github.com/Hollie-Fritz/ReactDemoPrototype" 
-                  target="_blank"><FaGithubAlt size={18} 
+                  <a
+                  href="https://github.com/Hollie-Fritz/ReactDemoPrototype"
+                  target="_blank"><FaGithubAlt size={18}
                   className="link"/></a>
                 </li>
               </ul>
