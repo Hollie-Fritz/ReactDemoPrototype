@@ -224,11 +224,10 @@ function InfoEdit({ formData, setFormData }) {
           </Form.Group>
           {/* ADDRESS */}
         </Row>
-        <Row className="mb-3">
           {/* HOURS */}
 
           {/* MONDAY */}
-
+          <Row className="mb-3">
           <Form.Group className="col col-sm-4">
             <Form.Label>Monday: Opening Hours</Form.Label>
             <Form.Select
@@ -289,9 +288,11 @@ function InfoEdit({ formData, setFormData }) {
               })}
             </Form.Select>
           </Form.Group>
+
           {/* MONDAY */}
           <br></br>
           {/* TUESDAY */}
+          <Row className="mb-3">
           <Form.Group className="col col-sm-4">
           <Form.Label>Tuesday: Opening Hours</Form.Label>
             <Form.Select
@@ -351,9 +352,11 @@ function InfoEdit({ formData, setFormData }) {
               })}
             </Form.Select>
           </Form.Group>
+          </Row>
           {/* TUESDAY */}
           <br></br>
           {/* WEDNESDAY */}
+          <Row className="mb-3">
           <Form.Group className="col col-sm-4">
           <Form.Label>Wednesday: Opening Hours</Form.Label>
             <Form.Select
@@ -414,10 +417,12 @@ function InfoEdit({ formData, setFormData }) {
               })}
             </Form.Select>
           </Form.Group>
+          </Row>
           {/* WEDNESDAY */}
-          <br></br>
 
+          <br></br>
           {/* THURSDAY */}
+          <Row className="mb-3">
           <Form.Group className="col col-sm-4">
           <Form.Label>Thursday: Opening Hours</Form.Label>
             <Form.Select
@@ -477,10 +482,11 @@ function InfoEdit({ formData, setFormData }) {
                 );
               })}
             </Form.Select>
-          </Form.Group>
+          </Form.Group></Row>
           {/* THURSDAY */}
           <br></br>
           {/* FRIDAY */}
+          <Row className="mb-3">
           <Form.Group className="col col-sm-4">
           <Form.Label>Friday: Opening Hours</Form.Label>
             <Form.Select
@@ -539,10 +545,11 @@ function InfoEdit({ formData, setFormData }) {
                 );
               })}
             </Form.Select>
-          </Form.Group>
+          </Form.Group></Row>
           {/* FRIDAY */}
           <br></br>
           {/* SATURDAY */}
+          <Row className="mb-3">
           <Form.Group className="col col-sm-4">
           <Form.Label>Saturday: Opening Hours</Form.Label>
             <Form.Select
@@ -601,10 +608,11 @@ function InfoEdit({ formData, setFormData }) {
                 );
               })}
             </Form.Select>
-          </Form.Group>
+          </Form.Group></Row>
           {/* SATURDAY */}
           <br></br>
           {/* SUNDAY */}
+          <Row className="mb-3">
           <Form.Group className="col col-sm-4">
           <Form.Label>Sunday: Opening Hours</Form.Label>
             <Form.Select
@@ -663,7 +671,7 @@ function InfoEdit({ formData, setFormData }) {
                 );
               })}
             </Form.Select>
-          </Form.Group>
+          </Form.Group></Row>
           {/* SUNDAY */}
 
           {/* HOURS */}
