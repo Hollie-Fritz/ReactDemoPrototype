@@ -52,12 +52,12 @@ function MenuEdit({ menuItems, setMenuItems }) {
   };
 
   const handleRemoveImage = async (index) => {
-    setMenuItems(prevMenuItems => { 
+    setMenuItems(prevMenuItems => {
       var newData = [...prevMenuItems]
       newData[index]["menuImageUrl"] = "";
       return newData;
     })
-    setUploadStatus(prevUploadStatus => { 
+    setUploadStatus(prevUploadStatus => {
       var newData = [...prevUploadStatus]
       newData[index] = "Upload";
       return newData;
@@ -87,9 +87,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Your menu will be ordered by the order that you input "Menu Item Type".
-      For example, you input "entree" "dessert" "entree", the menu will display
-      entree first and desserts second.
+       Menu items will be sequentially grouped and displayed according to the 'Menu Item Type' you specify during input.
     </Tooltip>
   );
 
