@@ -48,11 +48,22 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
       newUploadStatus[index] = "Success!";
       setUploadStatus(newUploadStatus);
-
-      // const mainImage = document.querySelector("#mainImage");
-      // mainImage.src = file;
     });
   };
+
+  const handleRemoveImage = async (index) => {
+    setMenuItems(prevMenuItems => { 
+      var newData = [...prevMenuItems]
+      newData[index]["menuImageUrl"] = "";
+      return newData;
+    })
+    setUploadStatus(prevUploadStatus => { 
+      var newData = [...prevUploadStatus]
+      newData[index] = "Upload";
+      return newData;
+    })
+    console.log(menuItems);
+  }
 
   //function to add form items
   const handleAddItem = () => {
@@ -208,9 +219,16 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 <Button onClick={() => handleSubmitImage(index)}>
                   {uploadStatus[index] ?? "Upload"}
                 </Button>
-                <Button  className={styles.removebutton} variant="danger">
-            Remove Image
-          </Button>
+                <Button className={styles.removebutton} variant="danger" onClick={() =>
+                  {
+                    handleRemoveImage(index)
+                  }
+                }>
+                  {uploadStatus[index] === "Success!" ? "Remove Image" : "Image Removed"}
+                </Button>
+                {/* <Button  className={styles.removebutton} variant="danger">
+                  Remove Image
+                </Button> */}
               </Form.Group>
             </Form>
             {/* MENU IMAGE */}

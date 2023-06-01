@@ -21,6 +21,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
   };
 
   const [uploadStatus, setUploadStatus] = useState([]);
+  const [selectedFile, setSelectedFile] = useState([]);
 
   const handleSubmitImage = async (index) => {
     console.log("you pressed the upload image button");
@@ -50,6 +51,19 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     });
   };
 
+  const handleRemoveImage = async (index) => {
+    setMenuItems(prevMenuItems => { 
+      var newData = [...prevMenuItems]
+      newData[index]["menuImageUrl"] = "";
+      return newData;
+    })
+    setUploadStatus(prevUploadStatus => { 
+      var newData = [...prevUploadStatus]
+      newData[index] = "Upload";
+      return newData;
+    })
+  }
+
   //function to add form items
   const handleAddItem = () => {
     setMenuItems([
@@ -78,7 +92,6 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     </Tooltip>
   );
 
-  const [selectedFile, setSelectedFile] = useState([]);
 
   return (
     <>
@@ -183,15 +196,19 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                     const newSelectedFile = [...selectedFile];
                     newSelectedFile[index] = e.target.files[0]?.name;
                     setSelectedFile(newSelectedFile);
-
                     const newUploadStatus = [...uploadStatus];
                     newUploadStatus[index] = "Upload";
-                    setUploadStatus(newUploadStatus);
+                    setUploadStatus(prevUploadStatus =>{
+                      const newUploadStatus = [...prevUploadStatus];
+                      newUploadStatus[index] = "Upload";
+                      return newUploadStatus;
+                    });
                   }}
                 />
                 <FormControl
                   type="text"
-                  value={selectedFile[index] ?? "No File Selected"}
+                  id = {"formControl"+index}
+                  value={selectedFile[index]?? "No File Selected"}
                   placeholder="No File Selected"
                   readOnly
                   className="mx-2"
@@ -207,8 +224,12 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 <Button onClick={() => handleSubmitImage(index)}>
                   {uploadStatus[index] ?? "Upload"}
                 </Button>
-                <Button className={styles.removebutton} variant="danger">
-                  Remove Image
+                <Button className={styles.removebutton} variant="danger" onClick={() =>
+                  {
+                    handleRemoveImage(index)
+                  }
+                }>
+                  {uploadStatus[index] === "Success!" ? "Remove Image" : "Image Removed"}
                 </Button>
               </Form.Group>
             </Form>
