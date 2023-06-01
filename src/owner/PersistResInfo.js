@@ -10,6 +10,7 @@ import styles from "./Form.module.css";
 // form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState("Upload");
 
   // show the ChooseTemplate modal
   const handleChooseTemplate = () => {
@@ -71,7 +72,10 @@ function PersistResInfo({ formData, setFormData }) {
         setFormData({ ...formData, mainImageUrl: imageName });
         const mainImage = document.querySelector("#mainImage");
         mainImage.src = file;
-      });
+      }).then(()=>{
+        setUploadStatus("Success!");
+      })
+
     };
 
     imageForm.addEventListener("submit", handleSubmit);
@@ -81,6 +85,17 @@ function PersistResInfo({ formData, setFormData }) {
     };
     // eslint-disable-next-line
   }, [formData]);
+
+  const handleRemove = async (event) => {
+    event.preventDefault();
+    setFormData(prevState => { 
+      var newData = {...prevState}
+      newData["mainImageUrl"]= "";
+      return newData;
+    })
+    setUploadStatus("Upload")
+  }
+
 
   return (
     //using ‘container’ and ‘mb-3’ bootstrap classes
@@ -757,9 +772,9 @@ function PersistResInfo({ formData, setFormData }) {
             Browse
           </label>
           <Button type="submit" className="mb-0 mx-2">
-            Upload
+            {uploadStatus}
           </Button>
-          <Button className={styles.removebutton} variant="danger">
+          <Button className={styles.removebutton} variant="danger" onClick = {handleRemove}>
             Remove Image
           </Button>
         </Form>
