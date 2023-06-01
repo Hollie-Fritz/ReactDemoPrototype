@@ -45,6 +45,12 @@ function InfoEdit({ formData, setFormData }) {
     </Tooltip>
   );
 
+  const renderTooltipTwo = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      If no template is chosen the default template will be chosen.
+    </Tooltip>
+  );
+
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
     const imageInput = document.querySelector("#imageInput");
@@ -702,6 +708,15 @@ function InfoEdit({ formData, setFormData }) {
               </Button>
               <div>
                 <Form.Label>Selected Template</Form.Label>
+                <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltipTwo}
+          >
+            <span className={styles.removeimage}>
+              <AiOutlineInfoCircle size={20} className={styles.icon} />
+            </span>
+          </OverlayTrigger>
                 <FormControl
                   id="validation"
                   required

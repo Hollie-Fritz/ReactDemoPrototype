@@ -64,8 +64,8 @@ function PersistResInfo({ formData, setFormData }) {
           method: "PUT",
           body: file,
           headers: {
-            "Content-type": file.type,
-          },
+            "Content-type": file.type
+          }
         }
       ).then(() => {
         setFormData({ ...formData, mainImageUrl: imageName });
@@ -81,6 +81,12 @@ function PersistResInfo({ formData, setFormData }) {
     };
     // eslint-disable-next-line
   }, [formData]);
+
+  const renderTooltipTwo = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      If no template is chosen the default template will be chosen.
+    </Tooltip>
+  );
 
   return (
     //using ‘container’ and ‘mb-3’ bootstrap classes
@@ -127,7 +133,7 @@ function PersistResInfo({ formData, setFormData }) {
                 onChange={(event) =>
                   setFormData({
                     ...formData,
-                    phoneNo: event.target.value.replace(/\D/g, ""),
+                    phoneNo: event.target.value.replace(/\D/g, "")
                   })
                 }
                 onInvalid={(event) => {
@@ -216,7 +222,7 @@ function PersistResInfo({ formData, setFormData }) {
               onChange={(event) =>
                 setFormData({
                   ...formData,
-                  zip: event.target.value.replace(/\D/g, ""),
+                  zip: event.target.value.replace(/\D/g, "")
                 })
               }
               onInvalid={(event) => {
@@ -246,11 +252,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="openhours"
               value={formData["operatingHours"]["openHours"]["Monday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Monday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    openHours: {
+                      ...formData["operatingHours"]["openHours"],
+                      Monday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-              <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
 
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
@@ -277,11 +293,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="closehours"
               value={formData["operatingHours"]["closeHours"]["Monday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Monday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    closeHours: {
+                      ...formData["operatingHours"]["closeHours"],
+                      Monday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -300,7 +326,7 @@ function PersistResInfo({ formData, setFormData }) {
           <br></br>
           {/* TUESDAY */}
           <Form.Group className="col col-sm-4">
-          <Form.Label>Tuesday: Opening Hours</Form.Label>
+            <Form.Label>Tuesday: Opening Hours</Form.Label>
             <Form.Select
               id="validation"
               required
@@ -309,11 +335,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="openhours"
               value={formData["operatingHours"]["openHours"]["Tuesday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Tuesday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    openHours: {
+                      ...formData["operatingHours"]["openHours"],
+                      Tuesday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-              <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -339,11 +375,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="closehours"
               value={formData["operatingHours"]["closeHours"]["Tuesday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Tuesday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    closeHours: {
+                      ...formData["operatingHours"]["closeHours"],
+                      Tuesday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-              <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -362,7 +408,7 @@ function PersistResInfo({ formData, setFormData }) {
           <br></br>
           {/* WEDNESDAY */}
           <Form.Group className="col col-sm-4">
-          <Form.Label>Wednesday: Opening Hours</Form.Label>
+            <Form.Label>Wednesday: Opening Hours</Form.Label>
             <Form.Select
               id="validation"
               required
@@ -371,12 +417,24 @@ function PersistResInfo({ formData, setFormData }) {
               name="openhours"
               value={formData["operatingHours"]["openHours"]["Wednesday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Wednesday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    openHours: {
+                      ...formData["operatingHours"]["openHours"],
+                      Wednesday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-              <option key="closed" value="Closed">Closed</option>
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -402,11 +460,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="closehours"
               value={formData["operatingHours"]["closeHours"]["Wednesday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Wednesday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    closeHours: {
+                      ...formData["operatingHours"]["closeHours"],
+                      Wednesday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -426,7 +494,7 @@ function PersistResInfo({ formData, setFormData }) {
 
           {/* THURSDAY */}
           <Form.Group className="col col-sm-4">
-          <Form.Label>Thursday: Opening Hours</Form.Label>
+            <Form.Label>Thursday: Opening Hours</Form.Label>
             <Form.Select
               id="validation"
               required
@@ -435,12 +503,24 @@ function PersistResInfo({ formData, setFormData }) {
               name="openhours"
               value={formData["operatingHours"]["openHours"]["Thursday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Thursday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    openHours: {
+                      ...formData["operatingHours"]["openHours"],
+                      Thursday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-              <option key="closed" value="Closed">Closed</option>
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -466,11 +546,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="closehours"
               value={formData["operatingHours"]["closeHours"]["Thursday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Thursday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    closeHours: {
+                      ...formData["operatingHours"]["closeHours"],
+                      Thursday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -489,7 +579,7 @@ function PersistResInfo({ formData, setFormData }) {
           <br></br>
           {/* FRIDAY */}
           <Form.Group className="col col-sm-4">
-          <Form.Label>Friday: Opening Hours</Form.Label>
+            <Form.Label>Friday: Opening Hours</Form.Label>
             <Form.Select
               id="validation"
               required
@@ -498,11 +588,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="openhours"
               value={formData["operatingHours"]["openHours"]["Friday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Friday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    openHours: {
+                      ...formData["operatingHours"]["openHours"],
+                      Friday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -528,11 +628,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="closehours"
               value={formData["operatingHours"]["closeHours"]["Friday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Friday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    closeHours: {
+                      ...formData["operatingHours"]["closeHours"],
+                      Friday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -551,7 +661,7 @@ function PersistResInfo({ formData, setFormData }) {
           <br></br>
           {/* SATURDAY */}
           <Form.Group className="col col-sm-4">
-          <Form.Label>Saturday: Opening Hours</Form.Label>
+            <Form.Label>Saturday: Opening Hours</Form.Label>
             <Form.Select
               id="validation"
               required
@@ -560,11 +670,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="openhours"
               value={formData["operatingHours"]["openHours"]["Saturday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Saturday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    openHours: {
+                      ...formData["operatingHours"]["openHours"],
+                      Saturday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -590,11 +710,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="closehours"
               value={formData["operatingHours"]["closeHours"]["Saturday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Saturday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    closeHours: {
+                      ...formData["operatingHours"]["closeHours"],
+                      Saturday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -613,7 +743,7 @@ function PersistResInfo({ formData, setFormData }) {
           <br></br>
           {/* SUNDAY */}
           <Form.Group className="col col-sm-4">
-          <Form.Label>Sunday: Opening Hours</Form.Label>
+            <Form.Label>Sunday: Opening Hours</Form.Label>
             <Form.Select
               id="validation"
               required
@@ -622,11 +752,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="openhours"
               value={formData["operatingHours"]["openHours"]["Sunday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], openHours:{...formData["operatingHours"]["openHours"], Sunday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    openHours: {
+                      ...formData["operatingHours"]["openHours"],
+                      Sunday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -652,11 +792,21 @@ function PersistResInfo({ formData, setFormData }) {
               name="closehours"
               value={formData["operatingHours"]["closeHours"]["Sunday"]}
               onChange={(event) => {
-                setFormData({...formData, operatingHours:{...formData["operatingHours"], closeHours:{...formData["operatingHours"]["closeHours"], Sunday: event.target.value}}})
-              }
-              }
+                setFormData({
+                  ...formData,
+                  operatingHours: {
+                    ...formData["operatingHours"],
+                    closeHours: {
+                      ...formData["operatingHours"]["closeHours"],
+                      Sunday: event.target.value
+                    }
+                  }
+                });
+              }}
             >
-               <option key="closed" value="Closed">Closed</option>
+              <option key="closed" value="Closed">
+                Closed
+              </option>
               {Array.from({ length: 48 }, (_, i) => {
                 const hours24 = Math.floor(i / 2);
                 const hours12 = hours24 % 12 || 12;
@@ -707,6 +857,15 @@ function PersistResInfo({ formData, setFormData }) {
 
               <div>
                 <Form.Label>Selected Template</Form.Label>
+                <OverlayTrigger
+                  placement="top"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltipTwo}
+                >
+                  <span className={styles.removeimage}>
+                    <AiOutlineInfoCircle size={20} className={styles.icon} />
+                  </span>
+                </OverlayTrigger>
                 <FormControl
                   id="validation"
                   required
