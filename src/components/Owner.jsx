@@ -52,6 +52,22 @@ function Owner() {
     checkRestaurantOwner();
   }, []);
 
+
+  async function deleteRestaurant(restaurantName){
+      await fetch(
+        `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({restaurantName: restaurantName})
+        }
+      ).then(()=>{
+        window.location.reload();
+      })
+  }
+
   return (
     <>
       <NavBarHome />
@@ -94,7 +110,9 @@ function Owner() {
               </Row>
               <Row>
                 <Col xs={12} md={6} className="mb-2">
-                  <Button variant="outline-light" block className="Owner-btn">
+                  <Button variant="outline-light" block className="Owner-btn" onClick={()=>
+                    deleteRestaurant(user.getUsername())
+                  }>
                     Delete Restaurant
                   </Button>
                 </Col>
