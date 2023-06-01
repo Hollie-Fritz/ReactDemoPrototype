@@ -426,7 +426,7 @@ function Template1Cart(props) {
                     label="Name"
                     onChange={handleCustomerName}
                   >
-                    <Form.Control type="Name" placeholder="Enter your name" />
+                    <Form.Control type="Name" placeholder="Enter your name" id= "validation" required/>
                   </FloatingLabel>
                   {/* NAME */}
                 </Form>
@@ -496,7 +496,7 @@ function Template1Cart(props) {
                 <Button
                   variant="primary"
                   onClick={() => {
-                    const FormControl = document.querySelectorAll('.validation');
+                    const FormControl = document.querySelectorAll('#validation');
                     console.log(FormControl.length);
                     let isValid = true;
                     // force validity to go in descending order instead of ascending order
