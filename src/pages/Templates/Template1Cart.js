@@ -310,7 +310,21 @@ const Template1Cart = ({
   //renders the form for note, name, utensils, phone
   const renderForm = () => (
     <Form>
+           <nobr className="fw-bold" colSpan="3">Total: </nobr>
+           <nobr>${totalPrice.toFixed(2)}</nobr>
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              {/* tooltip icon */}
+              <span className={styles.infoButton}>
+                <AiOutlineInfoCircle size={20} className={styles.icon} />
+              </span>
+            </OverlayTrigger>
+            <br></br>
       {/* NAME */}
+      <br></br>
       <FloatingLabel
         controlId="floatingName"
         label="Name"
