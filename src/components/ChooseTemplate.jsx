@@ -41,7 +41,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                     id="default-radio"
                     label="Default Template"
                     name="template"
-                    value="Default Template"
+                    value="template1"
                   />
                 </label>
               </Col>
@@ -53,7 +53,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                     id="default-radio"
                     label="Upscale"
                     name="template"
-                    value="Upscale"
+                    value="template2"
                   />
                 </label>
               </Col>
@@ -67,7 +67,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                     id="default-radio"
                     label="Fresh"
                     name="template"
-                    value="Healthy"
+                    value="template3"
                   />
                 </label>
               </Col>
@@ -79,7 +79,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                     id="default-radio"
                     label="Dessert/Bakery"
                     name="template"
-                    value="Dessert/Bakery"
+                    value="template4"
                   />
                 </label>
               </Col>
