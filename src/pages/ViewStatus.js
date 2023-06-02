@@ -6,11 +6,12 @@ import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
-import "./ViewStatus.module.css";
 import { Pagination, EllipsisItem } from "react-bootstrap";
 
+import styles from './ViewStatus.module.css';
+
 //component that displays the orders
-function ViewOrder() {
+function ViewStatus() {
   const [orders, setOrders] = useState([]);
   const { user } = useAuthenticator((context) => [context.user]);
   const navigate = useNavigate();
@@ -266,4 +267,4 @@ function OrderCard({ order, user, navigate }) {
   );
 }
 
-export default ViewOrder;
+export default ViewStatus;
