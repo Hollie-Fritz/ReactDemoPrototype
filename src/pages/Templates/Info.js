@@ -9,29 +9,31 @@ function Info(props) {
 
   useEffect(() => {
     const checkIsOpen = () => {
-      if (resdata.openHours && resdata.closeHours) {
-        const now = moment().tz("America/Los_Angeles");
-        let openingTime = moment.tz(
-          `${now.format("YYYY-MM-DD")} ${resdata.openHours}`,
-          "YYYY-MM-DD hh:mm A",
-          "America/Los_Angeles"
-        );
-        let closingTime = moment.tz(
-          `${now.format("YYYY-MM-DD")} ${resdata.closeHours}`,
-          "YYYY-MM-DD hh:mm A",
-          "America/Los_Angeles"
-        );
+      const now = moment().tz("America/Los_Angeles");
 
-        console.log("Now:", now.format("hh:mm A")); // This will log the current time
-        console.log("Opening Time:", openingTime.format("hh:mm A")); // This will log the opening time
-        console.log("Closing Time:", closingTime.format("hh:mm A")); // This will log the closing time
+      const day = now.format('dddd');
 
-        if (closingTime.isBefore(openingTime)) {
-          closingTime = closingTime.add(1, "days");
-        }
-
-        setIsOpen(now.isBetween(openingTime, closingTime, undefined, "[]"));
+      if((resdata["operatingHours"] && resdata["operatingHours"]["openHours"][day]==="Closed") || (resdata["operatingHours"] && resdata["operatingHours"]["openHours"][day]==="Closed")){
+        setIsOpen(false);
+        return;
       }
+
+      const startTime = resdata["operatingHours"]["openHours"][day];
+      const endTime = resdata["operatingHours"]["closeHours"][day];
+      // const startTime = '12:00 AM';
+      // const endTime = '12:30 AM';
+
+      var format = 'HH:mm A';
+
+      var convertedNow = moment(now.format('HH:mm A'), format);
+      var beforeTime = moment(startTime, format);
+      var afterTime = moment(endTime, format);
+
+
+      // console.log(convertedNow);
+      // console.log(convertedNow.isBetween(beforeTime, afterTime));
+
+      setIsOpen(convertedNow.isBetween(beforeTime, afterTime));
     };
 
     checkIsOpen();
