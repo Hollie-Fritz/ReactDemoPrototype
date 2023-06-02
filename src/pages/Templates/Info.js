@@ -6,14 +6,21 @@ import moment from "moment-timezone";
 function Info(props) {
   const { resdata, averageRating } = props.data;
   const [isOpen, setIsOpen] = useState(false);
+  const [openHours, setOpenHours] = useState("");
+  const [closeHours, setCloseHours] = useState("");
 
   useEffect(() => {
     const checkIsOpen = () => {
       const now = moment().tz("America/Los_Angeles");
 
-      const day = now.format('dddd');
+      const day = now.format("dddd");
 
-      if((resdata["operatingHours"] && resdata["operatingHours"]["openHours"][day]==="Closed") || (resdata["operatingHours"] && resdata["operatingHours"]["openHours"][day]==="Closed")){
+      if (
+        (resdata["operatingHours"] &&
+          resdata["operatingHours"]["openHours"][day] === "Closed") ||
+        (resdata["operatingHours"] &&
+          resdata["operatingHours"]["openHours"][day] === "Closed")
+      ) {
         setIsOpen(false);
         return;
       }
@@ -23,17 +30,18 @@ function Info(props) {
       // const startTime = '12:00 AM';
       // const endTime = '12:30 AM';
 
-      var format = 'HH:mm A';
+      var format = "HH:mm A";
 
-      var convertedNow = moment(now.format('HH:mm A'), format);
+      var convertedNow = moment(now.format("HH:mm A"), format);
       var beforeTime = moment(startTime, format);
       var afterTime = moment(endTime, format);
-
 
       // console.log(convertedNow);
       // console.log(convertedNow.isBetween(beforeTime, afterTime));
 
       setIsOpen(convertedNow.isBetween(beforeTime, afterTime));
+      setOpenHours(startTime);
+      setCloseHours(endTime);
     };
 
     checkIsOpen();
@@ -57,12 +65,18 @@ function Info(props) {
       {/* restaurant hours */}
       <Card.Text>
         <nobr className="fw-bold">Hours: </nobr>
-        {resdata["openHours"]} - {resdata["closeHours"]}
+        {openHours} - {closeHours}
+        <span
+          style={{
+            marginLeft: "10px",
+            color: isOpen ? "green" : "red",
+            fontWeight: "bold"
+          }}
+        >
+          {isOpen ? "We are currently open!" : "We are currently closed."}
+        </span>
       </Card.Text>
-      <Card.Text>
-        {console.log('isOpen:', isOpen)} {/* test status */}
-        {isOpen ? "We are currently open!" : "We are currently closed."}
-      </Card.Text>
+
 
       {/* cuisine type */}
       <Card.Text>
