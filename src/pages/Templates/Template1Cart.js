@@ -5,7 +5,15 @@ import styles from "./Template1Cart.module.css";
 import { CiSquareRemove } from "react-icons/ci";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
-const Template1Cart = ({ show, handleClose, fooddata, cart, setCart, userId, name }) => {
+const Template1Cart = ({
+  show,
+  handleClose,
+  fooddata,
+  cart,
+  setCart,
+  userId,
+  name
+}) => {
   const [customerName, setCustomerName] = useState("anonymous");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null); //empty or order completed
@@ -283,6 +291,16 @@ const Template1Cart = ({ show, handleClose, fooddata, cart, setCart, userId, nam
           <tr>
             <td colSpan="3">Total:</td>
             <td>${totalPrice.toFixed(2)}</td>
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              {/* tooltip icon */}
+              <span className={styles.infoButton}>
+                <AiOutlineInfoCircle size={20} className={styles.icon} />
+              </span>
+            </OverlayTrigger>
           </tr>
         </tfoot>
       )}
