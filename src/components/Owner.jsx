@@ -61,6 +61,8 @@ function Owner() {
       }
     ).then(() => {
       window.location.reload();
+    }).catch(error => {
+      console.log(error)
     });
   }
 

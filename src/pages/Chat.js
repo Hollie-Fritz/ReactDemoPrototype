@@ -91,6 +91,13 @@ function Chat() {
         text: data.text,
       };
       addMessageToList(message);
+
+      if(data.sentBy === 'console'){
+        setTimeout(()=>{
+          navigate('/chat')
+          getChatUsers();
+        }, 5000);
+      }
     };
 
     ws.onclose = function () {};
@@ -116,6 +123,28 @@ function Chat() {
     setMessages([]);
   }
 
+  async function deleteChat(){
+    await fetch(
+      `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/deleteChat`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: params['userId'],
+          toUserId: params["toUserId"]
+        })
+      }
+    )
+      //check if data was correctly sent in console log
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      }).catch(error =>{
+        console.log(error);
+      });
+  }
   return (
     <>
       <NavBarHome />
@@ -178,7 +207,14 @@ function Chat() {
                   variant="outline-success"
                   onClick={() => sendMessage()}
                 >
-                  Send message
+                  Send
+                </Button>
+
+                <Button
+                  variant="outline-success"
+                  onClick={() => deleteChat()}
+                >
+                  Delete conversation
                 </Button>
               </Form>
           </Col>
