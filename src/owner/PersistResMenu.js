@@ -90,6 +90,13 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     </Tooltip>
   );
 
+  const renderTooltip2 = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The menu item image looks best with the following dimensions:<br></br>
+      ?x?<br></br>
+      It will be displayed at the top of your menu item.
+    </Tooltip>
+  );
 
   return (
     <>
@@ -98,7 +105,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
           <Row className="mb-3" key={index}>
             <Form.Group className="col col-sm-3">
               {/* MENU ITEM */}
-              <Form.Label>Menu Item</Form.Label>
+              <Form.Label className="fw-bold">Menu Item</Form.Label>
               <Form.Control
                 id="validation"
                 required
@@ -114,7 +121,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM PRICE */}
             <Form.Group className="col col-sm-3">
-              <Form.Label>Price</Form.Label>
+              <Form.Label className="fw-bold">Price</Form.Label>
               <InputGroup className="mb-3">
                 <Form.Control
                   id="validation"
@@ -139,7 +146,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM DESCRIPTION */}
             <Form.Group className="col col-sm-3">
-              <Form.Label>Description</Form.Label>
+              <Form.Label className="fw-bold">Description</Form.Label>
               <InputGroup>
                 <Form.Control
                   as="textarea"
@@ -157,7 +164,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM TYPE */}
             <Form.Group className="col col-sm-3">
-              <Form.Label>
+              <Form.Label className="fw-bold">
                 Menu Item Type{" "}
                 <OverlayTrigger
                   placement="top"
@@ -183,6 +190,18 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             {/* MENU ITEM TYPE */}
 
             {/* MENU IMAGE */}
+            <Form.Label className="fw-bold">
+          Menu Item Image
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip2}
+          >
+            <span className={styles.removeimage}>
+              <AiOutlineInfoCircle size={20} className={styles.icon} />
+            </span>
+          </OverlayTrigger>
+          </Form.Label>
             <Form id={"imageForm" + index} className="col col-sm-6">
               <Form.Group className="col col-sm-6 d-flex align-items-center">
                 <input

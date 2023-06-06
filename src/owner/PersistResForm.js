@@ -192,7 +192,7 @@ function PersistResForm() {
           {/* Conditionally render the button to display submit
         on the last page and next on all other pages */}
           {page === FormTitles.length - 1 ? "Submit" : "Next"}
-        </Button>{" "}
+        </Button>{" "}<br></br><br></br>
         {page === FormTitles.length - 1 ? (
           <>
             <br></br>
