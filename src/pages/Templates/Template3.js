@@ -34,7 +34,7 @@ function Template3(props) {
     navigate,
     handleShowCartClick,
     viewCartClicked,
-    groupedFoodData,
+    groupedFoodData
   } = props.data;
 
   return (
@@ -64,7 +64,7 @@ function Template3(props) {
                   display: "flex",
                   justifyContent: "left",
                   alignItems: "center",
-                  position: "relative",
+                  position: "relative"
                 }}
               >
                 {/* restaurant name (displayed on banner) */}
@@ -76,7 +76,7 @@ function Template3(props) {
                     marginBottom: "0.5rem",
                     fontWeight: "bold",
                     textShadow:
-                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000",
+                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000"
                   }}
                 >
                   {resdata["name"]}
@@ -105,44 +105,82 @@ function Template3(props) {
                         {resdata["phone"]}
                       </Card.Text>
                       {/* restaurant hours */}
-                      {
-                      resdata["operatingHours"] ?
-                      <>
-                      <Card.Text>
-                        <nobr className="fw-bold">Monday: </nobr>
-                        {resdata["operatingHours"]["openHours"]["Monday"] } - {resdata["operatingHours"]["closeHours"]["Monday"] }
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Tuesday: </nobr>
-                        {resdata["operatingHours"]["openHours"]["Tuesday"] } - {resdata["operatingHours"]["closeHours"]["Tuesday"] }
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Wednesday: </nobr>
-                        {resdata["operatingHours"]["openHours"]["Wednesday"] } - {resdata["operatingHours"]["closeHours"]["Wednesday"] }
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Thursday: </nobr>
-                        {resdata["operatingHours"]["openHours"]["Thursday"] } - {resdata["operatingHours"]["closeHours"]["Thursday"] }
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Friday: </nobr>
-                        {resdata["operatingHours"]["openHours"]["Friday"] } - {resdata["operatingHours"]["closeHours"]["Friday"] }
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Saturday: </nobr>
-                        {resdata["operatingHours"]["openHours"]["Saturday"] } - {resdata["operatingHours"]["closeHours"]["Saturday"] }
-                      </Card.Text>
-                      <Card.Text>
-                        <nobr className="fw-bold">Sunday: </nobr>
-                        {resdata["operatingHours"]["openHours"]["Sunday"] } - {resdata["operatingHours"]["closeHours"]["Sunday"] }
-                      </Card.Text>
-                      </>
-                      :
-                      <Card.Text>
-                      <nobr className="fw-bold">Hours: </nobr>
-                      {resdata["openHours"]} - {resdata["closeHours"]}
-                      </Card.Text>
-                      }
+                      {resdata["operatingHours"] ? (
+                        <>
+                          <Card.Text>
+                            <nobr className="fw-bold">Monday: </nobr>
+                            {
+                              resdata["operatingHours"]["openHours"]["Monday"]
+                            } -{" "}
+                            {resdata["operatingHours"]["closeHours"]["Monday"]}
+                          </Card.Text>
+                          <Card.Text>
+                            <nobr className="fw-bold">Tuesday: </nobr>
+                            {
+                              resdata["operatingHours"]["openHours"]["Tuesday"]
+                            }{" "}
+                            -{" "}
+                            {resdata["operatingHours"]["closeHours"]["Tuesday"]}
+                          </Card.Text>
+                          <Card.Text>
+                            <nobr className="fw-bold">Wednesday: </nobr>
+                            {
+                              resdata["operatingHours"]["openHours"][
+                                "Wednesday"
+                              ]
+                            }{" "}
+                            -{" "}
+                            {
+                              resdata["operatingHours"]["closeHours"][
+                                "Wednesday"
+                              ]
+                            }
+                          </Card.Text>
+                          <Card.Text>
+                            <nobr className="fw-bold">Thursday: </nobr>
+                            {
+                              resdata["operatingHours"]["openHours"]["Thursday"]
+                            }{" "}
+                            -{" "}
+                            {
+                              resdata["operatingHours"]["closeHours"][
+                                "Thursday"
+                              ]
+                            }
+                          </Card.Text>
+                          <Card.Text>
+                            <nobr className="fw-bold">Friday: </nobr>
+                            {
+                              resdata["operatingHours"]["openHours"]["Friday"]
+                            } -{" "}
+                            {resdata["operatingHours"]["closeHours"]["Friday"]}
+                          </Card.Text>
+                          <Card.Text>
+                            <nobr className="fw-bold">Saturday: </nobr>
+                            {
+                              resdata["operatingHours"]["openHours"]["Saturday"]
+                            }{" "}
+                            -{" "}
+                            {
+                              resdata["operatingHours"]["closeHours"][
+                                "Saturday"
+                              ]
+                            }
+                          </Card.Text>
+                          <Card.Text>
+                            <nobr className="fw-bold">Sunday: </nobr>
+                            {
+                              resdata["operatingHours"]["openHours"]["Sunday"]
+                            } -{" "}
+                            {resdata["operatingHours"]["closeHours"]["Sunday"]}
+                          </Card.Text>
+                        </>
+                      ) : (
+                        <Card.Text>
+                          <nobr className="fw-bold">Hours: </nobr>
+                          {resdata["openHours"]} - {resdata["closeHours"]}
+                        </Card.Text>
+                      )}
 
                       {/* cuisine type */}
                       <Card.Text>
@@ -173,18 +211,22 @@ function Template3(props) {
                           >
                             View Reviews
                           </Button>{" "}
-                          {
-                            currentUserId
-                            &&
+                              {/* CHAT */}
+                              {currentUserId && (
                             <Button
-                            onClick={()=> navigate(`/chat/${currentUserId}/${id}`,
-                            {
-                              state:{
-                                      name: resdata["name"],
-                                    }
-                            })
-                            }>Chat</Button>
-                          }
+                            className={`mb-2 ${styles.reviewButton}`}
+                              onClick={() =>
+                                navigate(`/chat/${currentUserId}/${id}`, {
+                                  state: {
+                                    name: resdata["name"]
+                                  }
+                                })
+                              }
+                            >
+                              Chat
+                            </Button>
+                          )}
+                          {/* CHAT */}
                         </Stack>
 
                         <ViewReview
@@ -212,15 +254,16 @@ function Template3(props) {
                     style={{ display: "inline-block", alignItems: "right" }}
                   >
                     {/* inner card two -- google maps */}
-                    <Card className="border-0 mr-0" >
+                    <Card className="border-0 mr-0">
                       {/* Google Maps card display */}
-                      <div style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "100px",
-                        height: "400px",
-                      }}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          width: "100px",
+                          height: "400px"
+                        }}
                       >
                         <iframe
                           ref={frameRef}
@@ -233,99 +276,101 @@ function Template3(props) {
                             border: "0",
                             position: "absolute",
                             top: "0",
-                            left: "0",
+                            left: "0"
                           }}
                         />
-                        </div>
+                      </div>
                       {/* end inner card two -- google maps*/}
                     </Card>
                   </Col>
                 </Row>
                 <br></br>
                 <Card.Title as="h4"></Card.Title>
-                  {/* menu: display each menu item as a card */}
-                  {Object.entries(groupedFoodData).map(
-                    ([foodType, foodItems]) => {
-                      return (
-                        <div key={foodType}>
-                          <h2>{foodType}</h2>
-
-                            {foodItems.map((item, index) => {
-                              return (
-                                <Col className="d-flex align-items-stretch">
-                                  {/* inner card three */}
-                                  <Card
-                                    className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
-                                    key={index}
-                                    style={{ width: "37rem" }}
-                                  >
-                                    <Card.Img
-                                      variant="top"
-                                      src={
-                                        item.foodImageUrl
-                                          ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
-                                            item.foodImageUrl
-                                          : ""
-                                      }
-                                    />
-                                    <Card.Body>
-                                      <div className={styles.menuItem}>
-                                        <Card.Text
-                                          style={{ fontSize: "18px" }}
-                                          as="h5"
-                                          className={`${styles.menuItemTitle}`}
-                                        >
-                                          <nobr
-                                            as="h1"
-                                            className={`fw-bold ${styles.cardText}`}
-                                          >
-                                            {item.foodName}
-                                          </nobr>
-                                        </Card.Text>
-                                        <Card.Text>${item.foodPrice}</Card.Text>
-                                      </div>
-                                      <Card.Text>{item.foodDesc}</Card.Text>
-                                    </Card.Body>
-                                    <Card.Footer
-                                      className={`border-0 ${styles.cardFooter}`}
-
-                                    >
-                                      <br></br>
-                                      <br></br>
-                                      {/* Add to the cart button */}
-                                      <Button
-                                        className={`${styles.addButton}`}
-                                        style={{
-                                          backgroundColor: "var(--white)",
-                                          color: "var(--dark)",
-                                          borderColor: "var(--biscuit)",
-                                          borderWidth: "2px",
-                                          fontWeight: "bold",
-                                          position: "absolute",
-                                          bottom: 5,
-                                          left: 5,
-                                        }}
-                                        onClick={() =>
-                                          handleAddClick(item.foodId)
-                                        }
+                {/* menu: display each menu item as a card */}
+                {Object.entries(groupedFoodData).map(
+                  ([foodType, foodItems]) => {
+                    return (
+                      <div key={foodType}>
+                        <h2>{foodType}</h2>
+                        <br></br>
+                        <br></br>
+                        <Row md={1} lg={3} className="g-4">
+                          {foodItems.map((item, index) => {
+                            return (
+                              <Col className="d-flex align-items-stretch">
+                                {/* inner card three */}
+                                <Card
+                                  className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
+                                  key={index}
+                                  style={{ width: "37rem" }}
+                                >
+                                  <Card.Img
+                                    variant="top"
+                                    src={
+                                      item.foodImageUrl
+                                        ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                          item.foodImageUrl
+                                        : ""
+                                    }
+                                  />
+                                  <Card.Body>
+                                    <div className={styles.menuItem}>
+                                      <Card.Text
+                                        style={{ fontSize: "18px" }}
+                                        as="h5"
+                                        className={`${styles.menuItemTitle}`}
                                       >
-                                        {showAddedMessage === item.foodId &&
-                                        cart[item.foodId] > 0
-                                          ? "✓"
-                                          : "Add"}
-                                      </Button>
-                                    </Card.Footer>
-                                    {/* end inner card three */}
-                                  </Card>
-                                </Col>
-                              );
-                            })}
-
-                        </div>
-                      );
-                    }
-                  )}
-
+                                        <nobr
+                                          as="h1"
+                                          className={`fw-bold ${styles.cardText}`}
+                                        >
+                                          {item.foodName}
+                                        </nobr>
+                                      </Card.Text>
+                                      <Card.Text>${item.foodPrice}</Card.Text>
+                                    </div>
+                                    <Card.Text>{item.foodDesc}</Card.Text>
+                                  </Card.Body>
+                                  <Card.Footer
+                                    className={`border-0 ${styles.cardFooter}`}
+                                  >
+                                    <br></br>
+                                    <br></br>
+                                    {/* Add to the cart button */}
+                                    <Button
+                                      className={`${styles.addButton}`}
+                                      style={{
+                                        backgroundColor: "var(--white)",
+                                        color: "var(--dark)",
+                                        borderColor: "var(--biscuit)",
+                                        borderWidth: "2px",
+                                        fontWeight: "bold",
+                                        position: "absolute",
+                                        bottom: 5,
+                                        left: 5
+                                      }}
+                                      onClick={() =>
+                                        handleAddClick(item.foodId)
+                                      }
+                                    >
+                                      {showAddedMessage === item.foodId &&
+                                      cart[item.foodId] > 0
+                                        ? "✓"
+                                        : "Add"}
+                                    </Button>
+                                  </Card.Footer>
+                                  {/* end inner card three */}
+                                </Card>
+                              </Col>
+                            );
+                          })}
+                        </Row>
+                        <br></br>
+                        <br></br>
+                      </div>
+                    );
+                  }
+                )}
               </Card.Body>
               {/* View Cart */}
               <Button

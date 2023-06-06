@@ -5,8 +5,15 @@ import styles from "./Template1Cart.module.css";
 import { CiSquareRemove } from "react-icons/ci";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
-function Template1Cart(props) {
-  const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
+const Template1Cart = ({
+  show,
+  handleClose,
+  fooddata,
+  cart,
+  setCart,
+  userId,
+  name
+}) => {
   const [customerName, setCustomerName] = useState("");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null); //empty or order completed
@@ -14,6 +21,8 @@ function Template1Cart(props) {
   const [checkout, setCheckout] = useState(false); //check out
   const [purchased, setPurchased] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [reviewOrder, setReviewOrder] = useState(false);
+  const [showFields, setShowFields] = useState(false);
   const { user } = useAuthenticator((context) => [context.user]);
 
   //useEffect hook to handle message display based on cart items
@@ -155,9 +164,8 @@ function Template1Cart(props) {
   };
 
   const handlePlaceOrder = async () => {
-    // Submit the order details to the server
     await handleSubmit();
-    // Then, show the "Order completed" message
+    //order completed message after submit
     setMessage(
       <>
         <p style={{ textAlign: "center", fontWeight: "bold" }}>Order placed!</p>
@@ -166,10 +174,11 @@ function Template1Cart(props) {
         </p>
       </>
     );
-    // Clear the cart after order placement
+
     setCart({});
     setCheckout(false);
     setPurchased(true);
+    setShowFields(false);
   };
 
   //tooltip for total price information
@@ -180,351 +189,252 @@ function Template1Cart(props) {
     </Tooltip>
   );
 
+  //check if the cart is empty
   const isCartEmpty = () => {
     return Object.values(cart).every((value) => value === 0);
   };
 
-  // Replace Modal with Card component
+  const handleReviewOrder = () => {
+    setShowFields(true);
+  };
+
+  //renders the table of items
+  const renderTable = (checkoutTable) => (
+    <Table responsive>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          {checkoutTable && <th> </th>}
+        </tr>
+      </thead>
+      <tbody>
+        {/* map over the food data and display each item in a table row */}
+        {fooddata.map((item, index) => {
+          const quantity = cart[item.foodId] || 0;
+          if (quantity <= 0) return null;
+
+          const total = (quantity * item.foodPrice).toFixed(2);
+          return (
+            <tr key={item.foodId}>
+              <td>{item.foodName}</td>
+              <td>${item.foodPrice}</td>
+              <td>
+                {checkoutTable && (
+                  <td>
+                    {/* decrement item */}
+                    <Button
+                      size="sm"
+                      onClick={() => handleDecrement(item.foodId)}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        padding: 0,
+                        outline: "none"
+                      }}
+                      classcheckoutTable={`${styles.buttonIcon} ${styles.buttonMinus} ${styles.decrementButton}`}
+                    >
+                      <AiOutlineMinus
+                        size={20}
+                        className={`${styles.iconMinus}`}
+                      />
+                    </Button>{" "}
+                    {quantity}
+                    {/* increment item */}
+                    <Button
+                      size="sm"
+                      onClick={() => handleIncrement(item.foodId)}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        padding: 0,
+                        outline: "none"
+                      }}
+                      className={`${styles.buttonIcon} ${styles.buttonPlus} ${styles.incrementButton}`}
+                    >
+                      <AiOutlinePlus size={20} className={styles.iconPlus} />
+                    </Button>
+                  </td>
+                )}
+                {!checkoutTable && quantity}
+              </td>
+              <td>${total}</td>
+              {checkoutTable && (
+                <td>
+                  <td>
+                    {/* remove item */}
+                    <Button
+                      size="sm"
+                      onClick={() => handleRemove(item.foodId)}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        padding: 0,
+                        outline: "none"
+                      }}
+                      className={`${styles.buttonIcon} ${styles.buttonPlus}`}
+                    >
+                      {/* remove item icon */}
+                      <CiSquareRemove size={30} className={styles.iconRemove} />
+                    </Button>
+                  </td>
+                </td>
+              )}
+            </tr>
+          );
+        })}
+      </tbody>
+      {checkoutTable && (
+        <tfoot>
+          <tr>
+            <td colSpan="3">Total:</td>
+            <td>${totalPrice.toFixed(2)}</td>
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              {/* tooltip icon */}
+              <span className={styles.infoButton}>
+                <AiOutlineInfoCircle size={20} className={styles.icon} />
+              </span>
+            </OverlayTrigger>
+          </tr>
+        </tfoot>
+      )}
+    </Table>
+  );
+
+  //renders the form for note, name, utensils, phone
+  const renderForm = () => (
+    <Form>
+           <nobr className="fw-bold" colSpan="3">Total: </nobr>
+           <nobr>${totalPrice.toFixed(2)}</nobr>
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              {/* tooltip icon */}
+              <span className={styles.infoButton}>
+                <AiOutlineInfoCircle size={20} className={styles.icon} />
+              </span>
+            </OverlayTrigger>
+            <br></br>
+      {/* NAME */}
+      <br></br>
+      <FloatingLabel
+        controlId="floatingName"
+        label="Name"
+        onChange={handleCustomerName}
+      >
+        <Form.Control type="Name" placeholder="Enter your name" />
+      </FloatingLabel>
+      <br></br>
+      {/* NOTE */}
+      <FloatingLabel controlId="floatingTextarea2" label="Note">
+        <Form.Control
+          as="textarea"
+          placeholder="Enter a note"
+          onChange={handleNote}
+          style={{ height: "100px" }}
+          maxLength="250"
+        />
+        <div style={{ textAlign: "left" }}>{250 - note.length} characters</div>
+      </FloatingLabel>
+      <br></br>
+      {/* PHONE NUMBER */}
+      <FloatingLabel
+        controlId="floatingPhoneNumber"
+        label="Phone Number"
+        onChange={handlePhoneNumber}
+      >
+        <Form.Control
+          type="PhoneNumber"
+          placeholder="Enter your Phone Number"
+        />
+      </FloatingLabel>
+      <br></br>
+      {/* UTENSIL TOGGLE */}
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check
+          onChange={handleUtensils}
+          type="checkbox"
+          label="Utensils"
+        />
+      </Form.Group>
+    </Form>
+  );
   return (
     <div className="cart-container">
-    <Card
-        className="cart-card"
-      >
-        <Card.Title>Your Current Pickup Order</Card.Title>
-        {message === "Order completed" ? (
-          <Card.Body>{message}</Card.Body>
-        ) : message ? (
+      <Card className="cart-card">
+        <Card.Title>
+          {isCartEmpty()
+            ? "Add items to your cart to get started!"
+            : "Your Current Pickup Order"}
+        </Card.Title>
+        {message ? (
           <Card.Body>{message}</Card.Body>
         ) : checkout ? (
           <>
-            <Card.Body>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* map over the food data and display each item in a table row */}
-                  {fooddata.map((item, index) => {
-                    const quantity = cart[item.foodId] || 0;
-                    if (quantity > 0) {
-                      const total = (quantity * item.foodPrice).toFixed(2);
-                      return (
-                        <tr key={item.foodId}>
-                          <td>{item.foodName}</td>
-                          <td>${item.foodPrice}</td>
-                          <td>{quantity}</td>
-                          <td>${total}</td>
-                        </tr>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </tbody>
-              </Table>
+            {!isCartEmpty() && (
+              <Card.Body>
+                {renderTable(false)}
+                {showFields && renderForm()}
+              </Card.Body>
+            )}
+            {!isCartEmpty() && (
+              <Card.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setCheckout(false);
+                    setShowFields(false);
+                  }}
+                >
+                  Edit Order
+                </Button>
+                {showFields ? (
 
-              <div className={styles.container}>
-                <p className={`${styles.textRight} ${styles.fontWeightBold}`}>
-                  Total: ${totalPrice.toFixed(2)}
-                  {/* tooltip trigger for price */}
-                  <OverlayTrigger
-                    placement="top"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={renderTooltip}
-                  >
-                    {/* tooltip icon */}
-                    <span className={styles.infoButton}>
-                      <AiOutlineInfoCircle size={20} className={styles.icon} />
-                    </span>
-                  </OverlayTrigger>
-                </p>
-              </div>
-
-              <p></p>
-              {checkout ? (
-                <>
-                  <Form>
-                    {/* NAME */}
-                    <FloatingLabel
-                      controlId="floatingName"
-                      label="Name"
-                      onChange={handleCustomerName}
-                    >
-                    <Form.Control type="Name" placeholder="Enter your name" class="validation"
-                                    required
-                                    onInvalid={(event) => {
-                                      event.target.setCustomValidity(
-                                        "Please enter a name"
-                                      );
-                                    }}
-                                    value ={customerName}
-                    />
-                    </FloatingLabel>
-                    {/* NAME */}
-                  </Form>
-                  <br />
-                  <div>
-                    <Form>
-                      {/* NOTE */}
-                      <FloatingLabel controlId="floatingTextarea2" label="Note">
-                        <Form.Control
-                          as="textarea"
-                          placeholder="Enter a note"
-                          onChange={handleNote}
-                          style={{ height: "100px" }}
-                          maxLength="250"
-                        />
-                        <div style={{ textAlign: "left" }}>
-                          {/* displays the remaining characters left for the note */}
-                          {250 - note.length} characters
-                        </div>
-                      </FloatingLabel>
-                      <br />
-                      {/* NOTE */}
-                      {/* PHONE NUMBER */}
-                      <div>
-                        <Form>
-                          <FloatingLabel
-                            controlId="floatingPhoneNumber"
-                            label="Phone Number"
-                            onChange={handlePhoneNumber}
-                          >
-                            <Form.Control
-                              type="PhoneNumber"
-                              placeholder="Enter your Phone Number"
-                            />
-                          </FloatingLabel>
-                        </Form>
-                      </div>
-                      <br />
-                      {/* PHONE NUMBER */}
-                      {/* UTENSIL TOGGLE */}
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formBasicCheckbox"
-                      >
-                        <Form.Check
-                          onChange={handleUtensils}
-                          type="checkbox"
-                          label="Utensils"
-                        />
-                      </Form.Group>
-                      {/* UTENSIL TOGGLE */}
-                    </Form>
-                  </div>
-                </>
-              ) : null}
-            </Card.Body>
-            <Card.Footer>
-              <Button variant="secondary" onClick={() => setCheckout(false)}>
-                Edit Order
-              </Button>
-              <Button variant="primary" onClick={handlePlaceOrder}>
-                Place Order
-              </Button>
-            </Card.Footer>
-          </>
-        ) : (
-          <>
-            <Card.Body>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* map over the food data and display each item in a table row */}
-                  {fooddata.map((item, index) => {
-                    const quantity = cart[item.foodId] || 0;
-                    if (quantity > 0) {
-                      const total = (quantity * item.foodPrice).toFixed(2);
-                      return (
-                        <tr key={item.foodId}>
-                          <td>{item.foodName}</td>
-                          <td>${item.foodPrice}</td>
-                          <td>
-                            {/* decrement item */}
-                            <Button
-                              size="sm"
-                              onClick={() => handleDecrement(item.foodId)}
-                              style={{
-                                background: "transparent",
-                                border: "none",
-                                padding: 0,
-                                outline: "none"
-                              }}
-                              className={`${styles.buttonIcon} ${styles.buttonMinus} ${styles.decrementButton}`}
-                            >
-                              <AiOutlineMinus
-                                size={20}
-                                className={`${styles.iconMinus}`}
-                              />
-                            </Button>{" "}
-                            {quantity}
-                            {/* increment item */}
-                            <Button
-                              size="sm"
-                              onClick={() => handleIncrement(item.foodId)}
-                              style={{
-                                background: "transparent",
-                                border: "none",
-                                padding: 0,
-                                outline: "none"
-                              }}
-                              className={`${styles.buttonIcon} ${styles.buttonPlus} ${styles.incrementButton}`}
-                            >
-                              <AiOutlinePlus
-                                size={20}
-                                className={styles.iconPlus}
-                              />
-                            </Button>
-                          </td>
-                          <td>${total}</td>
-                          <td>
-                            {/* remove item */}
-                            <Button
-                              size="sm"
-                              onClick={() => handleRemove(item.foodId)}
-                              style={{
-                                background: "transparent",
-                                border: "none",
-                                padding: 0,
-                                outline: "none"
-                              }}
-                              className={`${styles.buttonIcon} ${styles.buttonPlus}`}
-                            >
-                              {/* remove item icon */}
-                              <CiSquareRemove
-                                size={30}
-                                className={styles.iconRemove}
-                              />
-                            </Button>
-                          </td>
-                        </tr>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </tbody>
-              </Table>
-              <div>
-                <Form>
-                  {/* NAME */}
-                  <FloatingLabel
-                    controlId="floatingName"
-                    label="Name"
-                    onChange={handleCustomerName}
-                  >
-                    <Form.Control type="Name" placeholder="Enter your name" id= "validation" required/>
-                  </FloatingLabel>
-                  {/* NAME */}
-                </Form>
-              </div>
-              <br />
-              <div>
-                <Form>
-                  {/* NOTE */}
-                  <FloatingLabel controlId="floatingTextarea2" label="Note">
-                    <Form.Control
-                      as="textarea"
-                      placeholder="Enter a note"
-                      onChange={handleNote}
-                      style={{ height: "100px" }}
-                      maxLength="250"
-                    />
-                    <div style={{ textAlign: "left" }}>
-                      {/* displays the remaining characters left for the note */}
-                      {250 - note.length} characters
-                    </div>
-                  </FloatingLabel>
-                  <br />
-                  {/* NOTE */}
-                  {/* PHONE NUMBER */}
-                  <div>
-                    <Form>
-                      <FloatingLabel
-                        controlId="floatingPhoneNumber"
-                        label="Phone Number"
-                        onChange={handlePhoneNumber}
-                      >
-                        <Form.Control
-                          type="PhoneNumber"
-                          placeholder="Enter your Phone Number"
-                        />
-                      </FloatingLabel>
-                    </Form>
-                  </div>
-                  <br />
-                  {/* PHONE NUMBER */}
-                  {/* UTENSIL TOGGLE */}
-                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check
-                      onChange={handleUtensils}
-                      type="checkbox"
-                      label="Utensils"
-                    />
-                  </Form.Group>
-                  {/* UTENSIL TOGGLE */}
-                </Form>
-              </div>
-            </Card.Body>
-            <Card.Footer>
-              {checkout ? (
-                <>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setCheckout(false)}
-                  >
-                    Back
-                  </Button>
                   <Button variant="primary" onClick={handlePlaceOrder}>
                     Place Order
                   </Button>
-                </>
-              ) : (
+                ) : (
+                  <Button variant="primary" onClick={handleReviewOrder}>
+                    Add Details
+                  </Button>
+                )}
+              </Card.Footer>
+            )}
+          </>
+        ) : (
+          <>
+            {!isCartEmpty() && (
+              <Card.Body>
+                {renderTable(true)}
+                {showFields && renderForm()}
+              </Card.Body>
+            )}
+            {!isCartEmpty() && (
+              <Card.Footer>
                 <Button
                   variant="primary"
                   onClick={() => {
-                    const FormControl = document.querySelectorAll('#validation');
-                    console.log(FormControl.length);
-                    let isValid = true;
-                    // force validity to go in descending order instead of ascending order
-                    for (let index = FormControl.length - 1; index >= 0; index--) {
-                      if (!FormControl[index].checkValidity()) {
-                        console.log("is false");
-                        isValid = false;
-                        FormControl[index].reportValidity();
-                      }
-                    }
-                    if (!isValid) {
-                      // enables next button to work by incrementing
-                      return;
-                    }
-                    setCheckout(true)
-                  }
-                  }
-                  disabled={
-                    isCartEmpty()}
+                    setCheckout(true);
+                    setShowFields(false);
+                  }}
+                  disabled={isCartEmpty()}
                 >
                   Review Order
                 </Button>
-              )}
-            </Card.Footer>
+              </Card.Footer>
+            )}
           </>
         )}
       </Card>
     </div>
   );
-}
+};
 export default Template1Cart;
