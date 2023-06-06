@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Accordion } from "react-bootstrap";
 import AverageRating from "../../components/rating/AverageRating";
 import moment from "moment-timezone";
 
@@ -70,14 +70,58 @@ function Info(props) {
           style={{
             marginLeft: "10px",
             color: isOpen ? "green" : "red",
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           {isOpen ? "We are currently open!" : "We are currently closed."}
         </span>
       </Card.Text>
 
-
+      <Accordion defaultActiveKey="0">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Operating Hours:</Accordion.Header>
+          <Accordion.Body>
+            <>
+              <Card.Text>
+                <nobr className="fw-bold">Monday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Monday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Monday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Tuesday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Tuesday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Tuesday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Wednesday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Wednesday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Wednesday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Thursday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Thursday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Thursday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Friday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Friday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Friday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Saturday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Saturday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Saturday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Sunday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Sunday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Sunday"]}
+              </Card.Text>
+            </>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+      <br></br>
       {/* cuisine type */}
       <Card.Text>
         <nobr className="fw-bold">Cuisine Type: </nobr>
