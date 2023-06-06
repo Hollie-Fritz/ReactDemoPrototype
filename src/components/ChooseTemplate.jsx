@@ -39,7 +39,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                   <Form.Check
                     type="radio"
                     id="default-radio"
-                    label="template1"
+                    label="Default Template"
                     name="template"
                     value="template1"
                   />
@@ -51,7 +51,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                   <Form.Check
                     type="radio"
                     id="default-radio"
-                    label="template2"
+                    label="Upscale"
                     name="template"
                     value="template2"
                   />
@@ -65,7 +65,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                   <Form.Check
                     type="radio"
                     id="default-radio"
-                    label="template3"
+                    label="Fresh"
                     name="template"
                     value="template3"
                   />
@@ -77,7 +77,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
                   <Form.Check
                     type="radio"
                     id="default-radio"
-                    label="template4"
+                    label="Dessert/Bakery"
                     name="template"
                     value="template4"
                   />

@@ -56,10 +56,6 @@ function ReviewEdit({ formData, menuItems }) {
                     {formData["operatingHours"]["openHours"]["Sunday"] } - {formData["operatingHours"]["closeHours"]["Sunday"] }
                   </Card.Text>
                 <Card.Text>
-                  <nobr className="fw-bold">Hours: </nobr>
-                  {formData.openhours} - {formData.closehours}
-                </Card.Text>
-                <Card.Text>
                   <nobr className="fw-bold">Cuisine Type: </nobr>
                   {formData.resCuisine}
                 </Card.Text>
