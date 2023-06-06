@@ -105,6 +105,7 @@ function Chat() {
     if (message.trim() && ws) {
       ws.send(JSON.stringify({ action: "onmessage", message }));
     }
+    messageInput.current.value = "";
   }
 
   function addMessageToList(message) {

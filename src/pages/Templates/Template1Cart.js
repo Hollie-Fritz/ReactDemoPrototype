@@ -14,7 +14,7 @@ const Template1Cart = ({
   userId,
   name
 }) => {
-  const [customerName, setCustomerName] = useState("anonymous");
+  const [customerName, setCustomerName] = useState("");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState(null); //empty or order completed
   const [utensils, setUtensils] = useState(false);
@@ -397,6 +397,7 @@ const Template1Cart = ({
                   Edit Order
                 </Button>
                 {showFields ? (
+
                   <Button variant="primary" onClick={handlePlaceOrder}>
                     Place Order
                   </Button>

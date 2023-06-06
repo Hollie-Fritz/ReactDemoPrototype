@@ -3,54 +3,66 @@ import Auth from "@aws-amplify/auth";
 import NavBarHome from "./NavBarHome";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
-import './Owner.css'; // you should create this file
+import "./Owner.css"; // you should create this file
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Owner() {
   const [userId, setUserId] = useState("");
   const [hasRestaurant, setHasRestaurant] = useState(false);
 
-  const { user } = useAuthenticator((context) => [
-    context.user, 
-  ]);
+  const { user } = useAuthenticator((context) => [context.user]);
   const navigate = useNavigate();
 
-  useEffect(() => {              
-    if(!user){
-      navigate("/login")
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
       return;
     }
-    
-    async function get(){
+
+    async function get() {
       const nameJson = await Auth.currentUserInfo();
       const name = nameJson["username"];
       setUserId(name);
     }
     get();
 
-    async function checkRestaurantOwner(){
+    async function checkRestaurantOwner() {
       await fetch(
         `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurantById?id=${user.username}`,
         {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           }
         }
       )
-      //check if data was correctly sent in console log
+        //check if data was correctly sent in console log
         .then((response) => response.json())
         .then((data) => {
           console.log("restaurant length is " + data.length);
-          if(data.length !== 0){
+          if (data.length !== 0) {
             setHasRestaurant(true);
           }
-        }
-      ); 
+        });
     }
     checkRestaurantOwner();
   }, []);
+
+  async function deleteRestaurant(restaurantName) {
+    await fetch(
+      `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ restaurantName: restaurantName })
+      }
+    ).then(() => {
+      window.location.reload();
+    });
+  }
 
   return (
     <>
@@ -64,45 +76,72 @@ function Owner() {
         <Stack gap={3}>
           <Stack direction="horizontal" gap={2}>
             <Row>
-              {
-                hasRestaurant?
+              {hasRestaurant ? (
                 <>
                   <Col className="col mb-2">
-                    <Button variant="outline-light" block className="Owner-btn" href="./edit">
+                    <Button
+                      variant="outline-light"
+                      block
+                      className="Owner-btn"
+                      href="./edit"
+                    >
                       Edit Restaurant Webpage
                     </Button>
                   </Col>
                 </>
-                :
+              ) : (
                 <Col xs={12} md={6} className="mb-2">
-                  <Button variant="outline-light" block className="Owner-btn" href="./create">
+                  <Button
+                    variant="outline-light"
+                    block
+                    className="Owner-btn"
+                    href="./create"
+                  >
                     Webpage Creation
                   </Button>
                 </Col>
-              }
+              )}
             </Row>
           </Stack>
-          {
-            hasRestaurant?
+          {hasRestaurant ? (
             <>
               <Row>
                 <Col xs={12} md={6} className="mb-2">
-                  <Button variant="outline-light" block className="Owner-btn" href="./orders">
+                  <Button
+                    variant="outline-light"
+                    block
+                    className="Owner-btn"
+                    href="./orders"
+                  >
                     Check Orders
                   </Button>
                 </Col>
               </Row>
               <Row>
                 <Col xs={12} md={6} className="mb-2">
-                  <Button variant="outline-light" block className="Owner-btn">
+                  <Link to={`/r/${userId}`}>
+                    <Button variant="outline-light" block className="Owner-btn">
+                      View My Webpage
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} md={6} className="mb-2">
+                  <Button
+                    variant="outline-light"
+                    block
+                    className="Owner-btn"
+                    onClick={() => deleteRestaurant(user.getUsername())}
+                  >
                     Delete Restaurant
                   </Button>
                 </Col>
               </Row>
             </>
-            :
+          ) : (
             ""
-          }
+          )}
         </Stack>
       </Container>
     </>

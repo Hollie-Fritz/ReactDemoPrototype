@@ -13,19 +13,25 @@ export function Login() {
   const location = useLocation();
   const navigate = useNavigate();
   var from = (location.state && location.state.from && location.state.from.pathname) || "/owner";
+
   useEffect(() => {
     if (route === "authenticated") {
       console.log("redirecting");
       navigate(-1);
     }
   }, [route, navigate, from]);
+
   return (
     <>
     <NavBarHome/>
+    <br></br>
     <View className="auth-wrapper">
-      {" "}
-      {/*  Sign-in box */}
+      {/* Sign-in box */}
       <Authenticator></Authenticator>
+      {/* User note */}
+      <p style={{textAlign: 'center', marginTop: '10px'}}>
+      <nobr className="fw-bold">Note:</nobr> Your username will be used as the URL of your page.
+      </p>
     </View>
     </>
   );
