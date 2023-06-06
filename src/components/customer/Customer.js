@@ -13,11 +13,28 @@ const Search = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let url = `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant?name=${searchField}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setRestaurants(data);
-      console.log(data);
+      await fetch(
+        `https://search-vs-nuorder-domain-6xjby743ln7v46sb2oob5alsj4.us-west-2.es.amazonaws.com/restaurant/_search?q=*${searchField}*&size=50`,
+        {
+          method: "GET",
+          headers: {
+            "Authorization": "Basic a3lsZW1haTpQYXNzd29yZDEyMyQ=",
+          },
+        } 
+      )
+      .then((response)=> response.json())
+      .then((data) => {
+          console.log(data)
+          var list = [];
+          for(var current of data["hits"]["hits"]){
+            list.push(
+              {...current["_source"], userId: current["_id"]}
+            )
+          }
+          setRestaurants(list);
+        }
+      )
+      .catch((error) => console.log(error));
     };
     fetchData();
   }, [searchField]);

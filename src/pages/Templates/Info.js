@@ -1,40 +1,140 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Accordion } from "react-bootstrap";
 import AverageRating from "../../components/rating/AverageRating";
+import moment from "moment-timezone";
 
-function Info(props){
-    const {resdata, averageRating} = props.data;
-return(   
-    <>     
-    {/* restaurant address */}
-    <Card.Text>
-    <nobr className="fw-bold">Address: </nobr>
-        {resdata["address1"]} {resdata["address2"]},{" "}
-        {resdata["city"]}, {resdata["state"]}{" "}
-        {resdata["zipCode"]}
-    </Card.Text>
-    {/* restaurant phone number */}
-    <Card.Text>
+function Info(props) {
+  const { resdata, averageRating } = props.data;
+  const [isOpen, setIsOpen] = useState(false);
+  const [openHours, setOpenHours] = useState("");
+  const [closeHours, setCloseHours] = useState("");
+
+  useEffect(() => {
+    const checkIsOpen = () => {
+      const now = moment().tz("America/Los_Angeles");
+
+      const day = now.format("dddd");
+
+      if (
+        (resdata["operatingHours"] &&
+          resdata["operatingHours"]["openHours"][day] === "Closed") ||
+        (resdata["operatingHours"] &&
+          resdata["operatingHours"]["openHours"][day] === "Closed")
+      ) {
+        setIsOpen(false);
+        return;
+      }
+
+      const startTime = resdata["operatingHours"]["openHours"][day];
+      const endTime = resdata["operatingHours"]["closeHours"][day];
+      // const startTime = '12:00 AM';
+      // const endTime = '12:30 AM';
+
+      var format = "HH:mm A";
+
+      var convertedNow = moment(now.format("HH:mm A"), format);
+      var beforeTime = moment(startTime, format);
+      var afterTime = moment(endTime, format);
+
+      // console.log(convertedNow);
+      // console.log(convertedNow.isBetween(beforeTime, afterTime));
+
+      setIsOpen(convertedNow.isBetween(beforeTime, afterTime));
+      setOpenHours(startTime);
+      setCloseHours(endTime);
+    };
+
+    checkIsOpen();
+    const interval = setInterval(checkIsOpen, 60000);
+    return () => clearInterval(interval);
+  }, [resdata]);
+
+  return (
+    <>
+      {/* restaurant address */}
+      <Card.Text>
+        <nobr className="fw-bold">Address: </nobr>
+        {resdata["address1"]} {resdata["address2"]}, {resdata["city"]},{" "}
+        {resdata["state"]} {resdata["zipCode"]}
+      </Card.Text>
+      {/* restaurant phone number */}
+      <Card.Text>
         <nobr className="fw-bold">Phone: </nobr>
         {resdata["phone"]}
-    </Card.Text>
-    {/* restaurant hours */}
-    <Card.Text>
+      </Card.Text>
+      {/* restaurant hours */}
+      <Card.Text>
         <nobr className="fw-bold">Hours: </nobr>
-        {resdata["openHours"]} - {resdata["closeHours"]}
-    </Card.Text>
-    {/* cuisine type */}
-    <Card.Text>
+        {openHours} - {closeHours}
+        <span
+          style={{
+            marginLeft: "10px",
+            color: isOpen ? "green" : "red",
+            fontWeight: "bold",
+          }}
+        >
+          {isOpen ? "We are currently open!" : "We are currently closed."}
+        </span>
+      </Card.Text>
+
+      <Accordion defaultActiveKey="0">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Operating Hours:</Accordion.Header>
+          <Accordion.Body>
+            <>
+              <Card.Text>
+                <nobr className="fw-bold">Monday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Monday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Monday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Tuesday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Tuesday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Tuesday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Wednesday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Wednesday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Wednesday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Thursday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Thursday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Thursday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Friday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Friday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Friday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Saturday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Saturday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Saturday"]}
+              </Card.Text>
+              <Card.Text>
+                <nobr className="fw-bold">Sunday: </nobr>
+                {resdata["operatingHours"]["openHours"]["Sunday"]} -{" "}
+                {resdata["operatingHours"]["closeHours"]["Sunday"]}
+              </Card.Text>
+            </>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+      <br></br>
+      {/* cuisine type */}
+      <Card.Text>
         <nobr className="fw-bold">Cuisine Type: </nobr>
         {resdata["cuisine"]}
-    </Card.Text>
-    <Card.Text>
+      </Card.Text>
+      <Card.Text>
         <div style={{ display: "flex", alignItems: "center" }}>
-            <span className="fw-bold">Rating: </span>
-            <AverageRating averageRating={averageRating} />
+          <span className="fw-bold">Rating: </span>
+          <AverageRating averageRating={averageRating} />
         </div>
-    </Card.Text></>
-)
+      </Card.Text>
+    </>
+  );
 }
 
 export default Info;

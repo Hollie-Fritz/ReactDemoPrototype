@@ -174,18 +174,22 @@ function Template4(props) {
                           >
                             View Reviews
                           </Button>{" "}
-                          {
-                            currentUserId
-                            &&
+                            {/* CHAT */}
+                            {currentUserId && (
                             <Button
-                            onClick={()=> navigate(`/chat/${currentUserId}/${id}`,
-                            {
-                              state:{
-                                      name: resdata["name"],
-                                    }
-                            })
-                            }>Chat</Button>
-                          }
+                            className={`mb-2 ${styles.reviewButton}`}
+                              onClick={() =>
+                                navigate(`/chat/${currentUserId}/${id}`, {
+                                  state: {
+                                    name: resdata["name"]
+                                  }
+                                })
+                              }
+                            >
+                              Chat
+                            </Button>
+                          )}
+                          {/* CHAT */}
                         </Stack>
 
                         <ViewReview
@@ -248,86 +252,89 @@ function Template4(props) {
                   <Card.Title as="h4"></Card.Title>
                   {/* menu: display each menu item as a card */}
                   {Object.entries(groupedFoodData).map(
-                    ([foodType, foodItems]) => {
-                      return (
-                        <div key={foodType}>
-                          <h2>{foodType}</h2>
-
-                            {foodItems.map((item, index) => {
-                              return (
-                                <Col className="d-flex align-items-stretch">
-                                  {/* inner card three */}
-                                  <Card
-                                    className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
-                                    key={index}
-                                    style={{ width: "37rem" }}
-                                  >
-                                    <Card.Img
-                                      variant="top"
-                                      src={
-                                        item.foodImageUrl
-                                          ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
-                                            item.foodImageUrl
-                                          : ""
-                                      }
-                                    />
-                                    <Card.Body>
-                                      <div className={styles.menuItem}>
-                                        <Card.Text
-                                          style={{ fontSize: "18px" }}
-                                          as="h5"
-                                          className={`${styles.menuItemTitle}`}
-                                        >
-                                          <nobr
-                                            as="h1"
-                                            className={`fw-bold ${styles.cardText}`}
-                                          >
-                                            {item.foodName}
-                                          </nobr>
-                                        </Card.Text>
-                                        <Card.Text>${item.foodPrice}</Card.Text>
-                                      </div>
-                                      <Card.Text>{item.foodDesc}</Card.Text>
-                                    </Card.Body>
-                                    <Card.Footer
-                                      className={`border-0 ${styles.cardFooter}`}
-
-                                    >
-                                      <br></br>
-                                      <br></br>
-                                      {/* Add to the cart button */}
-                                      <Button
-                                        className={`${styles.addButton}`}
-                                        style={{
-                                          backgroundColor: "var(--white)",
-                                          color: "var(--dark)",
-                                          borderColor: "var(--biscuit)",
-                                          borderWidth: "2px",
-                                          fontWeight: "bold",
-                                          position: "absolute",
-                                          bottom: 5,
-                                          left: 5,
-                                        }}
-                                        onClick={() =>
-                                          handleAddClick(item.foodId)
-                                        }
+                  ([foodType, foodItems]) => {
+                    return (
+                      <div key={foodType}>
+                        <h2>{foodType}</h2>
+                        <br></br>
+                        <br></br>
+                        <Row md={1} lg={3} className="g-4">
+                          {foodItems.map((item, index) => {
+                            return (
+                              <Col className="d-flex align-items-stretch">
+                                {/* inner card three */}
+                                <Card
+                                  className={` ${styles.cardText} ${styles.card} ${styles.cardItem}`}
+                                  key={index}
+                                  style={{ width: "37rem" }}
+                                >
+                                  <Card.Img
+                                    variant="top"
+                                    src={
+                                      item.foodImageUrl
+                                        ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                          item.foodImageUrl
+                                        : ""
+                                    }
+                                  />
+                                  <Card.Body>
+                                    <div className={styles.menuItem}>
+                                      <Card.Text
+                                        style={{ fontSize: "18px" }}
+                                        as="h5"
+                                        className={`${styles.menuItemTitle}`}
                                       >
-                                        {showAddedMessage === item.foodId &&
-                                        cart[item.foodId] > 0
-                                          ? "✓"
-                                          : "Add"}
-                                      </Button>
-                                    </Card.Footer>
-                                    {/* end inner card three */}
-                                  </Card>
-                                </Col>
-                              );
-                            })}
-
-                        </div>
-                      );
-                    }
-                  )}
+                                        <nobr
+                                          as="h1"
+                                          className={`fw-bold ${styles.cardText}`}
+                                        >
+                                          {item.foodName}
+                                        </nobr>
+                                      </Card.Text>
+                                      <Card.Text>${item.foodPrice}</Card.Text>
+                                    </div>
+                                    <Card.Text>{item.foodDesc}</Card.Text>
+                                  </Card.Body>
+                                  <Card.Footer
+                                    className={`border-0 ${styles.cardFooter}`}
+                                  >
+                                    <br></br>
+                                    <br></br>
+                                    {/* Add to the cart button */}
+                                    <Button
+                                      className={`${styles.addButton}`}
+                                      style={{
+                                        backgroundColor: "var(--white)",
+                                        color: "var(--dark)",
+                                        borderColor: "var(--biscuit)",
+                                        borderWidth: "2px",
+                                        fontWeight: "bold",
+                                        position: "absolute",
+                                        bottom: 5,
+                                        left: 5
+                                      }}
+                                      onClick={() =>
+                                        handleAddClick(item.foodId)
+                                      }
+                                    >
+                                      {showAddedMessage === item.foodId &&
+                                      cart[item.foodId] > 0
+                                        ? "✓"
+                                        : "Add"}
+                                    </Button>
+                                  </Card.Footer>
+                                  {/* end inner card three */}
+                                </Card>
+                              </Col>
+                            );
+                          })}
+                        </Row>
+                        <br></br>
+                        <br></br>
+                      </div>
+                    );
+                  }
+                )}
 
               </Card.Body>
               {/* View Cart */}
