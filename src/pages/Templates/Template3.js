@@ -6,6 +6,7 @@ import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template3.module.css";
+import Info from "./Info.js";
 
 // Template3 component
 function Template3(props) {
@@ -92,107 +93,9 @@ function Template3(props) {
                       className={`border-0 ml-auto mr-3 ${styles.cardText} ${styles.card}`}
                       style={{ display: "inline-block", alignItems: "left" }}
                     >
-                      {/* restaurant address */}
-                      <Card.Text>
-                        <nobr className="fw-bold">Address: </nobr>
-                        {resdata["address1"]} {resdata["address2"]},{" "}
-                        {resdata["city"]}, {resdata["state"]}{" "}
-                        {resdata["zipCode"]}
-                      </Card.Text>
-                      {/* restaurant phone number */}
-                      <Card.Text>
-                        <nobr className="fw-bold">Phone: </nobr>
-                        {resdata["phone"]}
-                      </Card.Text>
-                      {/* restaurant hours */}
-                      {resdata["operatingHours"] ? (
-                        <>
-                          <Card.Text>
-                            <nobr className="fw-bold">Monday: </nobr>
-                            {
-                              resdata["operatingHours"]["openHours"]["Monday"]
-                            } -{" "}
-                            {resdata["operatingHours"]["closeHours"]["Monday"]}
-                          </Card.Text>
-                          <Card.Text>
-                            <nobr className="fw-bold">Tuesday: </nobr>
-                            {
-                              resdata["operatingHours"]["openHours"]["Tuesday"]
-                            }{" "}
-                            -{" "}
-                            {resdata["operatingHours"]["closeHours"]["Tuesday"]}
-                          </Card.Text>
-                          <Card.Text>
-                            <nobr className="fw-bold">Wednesday: </nobr>
-                            {
-                              resdata["operatingHours"]["openHours"][
-                                "Wednesday"
-                              ]
-                            }{" "}
-                            -{" "}
-                            {
-                              resdata["operatingHours"]["closeHours"][
-                                "Wednesday"
-                              ]
-                            }
-                          </Card.Text>
-                          <Card.Text>
-                            <nobr className="fw-bold">Thursday: </nobr>
-                            {
-                              resdata["operatingHours"]["openHours"]["Thursday"]
-                            }{" "}
-                            -{" "}
-                            {
-                              resdata["operatingHours"]["closeHours"][
-                                "Thursday"
-                              ]
-                            }
-                          </Card.Text>
-                          <Card.Text>
-                            <nobr className="fw-bold">Friday: </nobr>
-                            {
-                              resdata["operatingHours"]["openHours"]["Friday"]
-                            } -{" "}
-                            {resdata["operatingHours"]["closeHours"]["Friday"]}
-                          </Card.Text>
-                          <Card.Text>
-                            <nobr className="fw-bold">Saturday: </nobr>
-                            {
-                              resdata["operatingHours"]["openHours"]["Saturday"]
-                            }{" "}
-                            -{" "}
-                            {
-                              resdata["operatingHours"]["closeHours"][
-                                "Saturday"
-                              ]
-                            }
-                          </Card.Text>
-                          <Card.Text>
-                            <nobr className="fw-bold">Sunday: </nobr>
-                            {
-                              resdata["operatingHours"]["openHours"]["Sunday"]
-                            } -{" "}
-                            {resdata["operatingHours"]["closeHours"]["Sunday"]}
-                          </Card.Text>
-                        </>
-                      ) : (
-                        <Card.Text>
-                          <nobr className="fw-bold">Hours: </nobr>
-                          {resdata["openHours"]} - {resdata["closeHours"]}
-                        </Card.Text>
-                      )}
-
-                      {/* cuisine type */}
-                      <Card.Text>
-                        <nobr className="fw-bold">Cuisine Type: </nobr>
-                        {resdata["cuisine"]}
-                      </Card.Text>
-                      <Card.Text>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <span className="fw-bold">Rating: </span>
-                          <AverageRating averageRating={averageRating} />
-                        </div>
-                      </Card.Text>
+                     {/* RESTAURANT INFO */}
+                     <Info data={{ resdata, averageRating }} />
+                      {/* RESTAURANT INFO */}
                       <Card.Text>
                         <Stack direction="horizontal" gap={2}>
                           {/* leave review */}

@@ -27,6 +27,9 @@ export function ViewWebPage() {
   const { user } = useAuthenticator((context) => [context.user]);
   const [viewCartClicked, setViewCartClicked] = useState(false);
   const [showAddedMessage, setShowAddedMessage] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [openHours, setOpenHours] = useState("");
+  const [closeHours, setCloseHours] = useState("");
 
   // write reviews handlers
   const handleWriteReviewClick = (event) => {
@@ -228,7 +231,7 @@ export function ViewWebPage() {
         return (
           <>
             {" "}
-            <NavBarHome /> 
+            <NavBarHome />
             <br></br>
             <Template1 data={webPageVars} />{" "}
           </>
