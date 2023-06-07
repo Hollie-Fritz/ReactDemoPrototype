@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Card, Modal, Button } from "react-bootstrap";
 import AverageRating from "../../components/rating/AverageRating";
 import moment from "moment-timezone";
-import styles from "./Template1.module.css";
+import styles from "./info.module.css";
 
 function Info(props) {
-  const { resdata, averageRating } = props.data;
+  const { resdata, averageRating, className, templateName } = props.data;
   const [isOpen, setIsOpen] = useState(false);
   const [openHours, setOpenHours] = useState("");
   const [closeHours, setCloseHours] = useState("");
@@ -86,19 +86,27 @@ function Info(props) {
           {isOpen ? "We are currently open!" : "We are currently closed."}
         </span>
       </Card.Text>
-      <Button 
-        onClick={handleOpenModal} 
-        variant="light"
-        className="fw-bold">
-          Operating Hours
-          </Button>
+      <Button
+        onClick={handleOpenModal}
+        className={
+          templateName === "Template1"
+            ? styles.operatingHoursButtonTemplate1
+            : templateName === "Template2"
+            ? styles.operatingHoursButtonTemplate2
+            : templateName === "Template3"
+            ? styles.operatingHoursButtonTemplate3
+            : styles.operatingHoursButtonTemplate4
+        }
+      >
+        Operating Hours
+      </Button>
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>Operating Hours</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>
-            <nobr className="fw-bold">Monday: </nobr>
+            <nobr className="fw-bold reviewButton">Monday: </nobr>
             {resdata["operatingHours"]["openHours"]["Monday"]} -{" "}
             {resdata["operatingHours"]["closeHours"]["Monday"]}
           </p>

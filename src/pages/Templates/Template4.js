@@ -93,7 +93,13 @@ function Template4(props) {
                       style={{ display: "inline-block", alignItems: "left" }}
                     >
                       {/* RESTAURANT INFO */}
-                      <Info data={{ resdata, averageRating }} />
+                      <Info
+                          data={{
+                            resdata,
+                            averageRating,
+                            templateName: "Template4",
+                          }}
+                        />
                       {/* RESTAURANT INFO */}
 
                       <Card.Text>

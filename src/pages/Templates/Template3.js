@@ -94,7 +94,13 @@ function Template3(props) {
                       style={{ display: "inline-block", alignItems: "left" }}
                     >
                      {/* RESTAURANT INFO */}
-                     <Info data={{ resdata, averageRating }} />
+                     <Info
+                          data={{
+                            resdata,
+                            averageRating,
+                            templateName: "Template3",
+                          }}
+                        />
                       {/* RESTAURANT INFO */}
                       <Card.Text>
                         <Stack direction="horizontal" gap={2}>
