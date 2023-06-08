@@ -20,7 +20,7 @@ function TopRatedCarousel() {
   return (
     <Carousel style={{ height: "400px", width: "1000px" }}>
       {topRatedRestaurants.map((restaurant) => {
-        const imageUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + restaurant["mainImageUrl"];
+        const imageUrl = "https://nuorderbucket.s3.us-west-2.amazonaws.com/" + restaurant["mainImageUrl"];
 
         return (
           <Carousel.Item   key={restaurant} onClick={() => {

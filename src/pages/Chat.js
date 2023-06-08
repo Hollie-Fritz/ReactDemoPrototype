@@ -167,7 +167,10 @@ function Chat() {
               </Card.Body>
             </Card>
             <br />
-              <Form inline>
+              <Form inline onSubmit={(event) =>{
+                  event.preventDefault()
+                  sendMessage();
+                }}>
                 <Form.Control
                   ref={messageInput}
                   type="text"

@@ -59,7 +59,7 @@ function Template2(props) {
                     ? `url(${bucketUrl})`
                     : "",
                   backgroundSize: "cover",
-                  backgroundPostion: "center",
+                  backgroundPosition: "center",
                   color: "#FBFAF5",
                   height: "200px",
                   display: "flex",
@@ -81,6 +81,12 @@ function Template2(props) {
                   }}
                 >
                   {resdata["name"]}
+                  {/* <AverageRating averageRating={averageRating} />
+                  <nobr className="fw-bold"></nobr>
+                        {resdata["address1"]} {resdata["address2"]},{" "}
+                        {resdata["city"]}, {resdata["state"]}{" "}
+                        {resdata["zipCode"]}
+                  <div>{resdata["phone"]}</div> */}
                 </h1>
               </Card.Header>
 

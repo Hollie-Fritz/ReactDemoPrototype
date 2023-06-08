@@ -165,7 +165,7 @@ export function ViewWebPage() {
 
   // url for restaurant's main image (banner image)
   const bucketUrl =
-    "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" +
+    "https://nuorderbucket.s3.us-west-2.amazonaws.com/" +
     resdata["mainImageUrl"];
 
   //helper function -- groups food items by foodType
