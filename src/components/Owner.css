@@ -4,11 +4,11 @@
     color: white;
     padding: 2rem;
   }
-  
+
   .Owner-title {
     font-weight: bold;
   }
-  
+
   .Owner-btn {
     border-radius: 25px;
     border: 2px solid white;
@@ -16,4 +16,7 @@
     font-weight: bold;
     font-size: 1.1rem;
   }
-  
+
+  .deletebutton {
+    margin-left: 55px;
+  }
