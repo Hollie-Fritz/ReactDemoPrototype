@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
-import styles from "./Template2.module.css";
+import styles from "./Template1.module.css";
 import Banner from "./Banner.js";
 import Info from "./Info.js";
 import GoogleMap from "./GoogleMap.js";
