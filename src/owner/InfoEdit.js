@@ -39,6 +39,9 @@ function InfoEdit({ formData, setFormData }) {
     if (e.target.files.length > 0) {
       setSelectedFile(e.target.files[0].name);
     }
+    const newUploadStatus = uploadStatus;
+    newUploadStatus = "Upload";
+    setUploadStatus(newUploadStatus);
   };
 
   const renderTooltip = (props) => (
@@ -56,12 +59,22 @@ function InfoEdit({ formData, setFormData }) {
     </Tooltip>
   );
 
+  const handleRemove = async (event) => {
+    // event.preventDefault();
+    setFormData((prevState) => {
+      var newData = { ...prevState };
+      newData["mainImageUrl"] = "";
+      return newData;
+    });
+    console.log("removed")
+    setUploadStatus("Removed");
+  };
+
   useEffect(() => {
     const imageForm = document.querySelector("#imageForm");
     const imageInput = document.querySelector("#imageInput");
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
+    const handleSubmit = async () => {
       const file = imageInput.files[0];
       const imageName = uuidv4();
 
@@ -917,6 +930,7 @@ function InfoEdit({ formData, setFormData }) {
             type="text"
             value={selectedFile}
             placeholder="No File Selected"
+            onChange={handleFileChange}
             readOnly
             className="mx-2"
           />
@@ -924,10 +938,10 @@ function InfoEdit({ formData, setFormData }) {
             Browse
           </label>
           <Button className="mb-0 mx-2" type="submit">
-            {uploadStatus}
+            Upload
           </Button>
-          <Button className={styles.removebutton} variant="danger">
-            Remove Image
+          <Button className={styles.removebutton} variant="danger" onClick={() => handleRemove()}>
+            {uploadStatus === "Removed" ? "Image Removed": "Remove Image"}
           </Button>
         </Form>
 

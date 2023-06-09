@@ -246,7 +246,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                     handleRemoveImage(index)
                   }
                 }>
-                  {uploadStatus[index] === "Success!" ? "Remove Image" : "Image Removed"}
+                  {uploadStatus[index] === "Success!" ? "Remove Image" : uploadStatus[index] === "Upload" ? "Image Removed": "Remove Image"}
                 </Button>
               </Form.Group>
             </Form>

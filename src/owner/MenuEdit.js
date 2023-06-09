@@ -59,7 +59,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
     })
     setUploadStatus(prevUploadStatus => {
       var newData = [...prevUploadStatus]
-      newData[index] = "Upload";
+      newData[index] = "Removed";
       return newData;
     })
     console.log(menuItems);
@@ -204,6 +204,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   type="text"
                   value={selectedFile[index] ?? "No File Selected"}
                   placeholder="No File Selected"
+                  onChange={()=>{}}
                   readOnly
                   className="col col-sm-6 d-flex"
                 />
@@ -217,16 +218,17 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 <Button onClick={() => handleSubmitImage(index)}>
                   {uploadStatus[index] ?? "Upload"}
                 </Button>
-                <Button className={styles.removebutton} variant="danger" onClick={() =>
+                <Button className={styles.removebutton} variant="danger" id={"button" + index} onClick={() =>
                   {
                     handleRemoveImage(index)
                   }
                 }>
-                  {uploadStatus[index] === "Success!" ? "Remove Image" : "Image Removed"}
+                  {uploadStatus[index] === "Removed" ? "Image Removed": "Remove Image"}
                 </Button>
                 {/* <Button  className={styles.removebutton} variant="danger">
                   Remove Image
                 </Button> */}
+                {/* <div>{menu["menuImageUrl"]}</div> */}
               </Form.Group>
             </Form>
             {/* MENU IMAGE */}

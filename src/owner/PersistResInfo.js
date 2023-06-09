@@ -53,7 +53,7 @@ function PersistResInfo({ formData, setFormData }) {
     const imageInput = document.querySelector("#imageInput");
 
     const handleSubmit = async (event) => {
-      event.preventDefault();
+      // event.preventDefault();
       const file = imageInput.files[0];
       const imageName = uuidv4();
 
@@ -94,7 +94,7 @@ function PersistResInfo({ formData, setFormData }) {
       newData["mainImageUrl"] = "";
       return newData;
     });
-    setUploadStatus("Upload");
+    setUploadStatus("Removed");
   };
 
   const renderTooltipTwo = (props) => (
@@ -970,14 +970,14 @@ function PersistResInfo({ formData, setFormData }) {
             Browse
           </label>
           <Button type="submit" className="mb-0 mx-2">
-            {uploadStatus}
+            Upload
           </Button>
           <Button
             className={styles.removebutton}
             variant="danger"
             onClick={handleRemove}
           >
-            Remove Image
+            {uploadStatus === "Removed" ? "Image Removed": "Remove Image"}
           </Button>
         </Form>
 
