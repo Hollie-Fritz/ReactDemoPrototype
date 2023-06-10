@@ -1,0 +1,46 @@
+/* Template 1 */
+.operatingHoursButtonTemplate1 {
+  background-color: var(--white) !important;
+  color: var(--dark) !important;
+  border-color: var(--biscuit) !important;
+  font-weight: bold;
+}
+.operatingHoursButtonTemplate1:hover {
+  background-color: var(--mint) !important;
+  color: var(--night) !important;
+}
+
+/* Template 2 */
+.operatingHoursButtonTemplate2 {
+  background-color: var(--white) !important;
+  color: var(--dark) !important;
+  border-color: var(--biscuit) !important;
+  font-weight: bold;
+}
+.operatingHoursButtonTemplate2:hover {
+  background-color: var(--mint) !important;
+  color: var(--night) !important;
+}
+
+/* Template 3 */
+.operatingHoursButtonTemplate3 {
+    background-color: var(--white) !important;
+    color: var(--grass) !important;
+    border-color: var(--matcha) !important;
+    font-weight: bold;
+  }
+  .operatingHoursButtonTemplate3:hover {
+    background-color: var(--citrine) !important;
+    color: var(--grass) !important;
+  }
+
+/* Template 4 */
+.operatingHoursButtonTemplate4 {
+    background-color: var(--teal) !important;
+    color: var(--butter-milk) !important;
+    border-color: var(--frosting) !important;
+  }
+  .operatingHoursButtonTemplate4:hover {
+    background-color: var(--frosting) !important;
+    color: var(--butter-milk) !important;
+  }
