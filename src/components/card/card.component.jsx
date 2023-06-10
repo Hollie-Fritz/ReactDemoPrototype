@@ -44,7 +44,7 @@ const CardComponent = ({
   return (
     <>
       <CardGroup className="my-1">
-        <Card style={{ width: "18rem" }}
+        <Card style={{ width: "18rem",  border: '3px ridge #212529', borderRadius: '30px' }}
         className="card-container"
         >
           <Card.Body key={userId}
@@ -71,9 +71,9 @@ const CardComponent = ({
           <Card.Footer className="border-0" style={{ background: "white" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
-                variant="primary"
                 type="submit"
                 onClick={handleShowReviewClick}
+                className="reviews"
               >
                 View Reviews
               </Button>{" "}

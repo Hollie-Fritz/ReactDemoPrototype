@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Row, Pagination } from "react-bootstrap";
 import Card from "../card/card.component";
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+import "./card-list.styles.css";
 
 const CardList = ({ restaurants }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,33 +21,66 @@ const CardList = ({ restaurants }) => {
   const renderPaginationItems = () => {
     const paginationItems = [];
 
-    // Previous button
+    //previous button
     paginationItems.push(
-      <Pagination.Prev
+      <Pagination.Item
         key="prev"
-        disabled={currentPage === 1}
+        className={currentPage === 1 ? "disabled" : ""}
         onClick={() => handlePageChange(currentPage - 1)}
-      />
+      >
+        <GrFormPrevious />
+      </Pagination.Item>
     );
 
-    // Ellipsis for indicating previous or continuing results
-    if (currentPage > 3) {
+    //page 1
+    paginationItems.push(
+      <Pagination.Item
+        key={1}
+        active={currentPage === 1}
+        onClick={() => handlePageChange(1)}
+      >
+        {1}
+      </Pagination.Item>
+    );
+
+    //page 2 or ...
+    if (currentPage > 4) {
       paginationItems.push(<Pagination.Ellipsis key="ellipsis-previous" />);
+    } else {
+      paginationItems.push(
+        <Pagination.Item
+          key={2}
+          active={currentPage === 2}
+          onClick={() => handlePageChange(2)}
+        >
+          {2}
+        </Pagination.Item>
+      );
     }
 
-    // Page numbers
-    for (let i = 1; i <= totalPages; i++) {
-      if (
-        i === 1 ||
-        i === currentPage ||
-        i === currentPage - 1 ||
-        i === currentPage + 1 ||
-        i === totalPages
-      ) {
+    //fix page 2 not displaying
+    //curr page if > 2 and < last page
+    if (currentPage > 2 && currentPage < totalPages) {
+      paginationItems.push(
+        <Pagination.Item
+          key={currentPage}
+          active
+          onClick={() => handlePageChange(currentPage)}
+        >
+          {currentPage}
+        </Pagination.Item>
+      );
+    }
+
+    //page after curr page and ellipsis
+    if (currentPage < totalPages - 3) {
+      paginationItems.push(<Pagination.Ellipsis key="ellipsis-next" />);
+    } else if (currentPage < totalPages - 1) {
+      for (let i = currentPage + 1; i < totalPages; i++) {
         paginationItems.push(
           <Pagination.Item
             key={i}
-            active={currentPage === i}
+            active={i === currentPage}
             onClick={() => handlePageChange(i)}
           >
             {i}
@@ -54,25 +89,42 @@ const CardList = ({ restaurants }) => {
       }
     }
 
-    // Ellipsis for indicating next or continuing results
-    if (currentPage < totalPages - 2) {
-      paginationItems.push(<Pagination.Ellipsis key="ellipsis-next" />);
+    //last page
+    if (totalPages > 1) {
+      paginationItems.push(
+        <Pagination.Item
+          key={totalPages}
+          active={currentPage === totalPages}
+          onClick={() => handlePageChange(totalPages)}
+        >
+          {totalPages}
+        </Pagination.Item>
+      );
     }
 
-    // Next button
+    //next button
     paginationItems.push(
-      <Pagination.Next
+      <Pagination.Item
         key="next"
-        disabled={currentPage === totalPages}
+        className={currentPage === totalPages ? "disabled" : ""}
         onClick={() => handlePageChange(currentPage + 1)}
-      />
+      >
+        <GrFormNext />
+      </Pagination.Item>
     );
 
     return paginationItems;
   };
+
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
         <Container fluid>
           <Row xs={2} md={3} lg={4}>
             {currentItems.map((restaurant) => (

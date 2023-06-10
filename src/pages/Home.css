@@ -16,3 +16,6 @@
   box-shadow: none !important;
 }
 
+div.col-md-auto{
+  height: 65px !important;
+}

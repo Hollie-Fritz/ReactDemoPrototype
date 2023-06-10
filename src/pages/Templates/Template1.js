@@ -53,6 +53,7 @@ function Template1(props) {
                 <Banner data={{ resdata, bucketUrl }} />
                 {/* RESTAURANT BANNER IMAGE */}
 
+
                 <Card.Body style={{ overflow: "hidden" }}>
                   <Row className="d-flex justify-content-between">
                     <Col xs={1} md={5} className="mb-4">
@@ -171,6 +172,7 @@ function Template1(props) {
         className="position-fixed"
         style={{ top: "50%", right: 0, transform: "translateY(-50%)" }}
       ></Col>
+
     </>
   );
 }

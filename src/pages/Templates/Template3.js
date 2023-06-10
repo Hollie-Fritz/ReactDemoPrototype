@@ -102,6 +102,7 @@ function Template3(props) {
                           }}
                         />
                       {/* RESTAURANT INFO */}
+
                       <Card.Text>
                         <Stack direction="horizontal" gap={2}>
                           {/* leave review */}
