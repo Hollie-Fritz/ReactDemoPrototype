@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import ChooseTemplate from "../components/ChooseTemplate";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import styles from "./Form.module.css";
+import { CgAsterisk } from "react-icons/cg";
 
 // form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
@@ -40,7 +41,7 @@ function PersistResInfo({ formData, setFormData }) {
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       The restaurant banner looks best with the following dimensions:<br></br>
-      ?x?<br></br>
+      1250x200<br></br>
       It will be displayed at the top of your web page with your restaurant name
       over it.
     </Tooltip>
@@ -113,7 +114,12 @@ function PersistResInfo({ formData, setFormData }) {
           <Form.Group className="col col-sm-6">
             {/* provide a text label as a component */}
             {/* RES NAME */}
-            <Form.Label className="fw-bold">Restaurant Name</Form.Label>
+            <Form.Label className="fw-bold">
+              Restaurant Name{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span>
+            </Form.Label>
             <Form.Control
               id="validation"
               type="resName" //type – declares the type of input we want
@@ -131,7 +137,10 @@ function PersistResInfo({ formData, setFormData }) {
 
           {/* PHONE */}
           <Form.Group noValidate className="col col-sm-6">
-            <Form.Label className="fw-bold">Phone Number</Form.Label>
+            <Form.Label className="fw-bold">Phone Number{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
             <InputGroup>
               {/* country code 1 for US */}
               <InputGroup.Text id="basic-addon1">+1</InputGroup.Text>
@@ -167,7 +176,10 @@ function PersistResInfo({ formData, setFormData }) {
         <Row className="mb-3">
           {/* ADDRESS */}
           <Form.Group className=" col col-sm-6">
-            <Form.Label className="fw-bold">Address</Form.Label>
+            <Form.Label className="fw-bold">Address{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
             <Form.Control
               id="validation"
               required
@@ -195,7 +207,10 @@ function PersistResInfo({ formData, setFormData }) {
         </Row>
         <Row className="mb-3">
           <Form.Group className="col col-sm-4">
-            <Form.Label className="fw-bold">City</Form.Label>
+            <Form.Label className="fw-bold">City{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
             <Form.Control
               id="validation"
               required
@@ -225,7 +240,10 @@ function PersistResInfo({ formData, setFormData }) {
             </Form.Select>
           </Form.Group>
           <Form.Group className="col col-sm-4">
-            <Form.Label className="fw-bold">Zip Code</Form.Label>
+            <Form.Label className="fw-bold">Zip Code{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
             <Form.Control
               id="validation"
               required
@@ -254,14 +272,14 @@ function PersistResInfo({ formData, setFormData }) {
           {/* ADDRESS */}
         </Row>
         {/* HOURS */}
-        <Row  className="mb-3 no-gutters">
+        <Row className="mb-3 no-gutters">
           {/* WEEKDAY HOURS */}
           <Col md={6}>
             <h3>Weekday Hours</h3>
 
             {/* MONDAY */}
-            <Row  className="mb-3 no-gutters">
-                <Form.Group className="col col-sm-6 pr-2">
+            <Row className="mb-3 no-gutters">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">
                   Monday: Opening Hours
                 </Form.Label>
@@ -304,7 +322,7 @@ function PersistResInfo({ formData, setFormData }) {
                 </Form.Select>
               </Form.Group>
 
-                <Form.Group className="col col-sm-6 pr-2">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">Closing Hours</Form.Label>
                 <Form.Select
                   id="validation"
@@ -348,8 +366,8 @@ function PersistResInfo({ formData, setFormData }) {
             {/* MONDAY */}
             <br></br>
             {/* TUESDAY */}
-            <Row  className="mb-3 no-gutters">
-                <Form.Group className="col col-sm-6 pr-2">
+            <Row className="mb-3 no-gutters">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">
                   Tuesday: Opening Hours
                 </Form.Label>
@@ -391,7 +409,7 @@ function PersistResInfo({ formData, setFormData }) {
                 </Form.Select>
               </Form.Group>
 
-                <Form.Group className="col col-sm-6 pr-2">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">Closing Hours</Form.Label>
                 <Form.Select
                   id="validation"
@@ -434,8 +452,8 @@ function PersistResInfo({ formData, setFormData }) {
             {/* TUESDAY */}
             <br></br>
             {/* WEDNESDAY */}
-            <Row  className="mb-3 no-gutters">
-                <Form.Group className="col col-sm-6 pr-2">
+            <Row className="mb-3 no-gutters">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">
                   Wednesday: Opening Hours
                 </Form.Label>
@@ -480,7 +498,7 @@ function PersistResInfo({ formData, setFormData }) {
                 </Form.Select>
               </Form.Group>
 
-                <Form.Group className="col col-sm-6 pr-2">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">Closing Hours</Form.Label>
                 <Form.Select
                   id="validation"
@@ -524,8 +542,8 @@ function PersistResInfo({ formData, setFormData }) {
 
             <br></br>
             {/* THURSDAY */}
-            <Row  className="mb-3 no-gutters">
-                <Form.Group className="col col-sm-6 pr-2">
+            <Row className="mb-3 no-gutters">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">
                   Thursday: Opening Hours
                 </Form.Label>
@@ -570,7 +588,7 @@ function PersistResInfo({ formData, setFormData }) {
                 </Form.Select>
               </Form.Group>
 
-                <Form.Group className="col col-sm-6 pr-2">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">Closing Hours</Form.Label>
                 <Form.Select
                   id="validation"
@@ -613,8 +631,8 @@ function PersistResInfo({ formData, setFormData }) {
             {/* THURSDAY */}
             <br></br>
             {/* FRIDAY */}
-            <Row  className="mb-3 no-gutters">
-                <Form.Group className="col col-sm-6 pr-2">
+            <Row className="mb-3 no-gutters">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">
                   Friday: Opening Hours
                 </Form.Label>
@@ -656,7 +674,7 @@ function PersistResInfo({ formData, setFormData }) {
                 </Form.Select>
               </Form.Group>
 
-                <Form.Group className="col col-sm-6 pr-2">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">Closing Hours</Form.Label>
                 <Form.Select
                   id="validation"
@@ -706,8 +724,8 @@ function PersistResInfo({ formData, setFormData }) {
             <h3>Weekend Hours</h3>
 
             {/* SATURDAY */}
-            <Row  className="mb-3 no-gutters">
-                <Form.Group className="col col-sm-6 pr-2">
+            <Row className="mb-3 no-gutters">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">
                   Saturday: Opening Hours
                 </Form.Label>
@@ -749,7 +767,7 @@ function PersistResInfo({ formData, setFormData }) {
                 </Form.Select>
               </Form.Group>
 
-                <Form.Group className="col col-sm-6 pr-2">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">Closing Hours</Form.Label>
                 <Form.Select
                   id="validation"
@@ -792,8 +810,8 @@ function PersistResInfo({ formData, setFormData }) {
             {/* SATURDAY */}
             <br></br>
             {/* SUNDAY */}
-            <Row  className="mb-3 no-gutters">
-                <Form.Group className="col col-sm-6 pr-2">
+            <Row className="mb-3 no-gutters">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">
                   Sunday: Opening Hours
                 </Form.Label>
@@ -835,7 +853,7 @@ function PersistResInfo({ formData, setFormData }) {
                 </Form.Select>
               </Form.Group>
 
-                <Form.Group className="col col-sm-6 pr-2">
+              <Form.Group className="col col-sm-6 pr-2">
                 <Form.Label className="fw-bold">Closing Hours</Form.Label>
                 <Form.Select
                   id="validation"
@@ -883,7 +901,10 @@ function PersistResInfo({ formData, setFormData }) {
           {/* CUISINE */}
           <Form.Group className="col col-sm-6">
             {/* provide a text label as a component */}
-            <Form.Label className="fw-bold">Restaurant Cuisine Type</Form.Label>
+            <Form.Label className="fw-bold">Restaurant Cuisine Type{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
             <Form.Control
               id="validation"
               required
@@ -977,7 +998,7 @@ function PersistResInfo({ formData, setFormData }) {
             variant="danger"
             onClick={handleRemove}
           >
-            {uploadStatus === "Removed" ? "Image Removed": "Remove Image"}
+            {uploadStatus === "Removed" ? "Image Removed" : "Remove Image"}
           </Button>
         </Form>
 

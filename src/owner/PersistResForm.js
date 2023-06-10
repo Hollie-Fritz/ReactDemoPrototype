@@ -196,9 +196,6 @@ function PersistResForm() {
         {page === FormTitles.length - 1 ? (
           <>
             <br></br>
-            <Button variant="success" className="m-1" href="./owner">
-              Go Back to Options
-            </Button>
           </>
         ) : (
           ""

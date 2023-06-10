@@ -5,6 +5,7 @@ import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } 
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import styles from "./Form.module.css";
+import { CgAsterisk } from "react-icons/cg";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function PersistResMenu({ menuItems, setMenuItems }) {
@@ -105,7 +106,10 @@ function PersistResMenu({ menuItems, setMenuItems }) {
           <Row className="mb-3" key={index}>
             <Form.Group className="col col-sm-3">
               {/* MENU ITEM */}
-              <Form.Label className="fw-bold">Menu Item</Form.Label>
+              <Form.Label className="fw-bold">Menu Item{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
               <Form.Control
                 id="validation"
                 required
@@ -121,7 +125,10 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM PRICE */}
             <Form.Group className="col col-sm-3">
-              <Form.Label className="fw-bold">Price</Form.Label>
+              <Form.Label className="fw-bold">Price{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
               <InputGroup className="mb-3">
                 <Form.Control
                   id="validation"

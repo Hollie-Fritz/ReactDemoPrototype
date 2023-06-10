@@ -45,3 +45,10 @@ adds width so words don't wrap and margin for improved spacing */
 .imageupload {
   margin-top: 20px;
 }
+
+.asteriskicon{
+  position: relative;
+          color: red;
+          top: -5px;
+          left: -5px;
+}
