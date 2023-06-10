@@ -76,7 +76,7 @@ function PopUp(){
                   toast(
                     <div onClick ={() => navigate("/orderStatus")}>Your order from {message["customerName"]} has a new update!</div>
                   );
-                } else if (message["updateType"] === "Message" && location.pathname !== `/${user.getUsername()}/${message["sentBy"]}`) {
+                } else if (message["updateType"] === "Message" && location.pathname !== `/chat/${user.getUsername()}/${message["sentBy"]}`) {
                   toast(
                     <div onClick ={() => navigate(`chat/${user.getUsername()}/${message["sentBy"]}`)}>From {message["sentBy"]}: {message["message"]}</div>
                   );
