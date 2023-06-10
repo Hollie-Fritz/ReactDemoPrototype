@@ -10,7 +10,7 @@ body {
 /* remove image button
 adds width so words don't wrap and margin for improved spacing */
 .removebutton {
-  min-width: 146px;
+  min-width: 149px;
   margin-left:8px;
 }
 
@@ -44,4 +44,11 @@ adds width so words don't wrap and margin for improved spacing */
 
 .imageupload {
   margin-top: 20px;
+}
+
+.asteriskicon{
+  position: relative;
+          color: red;
+          top: -5px;
+          left: -5px;
 }

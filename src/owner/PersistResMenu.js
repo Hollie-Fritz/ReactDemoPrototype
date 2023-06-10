@@ -5,6 +5,7 @@ import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } 
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import styles from "./Form.module.css";
+import { CgAsterisk } from "react-icons/cg";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function PersistResMenu({ menuItems, setMenuItems }) {
@@ -90,6 +91,13 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     </Tooltip>
   );
 
+  const renderTooltip2 = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      The menu item image looks best with the following dimensions:<br></br>
+      ?x?<br></br>
+      It will be displayed at the top of your menu item.
+    </Tooltip>
+  );
 
   return (
     <>
@@ -98,7 +106,10 @@ function PersistResMenu({ menuItems, setMenuItems }) {
           <Row className="mb-3" key={index}>
             <Form.Group className="col col-sm-3">
               {/* MENU ITEM */}
-              <Form.Label>Menu Item</Form.Label>
+              <Form.Label className="fw-bold">Menu Item{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
               <Form.Control
                 id="validation"
                 required
@@ -114,7 +125,10 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM PRICE */}
             <Form.Group className="col col-sm-3">
-              <Form.Label>Price</Form.Label>
+              <Form.Label className="fw-bold">Price{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
               <InputGroup className="mb-3">
                 <Form.Control
                   id="validation"
@@ -139,7 +153,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM DESCRIPTION */}
             <Form.Group className="col col-sm-3">
-              <Form.Label>Description</Form.Label>
+              <Form.Label className="fw-bold">Description</Form.Label>
               <InputGroup>
                 <Form.Control
                   as="textarea"
@@ -157,7 +171,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM TYPE */}
             <Form.Group className="col col-sm-3">
-              <Form.Label>
+              <Form.Label className="fw-bold">
                 Menu Item Type{" "}
                 <OverlayTrigger
                   placement="top"
@@ -183,6 +197,18 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             {/* MENU ITEM TYPE */}
 
             {/* MENU IMAGE */}
+            <Form.Label className="fw-bold">
+          Menu Item Image
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip2}
+          >
+            <span className={styles.removeimage}>
+              <AiOutlineInfoCircle size={20} className={styles.icon} />
+            </span>
+          </OverlayTrigger>
+          </Form.Label>
             <Form id={"imageForm" + index} className="col col-sm-6">
               <Form.Group className="col col-sm-6 d-flex align-items-center">
                 <input
@@ -220,16 +246,27 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                   Browse
                 </label>
                 <Button onClick={() => handleSubmitImage(index)}>
-                  {uploadStatus[index] ?? "Upload"}
+                Upload
                 </Button>
                 <Button className={styles.removebutton} variant="danger" onClick={() =>
                   {
                     handleRemoveImage(index)
                   }
                 }>
-                  {uploadStatus[index] === "Success!" ? "Remove Image" : "Image Removed"}
+                Remove Image
                 </Button>
               </Form.Group>
+              
+              {
+                menu["menuImageUrl"] &&
+                <img
+                src={
+                  "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                    menu["menuImageUrl"]
+                }
+                alt=""
+                />
+              }
             </Form>
             {/* MENU IMAGE */}
 

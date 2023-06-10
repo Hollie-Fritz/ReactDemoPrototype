@@ -5,6 +5,7 @@ import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } 
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import styles from "./Form.module.css";
+import { CgAsterisk } from "react-icons/cg";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function MenuEdit({ menuItems, setMenuItems }) {
@@ -59,7 +60,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
     })
     setUploadStatus(prevUploadStatus => {
       var newData = [...prevUploadStatus]
-      newData[index] = "Upload";
+      newData[index] = "Removed";
       return newData;
     })
     console.log(menuItems);
@@ -98,7 +99,10 @@ function MenuEdit({ menuItems, setMenuItems }) {
           <Row className="mb-3" key={index}>
             {/* MENU ITEM */}
             <Form.Group controlId="formItem" className="col col-sm-3">
-              <Form.Label>Menu Item</Form.Label>
+              <Form.Label className="fw-bold">Menu Item{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
               <Form.Control
                 id="validation"
                 required
@@ -114,7 +118,10 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM PRICE */}
             <Form.Group controlId="formItemPrice" className="col col-sm-3">
-              <Form.Label>Price</Form.Label>
+              <Form.Label className="fw-bold">Price{" "}
+              <span className={styles.asteriskicon}>
+                <CgAsterisk />
+              </span></Form.Label>
               <InputGroup className="mb-3">
                 <Form.Control
                   id="validation"
@@ -139,7 +146,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM DESCRIPTION */}
             <Form.Group controlId="formItemDesc" className="col col-sm-3">
-              <Form.Label>Description</Form.Label>
+              <Form.Label className="fw-bold">Description</Form.Label>
               <InputGroup>
                 <Form.Control
                   as="textarea"
@@ -157,7 +164,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM TYPE */}
             <Form.Group controlId="formItemType" className="col col-sm-3">
-              <Form.Label>
+              <Form.Label className="fw-bold">
                 Menu Item Type{" "}
                 <OverlayTrigger
                   placement="top"
@@ -204,6 +211,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   type="text"
                   value={selectedFile[index] ?? "No File Selected"}
                   placeholder="No File Selected"
+                  onChange={()=>{}}
                   readOnly
                   className="col col-sm-6 d-flex"
                 />
@@ -215,19 +223,30 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   Browse
                 </label>
                 <Button onClick={() => handleSubmitImage(index)}>
-                  {uploadStatus[index] ?? "Upload"}
+                  Upload
                 </Button>
-                <Button className={styles.removebutton} variant="danger" onClick={() =>
+                <Button className={styles.removebutton} variant="danger" id={"button" + index} onClick={() =>
                   {
                     handleRemoveImage(index)
                   }
                 }>
-                  {uploadStatus[index] === "Success!" ? "Remove Image" : "Image Removed"}
+                  Remove Image
                 </Button>
                 {/* <Button  className={styles.removebutton} variant="danger">
                   Remove Image
                 </Button> */}
+                {/* <div>{menu["menuImageUrl"]}</div> */}
               </Form.Group>
+              {
+                menu["menuImageUrl"] &&
+                <img
+                src={
+                  "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                    menu["menuImageUrl"]
+                }
+                alt=""
+                />
+              }
             </Form>
             {/* MENU IMAGE */}
 
