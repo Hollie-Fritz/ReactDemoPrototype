@@ -1,8 +1,11 @@
 import React from "react";
-import { Card, ListGroup} from "react-bootstrap";
+import { Card, ListGroup, Button} from "react-bootstrap";
 import "../components/Grid.css";
 import "../pages/About.css";
 import NavBarHome from "../components/NavBarHome";
+import { AiOutlineMail } from "react-icons/ai";
+import { FaGithubAlt } from "react-icons/fa";
+
 
 const Contact = () => {
   const cardInfo = [
@@ -10,7 +13,7 @@ const Contact = () => {
       image:
         "https://nuorderbucket.s3.us-west-2.amazonaws.com/Hollie.png",
       name: "Hollie Fritz",
-      position: "Program Manager and Front-End Developer of NuOrder since 2022",
+      position: "Program Lead and Front-End Developer of NuOrder since 2022",
       email: "hollie.fritz@bellevuecollege.edu",
       github: "https://github.com/Hollie-Fritz",
     },
@@ -42,30 +45,29 @@ const Contact = () => {
 
   const renderCard = (card, index) => {
     return (
-      <Card style={{ width: "18rem" }} className="box" key={index}>
+      <Card style={{ width: "18rem", border: '5px solid black', borderRadius: '100px' }} className="box" key={index}>
         <Card.Img
           variant="top"
           src={card.image}
           className="avatar d-block mx-auto img-fluid wd-30"
+          style={{ marginTop: '20px' }}
         />
         <Card.Body>
           <Card.Title style={{ textAlign: "center" }}>{card.name}</Card.Title>
           <Card.Text style={{ textAlign: "center" }}>{card.position}</Card.Text>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+            <a href={`mailto:${card.email}`}>
+              <AiOutlineMail size={28} className="linkicon"/>
+            </a>
+            <a  href={card.github} target="_blank" rel="noopener noreferrer">
+              <FaGithubAlt size={28}  className="linkicon"/>
+            </a>
+          </div>
         </Card.Body>
-        <ListGroup className="list-group-flush">
-          <ListGroup.Item style={{ textAlign: "center" }}>
-            Email: <Card.Link href={`mailto:${card.email}`}> {card.email}</Card.Link>
-          </ListGroup.Item>
-          <ListGroup.Item style={{ textAlign: "center" }}>
-          Github:{" "}
-            <Card.Link href={card.github} target="_blank" rel="noopener noreferrer">
-              {card.github}
-            </Card.Link>
-          </ListGroup.Item>
-        </ListGroup>
       </Card>
     );
   };
+
 
   return (
     <>

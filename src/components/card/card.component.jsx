@@ -44,7 +44,7 @@ const CardComponent = ({
   return (
     <>
       <CardGroup className="my-1">
-        <Card style={{ width: "18rem" }}
+        <Card style={{ width: "18rem",  border: '1px groove #212529' }}
         className="card-container"
         >
           <Card.Body key={userId}
