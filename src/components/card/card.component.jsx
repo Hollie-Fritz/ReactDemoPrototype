@@ -71,9 +71,9 @@ const CardComponent = ({
           <Card.Footer className="border-0" style={{ background: "white" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
-                variant="primary"
                 type="submit"
                 onClick={handleShowReviewClick}
+                className="reviews"
               >
                 View Reviews
               </Button>{" "}

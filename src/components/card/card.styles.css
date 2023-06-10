@@ -11,8 +11,21 @@
     transform: translateZ(0);
     transition: transform 0.25s ease-out;
   }
-  
+
   .card-container:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px #a5a3a3;
+  }
+/* review button color */
+  .reviews {
+    background-color: #333b42 !important;
+
+    border-color: #212921 !important;
+    border-width: 1px !important;
+
+  }
+
+  .reviews:hover{
+    background-color: #292129 !important;
+    color: white !important;
   }
