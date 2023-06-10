@@ -8,7 +8,7 @@ const Contact = () => {
   const cardInfo = [
     {
       image:
-        "https://static.vecteezy.com/system/resources/previews/009/384/545/original/kitty-cat-clipart-design-illustration-free-png.png",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Hollie.png",
       name: "Hollie Fritz",
       position: "Program Manager and Front-End Developer of NuOrder since 2022",
       email: "hollie.fritz@bellevuecollege.edu",
@@ -16,7 +16,7 @@ const Contact = () => {
     },
     {
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/009/354/797/small/kitty-cat-clipart-design-illustration-free-png.png",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Giang.png",
       name: "Giang Ngo",
       position: "Front-End Developer of NuOrder since 2022",
       email: "giang.ngo@bellevuecollege.edu",
@@ -24,15 +24,15 @@ const Contact = () => {
     },
     {
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/009/380/316/small_2x/kitty-cat-clipart-design-illustration-free-png.png",
-      name: "Nao Mai",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Kyle.png",
+      name: "Kyle Mai",
       position: "Full-Stack Developer of NuOrder since 2022",
       email: "nao.mai@belllevuecollege.edu",
       github: "https://github.com/kylemai96",
     },
     {
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/009/383/800/small/kitty-cat-clipart-design-illustration-free-png.png",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Jona.png",
       name: "Jonida Durbaku",
       position: "Front-End Developer of NuOrder since 2022",
       email: "jonida.durbaku@belllevuecollege.edu",
