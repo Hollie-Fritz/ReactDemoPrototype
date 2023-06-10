@@ -19,6 +19,7 @@ function Owner() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    //user not logged in -> navigate to login
     if (!user) {
       navigate("/login");
       return;
@@ -51,10 +52,12 @@ function Owner() {
     checkRestaurantOwner();
   }, []);
 
+  //when "Delete" button is pushed, show modal
   function deleteRestaurant() {
     setShowModal(true);
   }
 
+  //upon clicking "Delete" button in modal, delete the webpage
   async function confirmDelete(restaurantName) {
     await fetch(
       `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant`,
