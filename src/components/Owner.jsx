@@ -1,11 +1,13 @@
-import { Button, Stack, Container, Row, Col } from "react-bootstrap";
+import { Button, Modal, Stack, Container, Row, Col } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "./NavBarHome";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
-import "./Owner.css"; // you should create this file
+import "./Owner.css";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate, Link } from "react-router-dom";
+import { AiOutlineWarning } from "react-icons/ai"; //prettier-ignore
+
 
 function Owner() {
   const [userId, setUserId] = useState("");
@@ -14,7 +16,10 @@ function Owner() {
   const { user } = useAuthenticator((context) => [context.user]);
   const navigate = useNavigate();
 
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
+    //user not logged in -> navigate to login
     if (!user) {
       navigate("/login");
       return;
@@ -37,10 +42,8 @@ function Owner() {
           }
         }
       )
-        //check if data was correctly sent in console log
         .then((response) => response.json())
         .then((data) => {
-          console.log("restaurant length is " + data.length);
           if (data.length !== 0) {
             setHasRestaurant(true);
           }
@@ -49,7 +52,13 @@ function Owner() {
     checkRestaurantOwner();
   }, []);
 
-  async function deleteRestaurant(restaurantName) {
+  //when "Delete" button is pushed, show modal
+  function deleteRestaurant() {
+    setShowModal(true);
+  }
+
+  //upon clicking "Delete" button in modal, delete the webpage
+  async function confirmDelete(restaurantName) {
     await fetch(
       `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/restaurant`,
       {
@@ -73,77 +82,86 @@ function Owner() {
             <h1 className="Owner-title">Welcome, {userId}!</h1>
           </Col>
         </Row>
-        <Stack gap={3}>
-          <Stack direction="horizontal" gap={2}>
-            <Row>
-              {hasRestaurant ? (
-                <>
-                  <Col className="col mb-2">
-                    <Button
-                      variant="outline-light"
-                      block
-                      className="Owner-btn"
-                      href="./edit"
-                    >
-                      Edit Restaurant Webpage
-                    </Button>
-                  </Col>
-                </>
-              ) : (
-                <Col xs={12} md={6} className="mb-2">
-                  <Button
-                    variant="outline-light"
-                    block
-                    className="Owner-btn"
-                    href="./create"
-                  >
-                    Webpage Creation
-                  </Button>
-                </Col>
-              )}
-            </Row>
-          </Stack>
+
+        <Row className="justify-content-center">
           {hasRestaurant ? (
-            <>
-              <Row>
-                <Col xs={12} md={6} className="mb-2">
-                  <Button
-                    variant="outline-light"
-                    block
-                    className="Owner-btn"
-                    href="./orders"
-                  >
-                    Check Orders
-                  </Button>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={6} className="mb-2">
-                  <Link to={`/r/${userId}`}>
-                    <Button variant="outline-light" block className="Owner-btn">
-                      View My Webpage
-                    </Button>
-                  </Link>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={6} className="mb-2">
-                  <Button
-                    variant="outline-light"
-                    block
-                    className="Owner-btn"
-                    onClick={() => deleteRestaurant(user.getUsername())}
-                  >
-                    Delete Restaurant
-                  </Button>
-                </Col>
-              </Row>
-            </>
+            <Col xs={12} md="auto" className="mb-2 text-center">
+              <Button
+                variant="outline-light"
+                className="Owner-btn"
+                href="./edit"
+              >
+                Edit Restaurant Webpage
+              </Button>
+            </Col>
           ) : (
-            ""
+            <Col xs={12} md="auto" className="mb-2 text-center">
+              <Button
+                variant="outline-light"
+                className="Owner-btn"
+                href="./create"
+              >
+                Webpage Creation
+              </Button>
+            </Col>
           )}
-        </Stack>
+          {hasRestaurant && (
+            <>
+              <Col xs={12} md="auto" className="mb-2 text-center">
+                <Button
+                  variant="outline-light"
+                  className="Owner-btn"
+                  href="./orders"
+                >
+                  Check Orders
+                </Button>
+              </Col>
+              <Col xs={12} md="auto" className="mb-2 text-center">
+                <Link to={`/r/${userId}`}>
+                  <Button variant="outline-light" className="Owner-btn">
+                    View My Webpage
+                  </Button>
+                </Link>
+              </Col>
+            </>
+          )}
+        </Row>
+        <br></br>
+        {hasRestaurant && (
+          <Row className="justify-content-center">
+            <Col xs={12} md="auto" className="deletebutton">
+              <Button
+                variant="outline-light"
+                className="Owner-btn"
+                onClick={() => deleteRestaurant(user.getUsername())}
+              >
+                Delete Restaurant
+              </Button>
+            </Col>
+          </Row>
+        )}
       </Container>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header style={{ justifyContent: "center" }}>
+          <Modal.Title style={{ position: "relative", fontWeight: "bold" }}>
+          <AiOutlineWarning size={30} className="dangericon"/>Delete Restaurant<AiOutlineWarning size={30} className="dangericon"/>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        Are you sure you want to <b>delete</b> your restaurant's webpage?
+          <br></br>
+          We will be unable to recover your account if you proceed.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Go Back
+          </Button>
+          <Button variant="danger" onClick={() => confirmDelete(userId)}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

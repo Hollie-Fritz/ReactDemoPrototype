@@ -265,14 +265,11 @@ function FormEdit() {
         >
           {/* Conditionally render the button to display submit
         on the last page and next on all other pages */}
-          {page === FormTitles.length - 1 ? "Submit" : "Next"}
-        </Button>{" "}
+              {page === FormTitles.length - 1 ? "Submit" : "Next"}
+        </Button>{" "}<br></br><br></br>
         {page === FormTitles.length - 1 ? (
           <>
             <br></br>
-            <Button variant="success" className="m-1" href="./owner">
-              Go Back to Options
-            </Button>
           </>
         ) : (
           ""

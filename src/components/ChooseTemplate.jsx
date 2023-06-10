@@ -23,7 +23,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={show} onHide={handleClose} centered  size="lg">
         <Modal.Header closeButton>
           <Modal.Title as="h2" className="ms-auto fw-bold">
             Template Options
@@ -35,7 +35,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src={template1} rounded width="153" height="72" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/DefaultTemplate02.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -47,7 +47,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src={template2} rounded width="153" height="72" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/UpscaleTemplate01.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -61,7 +61,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src={template3}rounded width="153" height="72" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/FreshTemplate01.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -73,7 +73,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src={template4} rounded width="153" height="72" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/DessertBakery01.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"

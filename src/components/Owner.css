@@ -1,14 +1,16 @@
-/* Owner.css */
+/* background color block for owner page */
 .Owner-bg {
     background-color: #1b1b1b;
     color: white;
     padding: 2rem;
   }
-  
+
+/* welcome, user! message */
   .Owner-title {
     font-weight: bold;
   }
-  
+
+/* styling for buttons on owner page */
   .Owner-btn {
     border-radius: 25px;
     border: 2px solid white;
@@ -16,4 +18,15 @@
     font-weight: bold;
     font-size: 1.1rem;
   }
-  
+
+/* center the delete button on row below other buttons */
+  .deletebutton {
+    margin-left: 55px;
+  }
+
+/* styling for the danger icon displayed upon selecting "delete restaurant" */
+.dangericon{
+  color:red;
+  position: relative;
+  bottom:4px;
+}
