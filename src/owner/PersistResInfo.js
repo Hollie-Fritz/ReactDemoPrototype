@@ -54,7 +54,7 @@ function PersistResInfo({ formData, setFormData }) {
     const imageInput = document.querySelector("#imageInput");
 
     const handleSubmit = async (event) => {
-      // event.preventDefault();
+      event.preventDefault();
       const file = imageInput.files[0];
       const imageName = uuidv4();
 
@@ -90,6 +90,7 @@ function PersistResInfo({ formData, setFormData }) {
 
   const handleRemove = async (event) => {
     event.preventDefault();
+    console.log("removed");
     setFormData((prevState) => {
       var newData = { ...prevState };
       newData["mainImageUrl"] = "";
@@ -495,7 +496,7 @@ function PersistResInfo({ formData, setFormData }) {
             variant="danger"
             onClick={handleRemove}
           >
-            {uploadStatus === "Removed" ? "Image Removed" : "Remove Image"}
+            Remove Image
           </Button>
         </Form>
 

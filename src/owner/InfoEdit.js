@@ -59,8 +59,7 @@ function InfoEdit({ formData, setFormData }) {
     </Tooltip>
   );
 
-  const handleRemove = async (event) => {
-    // event.preventDefault();
+  const handleRemove = async () => {
     setFormData((prevState) => {
       var newData = { ...prevState };
       newData["mainImageUrl"] = "";
@@ -74,7 +73,8 @@ function InfoEdit({ formData, setFormData }) {
     const imageForm = document.querySelector("#imageForm");
     const imageInput = document.querySelector("#imageInput");
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
       const file = imageInput.files[0];
       const imageName = uuidv4();
 
@@ -484,9 +484,12 @@ function InfoEdit({ formData, setFormData }) {
           <Button
             className={styles.removebutton}
             variant="danger"
-            onClick={() => handleRemove()}
+            onClick={() => {
+              handleRemove()
+              }
+            }
           >
-            {uploadStatus === "Removed" ? "Image Removed" : "Remove Image"}
+          Remove Image
           </Button>
         </Form>
 
@@ -494,7 +497,7 @@ function InfoEdit({ formData, setFormData }) {
           <img
             id="mainImage"
             src={
-              `https://d12zok1slvqtin.cloudfront.net/fit-in/300x300/` +
+              `https://d12zok1slvqtin.cloudfront.net/` +
               formData["mainImageUrl"]
             }
             alt=""

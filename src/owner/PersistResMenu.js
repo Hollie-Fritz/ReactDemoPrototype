@@ -246,16 +246,27 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                   Browse
                 </label>
                 <Button onClick={() => handleSubmitImage(index)}>
-                  {uploadStatus[index] ?? "Upload"}
+                Upload
                 </Button>
                 <Button className={styles.removebutton} variant="danger" onClick={() =>
                   {
                     handleRemoveImage(index)
                   }
                 }>
-                  {uploadStatus[index] === "Success!" ? "Remove Image" : uploadStatus[index] === "Upload" ? "Image Removed": "Remove Image"}
+                Remove Image
                 </Button>
               </Form.Group>
+              
+              {
+                menu["menuImageUrl"] &&
+                <img
+                src={
+                  "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                    menu["menuImageUrl"]
+                }
+                alt=""
+                />
+              }
             </Form>
             {/* MENU IMAGE */}
 

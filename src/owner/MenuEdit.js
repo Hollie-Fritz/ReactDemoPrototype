@@ -223,20 +223,30 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   Browse
                 </label>
                 <Button onClick={() => handleSubmitImage(index)}>
-                  {uploadStatus[index] ?? "Upload"}
+                  Upload
                 </Button>
                 <Button className={styles.removebutton} variant="danger" id={"button" + index} onClick={() =>
                   {
                     handleRemoveImage(index)
                   }
                 }>
-                  {uploadStatus[index] === "Removed" ? "Image Removed": "Remove Image"}
+                  Remove Image
                 </Button>
                 {/* <Button  className={styles.removebutton} variant="danger">
                   Remove Image
                 </Button> */}
                 {/* <div>{menu["menuImageUrl"]}</div> */}
               </Form.Group>
+              {
+                menu["menuImageUrl"] &&
+                <img
+                src={
+                  "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                    menu["menuImageUrl"]
+                }
+                alt=""
+                />
+              }
             </Form>
             {/* MENU IMAGE */}
 
