@@ -60,7 +60,7 @@ function Template4(props) {
                     ? `url(${bucketUrl})`
                     : "",
                   backgroundSize: "cover",
-                  backgroundPostion: "center",
+                  backgroundPosition: "center",
                   color: "#FBFAF5",
                   height: "200px",
                   display: "flex",
