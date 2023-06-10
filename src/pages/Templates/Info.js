@@ -19,6 +19,7 @@ function Info(props) {
     setShowModal(false);
   };
 
+
   useEffect(() => {
     const checkIsOpen = () => {
       const now = moment().tz("America/Los_Angeles");
@@ -74,7 +75,9 @@ function Info(props) {
       </Card.Text>
       {/* restaurant hours */}
       <Card.Text>
+
         <nobr className="fw-bold">Today's Hours: </nobr>
+
         {openHours} - {closeHours}
         <span
           style={{
