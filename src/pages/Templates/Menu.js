@@ -17,7 +17,7 @@ function Menu(props) {
                 return (
                   <Col className="d-flex align-items-stretch">
                     {/* inner card three */}
-                    <Card key={index} style={{ width: "37rem" }}>
+                    <Card key={index} style={{ width: "45rem" }}>
                       <Card.Body>
                         <Row>
                           <Col md={8}>
@@ -58,12 +58,13 @@ function Menu(props) {
                               </Button>
                             </Card.Footer>
                           </Col>
-                          <Col md={4}>
+                          <Col md={4} className="d-flex align-items-center justify-content-center">
+                            <div style={{ height: "150px", width:"150px", overflow:"hidden" }}>
                             <Card.Img
                               variant="top"
                               src={
                                 item.foodImageUrl
-                                  ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                  ? "https://d12zok1slvqtin.cloudfront.net/fit-in/150x150/" +
                                     item.foodImageUrl
                                   : ""
                               }
@@ -71,6 +72,7 @@ function Menu(props) {
                             height: "100%",
                           width: "100%"}}
                             />
+                            </div>
                           </Col>
                         </Row>
                       </Card.Body>
