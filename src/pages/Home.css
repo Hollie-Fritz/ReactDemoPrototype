@@ -19,3 +19,9 @@
 div.col-md-auto{
   height: 65px !important;
 }
+
+
+.dropdown-menu {
+  left: auto !important;
+  right: 0 !important;
+}
