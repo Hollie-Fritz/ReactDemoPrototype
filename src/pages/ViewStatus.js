@@ -6,8 +6,7 @@ import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
-import { Pagination, EllipsisItem } from "react-bootstrap";
-
+import { Pagination, Ellipsis} from "react-bootstrap";
 import styles from './ViewStatus.module.css';
 
 //component that displays the orders
@@ -22,7 +21,6 @@ function ViewStatus() {
   const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
   //fetches the list of orders
   useEffect(() => {
     if (!user) {
@@ -46,36 +44,18 @@ function ViewStatus() {
 
     // eslint-disable-next-line
   }, []);
+
+  const EllipsisItem = () => {
+    return <Pagination.Item disabled>...</Pagination.Item>;
+  };
+  
   const renderPaginationItems = () => {
     const totalPages = Math.ceil(orders.length / itemsPerPage);
-    const visiblePages = 3;
-    const pageNeighbours = Math.floor(visiblePages / 2);
     const pageNumbers = [];
   
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
     }
-  
-    if (totalPages <= visiblePages) {
-      return pageNumbers.map((number) => (
-        <Pagination.Item
-          key={number}
-          active={number === currentPage}
-          onClick={() => paginate(number)}
-        >
-          {number}
-        </Pagination.Item>
-      ));
-    }
-  
-    const leftOffset = currentPage - pageNeighbours - 1;
-    const rightOffset = currentPage + pageNeighbours - totalPages;
-  
-    const hasLeftEllipsis = leftOffset > 1;
-    const hasRightEllipsis = rightOffset > 1;
-  
-    let ellipsisLeftCount = Math.min(leftOffset, pageNeighbours);
-    let ellipsisRightCount = Math.min(rightOffset, pageNeighbours);
   
     const items = [];
   
@@ -95,19 +75,17 @@ function ViewStatus() {
         active={1 === currentPage}
         onClick={() => paginate(1)}
       >
-        1
+        {1}
       </Pagination.Item>
     );
   
-    // Left ellipsis
-    if (hasLeftEllipsis) {
-      items.push(
-        <Pagination.Ellipsis key="ellipsis-left" onClick={() => paginate(currentPage - pageNeighbours - 1)} />
-      );
+    // Ellipsis after the second page
+    if (currentPage >= 4) {
+      items.push(<EllipsisItem key="ellipsis-start" />);
     }
   
-    // Page numbers between left and right ellipsis
-    for (let i = currentPage - pageNeighbours; i <= currentPage + pageNeighbours; i++) {
+    // Pages between the ellipsis
+    for (let i = currentPage - 1; i <= currentPage + 1; i++) {
       if (i > 1 && i < totalPages) {
         items.push(
           <Pagination.Item
@@ -121,11 +99,9 @@ function ViewStatus() {
       }
     }
   
-    // Right ellipsis
-    if (hasRightEllipsis) {
-      items.push(
-        <Pagination.Ellipsis key="ellipsis-right" onClick={() => paginate(currentPage + pageNeighbours + 1)} />
-      );
+    // Ellipsis before the last page
+    if (currentPage <= totalPages - 3) {
+      items.push(<EllipsisItem key="ellipsis-end" />);
     }
   
     // Last page
@@ -150,6 +126,9 @@ function ViewStatus() {
   
     return items;
   };
+  
+  
+      
   //rendering the component
   return (
     <>
