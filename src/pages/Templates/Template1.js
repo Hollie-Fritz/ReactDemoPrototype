@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Row, Container, Button, Card, Col, Stack } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
-import styles from "./Template1.module.css";
 import Banner from "./Banner.js";
 import Info from "./Info.js";
 import GoogleMap from "./GoogleMap.js";
 import Menu from "./Menu.js";
 import Template1Cart from "./Template1Cart.js";
+
+import styles from "./Template1.module.css";
 
 // Template1 component
 function Template1(props) {
@@ -52,7 +53,6 @@ function Template1(props) {
                 {/* RESTAURANT BANNER IMAGE */}
                 <Banner data={{ resdata, bucketUrl }} />
                 {/* RESTAURANT BANNER IMAGE */}
-
 
                 <Card.Body style={{ overflow: "hidden" }}>
                   <Row className="d-flex justify-content-between">
@@ -140,8 +140,18 @@ function Template1(props) {
               </Card>
             </div>
           </Col>
-          <Col className="order-last" xs={4} md={3}>
-            <Template1Cart
+    
+          <Col className="order-last" xs={4} md={3} 
+            style={{
+              position: "sticky",
+              top: "0",
+              right: "0",
+              height: "0vh",
+              overflowY: "auto"
+            }}
+          >
+            <Template1Cart 
+              className={styles.floating}
               fooddata={fooddata}
               cart={cart}
               setCart={setcart}
@@ -149,9 +159,10 @@ function Template1(props) {
               name={resdata["name"]}
             />
           </Col>
+
         </Row>
       </Container>
-
+ 
       {/* REVIEW POPUP */}
       <ViewReview
         show={showViewReviewForm}

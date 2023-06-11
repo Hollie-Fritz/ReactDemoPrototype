@@ -29,13 +29,13 @@ return(
                         />
                         <Card.Body>
                           <Card.Text
-                            style={{ fontSize: "18px" }}
+                          style={{ fontSize: "18px", wordWrap: "break-word", overflowWrap: "break-word" }}
                             as="h5"
                             className="text-center font-size: 10px"
                           >
-                            <nobr as="h1" className="fw-bold">
+                            <div as="h1" className="fw-bold">
                               {item.foodName}
-                            </nobr>
+                            </div>
                           </Card.Text>
                           <Card.Text>${item.foodPrice}</Card.Text>
                           <Card.Text>{item.foodDesc}</Card.Text>

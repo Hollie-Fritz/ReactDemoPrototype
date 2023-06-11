@@ -21,3 +21,9 @@
   overflow: hidden;
   position: relative;
 }
+
+.sticky-col {
+  position: sticky !important; 
+  top: 0;
+  height: 100vh; /* optional, if you want the column to take the full viewport height */
+}
