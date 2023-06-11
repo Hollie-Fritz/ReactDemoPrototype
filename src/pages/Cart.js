@@ -382,7 +382,6 @@ function Cart(props) {
                 <FloatingLabel
                   controlId="floatingName"
                   label="Name"
-                  onChange={handleCustomerName}
                 >
                   <Form.Control type="Name" placeholder="Enter your name" id = "validation"
                                   required
@@ -391,6 +390,14 @@ function Cart(props) {
                                       "Please enter a name"
                                     );
                                   }}
+                                  onInput={(event) => {
+                                    event.target.setCustomValidity("");
+                                  }}
+                                  onChange={(event)=> {
+                                    console.log(customerName);
+                                    handleCustomerName(event)
+                                  }
+                                  }
                                   value ={customerName}
                   />
                 </FloatingLabel>
@@ -458,6 +465,7 @@ function Cart(props) {
               </>
             ) : (
               <Button variant="primary" onClick={() => {
+                console.log(customerName);
                 const FormControl = document.querySelectorAll('[id*="validation"]');
                 console.log(FormControl.length);
                 let isValid = true;
