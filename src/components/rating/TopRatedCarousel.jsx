@@ -18,7 +18,7 @@ function TopRatedCarousel() {
   }, []);
 
   return (
-    <Carousel style={{ height: "400px", width: "1000px" }}>
+    <Carousel style={{ height: "400px", width: "1000px", cursor: "pointer" }}>
       {topRatedRestaurants.map((restaurant) => {
         const imageUrl = "https://nuorderbucket.s3.us-west-2.amazonaws.com/" + restaurant["mainImageUrl"];
 

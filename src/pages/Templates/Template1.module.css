@@ -22,8 +22,20 @@
   position: relative;
 }
 
+<<<<<<< HEAD
 .sticky-col {
   position: sticky !important; 
   top: 0;
   height: 100vh; /* optional, if you want the column to take the full viewport height */
+=======
+.cart-container {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.cart-container.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%
+>>>>>>> 5f38f255657dc5cbc2e75ce2c947cdf4eb6e1fe1
 }
