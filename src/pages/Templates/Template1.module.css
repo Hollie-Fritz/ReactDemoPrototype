@@ -21,3 +21,14 @@
   overflow: hidden;
   position: relative;
 }
+
+.cart-container {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.cart-container.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
