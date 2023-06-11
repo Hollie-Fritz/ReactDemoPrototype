@@ -155,6 +155,7 @@ function ViewStatus() {
           ))}
         </Row>
       </Container>
+      <br></br><br></br>
       <div className="d-flex justify-content-center">
         <Pagination>{renderPaginationItems()}</Pagination>
       </div>

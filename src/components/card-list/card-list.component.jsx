@@ -132,7 +132,9 @@ const CardList = ({ restaurants }) => {
             ))}
           </Row>
         </Container>
-        <br />
+        <br/>
+        <br></br>
+        <br></br>
         <Pagination>{renderPaginationItems()}</Pagination>
       </div>
     </>

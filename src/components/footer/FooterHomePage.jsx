@@ -54,7 +54,7 @@ let FooterHomePage = () => {
           </Row>
         </Container>
         <div className="text-center py-3">
-          &copy; {new Date().getFullYear()} NuOrder. All rights reserved.
+           2022 - 2023 Bellevue College Capstone Project
         </div>
       </footer>
     </>
