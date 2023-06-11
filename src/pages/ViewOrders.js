@@ -8,6 +8,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
 import { Pagination } from "react-bootstrap";
+import style from "./ViewStatus.module.css";
 
 //component that displays the orders
 function ViewOrder() {
@@ -299,16 +300,11 @@ function OrderCard({
                 </Form.Select>
               </Col>
               <Col sm="4">
-                <Button
+              <Button  className={style["orders-button"]}
                   onClick={async () => {
                     // retrieve element of form using unique id.
                     const form = document.getElementById("form" + index);
                     await updateOrderStatus(order["id"], form.value);
-                  }}
-                  style={{
-                    marginBottom: "20px",
-                    backgroundColor: "#212529",
-                    color: "white",
                   }}
                 >
                   {loadingState[order["id"]] ? (
@@ -321,7 +317,7 @@ function OrderCard({
               </Col>
             </Form.Group>
             <OrderProgress stage={order["progress"]} />
-            <Button
+            <Button  className={style["orders-button"]}
                 style={{ marginTop: "20px" }}
                 onClick={()=>
                   deleteOrder(order["id"])
@@ -329,9 +325,10 @@ function OrderCard({
               >
                 Delete
             </Button>
+            
             {user && order["customerId"] !== "" && (
-              <Button
-                style={{ marginTop: "20px" }}
+              <Button  className={style["orders-button"]}
+                style={{ marginTop: "20px", marginLeft: "10px" }}
                 onClick={() =>
                   navigate(
                     `/chat/${user.getUsername()}/${order["customerId"]}`,

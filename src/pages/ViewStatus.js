@@ -6,8 +6,8 @@ import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
-import { Pagination, Ellipsis} from "react-bootstrap";
-import styles from './ViewStatus.module.css';
+import { Pagination, Ellipsis } from "react-bootstrap";
+import style from "./ViewStatus.module.css";
 
 //component that displays the orders
 function ViewStatus() {
@@ -48,17 +48,17 @@ function ViewStatus() {
   const EllipsisItem = () => {
     return <Pagination.Item disabled>...</Pagination.Item>;
   };
-  
+
   const renderPaginationItems = () => {
     const totalPages = Math.ceil(orders.length / itemsPerPage);
     const pageNumbers = [];
-  
+
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
     }
-  
+
     const items = [];
-  
+
     // Previous page
     items.push(
       <Pagination.Prev
@@ -67,7 +67,7 @@ function ViewStatus() {
         disabled={currentPage === 1}
       />
     );
-  
+
     // First page
     items.push(
       <Pagination.Item
@@ -78,12 +78,12 @@ function ViewStatus() {
         {1}
       </Pagination.Item>
     );
-  
+
     // Ellipsis after the second page
     if (currentPage >= 4) {
       items.push(<EllipsisItem key="ellipsis-start" />);
     }
-  
+
     // Pages between the ellipsis
     for (let i = currentPage - 1; i <= currentPage + 1; i++) {
       if (i > 1 && i < totalPages) {
@@ -98,12 +98,12 @@ function ViewStatus() {
         );
       }
     }
-  
+
     // Ellipsis before the last page
     if (currentPage <= totalPages - 3) {
       items.push(<EllipsisItem key="ellipsis-end" />);
     }
-  
+
     // Last page
     items.push(
       <Pagination.Item
@@ -114,7 +114,7 @@ function ViewStatus() {
         {totalPages}
       </Pagination.Item>
     );
-  
+
     // Next page
     items.push(
       <Pagination.Next
@@ -123,12 +123,10 @@ function ViewStatus() {
         disabled={currentPage === totalPages}
       />
     );
-  
+
     return items;
   };
-  
-  
-      
+
   //rendering the component
   return (
     <>
@@ -158,8 +156,8 @@ function ViewStatus() {
         </Row>
       </Container>
       <div className="d-flex justify-content-center">
-      <Pagination>{renderPaginationItems()}</Pagination>
-    </div>
+        <Pagination>{renderPaginationItems()}</Pagination>
+      </div>
     </>
   );
 }
@@ -225,6 +223,7 @@ function OrderCard({ order, user, navigate }) {
             </Form.Label>
             <OrderProgress stage={order["progress"]} />
             <Button
+              className={style["orders-button"]}
               style={{ marginTop: "20px" }}
               onClick={() =>
                 navigate(
