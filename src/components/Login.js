@@ -1,14 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 
-import { Authenticator, useAuthenticator, View, useTheme, Image, Text, Heading, Button } from "@aws-amplify/ui-react";
+import { Authenticator, useAuthenticator, View, ThemeProvider, useTheme, Image, Text, Heading, Button } from "@aws-amplify/ui-react";
 
 import "@aws-amplify/ui-react/styles.css";
-import logo from "../assests/NuOrderLogoLarge.png";
-
+import logo from "../assests/DarkLogo.png";
 
 import { useNavigate, useLocation } from "react-router";
 import NavBarHome from "./NavBarHome";
+import "./Login.css";
 
 export function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
@@ -39,8 +39,8 @@ export function Login() {
 
       return (
         <View textAlign="center" padding={tokens.space.large}>
-          <Text color={tokens.colors.neutral[80]}>
-            &copy; All Rights Reserved
+          <Text color={tokens.colors.neutral[80]} fontSize={15}>
+            <nobr className="fw-bold">Note:</nobr> Your username will be used as the URL of your page.
           </Text>
         </View>
       );
@@ -69,6 +69,7 @@ export function Login() {
               onClick={toResetPassword}
               size="small"
               variation="link"
+              color="black"
             >
               Reset Password
             </Button>
@@ -100,6 +101,7 @@ export function Login() {
               onClick={toSignIn}
               size="small"
               variation="link"
+              color="black"
             >
               Back to Sign In
             </Button>
@@ -107,6 +109,7 @@ export function Login() {
         );
       },
     },
+
     ConfirmSignUp: {
       Header() {
         const { tokens } = useTheme();
@@ -120,9 +123,10 @@ export function Login() {
         );
       },
       Footer() {
-        return <Text>Footer Information</Text>;
+        return <Text>NuOrder</Text>;
       },
     },
+
     SetupTOTP: {
       Header() {
         const { tokens } = useTheme();
@@ -136,9 +140,10 @@ export function Login() {
         );
       },
       Footer() {
-        return <Text>Footer Information</Text>;
+        return <Text>NuOrder</Text>;
       },
     },
+
     ConfirmSignIn: {
       Header() {
         const { tokens } = useTheme();
@@ -152,9 +157,10 @@ export function Login() {
         );
       },
       Footer() {
-        return <Text>Footer Information</Text>;
+        return <Text>NuOrder</Text>;
       },
     },
+
     ResetPassword: {
       Header() {
         const { tokens } = useTheme();
@@ -168,9 +174,10 @@ export function Login() {
         );
       },
       Footer() {
-        return <Text>Footer Information</Text>;
+        return <Text>NuOrder</Text>;
       },
     },
+
     ConfirmResetPassword: {
       Header() {
         const { tokens } = useTheme();
@@ -184,7 +191,7 @@ export function Login() {
         );
       },
       Footer() {
-        return <Text>Footer Information</Text>;
+        return <Text>NuOrder</Text>;
       },
     },
   };
@@ -247,19 +254,68 @@ export function Login() {
     },
   };
 
+  const { tokens } = useTheme();
+  const theme = {
+    name: 'Auth Example Theme',
+    tokens: {
+      colors: {
+        // background: {
+        //   primary: {
+        //     value: tokens.colors.neutral['90'].value,
+        //   },
+        //   secondary: {
+        //     value: tokens.colors.neutral['100'].value,
+        //   },
+        // },
+        font: {
+          interactive: {
+            value: tokens.colors.black.value,
+          },
+        },
+        // brand: {
+          // primary: {
+          //   '10': tokens.colors.teal['100'],
+          //   '80': tokens.colors.teal['40'],
+            // '90': tokens.colors.teal['20'],
+            // '100': tokens.colors.teal['10'],
+          // },
+        // },
+      },
+      components: {
+        tabs: {
+          item: {
+            _focus: {
+              color: {
+                value: tokens.colors.black.value,
+              },
+            },
+            _hover: {
+              color: {
+                value: tokens.colors.yellow['80'].value,
+              },
+            },
+            _active: {
+              color: {
+                value: tokens.colors.black.value,
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
   return (
     <>
     <NavBarHome/>
     <br></br>
     <View className="auth-wrapper">
       {/* Sign-in box */}
+      <ThemeProvider theme={theme}>
       <Authenticator formFields={formFields} components={components}>
-      {({ signOut }) => <button onClick={signOut}>Sign out</button>}
-    </Authenticator>
-      {/* User note */}
-      <p style={{textAlign: 'center', marginTop: '10px'}}>
-      <nobr className="fw-bold">Note:</nobr> Your username will be used as the URL of your page.
-      </p>
+        {({ signOut }) => <button onClick={signOut}>Sign out</button>}
+      </Authenticator>
+      </ThemeProvider>
     </View>
     </>
   );
