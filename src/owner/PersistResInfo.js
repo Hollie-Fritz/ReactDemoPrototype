@@ -423,7 +423,7 @@ function PersistResInfo({ formData, setFormData }) {
               <Button
                 variant="primary"
                 onClick={handleChooseTemplate}
-                className={styles.templatebutton}
+                className={styles.tempbutton}
               >
                 Choose a template
               </Button>

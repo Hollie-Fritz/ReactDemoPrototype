@@ -7,12 +7,7 @@ body {
   color: RGB(240, 178, 109)
 }
 
-/* remove image button
-adds width so words don't wrap and margin for improved spacing */
-.removebutton {
-  min-width: 149px;
-  margin-left:8px;
-}
+
 
 .templatebutton {
   min-width: 166px;
@@ -51,4 +46,66 @@ adds width so words don't wrap and margin for improved spacing */
           color: red;
           top: -5px;
           left: -5px;
+}
+
+.removemenu {
+  background-color: #A60018 !important;
+  border-color: #A60018 !important;
+  margin-top:2px !important;
+}
+
+.removemenu:hover {
+  background-color: #6e0011 !important;
+  border-color: #6e0011 !important;
+  margin-top:2px !important;
+}
+
+.tempbutton{
+  background-color: #3F86C4;
+  border-color: #3F86C4 !important;
+  margin-right: 2px;
+}
+
+.tempbutton:hover{
+  background-color: #3570a3;
+  border-color: #3570a3 !important;
+  margin-right: 2px;
+}
+
+.menubutton{
+  background-color: #3F86C4;
+  border-color: #3F86C4 !important;
+  margin-right: 2px;
+}
+
+.menubutton:hover{
+  background-color: #3570a3;
+  border-color: #3570a3 !important;
+  margin-right: 2px;
+}
+
+/* remove image button
+adds width so words don't wrap and margin for improved spacing */
+.removebutton {
+  background-color: #A60018 !important;
+  border-color: #A60018 !important;
+  min-width: 149px;
+  margin-left:8px;
+}
+
+.removebutton:hover {
+  background-color: #6e0011 !important;
+  border-color: #6e0011 !important;
+  min-width: 149px;
+  margin-left:8px;
+}
+
+.prevnext{
+  background-color: #212529 !important;
+  border-color: #212529 !important;
+}
+
+.prevnext:hover{
+  background-color: #000000  !important;
+  border-color: #000000  !important;
 }

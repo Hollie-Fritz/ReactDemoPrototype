@@ -413,7 +413,7 @@ function InfoEdit({ formData, setFormData }) {
               <Button
                 variant="primary"
                 onClick={handleChooseTemplate}
-                className="me-2"
+                className={styles.tempbutton}
               >
                 Choose a template
               </Button>

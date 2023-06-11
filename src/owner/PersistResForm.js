@@ -6,7 +6,7 @@ import PersistResReview from "./PersistResReview";
 import { Button } from "react-bootstrap";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "../components/NavBarHome";
-import "./Form.module.css";
+import styles from "./Form.module.css";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
@@ -160,10 +160,12 @@ function PersistResForm() {
             // enables prev button to work by decrementing
             setPage((currPage) => currPage - 1);
           }}
+          className={styles.prevnext}
         >
           Prev
         </Button>{" "}
         <Button
+        className={styles.prevnext}
           id="submitOrNext"
           onClick={() => {
             const FormControl = document.querySelectorAll('[id*="validation"]');

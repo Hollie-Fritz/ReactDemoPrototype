@@ -256,7 +256,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 Remove Image
                 </Button>
               </Form.Group>
-              
+
               {
                 menu["menuImageUrl"] &&
                 <img
@@ -276,7 +276,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
               {menuItems.length !== 1 && (
                 <Button
                   variant="danger"
-                  className="mt-2"
+                  className={styles.removemenu}
                   onClick={() => handleRemove(index)}
                 >
                   Remove Menu Item
@@ -285,7 +285,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             </Form.Group>
           </Row>
         ))}
-        <Button variant="primary" onClick={handleAddItem}>
+        <Button variant="primary" onClick={handleAddItem}
+          className={styles.menubutton}>
           Add Menu Item
         </Button>
       </Form>
