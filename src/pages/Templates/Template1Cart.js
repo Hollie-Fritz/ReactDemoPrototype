@@ -431,11 +431,11 @@ const Template1Cart = ({
                 </Button>
                 {showFields ? (
 
-                  <Button variant="primary" onClick={handlePlaceOrder}>
+                  <Button className = {styles.t1cartbutton} variant="primary" onClick={handlePlaceOrder}>
                     Place Order
                   </Button>
                 ) : (
-                  <Button variant="primary" onClick={handleReviewOrder}>
+                  <Button className = {styles.t1cartbutton} variant="primary" onClick={handleReviewOrder}>
                     Add Details
                   </Button>
                 )}
@@ -453,6 +453,7 @@ const Template1Cart = ({
             {!isCartEmpty() && (
               <Card.Footer>
                 <Button
+                className = {styles.t1cartbutton}
                   variant="primary"
                   onClick={() => {
                     setCheckout(true);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
+import styles from "./Template1.module.css";
 
 function Menu(props) {
   const { groupedFoodData, handleAddClick, showAddedMessage, cart } = props.data;
@@ -44,6 +45,7 @@ function Menu(props) {
                               <br />
                               {/* Add to the cart button */}
                               <Button
+                               className={styles.reviewButton}
                                 style={{
                                   position: "absolute",
                                   bottom: 5,
