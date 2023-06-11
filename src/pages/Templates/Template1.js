@@ -146,7 +146,7 @@ function Template1(props) {
               position: "sticky",
               top: "0",
               right: "0",
-              height: "0vh",
+              height: "50vh",
               overflowY: "auto"
             }}
           >
