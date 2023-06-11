@@ -29,7 +29,7 @@ function ViewOrder() {
     const response = await fetch(
       `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order?name=${username}`,
       {
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" }
       }
     );
     const data = await response.json();
@@ -48,7 +48,7 @@ function ViewOrder() {
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }
     );
 
@@ -179,7 +179,7 @@ function ViewOrder() {
     return items;
   };
 
-  async function deleteOrder(orderId){
+  async function deleteOrder(orderId) {
     const body = { orderId: orderId };
 
     await fetch(
@@ -187,10 +187,12 @@ function ViewOrder() {
       {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }
-    ).then(()=>{
-      setOrders(prevState => prevState.filter(order => order.id !== orderId));
+    ).then(() => {
+      setOrders((prevState) =>
+        prevState.filter((order) => order.id !== orderId)
+      );
     });
   }
 
@@ -198,8 +200,14 @@ function ViewOrder() {
   return (
     <>
       <NavBarHome />
+      <br></br>
       <Container>
         <Row>
+          {currentItems.length === 0 && (
+            <h2 style={{ textAlign: "center", fontWeight: "bold" }}>
+              Your restaurant currently doesn't have any orders.
+            </h2>
+          )}
           {currentItems.map((order, index) => (
             <OrderCard
               order={order}
@@ -308,7 +316,7 @@ function OrderCard({
                   style={{
                     marginBottom: "20px",
                     backgroundColor: "#212529",
-                    color: "white",
+                    color: "white"
                   }}
                 >
                   {loadingState[order["id"]] ? (
@@ -322,12 +330,10 @@ function OrderCard({
             </Form.Group>
             <OrderProgress stage={order["progress"]} />
             <Button
-                style={{ marginTop: "20px" }}
-                onClick={()=>
-                  deleteOrder(order["id"])
-                }
-              >
-                Delete
+              style={{ marginTop: "20px" }}
+              onClick={() => deleteOrder(order["id"])}
+            >
+              Delete
             </Button>
             {user && order["customerId"] !== "" && (
               <Button
@@ -337,8 +343,8 @@ function OrderCard({
                     `/chat/${user.getUsername()}/${order["customerId"]}`,
                     {
                       state: {
-                        name: order["customerName"],
-                      },
+                        name: order["customerName"]
+                      }
                     }
                   )
                 }

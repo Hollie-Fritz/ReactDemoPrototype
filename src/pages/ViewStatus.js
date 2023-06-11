@@ -8,7 +8,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
 import { Pagination, EllipsisItem } from "react-bootstrap";
 
-import styles from './ViewStatus.module.css';
+import styles from "./ViewStatus.module.css";
 
 //component that displays the orders
 function ViewStatus() {
@@ -22,7 +22,7 @@ function ViewStatus() {
   const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+
   //fetches the list of orders
   useEffect(() => {
     if (!user) {
@@ -51,11 +51,11 @@ function ViewStatus() {
     const visiblePages = 3;
     const pageNeighbours = Math.floor(visiblePages / 2);
     const pageNumbers = [];
-  
+
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
     }
-  
+
     if (totalPages <= visiblePages) {
       return pageNumbers.map((number) => (
         <Pagination.Item
@@ -67,18 +67,18 @@ function ViewStatus() {
         </Pagination.Item>
       ));
     }
-  
+
     const leftOffset = currentPage - pageNeighbours - 1;
     const rightOffset = currentPage + pageNeighbours - totalPages;
-  
+
     const hasLeftEllipsis = leftOffset > 1;
     const hasRightEllipsis = rightOffset > 1;
-  
+
     let ellipsisLeftCount = Math.min(leftOffset, pageNeighbours);
     let ellipsisRightCount = Math.min(rightOffset, pageNeighbours);
-  
+
     const items = [];
-  
+
     // Previous page
     items.push(
       <Pagination.Prev
@@ -87,7 +87,7 @@ function ViewStatus() {
         disabled={currentPage === 1}
       />
     );
-  
+
     // First page
     items.push(
       <Pagination.Item
@@ -98,16 +98,23 @@ function ViewStatus() {
         1
       </Pagination.Item>
     );
-  
+
     // Left ellipsis
     if (hasLeftEllipsis) {
       items.push(
-        <Pagination.Ellipsis key="ellipsis-left" onClick={() => paginate(currentPage - pageNeighbours - 1)} />
+        <Pagination.Ellipsis
+          key="ellipsis-left"
+          onClick={() => paginate(currentPage - pageNeighbours - 1)}
+        />
       );
     }
-  
+
     // Page numbers between left and right ellipsis
-    for (let i = currentPage - pageNeighbours; i <= currentPage + pageNeighbours; i++) {
+    for (
+      let i = currentPage - pageNeighbours;
+      i <= currentPage + pageNeighbours;
+      i++
+    ) {
       if (i > 1 && i < totalPages) {
         items.push(
           <Pagination.Item
@@ -120,14 +127,17 @@ function ViewStatus() {
         );
       }
     }
-  
+
     // Right ellipsis
     if (hasRightEllipsis) {
       items.push(
-        <Pagination.Ellipsis key="ellipsis-right" onClick={() => paginate(currentPage + pageNeighbours + 1)} />
+        <Pagination.Ellipsis
+          key="ellipsis-right"
+          onClick={() => paginate(currentPage + pageNeighbours + 1)}
+        />
       );
     }
-  
+
     // Last page
     items.push(
       <Pagination.Item
@@ -138,7 +148,7 @@ function ViewStatus() {
         {totalPages}
       </Pagination.Item>
     );
-  
+
     // Next page
     items.push(
       <Pagination.Next
@@ -147,7 +157,7 @@ function ViewStatus() {
         disabled={currentPage === totalPages}
       />
     );
-  
+
     return items;
   };
   //rendering the component
@@ -161,11 +171,19 @@ function ViewStatus() {
             style={{
               fontWeight: "bold",
               marginTop: "20px",
-              marginBottom: "-25px",
+              marginBottom: "-25px"
             }}
           >
             My Orders:
           </h2>
+          <br></br>
+          {currentItems.length === 0 && (
+             <>
+             <h3 style={{ textAlign: "center", fontWeight: "bold" }}>
+              You have not placed any orders.
+            </h3>
+            </>
+          )}
           {currentItems.map((order, index) => (
             <React.Fragment key={index}>
               <OrderCard
@@ -179,8 +197,8 @@ function ViewStatus() {
         </Row>
       </Container>
       <div className="d-flex justify-content-center">
-      <Pagination>{renderPaginationItems()}</Pagination>
-    </div>
+        <Pagination>{renderPaginationItems()}</Pagination>
+      </div>
     </>
   );
 }
@@ -252,8 +270,8 @@ function OrderCard({ order, user, navigate }) {
                   `/chat/${user.getUsername()}/${order["restaurantId"]}`,
                   {
                     state: {
-                      name: order["restaurantName"],
-                    },
+                      name: order["restaurantName"]
+                    }
                   }
                 )
               }
