@@ -15,6 +15,7 @@ function ViewOrder() {
   const [orders, setOrders] = useState([]);
   const [loadingState, setLoadingState] = useState({});
   const { user } = useAuthenticator((context) => [context.user]);
+  const [fetched, setFetched] = useState(false);
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,6 +37,7 @@ function ViewOrder() {
     );
     const data = await response.json();
     setOrders(data);
+    setFetched(true);
   }
 
   //update the status of the orders (progress bar)
@@ -171,8 +173,8 @@ function ViewOrder() {
     <>
       <NavBarHome />
       <Container>
-        <Row>
-          {currentItems.length === 0 && (
+        {fetched && <Row>
+           {currentItems.length === 0 && (
             <div
               style={{
                 display: "flex",
@@ -196,7 +198,7 @@ function ViewOrder() {
               deleteOrder={deleteOrder}
             />
           ))}
-        </Row>
+        </Row>}
         <br></br>
         <br></br>
         {orders.length > 0 && (

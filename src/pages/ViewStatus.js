@@ -13,6 +13,7 @@ import style from "./ViewStatus.module.css";
 function ViewStatus() {
   const [orders, setOrders] = useState([]);
   const { user } = useAuthenticator((context) => [context.user]);
+   const [fetched, setFetched] = useState(false);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
@@ -35,6 +36,7 @@ function ViewStatus() {
         );
         const data = await response.json();
         setOrders(data);
+        setFetched(true);
         console.log(JSON.stringify(orders));
       } catch (error) {
         console.error(error);
@@ -132,7 +134,7 @@ function ViewStatus() {
     <>
       <NavBarHome />
       <Container>
-        <Row>
+      {fetched && <Row>
           <br />
           {orders.length > 0 && (
             <h2
@@ -171,7 +173,7 @@ function ViewStatus() {
               />
             </React.Fragment>
           ))}
-        </Row>
+        </Row>}
       </Container>
       <br></br>
       <br></br>
