@@ -1,13 +1,14 @@
-import { Button, Modal, Stack, Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import Auth from "@aws-amplify/auth";
 import NavBarHome from "./NavBarHome";
-import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect } from "react";
-import "./Owner.css";
+
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useNavigate, Link } from "react-router-dom";
+import { Button, Modal, Container, Row, Col } from "react-bootstrap";
 import { AiOutlineWarning } from "react-icons/ai"; //prettier-ignore
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Owner.css";
 
 function Owner() {
   const [userId, setUserId] = useState("");

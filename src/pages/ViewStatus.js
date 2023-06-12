@@ -1,12 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Auth from "@aws-amplify/auth";
 import React, { useState, useEffect } from "react";
-import { Card, Table, Container, Row, Form, Button, Col, } from "react-bootstrap"; // prettier-ignore
+import { useNavigate } from "react-router-dom";
 import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
+
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useNavigate } from "react-router-dom";
+import { Card, Table, Container, Row, Form, Button, Col } from "react-bootstrap"; // prettier-ignore
 import { Pagination, Ellipsis } from "react-bootstrap";
+
 import style from "./ViewStatus.module.css";
 
 //component that displays the orders
@@ -155,6 +157,7 @@ function ViewStatus() {
           ))}
         </Row>
       </Container>
+      <br></br><br></br>
       <div className="d-flex justify-content-center">
         <Pagination>{renderPaginationItems()}</Pagination>
       </div>

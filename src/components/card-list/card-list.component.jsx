@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Container, Row, Pagination } from "react-bootstrap";
 import Card from "../card/card.component";
+import { Container, Row, Pagination } from "react-bootstrap";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+
 import "./card-list.styles.css";
 
 const CardList = ({ restaurants }) => {
@@ -132,7 +133,9 @@ const CardList = ({ restaurants }) => {
             ))}
           </Row>
         </Container>
-        <br />
+        <br/>
+        <br></br>
+        <br></br>
         <Pagination>{renderPaginationItems()}</Pagination>
       </div>
     </>

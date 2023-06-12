@@ -34,10 +34,9 @@ let FooterHomePage = () => {
                   <a href="/contact" className="link"><AiTwotonePhone size={18} /></a>
                 </li>
                 <li>
-                  <a
-                  href="https://github.com/Hollie-Fritz/ReactDemoPrototype"
-                  target="_blank"><FaGithubAlt size={18}
-                  className="link"/></a>
+                  <a href="https://github.com/Hollie-Fritz/ReactDemoPrototype" target="_blank"> 
+                    <FaGithubAlt size={18} className="link"/>
+                  </a>
                 </li>
               </ul>
             </Col>
@@ -54,7 +53,7 @@ let FooterHomePage = () => {
           </Row>
         </Container>
         <div className="text-center py-3">
-          &copy; {new Date().getFullYear()} NuOrder. All rights reserved.
+           2022 - 2023 Bellevue College Capstone Project
         </div>
       </footer>
     </>

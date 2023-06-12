@@ -1,9 +1,9 @@
-import React from "react";
-import { Card, CardGroup, ListGroup, Button } from "react-bootstrap";
-import { useState } from "react";
+import React, { useState }from "react";
+import { useNavigate } from "react-router-dom";
 import ViewReview from "../rating/ViewReview";
 import AverageRating from "../rating/AverageRating";
-import { useNavigate } from "react-router-dom";
+import { Card, CardGroup, ListGroup, Button } from "react-bootstrap";
+
 import "./card.styles.css";
 
 const CardComponent = ({

@@ -1,6 +1,6 @@
-import Card from "react-bootstrap/Card";
-import { Row, Container } from "react-bootstrap";
 import React from "react";
+import { Row, Container } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 
 function PersistResReview({ formData, menuItems }) {
   return (

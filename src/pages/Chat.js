@@ -1,12 +1,11 @@
 import NavBarHome from "../components/NavBarHome";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate  } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 // import { Auth } from "aws-amplify";
-import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
-import "./Chat.css"; // Import the custom CSS file
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
+
+import "./Chat.css"; // Import the custom CSS file
 
 function Chat() {
     const params = useParams();
