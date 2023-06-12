@@ -83,7 +83,6 @@ function PopUp(){
                 }
               };
               ws.onclose = function (evt){
-                ws = null;
                 console.log('Socket is closed. Reconnect will be attempted in 1 second.', evt.reason);
                 setTimeout(function() {
                   setup();
