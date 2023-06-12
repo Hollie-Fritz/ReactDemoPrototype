@@ -3,20 +3,23 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import { ThemeProvider } from "react-bootstrap"
 import { Routes, Route } from 'react-router-dom';
 import FooterHomePage from './components/footer/FooterHomePage'
-import './App.css';
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import { Login } from './components/Login';
-import Owner  from './components/Owner';
-import PageNotFound from './pages/PageNotFound';
-import PersistResForm from "./owner/PersistResForm";
-import ViewOrders from "./pages/ViewOrders";
 import ViewWebpage from './pages/ViewWebPage';
-import FormEdit from './owner/FormEdit';
-import PopUp from './PopUp';
+import ViewOrders from "./pages/ViewOrders";
 import ViewStatus from './pages/ViewStatus';
 import Chat from "./pages/Chat";
+import PageNotFound from './pages/PageNotFound';
+import Login from './components/Login';
+import Owner  from './components/Owner';
+import PersistResForm from "./owner/PersistResForm";
+import FormEdit from './owner/FormEdit';
+import PopUp from './PopUp';
+
+import './App.css';
+
 const App = () => {
 
   return (

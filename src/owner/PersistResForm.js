@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Auth from "@aws-amplify/auth";
+import NavBarHome from "../components/NavBarHome";
 import PersistResInfo from "./PersistResInfo";
 import PersistResMenu from "./PersistResMenu";
 import PersistResReview from "./PersistResReview";
 import { Button } from "react-bootstrap";
-import Auth from "@aws-amplify/auth";
-import NavBarHome from "../components/NavBarHome";
+
 import "./Form.module.css";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk

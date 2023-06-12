@@ -1,6 +1,6 @@
 import React from "react";
-import { Modal, Table } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
+import { Modal, Table } from "react-bootstrap";
 
 const ViewReview = ({ show, handleClose, name, reviews }) => {
   return (

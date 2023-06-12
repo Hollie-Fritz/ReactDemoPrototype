@@ -1,10 +1,11 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
-import logo from "../assests/NuOrderLogoLarge.png";
-import "../pages/Home.css";
-// import { useNavigate, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+// import { useNavigate, useLocation } from "react-router-dom";
+import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
+import logo from "../assests/NuOrderLogoLarge.png";
+
+import "../pages/Home.css";
 
 let NavBarHome = () => {
   const { signOut, user } = useAuthenticator((context) => [

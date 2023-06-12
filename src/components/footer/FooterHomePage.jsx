@@ -34,10 +34,9 @@ let FooterHomePage = () => {
                   <a href="/contact" className="link"><AiTwotonePhone size={18} /></a>
                 </li>
                 <li>
-                  <a
-                  href="https://github.com/Hollie-Fritz/ReactDemoPrototype"
-                  target="_blank"><FaGithubAlt size={18}
-                  className="link"/></a>
+                  <a href="https://github.com/Hollie-Fritz/ReactDemoPrototype" target="_blank"> 
+                  <FaGithubAlt size={18} className="link"/>
+                  </a>
                 </li>
               </ul>
             </Col>

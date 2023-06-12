@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Table, Form, FloatingLabel, Tooltip, OverlayTrigger, } from "react-bootstrap"; //prettier-ignore
-import { AiOutlineInfoCircle, AiOutlinePlus, AiOutlineMinus, } from "react-icons/ai"; //prettier-ignore
-import styles from "./Cart.module.css";
-import { CiSquareRemove } from "react-icons/ci";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+
+import { Modal, Button, Table, Form, FloatingLabel, Tooltip, OverlayTrigger } from "react-bootstrap"; //prettier-ignore
+import { AiOutlineInfoCircle, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"; //prettier-ignore
+import { CiSquareRemove } from "react-icons/ci";
+
+import styles from "./Cart.module.css";
 
 function Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;

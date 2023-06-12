@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Auth from "@aws-amplify/auth";
+import NavBarHome from "../components/NavBarHome";
 import InfoEdit from "./InfoEdit";
 import MenuEdit from "./MenuEdit";
 import ReviewEdit from "./ReviewEdit";
-import { Button, FormControl } from "react-bootstrap";
-import Auth from "@aws-amplify/auth";
-import NavBarHome from "../components/NavBarHome";
-import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
 import "./Form.module.css";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk

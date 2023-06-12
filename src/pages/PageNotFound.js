@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Image, ListGroup } from "react-bootstrap";
-import ice from "../assests/icecream.png";
 import { Link } from "react-router-dom";
+import ice from "../assests/icecream.png";
 
 const PageNotFound = () => {
   return (

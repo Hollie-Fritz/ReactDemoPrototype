@@ -1,16 +1,13 @@
-import React from "react";
-import { useEffect } from "react";
-
-import { Authenticator, useAuthenticator, View, ThemeProvider, useTheme, Image, Text, Heading, Button } from "@aws-amplify/ui-react";
-
-import "@aws-amplify/ui-react/styles.css";
-import logo from "../assests/DarkLogo.png";
-
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import NavBarHome from "./NavBarHome";
+import { Authenticator, useAuthenticator, View, ThemeProvider, useTheme, Image, Text, Heading, Button } from "@aws-amplify/ui-react";
+
+import logo from "../assests/DarkLogo.png";
+import "@aws-amplify/ui-react/styles.css";
 import "./Login.css";
 
-export function Login() {
+function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,7 +26,7 @@ export function Login() {
 
       return (
         <View textAlign="center" padding={tokens.space.large}>
-          <Image src={logo} alt="logo" className="logoHome" />
+          <Image src={logo} alt="logo" className="logoLogin" />
         </View>
       );
     },
@@ -122,9 +119,7 @@ export function Login() {
           </Heading>
         );
       },
-      Footer() {
-        return <Text>NuOrder</Text>;
-      },
+      
     },
 
     SetupTOTP: {
@@ -139,9 +134,7 @@ export function Login() {
           </Heading>
         );
       },
-      Footer() {
-        return <Text>NuOrder</Text>;
-      },
+      
     },
 
     ConfirmSignIn: {
@@ -156,9 +149,7 @@ export function Login() {
           </Heading>
         );
       },
-      Footer() {
-        return <Text>NuOrder</Text>;
-      },
+      
     },
 
     ResetPassword: {
@@ -173,9 +164,7 @@ export function Login() {
           </Heading>
         );
       },
-      Footer() {
-        return <Text>NuOrder</Text>;
-      },
+      
     },
 
     ConfirmResetPassword: {
@@ -190,9 +179,7 @@ export function Login() {
           </Heading>
         );
       },
-      Footer() {
-        return <Text>NuOrder</Text>;
-      },
+      
     },
   };
 
@@ -310,13 +297,14 @@ export function Login() {
     <NavBarHome/>
     <br></br>
     <View className="auth-wrapper">
-      {/* Sign-in box */}
       <ThemeProvider theme={theme}>
+      {/* Sign-in box */}
       <Authenticator formFields={formFields} components={components}>
-        {({ signOut }) => <button onClick={signOut}>Sign out</button>}
       </Authenticator>
       </ThemeProvider>
     </View>
     </>
   );
 }
+
+export default Login;

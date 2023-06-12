@@ -2,4 +2,7 @@
     background: #333b42 !important;
     border-color: #212921 !important;
   }
-
+  .logoLogin {
+    width: 200px; 
+    height: auto; 
+  }
