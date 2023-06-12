@@ -96,7 +96,7 @@ function Chat() {
       let message = {
         user: data.sentBy,
         text: data.text,
-        timestamp: new Date().toLocaleString(),
+        timestamp: new Date(data.time * 1000).toLocaleString(),
         isDateMarker: false // <-- Added this property for each message
       };
       addMessageToList(message);
@@ -122,20 +122,20 @@ function Chat() {
   const lastMessage = messages[messages.length - 1];
 
   // If this is the first message of the day, add a date marker before it
-  if (!lastMessage || !isSameDay(new Date(message.timestamp), new Date(lastMessage.timestamp))) {
-    setMessages(prevMessages => [...prevMessages, { isDateMarker: true, date: new Date(message.timestamp).toLocaleDateString() }]);
-  }
+  // if (!lastMessage || !isSameDay(new Date(message.timestamp), new Date(lastMessage.timestamp))) {
+  //   setMessages(prevMessages => [...prevMessages, { isDateMarker: true, date: new Date(message.timestamp).toLocaleDateString() }]);
+  // }
 
   // Then add the message itself
   setMessages(prevMessages => [...prevMessages, message]);
 
   }
 
-  function isSameDay(date1, date2) {
-    return date1.getFullYear() === date2.getFullYear() &&
-           date1.getMonth() === date2.getMonth() &&
-           date1.getDate() === date2.getDate();
-  }
+  // function isSameDay(date1, date2) {
+  //   return date1.getFullYear() === date2.getFullYear() &&
+  //          date1.getMonth() === date2.getMonth() &&
+  //          date1.getDate() === date2.getDate();
+  // }
 
   function clearMessageList() {
     setMessages([]);
