@@ -17,17 +17,10 @@ function Chat() {
     const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
     const navigate = useNavigate();
     const location = useLocation();
-    const messageContainer = useRef(null);
 
     const { user } = useAuthenticator((context) => [
       context.user, 
     ]);
-
-  useEffect(() => {
-      if (messageContainer.current) {
-        messageContainer.current.scrollIntoView({ behavior: "smooth" });
-      }
-    }, [messages]);
 
   useEffect(() => {
     async function get() {
@@ -89,7 +82,7 @@ function Chat() {
   }
 
   function initWebSocketsEvents(ws) {
-    // ws.onopen = function () {};
+    ws.onopen = function () {};
 
     ws.onmessage = function (evt) {
       let data = JSON.parse(evt.data);
@@ -119,23 +112,10 @@ function Chat() {
 
   function addMessageToList(message) {
      // Get the last message in the list
-  const lastMessage = messages[messages.length - 1];
-
-  // If this is the first message of the day, add a date marker before it
-  // if (!lastMessage || !isSameDay(new Date(message.timestamp), new Date(lastMessage.timestamp))) {
-  //   setMessages(prevMessages => [...prevMessages, { isDateMarker: true, date: new Date(message.timestamp).toLocaleDateString() }]);
-  // }
-
-  // Then add the message itself
-  setMessages(prevMessages => [...prevMessages, message]);
-
+    const lastMessage = messages[messages.length - 1];
+    // Then add the message itself
+    setMessages(prevMessages => [...prevMessages, message]);
   }
-
-  // function isSameDay(date1, date2) {
-  //   return date1.getFullYear() === date2.getFullYear() &&
-  //          date1.getMonth() === date2.getMonth() &&
-  //          date1.getDate() === date2.getDate();
-  // }
 
   function clearMessageList() {
     setMessages([]);
@@ -173,14 +153,13 @@ function Chat() {
             <h4>Talking to {location.state? location.state.name:params["toUserId"]}</h4>
             <hr/>
             <Card className="conversation-box">
-              <Card.Body ref={messageContainer}>
+              <Card.Body >
                 {messages.map((message, index) => {
                   console.log(JSON.stringify(messages));
 
                   //Date marker rendering
                   let dateMarker = null;
                   if (index === 0 || new Date(messages[index - 1].timestamp).toDateString() !== new Date(message.timestamp).toDateString()) {
-                    // If this is the first message or the date of this message is different from the previous one, render the date in a centered position
                     dateMarker = (
                       <div key={"dateMarker-" + index} className="date-marker">
                         {new Date(message.timestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
