@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate  } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 // import { Auth } from "aws-amplify";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
+import { Button, Container, Row, Col, Form, Card, ListGroup } from "react-bootstrap";
 
 import "./Chat.css"; // Import the custom CSS file
 
@@ -17,9 +17,17 @@ function Chat() {
     const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
     const navigate = useNavigate();
     const location = useLocation();
+    const messageContainer = useRef(null);
+
     const { user } = useAuthenticator((context) => [
       context.user, 
     ]);
+
+  useEffect(() => {
+      if (messageContainer.current) {
+        messageContainer.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }, [messages]);
 
   useEffect(() => {
     async function get() {
@@ -88,6 +96,7 @@ function Chat() {
       let message = {
         user: data.sentBy,
         text: data.text,
+        timestamp: new Date().toLocaleString(),
       };
       addMessageToList(message);
     };
@@ -122,10 +131,11 @@ function Chat() {
         <Row>
           <Col md={4} id="ws-container">
             <h4>Users:</h4>
+            <ListGroup>
             {
               listChat.map((user, index) => {
                 return (
-                  <Button variant="light" key={index} block onClick={()=>{
+                  <ListGroup.Item action variant="light" key={index} block onClick={()=>{
                       navigate(`/chat/${currentUserId}/${user["id"]}`, 
                       {
                         state: {
@@ -135,17 +145,18 @@ function Chat() {
                       )
                   }}>
                     {user["name"]? user["name"]: user["id"]}
-                  </Button>
+                  </ListGroup.Item>
                 );
               })
             }
-
+            </ListGroup>
           </Col>
+
           <Col md={8}>
             <h4>Talking to {location.state? location.state.name:params["toUserId"]}</h4>
-            <hr />
+            <hr/>
             <Card className="conversation-box">
-              <Card.Body>
+              <Card.Body ref={messageContainer}>
                 {messages.map((message, index) => {
                   const isCurrentUserMessage =
                     message.user === currentUserId;
@@ -159,7 +170,9 @@ function Chat() {
                     >
                       <div className="message-content">
                         <div className="message-text">{message.text}</div>
+                        
                       </div>
+                      <div className="message-timestamp">{message.timestamp}</div>
                     </div>
                   );
                 })}
