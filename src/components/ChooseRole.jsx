@@ -14,7 +14,6 @@ let ChooseCard = () => {
   ]);
   const navigate = useNavigate();
 
-
   function logOut() {
     signOut();
     navigate("/");

@@ -8,7 +8,6 @@ import { CgAsterisk } from "react-icons/cg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Form.module.css";
 
-
 // form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
