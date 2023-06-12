@@ -35,6 +35,11 @@
   color: #888;
 }
 
+.date-marker {
+  text-align: center;
+  color: #888;
+}
+
 .suggestions-card {
   position: absolute;
   bottom: 80px;

@@ -89,7 +89,7 @@ function Chat() {
   }
 
   function initWebSocketsEvents(ws) {
-    ws.onopen = function () {};
+    // ws.onopen = function () {};
 
     ws.onmessage = function (evt) {
       let data = JSON.parse(evt.data);
@@ -97,6 +97,7 @@ function Chat() {
         user: data.sentBy,
         text: data.text,
         timestamp: new Date().toLocaleString(),
+        isDateMarker: false // <-- Added this property for each message
       };
       addMessageToList(message);
     };
@@ -117,7 +118,23 @@ function Chat() {
   }
 
   function addMessageToList(message) {
-    setMessages((prevMessages) => [...prevMessages, message]);
+     // Get the last message in the list
+  const lastMessage = messages[messages.length - 1];
+
+  // If this is the first message of the day, add a date marker before it
+  if (!lastMessage || !isSameDay(new Date(message.timestamp), new Date(lastMessage.timestamp))) {
+    setMessages(prevMessages => [...prevMessages, { isDateMarker: true, date: new Date(message.timestamp).toLocaleDateString() }]);
+  }
+
+  // Then add the message itself
+  setMessages(prevMessages => [...prevMessages, message]);
+
+  }
+
+  function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getDate() === date2.getDate();
   }
 
   function clearMessageList() {
@@ -158,11 +175,19 @@ function Chat() {
             <Card className="conversation-box">
               <Card.Body ref={messageContainer}>
                 {messages.map((message, index) => {
-                  const isCurrentUserMessage =
-                    message.user === currentUserId;
-                  const messageAlignment = isCurrentUserMessage
-                    ? "message-right"
-                    : "message-left";
+                  if (index === 0 || new Date(messages[index - 1].timestamp).toDateString() !== new Date(message.timestamp).toDateString()) {
+                    // If this is the first message or the date of this message is different from the previous one, render the date in a centered position
+                    return (
+                      <div key={index} className="date-marker">
+                        {new Date(message.timestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+                      </div>
+                    );
+                  }
+
+                // Normal message rendering
+                const isCurrentUserMessage = message.user === currentUserId;
+                const messageAlignment = isCurrentUserMessage ? "message-right" : "message-left";
+
                   return (
                     <div
                       key={index}
@@ -170,9 +195,10 @@ function Chat() {
                     >
                       <div className="message-content">
                         <div className="message-text">{message.text}</div>
-                        
                       </div>
-                      <div className="message-timestamp">{message.timestamp}</div>
+                      <div className={`message-timestamp ${messageAlignment}`}>
+                        {new Date(message.timestamp).toLocaleTimeString('en-US')}
+                      </div>
                     </div>
                   );
                 })}
