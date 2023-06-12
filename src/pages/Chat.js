@@ -1,6 +1,6 @@
 import NavBarHome from "../components/NavBarHome";
 import { useParams, useLocation, useNavigate  } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // import { Auth } from "aws-amplify";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Button, Container, Row, Col, Form, Card, ListGroup } from "react-bootstrap";
@@ -175,10 +175,14 @@ function Chat() {
             <Card className="conversation-box">
               <Card.Body ref={messageContainer}>
                 {messages.map((message, index) => {
+                  console.log(JSON.stringify(messages));
+
+                  //Date marker rendering
+                  let dateMarker = null;
                   if (index === 0 || new Date(messages[index - 1].timestamp).toDateString() !== new Date(message.timestamp).toDateString()) {
                     // If this is the first message or the date of this message is different from the previous one, render the date in a centered position
-                    return (
-                      <div key={index} className="date-marker">
+                    dateMarker = (
+                      <div key={"dateMarker-" + index} className="date-marker">
                         {new Date(message.timestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
                       </div>
                     );
@@ -188,19 +192,26 @@ function Chat() {
                 const isCurrentUserMessage = message.user === currentUserId;
                 const messageAlignment = isCurrentUserMessage ? "message-right" : "message-left";
 
-                  return (
-                    <div
-                      key={index}
-                      className={`message-item ${messageAlignment}`}
-                    >
-                      <div className="message-content">
-                        <div className="message-text">{message.text}</div>
-                      </div>
-                      <div className={`message-timestamp ${messageAlignment}`}>
-                        {new Date(message.timestamp).toLocaleTimeString('en-US')}
-                      </div>
+                const messageElement = (
+                  <div
+                    key={index}
+                    className={`message-item ${messageAlignment}`}
+                  >
+                    <div className="message-content">
+                      <div className="message-text">{message.text}</div>
                     </div>
-                  );
+                    <div className={`message-timestamp ${messageAlignment}`}>
+                      {new Date(message.timestamp).toLocaleTimeString('en-US')}
+                    </div>
+                  </div>
+                );
+
+                  return (
+                    <React.Fragment key={index}>
+                      {dateMarker}
+                      {messageElement}
+                    </React.Fragment>
+                    );
                 })}
               </Card.Body>
             </Card>
