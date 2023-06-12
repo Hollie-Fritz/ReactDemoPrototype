@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate  } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 // import { Auth } from "aws-amplify";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
+import { Button, Container, Row, Col, Form, Card, ListGroup } from "react-bootstrap";
 
 import "./Chat.css"; // Import the custom CSS file
 
@@ -17,9 +17,17 @@ function Chat() {
     const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
     const navigate = useNavigate();
     const location = useLocation();
+    const messageContainer = useRef(null);
+
     const { user } = useAuthenticator((context) => [
       context.user, 
     ]);
+
+  useEffect(() => {
+      if (messageContainer.current) {
+        messageContainer.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }, [messages]);
 
   useEffect(() => {
     async function get() {
@@ -81,13 +89,15 @@ function Chat() {
   }
 
   function initWebSocketsEvents(ws) {
-    ws.onopen = function () {};
+    // ws.onopen = function () {};
 
     ws.onmessage = function (evt) {
       let data = JSON.parse(evt.data);
       let message = {
         user: data.sentBy,
         text: data.text,
+        timestamp: new Date().toLocaleString(),
+        isDateMarker: false // <-- Added this property for each message
       };
       addMessageToList(message);
     };
@@ -108,7 +118,23 @@ function Chat() {
   }
 
   function addMessageToList(message) {
-    setMessages((prevMessages) => [...prevMessages, message]);
+     // Get the last message in the list
+  const lastMessage = messages[messages.length - 1];
+
+  // If this is the first message of the day, add a date marker before it
+  if (!lastMessage || !isSameDay(new Date(message.timestamp), new Date(lastMessage.timestamp))) {
+    setMessages(prevMessages => [...prevMessages, { isDateMarker: true, date: new Date(message.timestamp).toLocaleDateString() }]);
+  }
+
+  // Then add the message itself
+  setMessages(prevMessages => [...prevMessages, message]);
+
+  }
+
+  function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getDate() === date2.getDate();
   }
 
   function clearMessageList() {
@@ -122,10 +148,11 @@ function Chat() {
         <Row>
           <Col md={4} id="ws-container">
             <h4>Users:</h4>
+            <ListGroup>
             {
               listChat.map((user, index) => {
                 return (
-                  <Button variant="light" key={index} block onClick={()=>{
+                  <ListGroup.Item action variant="light" key={index} block onClick={()=>{
                       navigate(`/chat/${currentUserId}/${user["id"]}`, 
                       {
                         state: {
@@ -135,23 +162,32 @@ function Chat() {
                       )
                   }}>
                     {user["name"]? user["name"]: user["id"]}
-                  </Button>
+                  </ListGroup.Item>
                 );
               })
             }
-
+            </ListGroup>
           </Col>
+
           <Col md={8}>
             <h4>Talking to {location.state? location.state.name:params["toUserId"]}</h4>
-            <hr />
+            <hr/>
             <Card className="conversation-box">
-              <Card.Body>
+              <Card.Body ref={messageContainer}>
                 {messages.map((message, index) => {
-                  const isCurrentUserMessage =
-                    message.user === currentUserId;
-                  const messageAlignment = isCurrentUserMessage
-                    ? "message-right"
-                    : "message-left";
+                  if (index === 0 || new Date(messages[index - 1].timestamp).toDateString() !== new Date(message.timestamp).toDateString()) {
+                    // If this is the first message or the date of this message is different from the previous one, render the date in a centered position
+                    return (
+                      <div key={index} className="date-marker">
+                        {new Date(message.timestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+                      </div>
+                    );
+                  }
+
+                // Normal message rendering
+                const isCurrentUserMessage = message.user === currentUserId;
+                const messageAlignment = isCurrentUserMessage ? "message-right" : "message-left";
+
                   return (
                     <div
                       key={index}
@@ -159,6 +195,9 @@ function Chat() {
                     >
                       <div className="message-content">
                         <div className="message-text">{message.text}</div>
+                      </div>
+                      <div className={`message-timestamp ${messageAlignment}`}>
+                        {new Date(message.timestamp).toLocaleTimeString('en-US')}
                       </div>
                     </div>
                   );
