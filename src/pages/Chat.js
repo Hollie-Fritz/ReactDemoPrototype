@@ -180,7 +180,7 @@ function Chat() {
                       <div className="message-text">{message.text}</div>
                     </div>
                     <div className={`message-timestamp ${messageAlignment}`}>
-                      {new Date(message.timestamp).toLocaleTimeString('en-US')}
+                      {new Date(message.timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
                     </div>
                   </div>
                 );
