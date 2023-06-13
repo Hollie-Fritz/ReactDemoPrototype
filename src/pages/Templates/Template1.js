@@ -58,8 +58,7 @@ function Template1(props) {
                   <Row className="d-flex justify-content-between">
                     <Col xs={1} md={5} className="mb-4">
                       <Card
-                        className={`border-0 ml-auto mr-3 ${styles.cardText} ${styles.card}`}
-                        style={{ display: "inline-block", alignItems: "left" }}
+
                       >
                         {/* RESTAURANT INFO */}
                         <Info
@@ -140,8 +139,8 @@ function Template1(props) {
               </Card>
             </div>
           </Col>
-    
-          <Col className="order-last" xs={4} md={3} 
+
+          <Col className="order-last" xs={4} md={3}
             style={{
               position: "sticky",
               top: "0",
@@ -150,7 +149,7 @@ function Template1(props) {
               overflowY: "auto"
             }}
           >
-            <Template1Cart 
+            <Template1Cart
               className={styles.floating}
               fooddata={fooddata}
               cart={cart}
@@ -162,7 +161,7 @@ function Template1(props) {
 
         </Row>
       </Container>
- 
+
       {/* REVIEW POPUP */}
       <ViewReview
         show={showViewReviewForm}
