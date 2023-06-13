@@ -240,12 +240,12 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 />
                 <label
                   htmlFor={"imageInput" + index}
-                  className="btn btn-primary"
+                  className={`btn btn-primary mb-0 mx-2  ${styles.tempbutton}`}
                   style={{ marginRight: "10px" }}
                 >
                   Browse
                 </label>
-                <Button onClick={() => handleSubmitImage(index)}>
+                <Button className={`btn btn-primary mb-0 mx-1  ${styles.tempbutton}`} onClick={() => handleSubmitImage(index)}>
                 Upload
                 </Button>
                 <Button className={styles.removebutton} variant="danger" onClick={() =>
@@ -256,6 +256,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 Remove Image
                 </Button>
               </Form.Group>
+              <br></br>
               {
                 menu["menuImageUrl"] &&
                 <img

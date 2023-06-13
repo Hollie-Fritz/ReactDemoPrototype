@@ -9,7 +9,6 @@ import { CgAsterisk } from "react-icons/cg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Form.module.css";
 
-
 //form for restaurant info such as name, phone number and address
 function InfoEdit({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
@@ -477,24 +476,25 @@ function InfoEdit({ formData, setFormData }) {
             readOnly
             className="mx-2"
           />
-          <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
+          <label
+            htmlFor="imageInput"
+            className={`btn btn-primary  ${styles.tempbutton}`}
+          >
             Browse
           </label>
-          <Button className="mb-0 mx-2" type="submit">
+          <Button className={`mb-0 mx-2 ${styles.tempbutton}`} type="submit">
             Upload
           </Button>
           <Button
             className={styles.removebutton}
             variant="danger"
             onClick={() => {
-              handleRemove()
-              }
-            }
+              handleRemove();
+            }}
           >
-          Remove Image
+            Remove Image
           </Button>
         </Form>
-
         {formData["mainImageUrl"] ? (
           <img
             id="mainImage"
