@@ -1,13 +1,10 @@
+
+
 .container {
   display: flex;
   align-items: center;
 }
 
-.text-right {
-  text-align: right;
-  font-weight: bold;
-  margin-bottom: 0;
-}
 
 .info-button {
   background: transparent;
@@ -45,9 +42,9 @@
 }
 
 .incrementButton {
-  margin-left: 9px; /* Adjust this value to your liking */
+  margin-left: 9px;
 }
 
 .decrementButton {
-  margin-right: 5px; /* Adjust this value to your liking */
+  margin-right: 5px;
 }

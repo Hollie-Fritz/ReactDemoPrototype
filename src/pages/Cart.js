@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-
-import { Modal, Button, Table, Form, FloatingLabel, Tooltip, OverlayTrigger } from "react-bootstrap"; //prettier-ignore
+import { Modal, Button, Table, Form, FloatingLabel, Tooltip, OverlayTrigger, Container, Row, Col } from "react-bootstrap"; //prettier-ignore
 import { AiOutlineInfoCircle, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"; //prettier-ignore
 import { CiSquareRemove } from "react-icons/ci";
 
@@ -29,7 +28,7 @@ function Cart(props) {
             foodId: item.foodId,
             foodName: item.foodName,
             priceEach: item.foodPrice,
-            quantity: quantity,
+            quantity: quantity
           });
         }
       });
@@ -65,7 +64,7 @@ function Cart(props) {
     } else {
       delete temp[foodId];
     }
-    setCart(temp)
+    setCart(temp);
   };
 
   //handler to increase an item in the cart
@@ -113,7 +112,7 @@ function Cart(props) {
           foodId: item.foodId,
           foodName: item.foodName,
           priceEach: item.foodPrice,
-          quantity: quantity,
+          quantity: quantity
         });
       }
     });
@@ -137,7 +136,7 @@ function Cart(props) {
       utensils: utensils,
       progress: "Order placed",
       totalCost: totalPrice,
-      phoneNumber: phoneNumber,
+      phoneNumber: phoneNumber
     };
     //send data to server
     await fetch(
@@ -145,9 +144,9 @@ function Cart(props) {
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(converted),
+        body: JSON.stringify(converted)
       }
     )
       //check if data was correctly sent in console log
@@ -195,7 +194,7 @@ function Cart(props) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "100%",
+              width: "100%"
             }}
           >
             <h3>{message}</h3>
@@ -209,7 +208,7 @@ function Cart(props) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "100%",
+              width: "100%"
             }}
           >
             <h3>{message}</h3>
@@ -219,7 +218,13 @@ function Cart(props) {
         // if in checkout page, display the order confirmation
         <>
           <Modal.Header closeButton>
-            <Modal.Title  style={{ fontWeight: "bold" }}>Confirm Your Order</Modal.Title>
+          <Container>
+              <Col className="text-center">
+                <Modal.Title style={{ fontWeight: "bold" }}>
+                  Confirm Your Order
+                </Modal.Title>
+              </Col>
+            </Container>
           </Modal.Header>
           <Modal.Body>
             {/* Order confirmation display here */}
@@ -267,10 +272,16 @@ function Cart(props) {
       ) : (
         //if not display the cart
         <>
-          <Modal.Header closeButton>
-          <Modal.Title style={{ fontWeight: "bold" }}>Your Current Pickup Order</Modal.Title>
-
+          <Modal.Header closeButton className="p-3">
+            <Container>
+              <Col className="text-center">
+                <Modal.Title style={{ fontWeight: "bold" }}>
+                  Your Current Pickup Order
+                </Modal.Title>
+              </Col>
+            </Container>
           </Modal.Header>
+
           <Modal.Body>
             {/* TABLE */}
             {/* table that displays order items */}
@@ -303,7 +314,7 @@ function Cart(props) {
                               background: "transparent",
                               border: "none",
                               padding: 0,
-                              outline: "none",
+                              outline: "none"
                             }}
                             className={`${styles.buttonIcon} ${styles.buttonMinus} ${styles.decrementButton}`}
                           >
@@ -321,7 +332,7 @@ function Cart(props) {
                               background: "transparent",
                               border: "none",
                               padding: 0,
-                              outline: "none",
+                              outline: "none"
                             }}
                             className={`${styles.buttonIcon} ${styles.buttonPlus} ${styles.incrementButton}`}
                           >
@@ -341,7 +352,7 @@ function Cart(props) {
                               background: "transparent",
                               border: "none",
                               padding: 0,
-                              outline: "none",
+                              outline: "none"
                             }}
                             className={`${styles.buttonIcon} ${styles.buttonPlus}`}
                           >
@@ -383,26 +394,23 @@ function Cart(props) {
             <div>
               <Form>
                 {/* NAME */}
-                <FloatingLabel
-                  controlId="floatingName"
-                  label="Name"
-                >
-                  <Form.Control type="Name" placeholder="Enter your name" id = "validation"
-                                  required
-                                  onInvalid={(event) => {
-                                    event.target.setCustomValidity(
-                                      "Please enter a name"
-                                    );
-                                  }}
-                                  onInput={(event) => {
-                                    event.target.setCustomValidity("");
-                                  }}
-                                  onChange={(event)=> {
-                                    console.log(customerName);
-                                    handleCustomerName(event)
-                                  }
-                                  }
-                                  value ={customerName}
+                <FloatingLabel controlId="floatingName" label="Name">
+                  <Form.Control
+                    type="Name"
+                    placeholder="Enter your name"
+                    id="validation"
+                    required
+                    onInvalid={(event) => {
+                      event.target.setCustomValidity("Please enter a name");
+                    }}
+                    onInput={(event) => {
+                      event.target.setCustomValidity("");
+                    }}
+                    onChange={(event) => {
+                      console.log(customerName);
+                      handleCustomerName(event);
+                    }}
+                    value={customerName}
                   />
                 </FloatingLabel>
                 {/* NAME */}
@@ -468,26 +476,33 @@ function Cart(props) {
                 </Button>
               </>
             ) : (
-              <Button variant="primary" onClick={() => {
-                console.log(customerName);
-                const FormControl = document.querySelectorAll('[id*="validation"]');
-                console.log(FormControl.length);
-                let isValid = true;
-                // force validity to go in descending order instead of ascending order
-                for (let index = FormControl.length - 1; index >= 0; index--) {
-                  if (!FormControl[index].checkValidity()) {
-                    console.log("is false");
-                    isValid = false;
-                    FormControl[index].reportValidity();
+              <Button
+                variant="primary"
+                onClick={() => {
+                  console.log(customerName);
+                  const FormControl =
+                    document.querySelectorAll('[id*="validation"]');
+                  console.log(FormControl.length);
+                  let isValid = true;
+                  // force validity to go in descending order instead of ascending order
+                  for (
+                    let index = FormControl.length - 1;
+                    index >= 0;
+                    index--
+                  ) {
+                    if (!FormControl[index].checkValidity()) {
+                      console.log("is false");
+                      isValid = false;
+                      FormControl[index].reportValidity();
+                    }
                   }
-                }
-                if (!isValid) {
-                  // enables next button to work by incrementing
-                  return;
-                }
-                setCheckout(true)
-              }
-              }>
+                  if (!isValid) {
+                    // enables next button to work by incrementing
+                    return;
+                  }
+                  setCheckout(true);
+                }}
+              >
                 Review Order
               </Button>
             )}
