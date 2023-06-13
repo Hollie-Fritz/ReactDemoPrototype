@@ -214,7 +214,12 @@ function Template4(props) {
                                   key={index}
                                   style={{ width: "37rem" }}
                                 >
-                                  <Card.Img
+                               
+                                  <Card.Img 
+                                    style ={{objectFit: "contain",
+                                      height: "200px",
+                                      width: "100%",
+                                      display: "block"}}
                                     variant="top"
                                     src={
                                       item.foodImageUrl
@@ -223,6 +228,7 @@ function Template4(props) {
                                         : ""
                                     }
                                   />
+                                  
                                   <Card.Body>
                                     <div className={styles.menuItem}>
                                       <Card.Text
