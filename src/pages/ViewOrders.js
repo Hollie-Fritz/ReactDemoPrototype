@@ -57,7 +57,9 @@ function ViewOrder() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       }
-    );
+    ).then(()=>{
+      window.location.reload();
+    });
 
     //set loading state for submit button back to false after a delay
     setTimeout(
