@@ -1,7 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Row, Container, Button, Card, Col, Stack } from "react-bootstrap";
-import { FaShoppingCart } from "react-icons/fa";
-import Cart from "../Cart";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import Banner from "./Banner.js";
@@ -19,7 +17,6 @@ function Template1(props) {
     fooddata,
     cart,
     setcart,
-    showCart,
     showReviewForm,
     showViewReviewForm,
     reviews,
@@ -27,18 +24,14 @@ function Template1(props) {
     handleShowReviewClick,
     handleReviewFormClose,
     handleViewReviewFormClose,
-    handleShowCartClose,
     bucketUrl,
     id,
     frameRef,
     averageRating,
     showAddedMessage,
     handleAddClick,
-    cartItemCount,
     currentUserId,
     navigate,
-    handleShowCartClick,
-    viewCartClicked,
     groupedFoodData,
   } = props.data;
 

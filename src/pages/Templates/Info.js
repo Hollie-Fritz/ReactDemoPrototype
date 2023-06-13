@@ -5,7 +5,7 @@ import moment from "moment-timezone";
 import styles from "./info.module.css";
 
 function Info(props) {
-  const { resdata, averageRating, className, templateName } = props.data;
+  const { resdata, averageRating, templateName } = props.data;
   const [isOpen, setIsOpen] = useState(false);
   const [openHours, setOpenHours] = useState("");
   const [closeHours, setCloseHours] = useState("");

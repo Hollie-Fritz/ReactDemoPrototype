@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
-import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template3.module.css";
