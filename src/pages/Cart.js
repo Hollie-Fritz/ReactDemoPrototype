@@ -62,8 +62,10 @@ function Cart(props) {
     const temp = { ...cart };
     if (temp[foodId] > 1) {
       temp[foodId]--;
-      setCart(temp);
+    } else {
+      delete temp[foodId];
     }
+    setCart(temp)
   };
 
   //handler to increase an item in the cart
