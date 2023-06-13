@@ -1,9 +1,10 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } from "react-bootstrap"; // prettier-ignore
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Form, InputGroup, Row, Button, OverlayTrigger, Tooltip, FormControl, } from "react-bootstrap"; // prettier-ignore
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { CgAsterisk } from "react-icons/cg";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Form.module.css";
 import { CgAsterisk } from "react-icons/cg";
 

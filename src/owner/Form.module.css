@@ -7,6 +7,12 @@ body {
   color: RGB(240, 178, 109)
 }
 
+/* remove image button
+adds width so words don't wrap and margin for improved spacing */
+.removebutton {
+  min-width: 149px;
+  margin-left:8px;
+}
 
 
 .templatebutton {
@@ -108,4 +114,5 @@ adds width so words don't wrap and margin for improved spacing */
 .prevnext:hover{
   background-color: #000000  !important;
   border-color: #000000  !important;
+
 }

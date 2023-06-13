@@ -1,31 +1,33 @@
-import React from "react";
-import { useState, useEffect, useRef, useCallback } from "react"; // prettier-ignore
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useRef, useCallback } from "react"; // prettier-ignore
+import { useParams,useNavigate } from "react-router-dom";
 import NavBarHome from "../components/NavBarHome";
 import Template1 from "./Templates/Template1";
 import Template2 from "./Templates/Template2";
 import Template3 from "./Templates/Template3";
 import Template4 from "./Templates/Template4";
 // import { Auth } from "aws-amplify";
-import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
 export function ViewWebPage() {
-  // variables to be shared across all the templates
+  /* variables to be shared across all the templates */
   const { id } = useParams();
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const { user } = useAuthenticator((context) => [context.user]);
+  const navigate = useNavigate();
+  
   const [resdata, setresdata] = useState({});
   const [fooddata, setfooddata] = useState([]);
+  const [address, setAddress] = useState("");
+
   const [cart, setcart] = useState({});
   const [showCart, setShowCart] = useState(false);
+  const [viewCartClicked, setViewCartClicked] = useState(false);
+
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showViewReviewForm, setShowViewReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
-  const [address, setAddress] = useState("");
   const [averageRating, setAverageRating] = useState(0);
-  const [currentUserId, setCurrentUserId] = useState(null);
-  const navigate = useNavigate();
-  const { user } = useAuthenticator((context) => [context.user]);
-  const [viewCartClicked, setViewCartClicked] = useState(false);
+
   const [showAddedMessage, setShowAddedMessage] = useState(null);
 
   // write reviews handlers
@@ -162,7 +164,7 @@ export function ViewWebPage() {
 
   // url for restaurant's main image (banner image)
   const bucketUrl =
-    "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" +
+    "https://nuorderbucket.s3.us-west-2.amazonaws.com/" +
     resdata["mainImageUrl"];
 
   //helper function -- groups food items by foodType
@@ -213,7 +215,6 @@ export function ViewWebPage() {
     navigate,
     viewCartClicked,
     handleShowCartClick,
-    viewCartClicked,
     setViewCartClicked,
     groupedFoodData
   };
@@ -228,7 +229,7 @@ export function ViewWebPage() {
         return (
           <>
             {" "}
-            <NavBarHome /> 
+            <NavBarHome />
             <br></br>
             <Template1 data={webPageVars} />{" "}
           </>

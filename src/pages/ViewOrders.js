@@ -1,14 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Auth from "@aws-amplify/auth";
 import React, { useState, useEffect } from "react";
-import { Card, Table, Container, Row, Form, Button, Col} from "react-bootstrap"; // prettier-ignore
 import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
+
+import Auth from "@aws-amplify/auth";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
+
+import { Card, Table, Container, Row, Form, Button, Col} from "react-bootstrap"; // prettier-ignore
+import { Pagination, Ellipsis } from "react-bootstrap";
 import { AiOutlineCheck } from "react-icons/ai";
 import style from "./ViewStatus.module.css";
-import { Pagination, Ellipsis } from "react-bootstrap";
+
 
 //component that displays the orders
 function ViewOrder() {
@@ -77,6 +80,7 @@ function ViewOrder() {
       {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
+
         body: JSON.stringify(body)
       }
     ).then(() => {
@@ -89,6 +93,7 @@ function ViewOrder() {
   const EllipsisItem = () => {
     return <Pagination.Item disabled>...</Pagination.Item>;
   };
+
 
   const renderPaginationItems = () => {
     const totalPages = Math.ceil(orders.length / itemsPerPage);
@@ -315,6 +320,7 @@ function OrderCard({
             >
               Delete
             </Button>
+            
             {user && order["customerId"] !== "" && (
               <Button
                 className={style["orders-button"]}

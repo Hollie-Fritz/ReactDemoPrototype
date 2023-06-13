@@ -1,12 +1,11 @@
 import NavBarHome from "../components/NavBarHome";
-import { useParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useParams, useLocation, useNavigate  } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
 // import { Auth } from "aws-amplify";
-import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
-import "./Chat.css"; // Import the custom CSS file
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { Button, Container, Row, Col, Form, Card, ListGroup } from "react-bootstrap";
+
+import "./Chat.css"; // Import the custom CSS file
 
 function Chat() {
     const params = useParams();
@@ -18,6 +17,7 @@ function Chat() {
     const url = "wss://0vj4h7i94b.execute-api.us-west-2.amazonaws.com/prod";
     const navigate = useNavigate();
     const location = useLocation();
+
     const { user } = useAuthenticator((context) => [
       context.user, 
     ]);
@@ -89,6 +89,8 @@ function Chat() {
       let message = {
         user: data.sentBy,
         text: data.text,
+        timestamp: new Date(data.time * 1000).toLocaleString(),
+        isDateMarker: false // <-- Added this property for each message
       };
       addMessageToList(message);
     };
@@ -109,7 +111,10 @@ function Chat() {
   }
 
   function addMessageToList(message) {
-    setMessages((prevMessages) => [...prevMessages, message]);
+     // Get the last message in the list
+    const lastMessage = messages[messages.length - 1];
+    // Then add the message itself
+    setMessages(prevMessages => [...prevMessages, message]);
   }
 
   function clearMessageList() {
@@ -123,10 +128,11 @@ function Chat() {
         <Row>
           <Col md={4} id="ws-container">
             <h4>Users:</h4>
+            <ListGroup>
             {
               listChat.map((user, index) => {
                 return (
-                  <Button variant="light" key={index} block onClick={()=>{
+                  <ListGroup.Item action variant="light" key={index} block onClick={()=>{
                       navigate(`/chat/${currentUserId}/${user["id"]}`, 
                       {
                         state: {
@@ -136,38 +142,63 @@ function Chat() {
                       )
                   }}>
                     {user["name"]? user["name"]: user["id"]}
-                  </Button>
+                  </ListGroup.Item>
                 );
               })
             }
-
+            </ListGroup>
           </Col>
+
           <Col md={8}>
             <h4>Talking to {location.state? location.state.name:params["toUserId"]}</h4>
-            <hr />
+            <hr/>
             <Card className="conversation-box">
-              <Card.Body>
+              <Card.Body >
                 {messages.map((message, index) => {
-                  const isCurrentUserMessage =
-                    message.user === currentUserId;
-                  const messageAlignment = isCurrentUserMessage
-                    ? "message-right"
-                    : "message-left";
-                  return (
-                    <div
-                      key={index}
-                      className={`message-item ${messageAlignment}`}
-                    >
-                      <div className="message-content">
-                        <div className="message-text">{message.text}</div>
+                  console.log(JSON.stringify(messages));
+
+                  //Date marker rendering
+                  let dateMarker = null;
+                  if (index === 0 || new Date(messages[index - 1].timestamp).toDateString() !== new Date(message.timestamp).toDateString()) {
+                    dateMarker = (
+                      <div key={"dateMarker-" + index} className="date-marker">
+                        {new Date(message.timestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
                       </div>
+                    );
+                  }
+
+                // Normal message rendering
+                const isCurrentUserMessage = message.user === currentUserId;
+                const messageAlignment = isCurrentUserMessage ? "message-right" : "message-left";
+
+                const messageElement = (
+                  <div
+                    key={index}
+                    className={`message-item ${messageAlignment}`}
+                  >
+                    <div className="message-content">
+                      <div className="message-text">{message.text}</div>
                     </div>
-                  );
+                    <div className={`message-timestamp ${messageAlignment}`}>
+                      {new Date(message.timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                    </div>
+                  </div>
+                );
+
+                  return (
+                    <React.Fragment key={index}>
+                      {dateMarker}
+                      {messageElement}
+                    </React.Fragment>
+                    );
                 })}
               </Card.Body>
             </Card>
             <br />
-              <Form inline>
+              <Form inline onSubmit={(event) =>{
+                  event.preventDefault()
+                  sendMessage();
+                }}>
                 <Form.Control
                   ref={messageInput}
                   type="text"

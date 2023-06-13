@@ -1,5 +1,5 @@
-import Rating from "react-rating-stars-component";
 import React from "react";
+import Rating from "react-rating-stars-component";
 
 const AverageRating = (props) => {
   const roundedRating = Math.round(props.averageRating * 2) / 2;

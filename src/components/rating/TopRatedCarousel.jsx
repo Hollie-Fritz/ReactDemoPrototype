@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 import bg from "../../assests/bg.png";
-import { useNavigate } from "react-router-dom";
 
 function TopRatedCarousel() {
   const [topRatedRestaurants, setTopRatedRestaurants] = useState([]);
@@ -18,9 +18,9 @@ function TopRatedCarousel() {
   }, []);
 
   return (
-    <Carousel style={{ height: "400px", width: "1000px" }}>
+    <Carousel style={{ height: "400px", width: "1000px", cursor: "pointer" }}>
       {topRatedRestaurants.map((restaurant) => {
-        const imageUrl = "https://d12zok1slvqtin.cloudfront.net/fit-in/1250x200/" + restaurant["mainImageUrl"];
+        const imageUrl = "https://nuorderbucket.s3.us-west-2.amazonaws.com/" + restaurant["mainImageUrl"];
 
         return (
           <Carousel.Item   key={restaurant} onClick={() => {

@@ -6,3 +6,21 @@
   grid-gap: 20px;
 }
 
+.pagination .page-link {
+  color: black;
+  background-color: white;
+}
+
+.pagination .page-item.active .page-link {
+  color: white;
+  background-color: #333b42;
+  border-color: #333b42;
+}
+
+.pagination .page-item:hover .page-link {
+  color: black;
+}
+
+.pagination .page-item.active .page-link:hover {
+  color: white !important;
+}

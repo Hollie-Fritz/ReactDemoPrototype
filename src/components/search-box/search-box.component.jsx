@@ -7,12 +7,13 @@ import {
   Container,
   FloatingLabel,
 } from "react-bootstrap";
+
 import "./search-box.styles.css";
 
 const SearchBox = ({ className, placeholder, onChangeHandler }) => (
   <>
     <Container>
-      <Form inline="true">
+      <Form inline="true" onSubmit={(event) =>{event.preventDefault()}}>
         <Row className="justify-content-md-center">
           <Col xs lg="6">
             <FloatingLabel controlId="floatingName" label={placeholder}>

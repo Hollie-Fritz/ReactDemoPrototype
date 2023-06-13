@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Auth from "@aws-amplify/auth";
+import NavBarHome from "../components/NavBarHome";
 import InfoEdit from "./InfoEdit";
 import MenuEdit from "./MenuEdit";
 import ReviewEdit from "./ReviewEdit";
@@ -7,6 +10,7 @@ import Auth from "@aws-amplify/auth";
 import NavBarHome from "../components/NavBarHome";
 import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
+
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form

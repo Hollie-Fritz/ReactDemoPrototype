@@ -5,13 +5,14 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Hub } from "aws-amplify";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 function PopUp(){
   const { user } = useAuthenticator((context) => [
     context.user, 
   ]);
   const navigate = useNavigate();
+  const location = useLocation();
 
     // const dispatch = useDispatch();
   var ws = null;
@@ -75,10 +76,13 @@ function PopUp(){
                   toast(
                     <div onClick ={() => navigate("/orderStatus")}>Your order from {message["customerName"]} has a new update!</div>
                   );
+                } else if (message["updateType"] === "Message" && location.pathname !== `/chat/${user.getUsername()}/${message["sentBy"]}`) {
+                  toast(
+                    <div onClick ={() => navigate(`chat/${user.getUsername()}/${message["sentBy"]}`)}>From {message["sentBy"]}: {message["message"]}</div>
+                  );
                 }
               };
               ws.onclose = function (evt){
-                ws = null;
                 console.log('Socket is closed. Reconnect will be attempted in 1 second.', evt.reason);
                 setTimeout(function() {
                   setup();

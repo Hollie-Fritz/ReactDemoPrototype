@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Row, Container, Button, Card, Col, Stack } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
-import styles from "./Template1.module.css";
 import Banner from "./Banner.js";
 import Info from "./Info.js";
 import GoogleMap from "./GoogleMap.js";
 import Menu from "./Menu.js";
 import Template1Cart from "./Template1Cart.js";
+
+import styles from "./Template1.module.css";
 
 // Template1 component
 function Template1(props) {
@@ -38,113 +39,130 @@ function Template1(props) {
     navigate,
     handleShowCartClick,
     viewCartClicked,
-    groupedFoodData
+    groupedFoodData,
   } = props.data;
 
   return (
     <>
       <Container className="justify-content-center" fluid>
         <Row className="m-auto align-self-center">
-          <Col className="order-first"  xs={8} md={9}>
-          <div className="row no-gutters">
-            {/* outer card */}
-            <Card className="mb-3" border="dark">
-              {/* RESTAURANT BANNER IMAGE */}
-              <Banner data={{ resdata, bucketUrl }} />
-              {/* RESTAURANT BANNER IMAGE */}
+          <Col className="order-first" xs={8} md={9}>
+            <div className="row no-gutters">
+              {/* outer card */}
+              <Card className="mb-3" border="dark">
+                {/* RESTAURANT BANNER IMAGE */}
+                <Banner data={{ resdata, bucketUrl }} />
+                {/* RESTAURANT BANNER IMAGE */}
 
-              <Card.Body style={{ overflow: "hidden" }}>
-                <Row className="d-flex justify-content-between">
-                  <Col xs={1} md={5} className="mb-4">
-                    <Card
-                      className={`border-0 ml-auto mr-3 ${styles.cardText} ${styles.card}`}
-                      style={{ display: "inline-block", alignItems: "left" }}
-                    >
-                      {/* RESTAURANT INFO */}
-                      <Info data={{ resdata, averageRating }} />
-                      {/* RESTAURANT INFO */}
+                <Card.Body style={{ overflow: "hidden" }}>
+                  <Row className="d-flex justify-content-between">
+                    <Col xs={1} md={5} className="mb-4">
+                      <Card
+                        className={`border-0 ml-auto mr-3 ${styles.cardText} ${styles.card}`}
+                        style={{ display: "inline-block", alignItems: "left" }}
+                      >
+                        {/* RESTAURANT INFO */}
+                        <Info
+                          data={{
+                            resdata,
+                            averageRating,
+                            templateName: "Template1",
+                          }}
+                        />
+                        {/* RESTAURANT INFO */}
 
-                      <Card.Text>
-                        <Stack direction="horizontal" gap={2}>
-                          {/* REVIEW BUTTONS */}
-                          <Button
-                            className={`mb-2 ${styles.reviewButton}`}
-                            type="submit"
-                            onClick={handleWriteReviewClick}
-                          >
-                            Leave Review
-                          </Button>{" "}
-                          <Button
-                            className={`mb-2 ${styles.reviewButton}`}
-                            type="submit"
-                            onClick={handleShowReviewClick}
-                          >
-                            View Reviews
-                          </Button>{" "}
-                          {/* REVIEW BUTTONS */}
-                          {/* CHAT */}
-                          {currentUserId && (
+                        <Card.Text>
+                          <Stack direction="horizontal" gap={2}>
+                            {/* REVIEW BUTTONS */}
                             <Button
-                            className={`mb-2 ${styles.reviewButton}`}
-                              onClick={() =>
-                                navigate(`/chat/${currentUserId}/${id}`, {
-                                  state: {
-                                    name: resdata["name"]
-                                  }
-                                })
-                              }
+                              className={`mb-2 ${styles.reviewButton}`}
+                              type="submit"
+                              onClick={handleWriteReviewClick}
                             >
-                              Chat
-                            </Button>
-                          )}
-                          {/* CHAT */}
-                        </Stack>
-                      </Card.Text>
-                    </Card>
-                  </Col>
-                  <Col
-                    xs={12}
-                    md={6}
-                    className="mb-4 d-flex justify-content-center"
-                    style={{ display: "inline-block", alignItems: "right" }}
-                  >
-                    <Card className="border-0">
-                      {/* MAP */}
-                      <GoogleMap data={frameRef} />
-                      {/* MAP */}
-                    </Card>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <br></br>
+                              Leave Review
+                            </Button>{" "}
+                            <Button
+                              className={`mb-2 ${styles.reviewButton}`}
+                              type="submit"
+                              onClick={handleShowReviewClick}
+                            >
+                              View Reviews
+                            </Button>{" "}
+                            {/* REVIEW BUTTONS */}
+                            {/* CHAT */}
+                            {currentUserId && (
+                              <Button
+                                className={`mb-2 ${styles.reviewButton}`}
+                                onClick={() =>
+                                  navigate(`/chat/${currentUserId}/${id}`, {
+                                    state: {
+                                      name: resdata["name"],
+                                    },
+                                  })
+                                }
+                              >
+                                Chat
+                              </Button>
+                            )}
+                            {/* CHAT */}
+                          </Stack>
+                        </Card.Text>
+                      </Card>
+                    </Col>
+                    <Col
+                      xs={12}
+                      md={6}
+                      className="mb-4 d-flex justify-content-center"
+                      style={{ display: "inline-block", alignItems: "right" }}
+                    >
+                      <Card className="border-0">
+                        {/* MAP */}
+                        <GoogleMap data={frameRef} />
+                        {/* MAP */}
+                      </Card>
+                    </Col>
+                  </Row>
+                </Card.Body>
+                <br></br>
 
-              <Card.Body style={{ overflow: "hidden" }}>
-                <Card.Title as="h4"></Card.Title>
-                {/* MENU */}
-                <Menu
-                  data={{
-                    groupedFoodData,
-                    handleAddClick,
-                    showAddedMessage,
-                    cart
-                  }}
-                />
-              </Card.Body>
-            </Card>
-          </div>
+                <Card.Body style={{ overflow: "hidden" }}>
+                  <Card.Title as="h4"></Card.Title>
+                  {/* MENU */}
+                  <Menu
+                    data={{
+                      groupedFoodData,
+                      handleAddClick,
+                      showAddedMessage,
+                      cart,
+                    }}
+                  />
+                </Card.Body>
+              </Card>
+            </div>
           </Col>
-          <Col className="order-last" xs={4} md={3}>
-          <Template1Cart
-          fooddata={fooddata}
-          cart={cart}
-          setCart={setcart}
-          userId={resdata["userId"]}
-          name={resdata["name"]}
-        />
+    
+          <Col className="order-last" xs={4} md={3} 
+            style={{
+              position: "sticky",
+              top: "0",
+              right: "0",
+              height: "50vh",
+              overflowY: "auto"
+            }}
+          >
+            <Template1Cart 
+              className={styles.floating}
+              fooddata={fooddata}
+              cart={cart}
+              setCart={setcart}
+              userId={resdata["userId"]}
+              name={resdata["name"]}
+            />
           </Col>
+
         </Row>
       </Container>
-
+ 
       {/* REVIEW POPUP */}
       <ViewReview
         show={showViewReviewForm}
@@ -164,9 +182,8 @@ function Template1(props) {
         md={3}
         className="position-fixed"
         style={{ top: "50%", right: 0, transform: "translateY(-50%)" }}
-      >
+      ></Col>
 
-      </Col>
     </>
   );
 }

@@ -1,22 +1,25 @@
 import React from "react";
-import { Card, ListGroup} from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import NavBarHome from "../components/NavBarHome";
+
+import { AiOutlineMail } from "react-icons/ai";
+import { FaGithubAlt } from "react-icons/fa";
 import "../components/Grid.css";
 import "../pages/About.css";
-import NavBarHome from "../components/NavBarHome";
 
 const Contact = () => {
   const cardInfo = [
     {
       image:
-        "https://static.vecteezy.com/system/resources/previews/009/384/545/original/kitty-cat-clipart-design-illustration-free-png.png",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Hollie.png",
       name: "Hollie Fritz",
-      position: "Program Manager and Front-End Developer of NuOrder since 2022",
+      position: "Program Lead and Front-End Developer of NuOrder since 2022",
       email: "hollie.fritz@bellevuecollege.edu",
       github: "https://github.com/Hollie-Fritz",
     },
     {
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/009/354/797/small/kitty-cat-clipart-design-illustration-free-png.png",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Giang.png",
       name: "Giang Ngo",
       position: "Front-End Developer of NuOrder since 2022",
       email: "giang.ngo@bellevuecollege.edu",
@@ -24,15 +27,15 @@ const Contact = () => {
     },
     {
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/009/380/316/small_2x/kitty-cat-clipart-design-illustration-free-png.png",
-      name: "Nao Mai",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Kyle.png",
+      name: "Kyle Mai",
       position: "Full-Stack Developer of NuOrder since 2022",
       email: "nao.mai@belllevuecollege.edu",
       github: "https://github.com/kylemai96",
     },
     {
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/009/383/800/small/kitty-cat-clipart-design-illustration-free-png.png",
+        "https://nuorderbucket.s3.us-west-2.amazonaws.com/Jona.png",
       name: "Jonida Durbaku",
       position: "Front-End Developer of NuOrder since 2022",
       email: "jonida.durbaku@belllevuecollege.edu",
@@ -42,27 +45,25 @@ const Contact = () => {
 
   const renderCard = (card, index) => {
     return (
-      <Card style={{ width: "18rem" }} className="box" key={index}>
+      <Card style={{ width: "18rem", border: '5px solid black', borderRadius: '100px' }} className="box" key={index}>
         <Card.Img
           variant="top"
           src={card.image}
           className="avatar d-block mx-auto img-fluid wd-30"
+          style={{ marginTop: '20px' }}
         />
         <Card.Body>
           <Card.Title style={{ textAlign: "center" }}>{card.name}</Card.Title>
           <Card.Text style={{ textAlign: "center" }}>{card.position}</Card.Text>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+            <a href={`mailto:${card.email}`}>
+              <AiOutlineMail size={28} className="linkicon"/>
+            </a>
+            <a  href={card.github} target="_blank" rel="noopener noreferrer">
+              <FaGithubAlt size={28}  className="linkicon"/>
+            </a>
+          </div>
         </Card.Body>
-        <ListGroup className="list-group-flush">
-          <ListGroup.Item style={{ textAlign: "center" }}>
-            Email: <Card.Link href={`mailto:${card.email}`}> {card.email}</Card.Link>
-          </ListGroup.Item>
-          <ListGroup.Item style={{ textAlign: "center" }}>
-          Github:{" "}
-            <Card.Link href={card.github} target="_blank" rel="noopener noreferrer">
-              {card.github}
-            </Card.Link>
-          </ListGroup.Item>
-        </ListGroup>
       </Card>
     );
   };

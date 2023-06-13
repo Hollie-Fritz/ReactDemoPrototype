@@ -164,6 +164,24 @@ const Template1Cart = ({
   };
 
   const handlePlaceOrder = async () => {
+    ////////////////////////////////////////
+    console.log(customerName);
+    const FormControl = document.querySelectorAll('[id*="validation"]');
+    console.log(FormControl.length);
+    let isValid = true;
+    // force validity to go in descending order instead of ascending order
+    for (let index = FormControl.length - 1; index >= 0; index--) {
+      if (!FormControl[index].checkValidity()) {
+        console.log("is false");
+        isValid = false;
+        FormControl[index].reportValidity();
+      }
+    }
+    if (!isValid) {
+      // enables next button to work by incrementing
+      return;
+    }
+    /////////////////////////////////////////
     await handleSubmit();
     //order completed message after submit
     setMessage(
@@ -328,9 +346,24 @@ const Template1Cart = ({
       <FloatingLabel
         controlId="floatingName"
         label="Name"
-        onChange={handleCustomerName}
       >
-        <Form.Control type="Name" placeholder="Enter your name" />
+      <Form.Control type="Name" placeholder="Enter your name" id = "validation"
+        required
+        onInvalid={(event) => {
+          event.target.setCustomValidity(
+              "Please enter a name"
+          );
+          }}
+          onInput={(event) => {
+            event.target.setCustomValidity("");
+          }}
+          onChange={(event)=> {
+            console.log(customerName);
+            handleCustomerName(event)
+            }
+          }
+          value ={customerName}
+      />
       </FloatingLabel>
       <br></br>
       {/* NOTE */}
@@ -398,11 +431,11 @@ const Template1Cart = ({
                 </Button>
                 {showFields ? (
 
-                  <Button variant="primary" onClick={handlePlaceOrder}>
+                  <Button className = {styles.t1cartbutton} variant="primary" onClick={handlePlaceOrder}>
                     Place Order
                   </Button>
                 ) : (
-                  <Button variant="primary" onClick={handleReviewOrder}>
+                  <Button className = {styles.t1cartbutton} variant="primary" onClick={handleReviewOrder}>
                     Add Details
                   </Button>
                 )}
@@ -420,6 +453,7 @@ const Template1Cart = ({
             {!isCartEmpty() && (
               <Card.Footer>
                 <Button
+                className = {styles.t1cartbutton}
                   variant="primary"
                   onClick={() => {
                     setCheckout(true);

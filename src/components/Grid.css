@@ -8,6 +8,11 @@
   box-shadow: 0px 12px 18px -6px rgb(0, 0, 0, 0.3);
 }
 
+.box:hover {
+  transform: scale(1.00);
+  box-shadow: 0 0 20px #a5a3a3;
+}
+
 .box {
   margin: 20px;
 }
@@ -28,4 +33,34 @@
   object-fit: scale-down;
   resize: contain;
   position: inherit;
+}
+
+
+/* animate mail and github icons on contact page to bounce upon hover */
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-3px);
+  }
+
+  80% {
+    transform: translateY(-2px);
+  }
+}
+
+
+/* mail and github icons on contact page */
+.linkicon {
+  color: black;
+  transition: color 0.3s ease;
+  display: inline-block;
+
+}
+
+.linkicon:hover {
+  color: #E1CD56;
+  animation: bounce 1s infinite;
 }

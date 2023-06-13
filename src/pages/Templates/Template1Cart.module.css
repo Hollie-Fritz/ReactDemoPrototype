@@ -52,3 +52,15 @@
     margin-right: 5px;
   }
 
+  /* template 1 blue cart buttons */
+.t1cartbutton{
+  background-color: #3F86C4 !important;
+  border-color: #3F86C4 !important;
+
+}
+
+.t1cartbutton:hover{
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+
+}

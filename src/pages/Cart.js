@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Table, Form, FloatingLabel, Tooltip, OverlayTrigger, } from "react-bootstrap"; //prettier-ignore
-import { AiOutlineInfoCircle, AiOutlinePlus, AiOutlineMinus, } from "react-icons/ai"; //prettier-ignore
-import styles from "./Cart.module.css";
-import { CiSquareRemove } from "react-icons/ci";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+
+import { Modal, Button, Table, Form, FloatingLabel, Tooltip, OverlayTrigger } from "react-bootstrap"; //prettier-ignore
+import { AiOutlineInfoCircle, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"; //prettier-ignore
+import { CiSquareRemove } from "react-icons/ci";
+
+import styles from "./Cart.module.css";
 
 function Cart(props) {
   const { show, handleClose, fooddata, cart, setCart, userId, name } = props;
@@ -382,7 +384,6 @@ function Cart(props) {
                 <FloatingLabel
                   controlId="floatingName"
                   label="Name"
-                  onChange={handleCustomerName}
                 >
                   <Form.Control type="Name" placeholder="Enter your name" id = "validation"
                                   required
@@ -391,6 +392,14 @@ function Cart(props) {
                                       "Please enter a name"
                                     );
                                   }}
+                                  onInput={(event) => {
+                                    event.target.setCustomValidity("");
+                                  }}
+                                  onChange={(event)=> {
+                                    console.log(customerName);
+                                    handleCustomerName(event)
+                                  }
+                                  }
                                   value ={customerName}
                   />
                 </FloatingLabel>
@@ -458,6 +467,7 @@ function Cart(props) {
               </>
             ) : (
               <Button variant="primary" onClick={() => {
+                console.log(customerName);
                 const FormControl = document.querySelectorAll('[id*="validation"]');
                 console.log(FormControl.length);
                 let isValid = true;

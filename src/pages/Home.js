@@ -1,6 +1,7 @@
 import React from "react";
-import "./Home.css";
 import {Customer} from "../components/customer/Customer";
+
+import "./Home.css";
 
 const Home = () => {
   return (

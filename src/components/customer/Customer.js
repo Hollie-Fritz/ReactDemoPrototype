@@ -1,10 +1,9 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import NavBarHome from "../NavBarHome";
 import CardList from "../card-list/card-list.component";
 import SearchBox from "../search-box/search-box.component";
-import NavBarHome from "../NavBarHome";
 import TopRatedCarousel from "../rating/TopRatedCarousel";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Search = () => {
   const [searchField, setSearchField] = useState("");
@@ -66,7 +65,7 @@ const Search = () => {
 //Customer.js
 export function Customer() {
   return (
-     <div className="bg">
+    <div className="bg">
       <NavBarHome />
       <Container fluid="md">
         <Row className="justify-content-center">
@@ -83,7 +82,7 @@ export function Customer() {
           <Search  />
           </Col>
         </Row>
-      </Container></div>
-
+      </Container>
+    </div>
   );
 }
