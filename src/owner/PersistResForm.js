@@ -6,8 +6,6 @@ import PersistResInfo from "./PersistResInfo";
 import PersistResMenu from "./PersistResMenu";
 import PersistResReview from "./PersistResReview";
 import { Button } from "react-bootstrap";
-import Auth from "@aws-amplify/auth";
-import NavBarHome from "../components/NavBarHome";
 import styles from "./Form.module.css";
 
 
