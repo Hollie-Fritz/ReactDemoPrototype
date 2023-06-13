@@ -128,3 +128,8 @@
   position: relative;
 }
 
+.foodimg {
+  width: 100%;
+  height: 20vh;
+  object-fit: cover;
+}

@@ -222,6 +222,7 @@ function Template2(props) {
                                   style={{ width: "37rem" }}
                                 >
                                   <Card.Img
+                                  className={styles.foodimg}
                                     variant="top"
                                     src={
                                       item.foodImageUrl

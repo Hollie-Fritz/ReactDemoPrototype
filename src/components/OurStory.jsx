@@ -26,7 +26,7 @@ const OurStory = () => {
       </Accordion>
       <br />
       <br />
-      <h3 style={{color: "#fff"}}>Frequently Asked Questions (FAQs)</h3>
+      <h3 style={{color: "black", paddingLeft: "20px"}}>  Frequently Asked Questions (FAQs)</h3>
       <Accordion defaultActiveKey="1">
         <Accordion.Item className="accr">
           <Accordion.Header onClick={handleOnClick} className="header-accr" >
