@@ -35,7 +35,7 @@ function Template3(props) {
     navigate,
     handleShowCartClick,
     viewCartClicked,
-    groupedFoodData
+    groupedFoodData,
   } = props.data;
 
   return (
@@ -65,7 +65,7 @@ function Template3(props) {
                   display: "flex",
                   justifyContent: "left",
                   alignItems: "center",
-                  position: "relative"
+                  position: "relative",
                 }}
               >
                 {/* restaurant name (displayed on banner) */}
@@ -77,7 +77,7 @@ function Template3(props) {
                     marginBottom: "0.5rem",
                     fontWeight: "bold",
                     textShadow:
-                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000"
+                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000",
                   }}
                 >
                   {resdata["name"]}
@@ -93,14 +93,14 @@ function Template3(props) {
                       className={`border-0 ml-auto mr-3 ${styles.cardText} ${styles.card}`}
                       style={{ display: "inline-block", alignItems: "left" }}
                     >
-                     {/* RESTAURANT INFO */}
-                     <Info
-                          data={{
-                            resdata,
-                            averageRating,
-                            templateName: "Template3",
-                          }}
-                        />
+                      {/* RESTAURANT INFO */}
+                      <Info
+                        data={{
+                          resdata,
+                          averageRating,
+                          templateName: "Template3",
+                        }}
+                      />
                       {/* RESTAURANT INFO */}
 
                       <Card.Text>
@@ -121,15 +121,15 @@ function Template3(props) {
                           >
                             View Reviews
                           </Button>{" "}
-                              {/* CHAT */}
-                              {currentUserId && (
+                          {/* CHAT */}
+                          {currentUserId && (
                             <Button
-                            className={`mb-2 ${styles.reviewButton}`}
+                              className={`mb-2 ${styles.reviewButton}`}
                               onClick={() =>
                                 navigate(`/chat/${currentUserId}/${id}`, {
                                   state: {
-                                    name: resdata["name"]
-                                  }
+                                    name: resdata["name"],
+                                  },
                                 })
                               }
                             >
@@ -172,7 +172,7 @@ function Template3(props) {
                           justifyContent: "center",
                           alignItems: "center",
                           width: "100px",
-                          height: "400px"
+                          height: "400px",
                         }}
                       >
                         <iframe
@@ -186,7 +186,7 @@ function Template3(props) {
                             border: "0",
                             position: "absolute",
                             top: "0",
-                            left: "0"
+                            left: "0",
                           }}
                         />
                       </div>
@@ -215,6 +215,7 @@ function Template3(props) {
                                   style={{ width: "37rem" }}
                                 >
                                   <Card.Img
+                                    className={styles.foodimg}
                                     variant="top"
                                     src={
                                       item.foodImageUrl
@@ -257,7 +258,7 @@ function Template3(props) {
                                         fontWeight: "bold",
                                         position: "absolute",
                                         bottom: 5,
-                                        left: 5
+                                        left: 5,
                                       }}
                                       onClick={() =>
                                         handleAddClick(item.foodId)

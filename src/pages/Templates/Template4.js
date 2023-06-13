@@ -38,7 +38,6 @@ function Template4(props) {
     groupedFoodData,
   } = props.data;
 
-
   return (
     <>
       <Container
@@ -94,12 +93,12 @@ function Template4(props) {
                     >
                       {/* RESTAURANT INFO */}
                       <Info
-                          data={{
-                            resdata,
-                            averageRating,
-                            templateName: "Template4",
-                          }}
-                        />
+                        data={{
+                          resdata,
+                          averageRating,
+                          templateName: "Template4",
+                        }}
+                      />
                       {/* RESTAURANT INFO */}
 
                       <Card.Text>
@@ -120,15 +119,15 @@ function Template4(props) {
                           >
                             View Reviews
                           </Button>{" "}
-                            {/* CHAT */}
-                            {currentUserId && (
+                          {/* CHAT */}
+                          {currentUserId && (
                             <Button
-                            className={`mb-2 ${styles.reviewButton}`}
+                              className={`mb-2 ${styles.reviewButton}`}
                               onClick={() =>
                                 navigate(`/chat/${currentUserId}/${id}`, {
                                   state: {
-                                    name: resdata["name"]
-                                  }
+                                    name: resdata["name"],
+                                  },
                                 })
                               }
                             >
@@ -163,15 +162,16 @@ function Template4(props) {
                     style={{ display: "inline-block", alignItems: "right" }}
                   >
                     {/* inner card two -- google maps */}
-                    <Card className="border-0 mr-0" >
+                    <Card className="border-0 mr-0">
                       {/* Google Maps card display */}
-                      <div style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "100px",
-                        height: "400px",
-                      }}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          width: "100px",
+                          height: "400px",
+                        }}
                       >
                         <iframe
                           ref={frameRef}
@@ -187,7 +187,7 @@ function Template4(props) {
                             left: "0",
                           }}
                         />
-                        </div>
+                      </div>
                       {/* end inner card two -- google maps*/}
                     </Card>
                   </Col>
@@ -195,9 +195,9 @@ function Template4(props) {
                 <br></br>
                 <Card.Title as="h4"></Card.Title>
 
-                  <Card.Title as="h4"></Card.Title>
-                  {/* menu: display each menu item as a card */}
-                  {Object.entries(groupedFoodData).map(
+                <Card.Title as="h4"></Card.Title>
+                {/* menu: display each menu item as a card */}
+                {Object.entries(groupedFoodData).map(
                   ([foodType, foodItems]) => {
                     return (
                       <div key={foodType}>
@@ -215,6 +215,7 @@ function Template4(props) {
                                   style={{ width: "37rem" }}
                                 >
                                   <Card.Img
+                                    className={styles.foodimg}
                                     variant="top"
                                     src={
                                       item.foodImageUrl
@@ -257,7 +258,7 @@ function Template4(props) {
                                         fontWeight: "bold",
                                         position: "absolute",
                                         bottom: 5,
-                                        left: 5
+                                        left: 5,
                                       }}
                                       onClick={() =>
                                         handleAddClick(item.foodId)
@@ -281,7 +282,6 @@ function Template4(props) {
                     );
                   }
                 )}
-
               </Card.Body>
               {/* View Cart */}
               <Button
