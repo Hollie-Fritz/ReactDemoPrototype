@@ -1,11 +1,12 @@
 import React from "react";
 import Rating from "react-rating-stars-component";
 import { Modal, Table } from "react-bootstrap";
+import styles from "./ViewReview.css";
 
 const ViewReview = ({ show, handleClose, name, reviews }) => {
   return (
     <>
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={show} onHide={handleClose} centered className="reviewmodal">
         <Modal.Header closeButton>
           <Modal.Title className="ms-auto"><b>Reviews of {name}</b></Modal.Title>
         </Modal.Header>
