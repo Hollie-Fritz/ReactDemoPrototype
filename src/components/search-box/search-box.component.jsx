@@ -7,6 +7,7 @@ import {
   Container,
   FloatingLabel,
 } from "react-bootstrap";
+
 import "./search-box.styles.css";
 
 const SearchBox = ({ className, placeholder, onChangeHandler }) => (

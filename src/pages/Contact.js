@@ -1,11 +1,11 @@
 import React from "react";
-import { Card, ListGroup, Button} from "react-bootstrap";
-import "../components/Grid.css";
-import "../pages/About.css";
+import { Card } from "react-bootstrap";
 import NavBarHome from "../components/NavBarHome";
+
 import { AiOutlineMail } from "react-icons/ai";
 import { FaGithubAlt } from "react-icons/fa";
-
+import "../components/Grid.css";
+import "../pages/About.css";
 
 const Contact = () => {
   const cardInfo = [
@@ -67,7 +67,6 @@ const Contact = () => {
       </Card>
     );
   };
-
 
   return (
     <>

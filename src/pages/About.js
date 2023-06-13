@@ -1,8 +1,8 @@
 import React from "react";
-import "./About.css";
-import "../pages/About.css";
 import OurStory from "../components/OurStory";
 import NavBarHome from "../components/NavBarHome";
+
+import "../pages/About.css";
 
 const About = () => {
   return (

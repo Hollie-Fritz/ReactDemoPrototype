@@ -1,12 +1,12 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, InputGroup, Row, Button, Container, FormControl, Tooltip, OverlayTrigger, Col } from "react-bootstrap"; // prettier-ignore
+import React,{ useEffect, useState }  from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
 import ChooseTemplate from "../components/ChooseTemplate";
+import { Form, InputGroup, Row, Button, Container, FormControl, Tooltip, OverlayTrigger, Col } from "react-bootstrap"; // prettier-ignore
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import styles from "./Form.module.css";
 import { CgAsterisk } from "react-icons/cg";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./Form.module.css";
 
 // form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {

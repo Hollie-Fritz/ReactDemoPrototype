@@ -1,13 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Auth from "@aws-amplify/auth";
 import React, { useState, useEffect } from "react";
-import { Card, Table, Container, Row, Form, Button, Col, } from "react-bootstrap"; // prettier-ignore
-import NavBarHome from "../components/NavBarHome";
-import OrderProgress from "./OrderProgress";
+import Auth from "@aws-amplify/auth";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
+import NavBarHome from "../components/NavBarHome";
+import OrderProgress from "./OrderProgress";
+
+import { Card, Table, Container, Row, Form, Button, Col} from "react-bootstrap"; // prettier-ignore
+import { Pagination, Ellipsis } from "react-bootstrap";
 import { AiOutlineCheck } from "react-icons/ai";
-import { Pagination } from "react-bootstrap";
+
+import style from "./ViewStatus.module.css";
 
 //component that displays the orders
 function ViewOrder() {
@@ -21,6 +24,7 @@ function ViewOrder() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   //fetches the list of orders
@@ -64,36 +68,33 @@ function ViewOrder() {
     //fetch orders when the component mounts
     fetchOrders();
   }, []);
+
+  async function deleteOrder(orderId){
+    const body = { orderId: orderId };
+
+    await fetch(
+      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order",
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }
+    ).then(()=>{
+      setOrders(prevState => prevState.filter(order => order.id !== orderId));
+    });
+  }
+
+  const EllipsisItem = () => {
+    return <Pagination.Item disabled>...</Pagination.Item>;
+  }; 
+  
   const renderPaginationItems = () => {
     const totalPages = Math.ceil(orders.length / itemsPerPage);
-    const visiblePages = 3;
-    const pageNeighbours = Math.floor(visiblePages / 2);
     const pageNumbers = [];
 
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
     }
-
-    if (totalPages <= visiblePages) {
-      return pageNumbers.map((number) => (
-        <Pagination.Item
-          key={number}
-          active={number === currentPage}
-          onClick={() => paginate(number)}
-        >
-          {number}
-        </Pagination.Item>
-      ));
-    }
-
-    const leftOffset = currentPage - pageNeighbours - 1;
-    const rightOffset = currentPage + pageNeighbours - totalPages;
-
-    const hasLeftEllipsis = leftOffset > 1;
-    const hasRightEllipsis = rightOffset > 1;
-
-    let ellipsisLeftCount = Math.min(leftOffset, pageNeighbours);
-    let ellipsisRightCount = Math.min(rightOffset, pageNeighbours);
 
     const items = [];
 
@@ -113,26 +114,17 @@ function ViewOrder() {
         active={1 === currentPage}
         onClick={() => paginate(1)}
       >
-        1
+        {1}
       </Pagination.Item>
     );
 
-    // Left ellipsis
-    if (hasLeftEllipsis) {
-      items.push(
-        <Pagination.Ellipsis
-          key="ellipsis-left"
-          onClick={() => paginate(currentPage - pageNeighbours - 1)}
-        />
-      );
+    // Ellipsis after the second page
+    if (currentPage >= 4) {
+      items.push(<EllipsisItem key="ellipsis-start" />);
     }
 
-    // Page numbers between left and right ellipsis
-    for (
-      let i = currentPage - pageNeighbours;
-      i <= currentPage + pageNeighbours;
-      i++
-    ) {
+    // Pages between the ellipsis
+    for (let i = currentPage - 1; i <= currentPage + 1; i++) {
       if (i > 1 && i < totalPages) {
         items.push(
           <Pagination.Item
@@ -146,14 +138,9 @@ function ViewOrder() {
       }
     }
 
-    // Right ellipsis
-    if (hasRightEllipsis) {
-      items.push(
-        <Pagination.Ellipsis
-          key="ellipsis-right"
-          onClick={() => paginate(currentPage + pageNeighbours + 1)}
-        />
-      );
+    // Ellipsis before the last page
+    if (currentPage <= totalPages - 3) {
+      items.push(<EllipsisItem key="ellipsis-end" />);
     }
 
     // Last page
@@ -179,21 +166,6 @@ function ViewOrder() {
     return items;
   };
 
-  async function deleteOrder(orderId){
-    const body = { orderId: orderId };
-
-    await fetch(
-      "https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order",
-      {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      }
-    ).then(()=>{
-      setOrders(prevState => prevState.filter(order => order.id !== orderId));
-    });
-  }
-
   //rendering the component
   return (
     <>
@@ -212,9 +184,10 @@ function ViewOrder() {
             />
           ))}
         </Row>
+        <br></br><br></br>
         <div className="d-flex justify-content-center">
-          <Pagination>{renderPaginationItems()}</Pagination>
-        </div>
+        <Pagination>{renderPaginationItems()}</Pagination>
+      </div>
       </Container>
     </>
   );
@@ -299,16 +272,11 @@ function OrderCard({
                 </Form.Select>
               </Col>
               <Col sm="4">
-                <Button
+              <Button  className={style["orders-button"]}
                   onClick={async () => {
                     // retrieve element of form using unique id.
                     const form = document.getElementById("form" + index);
                     await updateOrderStatus(order["id"], form.value);
-                  }}
-                  style={{
-                    marginBottom: "20px",
-                    backgroundColor: "#212529",
-                    color: "white",
                   }}
                 >
                   {loadingState[order["id"]] ? (
@@ -321,7 +289,7 @@ function OrderCard({
               </Col>
             </Form.Group>
             <OrderProgress stage={order["progress"]} />
-            <Button
+            <Button  className={style["orders-button"]}
                 style={{ marginTop: "20px" }}
                 onClick={()=>
                   deleteOrder(order["id"])
@@ -329,9 +297,10 @@ function OrderCard({
               >
                 Delete
             </Button>
+            
             {user && order["customerId"] !== "" && (
-              <Button
-                style={{ marginTop: "20px" }}
+              <Button  className={style["orders-button"]}
+                style={{ marginTop: "20px", marginLeft: "10px" }}
                 onClick={() =>
                   navigate(
                     `/chat/${user.getUsername()}/${order["customerId"]}`,

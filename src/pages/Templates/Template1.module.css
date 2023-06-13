@@ -21,3 +21,25 @@
   overflow: hidden;
   position: relative;
 }
+
+.cart-container {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.cart-container.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.reviewButton{
+  background-color: #3F86C4 !important;
+  border-color: #3F86C4 !important;
+}
+
+.reviewButton:hover{
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+
+}
