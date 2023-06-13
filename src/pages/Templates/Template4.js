@@ -231,9 +231,9 @@ function Template4(props) {
                                   <Card.Body>
                                     <div className={styles.menuItem}>
                                       <Card.Text
-                                        style={{ fontSize: "18px" }}
                                         as="h5"
                                         className={`${styles.menuItemTitle}`}
+                                        style={{ fontSize: "18px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
                                       >
                                         <nobr
                                           as="h1"
