@@ -11,6 +11,9 @@ const ViewReview = ({ show, handleClose, name, reviews }) => {
           <Modal.Title className="ms-auto"><b>Reviews of {name}</b></Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {reviews.length === 0 ? (
+            <h5 className="text-center">No reviews yet!</h5>
+          ) : (
           <Table responsive="lg" hover size="sm">
             <thead>
               <tr>
@@ -43,6 +46,7 @@ const ViewReview = ({ show, handleClose, name, reviews }) => {
               })}
             </tbody>
           </Table>
+        )}
         </Modal.Body>
       </Modal>
     </>
