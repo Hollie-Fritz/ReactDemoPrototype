@@ -29,7 +29,7 @@ function Menu(props) {
                                 overflowWrap: "break-word",
                               }}
                               as="h5"
-                              className="text-center font-size: 10px"
+                              className="font-size: 10px"
                             >
                               <div as="h1" className="fw-bold">
                                 {item.foodName}
@@ -49,7 +49,7 @@ function Menu(props) {
                                 style={{
                                   position: "absolute",
                                   bottom: 5,
-                                  left: 5,
+                                  right: 5,
                                 }}
                                 onClick={() => handleAddClick(item.foodId)}
                               >
@@ -61,19 +61,21 @@ function Menu(props) {
                             </Card.Footer>
                           </Col>
                           <Col md={4} className="d-flex align-items-center justify-content-center">
-                            <div style={{ height: "150px", width:"150px", overflow:"hidden" }}>
-                            <Card.Img
-                              variant="top"
-                              src={
-                                item.foodImageUrl
-                                  ? "https://d12zok1slvqtin.cloudfront.net/fit-in/150x150/" +
-                                    item.foodImageUrl
-                                  : ""
-                              }
-                              style={{objectFit: "cover",
-                            height: "100%",
-                          width: "100%"}}
-                            />
+                            <div style={{ height: "150px", width:"150px" }}>
+                            {item.foodImageUrl &&
+                                  <Card.Img
+                                    variant="top"
+                                    src={
+                                      item.foodImageUrl
+                                        ? "https://d12zok1slvqtin.cloudfront.net/" +
+                                          item.foodImageUrl
+                                        : ""
+                                    }
+                                    style={{objectFit: "cover",
+                                  height: "100%",
+                                width: "100%"}}
+                                  />
+                            }
                             </div>
                           </Col>
                         </Row>
