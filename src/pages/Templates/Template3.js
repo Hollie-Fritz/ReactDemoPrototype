@@ -93,14 +93,14 @@ function Template3(props) {
                       className={`border-0 ml-auto mr-3 ${styles.cardText} ${styles.card}`}
                       style={{ display: "inline-block", alignItems: "left" }}
                     >
-                     {/* RESTAURANT INFO */}
-                     <Info
-                          data={{
-                            resdata,
-                            averageRating,
-                            templateName: "Template3",
-                          }}
-                        />
+                      {/* RESTAURANT INFO */}
+                      <Info
+                        data={{
+                          resdata,
+                          averageRating,
+                          templateName: "Template3"
+                        }}
+                      />
                       {/* RESTAURANT INFO */}
 
                       <Card.Text>
@@ -121,10 +121,10 @@ function Template3(props) {
                           >
                             View Reviews
                           </Button>{" "}
-                              {/* CHAT */}
-                              {currentUserId && (
+                          {/* CHAT */}
+                          {currentUserId && (
                             <Button
-                            className={`mb-2 ${styles.reviewButton}`}
+                              className={`mb-2 ${styles.reviewButton}`}
                               onClick={() =>
                                 navigate(`/chat/${currentUserId}/${id}`, {
                                   state: {
@@ -201,9 +201,10 @@ function Template3(props) {
                   ([foodType, foodItems]) => {
                     return (
                       <div key={foodType}>
-                        <h2>{foodType}</h2>
-                        <br></br>
-                        <br></br>
+                        <h2 className={styles.foodType}>
+                          <b>{foodType}</b>
+                        </h2>
+                        <hr />
                         <Row md={1} lg={3} className="g-4">
                           {foodItems.map((item, index) => {
                             return (
@@ -215,16 +216,43 @@ function Template3(props) {
                                   style={{ width: "37rem" }}
                                 >
                                   <Card.Img
+                                    className={styles.foodimg}
                                     variant="top"
                                     src={
                                       item.foodImageUrl
-                                        ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                        ? "https://d12zok1slvqtin.cloudfront.net/" +
                                           item.foodImageUrl
                                         : ""
                                     }
                                   />
                                   <Card.Body>
-                                    <div className={styles.menuItem}>
+                                    <div
+                                      className={styles.menuItem}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between"
+                                      }}
+                                    >
+                                      {/* Add to the cart button */}
+                                      <Button
+                                        className={`${styles.addButton}`}
+                                        style={{
+                                          backgroundColor: "var(--white)",
+                                          color: "var(--dark)",
+                                          borderColor: "var(--biscuit)",
+                                          borderWidth: "2px",
+                                          fontWeight: "bold"
+                                        }}
+                                        onClick={() =>
+                                          handleAddClick(item.foodId)
+                                        }
+                                      >
+                                        {showAddedMessage === item.foodId &&
+                                        cart[item.foodId] > 0
+                                          ? "✓"
+                                          : "Add"}
+                                      </Button>
                                       <Card.Text
                                         style={{ fontSize: "18px" }}
                                         as="h5"
@@ -241,34 +269,6 @@ function Template3(props) {
                                     </div>
                                     <Card.Text>{item.foodDesc}</Card.Text>
                                   </Card.Body>
-                                  <Card.Footer
-                                    className={`border-0 ${styles.cardFooter}`}
-                                  >
-                                    <br></br>
-                                    <br></br>
-                                    {/* Add to the cart button */}
-                                    <Button
-                                      className={`${styles.addButton}`}
-                                      style={{
-                                        backgroundColor: "var(--white)",
-                                        color: "var(--dark)",
-                                        borderColor: "var(--biscuit)",
-                                        borderWidth: "2px",
-                                        fontWeight: "bold",
-                                        position: "absolute",
-                                        bottom: 5,
-                                        left: 5
-                                      }}
-                                      onClick={() =>
-                                        handleAddClick(item.foodId)
-                                      }
-                                    >
-                                      {showAddedMessage === item.foodId &&
-                                      cart[item.foodId] > 0
-                                        ? "✓"
-                                        : "Add"}
-                                    </Button>
-                                  </Card.Footer>
                                   {/* end inner card three */}
                                 </Card>
                               </Col>

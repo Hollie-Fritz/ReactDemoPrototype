@@ -69,8 +69,10 @@ const Template1Cart = ({
     const temp = { ...cart };
     if (temp[foodId] > 1) {
       temp[foodId]--;
-      setCart(temp);
+    } else {
+      delete temp[foodId];
     }
+    setCart(temp);
   };
 
   //handler to increase an item in the cart
@@ -309,16 +311,18 @@ const Template1Cart = ({
           <tr>
             <td colSpan="3">Total:</td>
             <td>${totalPrice.toFixed(2)}</td>
-            <OverlayTrigger
-              placement="top"
-              delay={{ show: 250, hide: 400 }}
-              overlay={renderTooltip}
-            >
-              {/* tooltip icon */}
-              <span className={styles.infoButton}>
-                <AiOutlineInfoCircle size={20} className={styles.icon} />
-              </span>
-            </OverlayTrigger>
+            <td>
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+              >
+                {/* tooltip icon */}
+                <span className={styles.infoButton}>
+                  <AiOutlineInfoCircle size={20} className={styles.icon} />
+                </span>
+              </OverlayTrigger>
+            </td>
           </tr>
         </tfoot>
       )}
@@ -328,42 +332,41 @@ const Template1Cart = ({
   //renders the form for note, name, utensils, phone
   const renderForm = () => (
     <Form>
-           <nobr className="fw-bold" colSpan="3">Total: </nobr>
-           <nobr>${totalPrice.toFixed(2)}</nobr>
-            <OverlayTrigger
-              placement="top"
-              delay={{ show: 250, hide: 400 }}
-              overlay={renderTooltip}
-            >
-              {/* tooltip icon */}
-              <span className={styles.infoButton}>
-                <AiOutlineInfoCircle size={20} className={styles.icon} />
-              </span>
-            </OverlayTrigger>
-            <br></br>
+      <nobr className="fw-bold" colSpan="3">
+        Total:{" "}
+      </nobr>
+      <nobr>${totalPrice.toFixed(2)}</nobr>
+      <OverlayTrigger
+        placement="top"
+        delay={{ show: 250, hide: 400 }}
+        overlay={renderTooltip}
+      >
+        {/* tooltip icon */}
+        <span className={styles.infoButton}>
+          <AiOutlineInfoCircle size={20} className={styles.icon} />
+        </span>
+      </OverlayTrigger>
+      <br></br>
       {/* NAME */}
       <br></br>
-      <FloatingLabel
-        controlId="floatingName"
-        label="Name"
-      >
-      <Form.Control type="Name" placeholder="Enter your name" id = "validation"
-        required
-        onInvalid={(event) => {
-          event.target.setCustomValidity(
-              "Please enter a name"
-          );
+      <FloatingLabel controlId="floatingName" label="Name">
+        <Form.Control
+          type="Name"
+          placeholder="Enter your name"
+          id="validation"
+          required
+          onInvalid={(event) => {
+            event.target.setCustomValidity("Please enter a name");
           }}
           onInput={(event) => {
             event.target.setCustomValidity("");
           }}
-          onChange={(event)=> {
+          onChange={(event) => {
             console.log(customerName);
-            handleCustomerName(event)
-            }
-          }
-          value ={customerName}
-      />
+            handleCustomerName(event);
+          }}
+          value={customerName}
+        />
       </FloatingLabel>
       <br></br>
       {/* NOTE */}
@@ -402,8 +405,8 @@ const Template1Cart = ({
   );
   return (
     <div className="cart-container">
-      <Card className="cart-card">
-        <Card.Title>
+      <Card className={styles.cartcard}>
+        <Card.Title style={{ textAlign: "center" }}>
           {isCartEmpty()
             ? "Add items to your cart to get started!"
             : "Your Current Pickup Order"}
@@ -421,6 +424,7 @@ const Template1Cart = ({
             {!isCartEmpty() && (
               <Card.Footer>
                 <Button
+                  className={styles.editorder}
                   variant="secondary"
                   onClick={() => {
                     setCheckout(false);
@@ -430,12 +434,19 @@ const Template1Cart = ({
                   Edit Order
                 </Button>
                 {showFields ? (
-
-                  <Button className = {styles.t1cartbutton} variant="primary" onClick={handlePlaceOrder}>
+                  <Button
+                    className={styles.t1cartbutton}
+                    variant="primary"
+                    onClick={handlePlaceOrder}
+                  >
                     Place Order
                   </Button>
                 ) : (
-                  <Button className = {styles.t1cartbutton} variant="primary" onClick={handleReviewOrder}>
+                  <Button
+                    className={styles.t1cartbutton}
+                    variant="primary"
+                    onClick={handleReviewOrder}
+                  >
                     Add Details
                   </Button>
                 )}
@@ -453,7 +464,7 @@ const Template1Cart = ({
             {!isCartEmpty() && (
               <Card.Footer>
                 <Button
-                className = {styles.t1cartbutton}
+                  className={styles.t1cartbutton}
                   variant="primary"
                   onClick={() => {
                     setCheckout(true);

@@ -54,7 +54,7 @@ const CardComponent = ({
           }
           }>
             <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
-            {averageRating !== 0 ? (
+            {averageRating !== -1 ? (
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <AverageRating averageRating={averageRating} />
               </div>

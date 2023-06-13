@@ -1,66 +1,96 @@
 .container {
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+}
 
-  .text-right {
-    text-align: right;
-    font-weight: bold;
-    margin-bottom: 0;
-  }
+.text-right {
+  text-align: right;
+  font-weight: bold;
+  margin-bottom: 0;
+}
 
-  .info-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    margin-left: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+.info-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
-  .info-button:hover {
-    background: transparent;
-    color: inherit;
-  }
+.info-button:hover {
+  background: transparent;
+  color: inherit;
+}
 
-  .icon {
-    margin-top: -8px;
-    color: #0D6EFD;
-  }
+.icon {
+  margin-top: -8px;
+  color: #0d6efd;
+}
 
-  .iconMinus{
-    margin-top: -4px;
-    color: black;
-  }
+.iconMinus {
+  margin-top: -4px;
+  color: black;
+}
 
-  .iconPlus{
-    margin-top: -4px;
-    color: black;
-  }
+.iconPlus {
+  margin-top: -4px;
+  color: black;
+}
 
-  .iconRemove{
-    color: red;
-  }
+.iconRemove {
+  color: red;
+}
 
-  .incrementButton {
-    margin-left: 9px;
-  }
+.incrementButton {
+  margin-left: 9px;
+}
 
-  .decrementButton {
-    margin-right: 5px;
-  }
+.decrementButton {
+  margin-right: 5px;
+}
 
-  /* template 1 blue cart buttons */
-.t1cartbutton{
-  background-color: #3F86C4 !important;
-  border-color: #3F86C4 !important;
+/* template 1 blue cart buttons */
+.t1cartbutton {
+  background-color: #3f86c4 !important;
+  border-color: #3f86c4 !important;
+  border-radius: 22px !important;
+}
+
+.t1cartbutton:hover {
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+  border-radius: 22px !important;
+}
+
+.t1cartbutton {
+  background-color: #3f86c4 !important;
+  border-color: #3f86c4 !important;
+  border-radius: 22px !important;
+}
+
+.t1cartbutton:hover {
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+  border-radius: 22px !important;
+}
+
+.editorder{
+  background-color: #212529 !important;
+  border-color: #212529 !important;
+  border-radius: 22px !important;
+  margin-right: 3px;
+}
+
+.editorder:hover{
+  background-color: #000000  !important;
+  border-color: #000000  !important;
+
 
 }
 
-.t1cartbutton:hover{
-  background-color: #3570a3 !important;
-  border-color: #3570a3 !important;
-
+.cartcard {
+  border: 1px solid black !important;
 }

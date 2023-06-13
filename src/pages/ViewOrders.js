@@ -57,7 +57,9 @@ function ViewOrder() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       }
-    );
+    ).then(()=>{
+      window.location.reload();
+    });
 
     //set loading state for submit button back to false after a delay
     setTimeout(
@@ -206,7 +208,7 @@ function ViewOrder() {
         </Row>}
         <br></br>
         <br></br>
-        {orders.length > 0 && (
+        {orders.length > itemsPerPage && (
           <div className="d-flex justify-content-center">
             <Pagination>{renderPaginationItems()}</Pagination>
           </div>
@@ -320,7 +322,7 @@ function OrderCard({
             >
               Delete
             </Button>
-            
+
             {user && order["customerId"] !== "" && (
               <Button
                 className={style["orders-button"]}

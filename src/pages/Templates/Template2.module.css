@@ -20,14 +20,15 @@
 
 /* card styling */
 .card {
-  background-color: var(--dark);
+  background-color: var(--dark) !important;
   border-color: var(--milk);
   border-width: 3px !important;
-  color: var(--milk);
+  color: var(--biscuit) !important;
 }
 
 .cardItem {
-  background-color: var(--night);
+  background-color: var(--night) !important;
+  border-color: var(--milk) !important;
 }
 
 .cardItem:hover {
@@ -41,7 +42,7 @@
 
 .cardTitle,
 .cardText {
-  color: var(--night);
+  color: var(--white);
 }
 
 .menuItemTitle {
@@ -57,7 +58,7 @@
 }
 
 .cardFooter {
-  background-color: var(--night);
+  background-color: var(--night) !important;
   border-color: var(--white);
 }
 
@@ -127,3 +128,9 @@
   position: relative;
 }
 
+/* Sizing the image of menu items */
+.foodimg {
+  width: 100%;
+  height: 20vh;
+  object-fit: cover;
+}

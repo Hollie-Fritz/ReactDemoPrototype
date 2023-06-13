@@ -487,10 +487,10 @@ function PersistResInfo({ formData, setFormData }) {
             readOnly
             className="mx-2"
           />
-          <label htmlFor="imageInput" className="btn btn-primary mb-0 mx-2">
+          <label htmlFor="imageInput" className={`btn btn-primary  ${styles.tempbutton}`}>
             Browse
           </label>
-          <Button type="submit" className="mb-0 mx-2">
+          <Button type="submit"className={`mb-0 mx-2 ${styles.tempbutton}`}>
             Upload
           </Button>
           <Button

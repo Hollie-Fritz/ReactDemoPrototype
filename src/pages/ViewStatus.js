@@ -7,7 +7,7 @@ import OrderProgress from "./OrderProgress";
 
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Card, Table, Container, Row, Form, Button, Col } from "react-bootstrap"; // prettier-ignore
-import { Pagination, Ellipsis } from "react-bootstrap";
+import { Pagination } from "react-bootstrap";
 
 import style from "./ViewStatus.module.css";
 
@@ -179,7 +179,7 @@ function ViewStatus() {
       </Container>
       <br></br>
       <br></br>
-      {orders.length > 0 && (
+      {orders.length > itemsPerPage && (
         <div className="d-flex justify-content-center">
           <Pagination>{renderPaginationItems()}</Pagination>
         </div>
