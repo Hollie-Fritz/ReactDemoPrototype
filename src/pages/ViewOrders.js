@@ -1,22 +1,24 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
+import NavBarHome from "../components/NavBarHome";
+import OrderProgress from "./OrderProgress";
+
 import Auth from "@aws-amplify/auth";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
-import NavBarHome from "../components/NavBarHome";
-import OrderProgress from "./OrderProgress";
 
 import { Card, Table, Container, Row, Form, Button, Col} from "react-bootstrap"; // prettier-ignore
 import { Pagination, Ellipsis } from "react-bootstrap";
 import { AiOutlineCheck } from "react-icons/ai";
-
 import style from "./ViewStatus.module.css";
+
 
 //component that displays the orders
 function ViewOrder() {
   const [orders, setOrders] = useState([]);
   const [loadingState, setLoadingState] = useState({});
   const { user } = useAuthenticator((context) => [context.user]);
+  const [fetched, setFetched] = useState(false);
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,11 +35,12 @@ function ViewOrder() {
     const response = await fetch(
       `https://6b2uk8oqk7.execute-api.us-west-2.amazonaws.com/prod/order?name=${username}`,
       {
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" }
       }
     );
     const data = await response.json();
     setOrders(data);
+    setFetched(true);
   }
 
   //update the status of the orders (progress bar)
@@ -52,7 +55,7 @@ function ViewOrder() {
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }
     );
 
@@ -69,7 +72,7 @@ function ViewOrder() {
     fetchOrders();
   }, []);
 
-  async function deleteOrder(orderId){
+  async function deleteOrder(orderId) {
     const body = { orderId: orderId };
 
     await fetch(
@@ -77,17 +80,21 @@ function ViewOrder() {
       {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+
+        body: JSON.stringify(body)
       }
-    ).then(()=>{
-      setOrders(prevState => prevState.filter(order => order.id !== orderId));
+    ).then(() => {
+      setOrders((prevState) =>
+        prevState.filter((order) => order.id !== orderId)
+      );
     });
   }
 
   const EllipsisItem = () => {
     return <Pagination.Item disabled>...</Pagination.Item>;
-  }; 
-  
+  };
+
+
   const renderPaginationItems = () => {
     const totalPages = Math.ceil(orders.length / itemsPerPage);
     const pageNumbers = [];
@@ -171,7 +178,20 @@ function ViewOrder() {
     <>
       <NavBarHome />
       <Container>
-        <Row>
+        {fetched && <Row>
+           {currentItems.length === 0 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+                textAlign: "center"
+              }}
+            >
+              <h1>Your restaurant currently doesn't have any orders.</h1>
+            </div>
+          )}
           {currentItems.map((order, index) => (
             <OrderCard
               order={order}
@@ -183,11 +203,14 @@ function ViewOrder() {
               deleteOrder={deleteOrder}
             />
           ))}
-        </Row>
-        <br></br><br></br>
-        <div className="d-flex justify-content-center">
-        <Pagination>{renderPaginationItems()}</Pagination>
-      </div>
+        </Row>}
+        <br></br>
+        <br></br>
+        {orders.length > 0 && (
+          <div className="d-flex justify-content-center">
+            <Pagination>{renderPaginationItems()}</Pagination>
+          </div>
+        )}
       </Container>
     </>
   );
@@ -272,7 +295,8 @@ function OrderCard({
                 </Form.Select>
               </Col>
               <Col sm="4">
-              <Button  className={style["orders-button"]}
+                <Button
+                  className={style["orders-button"]}
                   onClick={async () => {
                     // retrieve element of form using unique id.
                     const form = document.getElementById("form" + index);
@@ -289,25 +313,25 @@ function OrderCard({
               </Col>
             </Form.Group>
             <OrderProgress stage={order["progress"]} />
-            <Button  className={style["orders-button"]}
-                style={{ marginTop: "20px" }}
-                onClick={()=>
-                  deleteOrder(order["id"])
-                }
-              >
-                Delete
+            <Button
+              className={style["orders-button"]}
+              style={{ marginTop: "20px" }}
+              onClick={() => deleteOrder(order["id"])}
+            >
+              Delete
             </Button>
             
             {user && order["customerId"] !== "" && (
-              <Button  className={style["orders-button"]}
+              <Button
+                className={style["orders-button"]}
                 style={{ marginTop: "20px", marginLeft: "10px" }}
                 onClick={() =>
                   navigate(
                     `/chat/${user.getUsername()}/${order["customerId"]}`,
                     {
                       state: {
-                        name: order["customerName"],
-                      },
+                        name: order["customerName"]
+                      }
                     }
                   )
                 }

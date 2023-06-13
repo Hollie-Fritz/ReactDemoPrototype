@@ -6,6 +6,7 @@ import { CgAsterisk } from "react-icons/cg";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Form.module.css";
+import { CgAsterisk } from "react-icons/cg";
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function PersistResMenu({ menuItems, setMenuItems }) {
@@ -256,7 +257,6 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 Remove Image
                 </Button>
               </Form.Group>
-              
               {
                 menu["menuImageUrl"] &&
                 <img
@@ -276,7 +276,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
               {menuItems.length !== 1 && (
                 <Button
                   variant="danger"
-                  className="mt-2"
+                  className={styles.removemenu}
                   onClick={() => handleRemove(index)}
                 >
                   Remove Menu Item
@@ -285,7 +285,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
             </Form.Group>
           </Row>
         ))}
-        <Button variant="primary" onClick={handleAddItem}>
+        <Button variant="primary" onClick={handleAddItem}
+          className={styles.menubutton}>
           Add Menu Item
         </Button>
       </Form>

@@ -6,6 +6,8 @@ import { CgAsterisk } from "react-icons/cg";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Form.module.css";
+import { CgAsterisk } from "react-icons/cg";
+
 
 //2nd page of restaurant owner's form, contains the form for menu items
 function MenuEdit({ menuItems, setMenuItems }) {
@@ -217,7 +219,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 />
                 <label
                   htmlFor={"imageInput" + index}
-                  className="btn btn-primary mx-2"
+                  className="btn btn-primary"
                   style={{ marginRight: "10px" }}
                 >
                   Browse
@@ -255,7 +257,7 @@ function MenuEdit({ menuItems, setMenuItems }) {
               {menuItems.length !== 1 && (
                 <Button
                   variant="danger"
-                  className="mt-2"
+                  className={styles.removemenu}
                   onClick={() => handleRemove(index)}
                 >
                   Remove Menu Item
@@ -264,7 +266,8 @@ function MenuEdit({ menuItems, setMenuItems }) {
             </Form.Group>
           </Row>
         ))}
-        <Button variant="primary" onClick={handleAddItem}>
+        <Button variant="primary" onClick={handleAddItem}
+        className={styles.menubutton}>
           Add Menu Item
         </Button>
       </Form>

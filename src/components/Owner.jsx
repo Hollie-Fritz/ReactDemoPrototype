@@ -10,9 +10,11 @@ import { AiOutlineWarning } from "react-icons/ai"; //prettier-ignore
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Owner.css";
 
+
 function Owner() {
   const [userId, setUserId] = useState("");
   const [hasRestaurant, setHasRestaurant] = useState(false);
+  const [fetched, setFetched] = useState(false);
 
   const { user } = useAuthenticator((context) => [context.user]);
   const navigate = useNavigate();
@@ -51,6 +53,7 @@ function Owner() {
         });
     }
     checkRestaurantOwner();
+    setFetched(true);
   }, []);
 
   //when "Delete" button is pushed, show modal
@@ -77,36 +80,70 @@ function Owner() {
   return (
     <>
       <NavBarHome />
-      <Container fluid className="Owner-bg">
-        <Row className="justify-content-center mb-4">
-          <Col xs={12} md={6} className="text-center">
-            <h1 className="Owner-title">Welcome, {userId}!</h1>
-          </Col>
-        </Row>
+      {fetched && (
+        <Container fluid className="Owner-bg">
+          {userId !== "" &&
+          <Row className="justify-content-center mb-4">
+            <Col xs={12} md={6} className="text-center">
+              <h1 className="Owner-title">Welcome, {userId}!</h1>
+            </Col>
+          </Row>
+          }
+          <Row className="justify-content-center">
+            {hasRestaurant ? (
+              <>
+                <Col xs={12} md="auto" className="mb-2 text-center">
+                  <Button
+                    variant="outline-light"
+                    className="Owner-btn"
+                    href="./edit"
+                  >
+                    Edit Restaurant Webpage
+                  </Button>
+                </Col>
+                <Col xs={12} md="auto" className="mb-2 text-center">
+                  <Button
+                    variant="outline-light"
+                    className="Owner-btn"
+                    href="./orders"
+                  >
+                    Check Orders
+                  </Button>
+                </Col>
+                <Col xs={12} md="auto" className="mb-2 text-center">
+                  <Link to={`/r/${userId}`}>
+                    <Button variant="outline-light" className="Owner-btn">
+                      View My Webpage
+                    </Button>
+                  </Link>
+                </Col>
 
-        <Row className="justify-content-center">
-          {hasRestaurant ? (
-            <Col xs={12} md="auto" className="mb-2 text-center">
-              <Button
-                variant="outline-light"
-                className="Owner-btn"
-                href="./edit"
-              >
-                Edit Restaurant Webpage
-              </Button>
-            </Col>
-          ) : (
-            <Col xs={12} md="auto" className="mb-2 text-center">
-              <Button
-                variant="outline-light"
-                className="Owner-btn"
-                href="./create"
-              >
-                Webpage Creation
-              </Button>
-            </Col>
-          )}
-          {hasRestaurant && (
+                <br></br>
+
+                <Row className="justify-content-center">
+                  <Col xs={12} md="auto" className="deletebutton">
+                    <Button
+                      variant="outline-light"
+                      className="Owner-btn"
+                      onClick={() => deleteRestaurant(user.getUsername())}
+                    >
+                      Delete Restaurant
+                    </Button>
+                  </Col>
+                </Row>
+              </>
+            ) : (
+              <Col xs={12} md="auto" className="mb-2 text-center">
+                <Button
+                  variant="outline-light"
+                  className="Owner-btn"
+                  href="./create"
+                >
+                  Webpage Creation
+                </Button>
+              </Col>
+            )}
+            {/* {hasRestaurant && (
             <>
               <Col xs={12} md="auto" className="mb-2 text-center">
                 <Button
@@ -125,10 +162,9 @@ function Owner() {
                 </Link>
               </Col>
             </>
-          )}
-        </Row>
-        <br></br>
-        {hasRestaurant && (
+          )} */}
+          </Row>
+          {/* {hasRestaurant && (
           <Row className="justify-content-center">
             <Col xs={12} md="auto" className="deletebutton">
               <Button
@@ -140,17 +176,20 @@ function Owner() {
               </Button>
             </Col>
           </Row>
-        )}
-      </Container>
 
+        )} */}
+        </Container>
+      )}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header style={{ justifyContent: "center" }}>
           <Modal.Title style={{ position: "relative", fontWeight: "bold" }}>
-          <AiOutlineWarning size={30} className="dangericon"/>Delete Restaurant<AiOutlineWarning size={30} className="dangericon"/>
+            <AiOutlineWarning size={30} className="dangericon" />
+            Delete Restaurant
+            <AiOutlineWarning size={30} className="dangericon" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        Are you sure you want to <b>delete</b> your restaurant's webpage?
+          Are you sure you want to <b>delete</b> your restaurant's webpage?
           <br></br>
           We will be unable to recover your account if you proceed.
         </Modal.Body>

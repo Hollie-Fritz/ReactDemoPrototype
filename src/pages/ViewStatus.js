@@ -6,6 +6,7 @@ import NavBarHome from "../components/NavBarHome";
 import OrderProgress from "./OrderProgress";
 
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 import { Card, Table, Container, Row, Form, Button, Col } from "react-bootstrap"; // prettier-ignore
 import { Pagination, Ellipsis } from "react-bootstrap";
 
@@ -15,6 +16,7 @@ import style from "./ViewStatus.module.css";
 function ViewStatus() {
   const [orders, setOrders] = useState([]);
   const { user } = useAuthenticator((context) => [context.user]);
+   const [fetched, setFetched] = useState(false);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
@@ -37,6 +39,7 @@ function ViewStatus() {
         );
         const data = await response.json();
         setOrders(data);
+        setFetched(true);
         console.log(JSON.stringify(orders));
       } catch (error) {
         console.error(error);
@@ -134,17 +137,35 @@ function ViewStatus() {
     <>
       <NavBarHome />
       <Container>
-        <Row>
+      {fetched && <Row>
           <br />
-          <h2
-            style={{
-              fontWeight: "bold",
-              marginTop: "20px",
-              marginBottom: "-25px",
-            }}
-          >
-            My Orders:
-          </h2>
+          {orders.length > 0 && (
+            <h2
+              style={{
+                fontWeight: "bold",
+                marginTop: "20px",
+                marginBottom: "-25px"
+              }}
+            >
+              My Orders:
+            </h2>
+          )}
+          <br></br>
+          {currentItems.length === 0 && (
+            <>
+              <h1
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
+                  textAlign: "center"
+                }}
+              >
+                You have not placed any orders.
+              </h1>
+            </>
+          )}
           {currentItems.map((order, index) => (
             <React.Fragment key={index}>
               <OrderCard
@@ -155,12 +176,15 @@ function ViewStatus() {
               />
             </React.Fragment>
           ))}
-        </Row>
+        </Row>}
       </Container>
-      <br></br><br></br>
-      <div className="d-flex justify-content-center">
-        <Pagination>{renderPaginationItems()}</Pagination>
-      </div>
+      <br></br>
+      <br></br>
+      {orders.length > 0 && (
+        <div className="d-flex justify-content-center">
+          <Pagination>{renderPaginationItems()}</Pagination>
+        </div>
+      )}
     </>
   );
 }
@@ -233,8 +257,8 @@ function OrderCard({ order, user, navigate }) {
                   `/chat/${user.getUsername()}/${order["restaurantId"]}`,
                   {
                     state: {
-                      name: order["restaurantName"],
-                    },
+                      name: order["restaurantName"]
+                    }
                   }
                 )
               }

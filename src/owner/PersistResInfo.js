@@ -1,4 +1,8 @@
+
 import React,{ useEffect, useState }  from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form, InputGroup, Row, Button, Container, FormControl, Tooltip, OverlayTrigger, Col } from "react-bootstrap"; // prettier-ignore
+
 import { v4 as uuidv4 } from "uuid";
 import ChooseTemplate from "../components/ChooseTemplate";
 import { Form, InputGroup, Row, Button, Container, FormControl, Tooltip, OverlayTrigger, Col } from "react-bootstrap"; // prettier-ignore
@@ -7,6 +11,7 @@ import { CgAsterisk } from "react-icons/cg";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Form.module.css";
+import { CgAsterisk } from "react-icons/cg";
 
 // form for restaurant info such as name, phone number and address
 function PersistResInfo({ formData, setFormData }) {
@@ -423,7 +428,7 @@ function PersistResInfo({ formData, setFormData }) {
               <Button
                 variant="primary"
                 onClick={handleChooseTemplate}
-                className={styles.templatebutton}
+                className={styles.tempbutton}
               >
                 Choose a template
               </Button>

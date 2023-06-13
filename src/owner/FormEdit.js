@@ -5,9 +5,12 @@ import NavBarHome from "../components/NavBarHome";
 import InfoEdit from "./InfoEdit";
 import MenuEdit from "./MenuEdit";
 import ReviewEdit from "./ReviewEdit";
-import { Button } from "react-bootstrap";
+import { Button, FormControl } from "react-bootstrap";
+import Auth from "@aws-amplify/auth";
+import NavBarHome from "../components/NavBarHome";
+import { useNavigate } from "react-router-dom";
+import styles from "./Form.module.css";
 
-import "./Form.module.css";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
@@ -234,10 +237,12 @@ function FormEdit() {
             // enables prev button to work by decrementing
             setPage((currPage) => currPage - 1);
           }}
+          className={styles.prevnext}
         >
           Prev
         </Button>{" "}
         <Button
+        className={styles.prevnext}
           id="submitOrNext"
           onClick={() => {
             const FormControl = document.querySelectorAll('[id*="validation"]');
@@ -264,6 +269,7 @@ function FormEdit() {
             }
           }}
         >
+
           {/* Conditionally render the button to display submit
         on the last page and next on all other pages */}
               {page === FormTitles.length - 1 ? "Submit" : "Next"}
