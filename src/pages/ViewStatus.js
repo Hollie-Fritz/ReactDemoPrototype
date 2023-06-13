@@ -197,12 +197,12 @@ function OrderCard({ order, user, navigate }) {
       <Card className="mb-3" style={{ height: "456px", overflowY: "auto" }}>
         <Card.Body>
           <Card.Title>
-            <nobr className="fw-bold" style={{ fontSize: "25px" }}>
+            <nobr className="fw-bold" style={{ fontSize: "25px" }} data-cy="restaurantName">
               {order["restaurantName"]}
             </nobr>
           </Card.Title>
           <Card.Text>
-            <nobr className="fw-bold">Order Date:</nobr>{" "}
+            <nobr className="fw-bold" data-cy="orderDateTime">Order Date:</nobr>{" "}
             {orderDateTime.toLocaleDateString()}
             <br></br>
             <nobr className="fw-bold">Order Time:</nobr>{" "}
@@ -227,18 +227,18 @@ function OrderCard({ order, user, navigate }) {
                 })}
               </tbody>
             </Table>
-            <nobr className="fw-bold border-0" style={{ background: "white" }}>
+            <nobr className="fw-bold border-0" style={{ background: "white" }} data-cy="note">
               {" "}
               Note: {order["note"]}
             </nobr>
             <br></br>
-            <nobr className="fw-bold border-0" style={{ background: "white" }}>
+            <nobr className="fw-bold border-0" style={{ background: "white" }} data-cy="utensils">
               {" "}
               Utensils:{" "}
             </nobr>
             {order["utensils"] ? "yes" : "no"}
             <br></br>
-            <nobr className="fw-bold border-0" style={{ background: "white" }}>
+            <nobr className="fw-bold border-0" style={{ background: "white" }} data-cy="totalCost">
               {" "}
               Total Cost:{" "}
             </nobr>{" "}
