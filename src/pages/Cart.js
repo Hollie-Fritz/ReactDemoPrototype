@@ -261,10 +261,10 @@ function Cart(props) {
             </Table>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setCheckout(false)}>
+            <Button  className={styles.editorder} variant="secondary" onClick={() => setCheckout(false)}>
               Edit Order
             </Button>
-            <Button variant="primary" onClick={handlePlaceOrder}>
+            <Button className={styles.cartbutton} variant="primary" onClick={handlePlaceOrder}>
               Place Order
             </Button>
           </Modal.Footer>
@@ -468,16 +468,16 @@ function Cart(props) {
             {/* button for order submission */}
             {checkout ? (
               <>
-                <Button variant="secondary" onClick={() => setCheckout(false)}>
+                <Button className={styles.editorder} variant="secondary" onClick={() => setCheckout(false)}>
                   Back
                 </Button>
-                <Button variant="primary" onClick={handlePlaceOrder}>
+                <Button className={styles.cartbutton} variant="primary" onClick={handlePlaceOrder}>
                   Place Order
                 </Button>
               </>
             ) : (
               <Button
-                variant="primary"
+              className={styles.cartbutton}
                 onClick={() => {
                   console.log(customerName);
                   const FormControl =
