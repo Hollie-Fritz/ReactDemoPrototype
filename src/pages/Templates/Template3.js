@@ -35,7 +35,7 @@ function Template3(props) {
     navigate,
     handleShowCartClick,
     viewCartClicked,
-    groupedFoodData,
+    groupedFoodData
   } = props.data;
 
   return (
@@ -65,7 +65,7 @@ function Template3(props) {
                   display: "flex",
                   justifyContent: "left",
                   alignItems: "center",
-                  position: "relative",
+                  position: "relative"
                 }}
               >
                 {/* restaurant name (displayed on banner) */}
@@ -77,7 +77,7 @@ function Template3(props) {
                     marginBottom: "0.5rem",
                     fontWeight: "bold",
                     textShadow:
-                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000",
+                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000"
                   }}
                 >
                   {resdata["name"]}
@@ -98,7 +98,7 @@ function Template3(props) {
                         data={{
                           resdata,
                           averageRating,
-                          templateName: "Template3",
+                          templateName: "Template3"
                         }}
                       />
                       {/* RESTAURANT INFO */}
@@ -128,8 +128,8 @@ function Template3(props) {
                               onClick={() =>
                                 navigate(`/chat/${currentUserId}/${id}`, {
                                   state: {
-                                    name: resdata["name"],
-                                  },
+                                    name: resdata["name"]
+                                  }
                                 })
                               }
                             >
@@ -172,7 +172,7 @@ function Template3(props) {
                           justifyContent: "center",
                           alignItems: "center",
                           width: "100px",
-                          height: "400px",
+                          height: "400px"
                         }}
                       >
                         <iframe
@@ -186,7 +186,7 @@ function Template3(props) {
                             border: "0",
                             position: "absolute",
                             top: "0",
-                            left: "0",
+                            left: "0"
                           }}
                         />
                       </div>
@@ -201,9 +201,10 @@ function Template3(props) {
                   ([foodType, foodItems]) => {
                     return (
                       <div key={foodType}>
-                        <h2>{foodType}</h2>
-                        <br></br>
-                        <br></br>
+                        <h2 className={styles.foodType}>
+                          <b>{foodType}</b>
+                        </h2>
+                        <hr />
                         <Row md={1} lg={3} className="g-4">
                           {foodItems.map((item, index) => {
                             return (
@@ -219,13 +220,39 @@ function Template3(props) {
                                     variant="top"
                                     src={
                                       item.foodImageUrl
-                                        ? "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                                        ? "https://d12zok1slvqtin.cloudfront.net/" +
                                           item.foodImageUrl
                                         : ""
                                     }
                                   />
                                   <Card.Body>
-                                    <div className={styles.menuItem}>
+                                    <div
+                                      className={styles.menuItem}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between"
+                                      }}
+                                    >
+                                      {/* Add to the cart button */}
+                                      <Button
+                                        className={`${styles.addButton}`}
+                                        style={{
+                                          backgroundColor: "var(--white)",
+                                          color: "var(--dark)",
+                                          borderColor: "var(--biscuit)",
+                                          borderWidth: "2px",
+                                          fontWeight: "bold"
+                                        }}
+                                        onClick={() =>
+                                          handleAddClick(item.foodId)
+                                        }
+                                      >
+                                        {showAddedMessage === item.foodId &&
+                                        cart[item.foodId] > 0
+                                          ? "✓"
+                                          : "Add"}
+                                      </Button>
                                       <Card.Text
                                         style={{ fontSize: "18px" }}
                                         as="h5"
@@ -242,34 +269,6 @@ function Template3(props) {
                                     </div>
                                     <Card.Text>{item.foodDesc}</Card.Text>
                                   </Card.Body>
-                                  <Card.Footer
-                                    className={`border-0 ${styles.cardFooter}`}
-                                  >
-                                    <br></br>
-                                    <br></br>
-                                    {/* Add to the cart button */}
-                                    <Button
-                                      className={`${styles.addButton}`}
-                                      style={{
-                                        backgroundColor: "var(--white)",
-                                        color: "var(--dark)",
-                                        borderColor: "var(--biscuit)",
-                                        borderWidth: "2px",
-                                        fontWeight: "bold",
-                                        position: "absolute",
-                                        bottom: 5,
-                                        left: 5,
-                                      }}
-                                      onClick={() =>
-                                        handleAddClick(item.foodId)
-                                      }
-                                    >
-                                      {showAddedMessage === item.foodId &&
-                                      cart[item.foodId] > 0
-                                        ? "✓"
-                                        : "Add"}
-                                    </Button>
-                                  </Card.Footer>
                                   {/* end inner card three */}
                                 </Card>
                               </Col>
