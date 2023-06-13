@@ -19,7 +19,7 @@
 /* card styling */
 .card {
   background-color: var(--butter-milk);
-  border-color: var(--raspberry);
+  border-color: var(--raspberry) !important;
   border-width: 3px !important;
 }
 
@@ -46,8 +46,8 @@
   }
 
 .cardFooter {
-  background-color: var(--butter-milk);
-  border-color: var(--raspberry);
+  background-color: var(--white) !important;
+  border-color: var(--raspberry) !important;
 }
 
 /* button styling for "Leave Review" and "View Reviews" */
