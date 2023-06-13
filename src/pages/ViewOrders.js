@@ -206,7 +206,7 @@ function ViewOrder() {
         </Row>}
         <br></br>
         <br></br>
-        {orders.length > 0 && (
+        {orders.length > itemsPerPage && (
           <div className="d-flex justify-content-center">
             <Pagination>{renderPaginationItems()}</Pagination>
           </div>
@@ -320,7 +320,7 @@ function OrderCard({
             >
               Delete
             </Button>
-            
+
             {user && order["customerId"] !== "" && (
               <Button
                 className={style["orders-button"]}
