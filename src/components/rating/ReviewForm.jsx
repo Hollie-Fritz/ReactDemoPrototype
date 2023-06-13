@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
+import "./ViewReview.css";
 
 function ReviewForm({ show, handleClose, userId, name }) {
   const [rating, setRating] = useState(1);
@@ -97,7 +98,7 @@ function ReviewForm({ show, handleClose, userId, name }) {
               </div>
             </Form.Group>
             <br />
-            <Button variant="primary" type="submit">
+            <Button className="submitButton" type="submit">
               Submit
             </Button>
           </Form>
