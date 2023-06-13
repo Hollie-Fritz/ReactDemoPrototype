@@ -152,12 +152,15 @@ function Info(props) {
         <nobr className="fw-bold">Cuisine Type: </nobr>
         {resdata["cuisine"]}
       </Card.Text>
-      <Card.Text>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <span className="fw-bold">Rating: </span>
-          <AverageRating averageRating={averageRating} />
-        </div>
-      </Card.Text>
+        <Card.Text>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span className="fw-bold">Rating: </span>
+            { averageRating !== -1 ?
+            <AverageRating averageRating={averageRating} />
+            : <span>No reviews yet!</span>
+            }
+          </div>
+        </Card.Text>
     </>
   );
 }
