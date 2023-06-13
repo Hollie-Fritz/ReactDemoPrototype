@@ -1,3 +1,4 @@
+/* cart button styling */
 .cart-icon {
   color: white;
   transition: transform 1s ease-in-out;
@@ -11,17 +12,45 @@
   transition: transform 1s linear;
 }
 
-  /* moves the icon to the right */
+/* moves the icon to the right */
 .roll-off {
   transform: translateX(5600%);
 }
 
+/* makes cart appear to dissapear into button border */
 .button-class {
-  /* makes cart appear to dissapear into button border */
   overflow: hidden;
   position: relative;
 }
 
+/* review buttons styling */
+.reviewButton {
+  background-color: #3f86c4 !important;
+  border-color: #3f86c4 !important;
+  border-radius: 22px !important;
+}
+
+.reviewButton:hover {
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+}
+
+/* add buttons styling */
+.addButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #3f86c4 !important;
+  border-color: #3f86c4 !important;
+  border-radius: 22px !important;
+}
+
+.addButton:hover {
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+}
+
+/* cart styling */
 .cart-container {
   height: 400px;
   overflow-y: scroll;
@@ -30,16 +59,35 @@
 .cart-container.fixed {
   position: fixed;
   top: 0;
-  width: 100%
+  width: 100%;
 }
 
-.reviewButton{
-  background-color: #3F86C4 !important;
-  border-color: #3F86C4 !important;
+/* card width */
+.card {
+  width: 50rem;
+  position: relative;
 }
 
-.reviewButton:hover{
-  background-color: #3570a3 !important;
-  border-color: #3570a3 !important;
+.cardBody {
+  display: flex;
+}
 
+/* all menu text to force to left */
+.menuDetails {
+  flex: 2;
+}
+
+/* image force right */
+.imageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* card image fills it's container */
+.cardImage {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }

@@ -6,7 +6,7 @@
   font-weight: bold;
 }
 .operatingHoursButtonTemplate1:hover {
-  background-color: var(--mint) !important;
+  background-color: rgb(243, 243, 243) !important;
   color: var(--night) !important;
 }
 

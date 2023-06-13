@@ -7,7 +7,7 @@ import OrderProgress from "./OrderProgress";
 
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Card, Table, Container, Row, Form, Button, Col } from "react-bootstrap"; // prettier-ignore
-import { Pagination, Ellipsis } from "react-bootstrap";
+import { Pagination } from "react-bootstrap";
 
 import style from "./ViewStatus.module.css";
 
