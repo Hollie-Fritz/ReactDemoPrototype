@@ -7,7 +7,7 @@ const ViewReview = ({ show, handleClose, name, reviews }) => {
     <>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title className="ms-auto">Reviews of {name}</Modal.Title>
+          <Modal.Title className="ms-auto"><b>Reviews of {name}</b></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Table responsive="lg" hover size="sm">

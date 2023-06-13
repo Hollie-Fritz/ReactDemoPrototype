@@ -15,7 +15,7 @@ function ReviewForm({ show, handleClose, userId, name }) {
       comment: review,
       rating: rating,
       resName: name,
-      userId: userId,
+      userId: userId
     };
 
     await fetch(
@@ -23,9 +23,9 @@ function ReviewForm({ show, handleClose, userId, name }) {
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       }
     )
       //check if data was correctly sent in console log
@@ -44,12 +44,16 @@ function ReviewForm({ show, handleClose, userId, name }) {
     <>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title className="ms-auto">Write a Review</Modal.Title>
+          <Modal.Title className="ms-auto">
+            <b>Write a Review</b>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formRating">
-              <Form.Label>Author:</Form.Label>
+              <Form.Label>
+                <b>Author:</b>
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Your name"
@@ -57,18 +61,28 @@ function ReviewForm({ show, handleClose, userId, name }) {
                 onChange={(event) => setAuthor(event.target.value)}
               />
               <br />
-              <Form.Label>Rating:</Form.Label>
-              <Rating
-                name="rating"
-                count={5}
-                value={rating}
-                onChange={setRating}
-                size={24}
-                activeColor="#ffd700"
-              />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Form.Label
+                  style={{ marginRight: "10px", alignSelf: "flex-end" }}
+                >
+                  <b>Rating:</b>
+                </Form.Label>
+                <div style={{ marginTop: "-9px" }}>
+                  <Rating
+                    name="rating"
+                    count={5}
+                    value={rating}
+                    onChange={setRating}
+                    size={24}
+                    activeColor="#ffd700"
+                  />
+                </div>
+              </div>
             </Form.Group>
             <Form.Group controlId="formReview">
-              <Form.Label>Review:</Form.Label>
+              <Form.Label>
+                <b>Review: </b>
+              </Form.Label>
               <br />
               <Form.Control
                 as="textarea"
