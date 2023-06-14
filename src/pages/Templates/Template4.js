@@ -201,9 +201,8 @@ function Template4(props) {
                   ([foodType, foodItems]) => {
                     return (
                       <div key={foodType}>
-                        <h2>{foodType}</h2>
-                        <br></br>
-                        <br></br>
+                        <h2 className={styles.foodType}>{foodType}</h2>
+                       <hr/>
                         <Row md={1} lg={3} className="g-4">
                           {foodItems.map((item, index) => {
                             return (
@@ -214,7 +213,7 @@ function Template4(props) {
                                   key={index}
                                   style={{ width: "37rem" }}
                                 >
-                                <Card.Img 
+                                <Card.Img
                                   style ={{objectFit: "contain",
                                     height: "200px",
                                     width: "100%",
@@ -227,7 +226,7 @@ function Template4(props) {
                                         : ""
                                     }
                                   />
-                                  
+
                                   <Card.Body>
                                     <div className={styles.menuItem}>
                                       <Card.Text
