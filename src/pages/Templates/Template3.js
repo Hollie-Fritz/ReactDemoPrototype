@@ -253,7 +253,7 @@ function Template3(props) {
                                           : "Add"}
                                       </Button>
                                       <Card.Text
-                                        style={{ fontSize: "18px" }}
+                                        style={{ fontSize: "18px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
                                         as="h5"
                                         className={`${styles.menuItemTitle}`}
                                       >
