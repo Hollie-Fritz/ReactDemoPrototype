@@ -153,7 +153,7 @@ function Info(props) {
       </Card.Text>
         <Card.Text>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <span className="fw-bold">Rating: </span>
+          <span className="fw-bold">Rating:&nbsp;</span>
             { averageRating !== -1 ?
             <AverageRating averageRating={averageRating} />
             : <span>No reviews yet!</span>
