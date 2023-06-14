@@ -51,7 +51,7 @@ const Search = () => {
     <div>
       <SearchBox
         onChangeHandler={onSearchChange}
-        placeholder="Search by Restaurant, Cuisine or City"
+        placeholder="Search by keyword (Restaurant, Cuisine, City, etc..)"
       />
       {notFound ? (
         <h2 style={{color: "#fff"}}>Restaurant cannot be found</h2>
