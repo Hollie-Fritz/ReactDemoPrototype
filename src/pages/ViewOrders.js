@@ -183,19 +183,34 @@ function ViewOrder() {
     <>
       <NavBarHome />
       <Container>
-        {fetched && <Row>
-           {currentItems.length === 0 && (
-            <div
+      {fetched && <Row>
+          <br />
+          {orders.length > 0 && (
+            <h2
               style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-                textAlign: "center"
+                fontWeight: "bold",
+                marginTop: "20px",
+                marginBottom: "-25px"
               }}
             >
-              <h1>Your restaurant currently doesn't have any orders.</h1>
-            </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;Restaurant Orders:
+            </h2>
+          )}
+          <br></br><br></br>
+          {currentItems.length === 0 && (
+            <>
+              <h1
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
+                  textAlign: "center"
+                }}
+              >
+                Your restaurant does not have any orders.
+              </h1>
+            </>
           )}
           {currentItems.map((order, index) => (
             <OrderCard
