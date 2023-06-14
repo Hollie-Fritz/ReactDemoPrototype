@@ -155,7 +155,7 @@ function Chat() {
           </Col>
           <Col md={8}>
             <h4 style={{ display: "flex", justifyContent: "center" }}>Chatting with: 
-              <Dropdown style={{ backgroundColor: 'rgb(107, 107, 107)' }}> 
+              <Dropdown style={{ backgroundColor: 'rgb(107, 107, 107)',borderRadius: '10px' }}> 
                 <Dropdown.Toggle style={{ backgroundColor: 'rgb(107, 107, 107)',  borderColor: 'rgb(107, 107, 107)'}}>
                   {location.state? location.state.name:params["toUserId"]}
                 </Dropdown.Toggle>

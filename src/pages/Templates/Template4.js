@@ -7,6 +7,7 @@ import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template4.module.css";
 import Info from "./Info.js";
+import { Link, Element } from 'react-scroll';
 
 // Template4 component
 function Template4(props) {
@@ -194,13 +195,37 @@ function Template4(props) {
                 </Row>
                 <br></br>
                 <Card.Title as="h4"></Card.Title>
-
+                <Row style={{display: 'flex', 
+                justifyContent: 'center', 
+                whiteSpace: 'nowrap',
+                overflow: 'auto', 
+                paddingBottom: '20px'}}>
+                  {Object.keys(groupedFoodData).map(foodType => (
+                    <Link
+                    activeClass="active"
+                    className="mr-3"
+                    style={{ cursor: 'pointer', 
+                    
+                    textDecoration: 'none'
+                  }}
+                   
+                      to={foodType}
+                      spy={true}
+                      smooth={true}
+                      offset={-70}
+                      duration={500}
+                    >
+                      {foodType}
+                    </Link>
+                  ))}
+                </Row>
+                
                 <Card.Title as="h4"></Card.Title>
                 {/* menu: display each menu item as a card */}
                 {Object.entries(groupedFoodData).map(
                   ([foodType, foodItems]) => {
                     return (
-                      <div key={foodType}>
+                      <Element name={foodType} key={foodType}>
                         <h2 className={styles.foodType}>{foodType}</h2>
                        <hr/>
                         <Row md={1} lg={3} className="g-4">
@@ -280,7 +305,7 @@ function Template4(props) {
                         </Row>
                         <br></br>
                         <br></br>
-                      </div>
+                      </Element> 
                     );
                   }
                 )}
