@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate  } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 // import { Auth } from "aws-amplify";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { Button, Container, Row, Col, Form, Card, ListGroup } from "react-bootstrap";
+import { Button, Container, Row, Col, Form, Card, ListGroup, Dropdown } from "react-bootstrap";
 
 import "./Chat.css"; // Import the custom CSS file
 
@@ -127,10 +127,12 @@ function Chat() {
   return (
     <>
       <NavBarHome />
+      <br></br>
       <Container fluid>
         <Row>
           <Col md={4} id="ws-container">
-            <h4>Users:</h4>
+            <h4 style={{marginBottom: "33px"}}>Conversations</h4>
+      
             <ListGroup>
             {
               listChat.map((user, index) => {
@@ -151,9 +153,33 @@ function Chat() {
             }
             </ListGroup>
           </Col>
-
           <Col md={8}>
-            <h4>Talking to {location.state? location.state.name:params["toUserId"]}</h4>
+            <h4 style={{ display: "flex", justifyContent: "center" }}>Chatting with: 
+              <Dropdown style={{ backgroundColor: 'rgb(107, 107, 107)' }}> 
+                <Dropdown.Toggle style={{ backgroundColor: 'rgb(107, 107, 107)',  borderColor: 'rgb(107, 107, 107)'}}>
+                  {location.state? location.state.name:params["toUserId"]}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {
+                    listChat.map((user,index) =>{
+                      return(
+                        <Dropdown.Item key={index} onClick={() => {
+                          navigate(`/chat/${currentUserId}/${user["id"]}`,
+                        
+                          {
+                            state:{
+                              name: user["name"]? user["name"]:user["id"]
+                            }
+                          })
+                        }}>
+                          {user["name"]? user["name"]:user["id"]}
+                        </Dropdown.Item>
+                      )
+                    })
+                  }
+                </Dropdown.Menu>
+              </Dropdown>
+            </h4>
             <hr/>
             <Card className="conversation-box">
               <Card.Body >
@@ -198,22 +224,28 @@ function Chat() {
               </Card.Body>
             </Card>
             <br />
-              <Form inline onSubmit={(event) =>{
+              <Form onSubmit={(event) =>{
                   event.preventDefault()
                   sendMessage();
-                }}>
+                }}
+                className="d-flex align-items-center"
+                >
+                  
                 <Form.Control
                   ref={messageInput}
                   type="text"
                   placeholder="Message"
-                  className="mr-sm-2"
+                  className="mr-sm-2 flex-grow-1"
                 />
+               
                 <Button
+                className="sendMsg"
                   variant="outline-success"
                   onClick={() => sendMessage()}
                 >
-                  Send message
+                  Send Message
                 </Button>
+                
               </Form>
           </Col>
         </Row>

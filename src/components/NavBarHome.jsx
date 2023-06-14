@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 // import { useNavigate, useLocation } from "react-router-dom";
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
+import { BsChatRightDotsFill } from "react-icons/bs";
 import logo from "../assests/NuOrderLogoLarge.png";
 
 import "../pages/Home.css";
@@ -66,7 +67,7 @@ let NavBarHome = () => {
                         }}
                       >
                         {" "}
-                        Chat{" "}
+                        <BsChatRightDotsFill size={30}/>{" "}
                       </Nav.Link>
                       <NavDropdown
                         title={user.username}
