@@ -146,10 +146,10 @@ function ViewStatus() {
                 marginBottom: "-25px"
               }}
             >
-              My Orders:
+              &nbsp;&nbsp;&nbsp;&nbsp;My Orders:
             </h2>
           )}
-          <br></br>
+          <br></br><br></br>
           {currentItems.length === 0 && (
             <>
               <h1
