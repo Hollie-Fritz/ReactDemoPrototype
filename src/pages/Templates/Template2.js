@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Container, Button, Card, Stack, Col } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../Cart";
-import AverageRating from "../../components/rating/AverageRating";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template2.module.css";
@@ -208,9 +207,9 @@ function Template2(props) {
                   ([foodType, foodItems]) => {
                     return (
                       <div key={foodType}>
-                        <h2>{foodType}</h2>
-                        <br></br>
-                        <br></br>
+                        <h2 className={styles.foodType}><b>{foodType}</b></h2>
+                        <hr/>
+
                         <Row md={1} lg={3} className="g-4">
                           {foodItems.map((item, index) => {
                             return (
@@ -234,7 +233,7 @@ function Template2(props) {
                                   <Card.Body>
                                     <div className={styles.menuItem}>
                                       <Card.Text
-                                        style={{ fontSize: "18px" }}
+                                        style={{ fontSize: "18px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
                                         as="h5"
                                         className={`${styles.menuItemTitle}`}
                                       >

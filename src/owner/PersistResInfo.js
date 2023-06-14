@@ -14,6 +14,12 @@ import styles from "./Form.module.css";
 function PersistResInfo({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
   const [uploadStatus, setUploadStatus] = useState("Upload");
+  const templateNames = {
+    template1: "Default Template",
+    template2: "Upscale",
+    template3: "Fresh",
+    template4: "Dessert/Bakery"
+  };
 
   // show the ChooseTemplate modal
   const handleChooseTemplate = () => {
@@ -43,7 +49,7 @@ function PersistResInfo({ formData, setFormData }) {
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       The restaurant banner looks best with the following dimensions:<br></br>
-      1250x200<br></br>
+      1800x200<br></br>
       It will be displayed at the top of your web page with your restaurant name
       over it.
     </Tooltip>
@@ -447,7 +453,7 @@ function PersistResInfo({ formData, setFormData }) {
                   type="text"
                   value={
                     formData.template
-                      ? formData.template
+                      ? templateNames[formData.template]
                       : "No Template Selected"
                   }
                   readOnly
@@ -501,16 +507,21 @@ function PersistResInfo({ formData, setFormData }) {
             Remove Image
           </Button>
         </Form>
-
         {formData["mainImageUrl"] ? (
-          <img
-            id="mainImage"
-            src={
-              `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
-              formData["mainImageUrl"]
-            }
-            alt=""
-          />
+          <>
+            <div>
+              <b>Banner Image Preview:</b>
+            </div>
+            <img
+              className={styles.imagePreview}
+              id="mainImage"
+              src={
+                `https://d12zok1slvqtin.cloudfront.net/` +
+                formData["mainImageUrl"]
+              }
+              alt=""
+            />
+          </>
         ) : (
           ""
         )}

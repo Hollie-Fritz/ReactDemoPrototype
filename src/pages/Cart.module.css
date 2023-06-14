@@ -1,13 +1,10 @@
+
+
 .container {
   display: flex;
   align-items: center;
 }
 
-.text-right {
-  text-align: right;
-  font-weight: bold;
-  margin-bottom: 0;
-}
 
 .info-button {
   background: transparent;
@@ -45,9 +42,46 @@
 }
 
 .incrementButton {
-  margin-left: 9px; /* Adjust this value to your liking */
+  margin-left: 9px;
 }
 
 .decrementButton {
-  margin-right: 5px; /* Adjust this value to your liking */
+  margin-right: 5px;
+}
+
+/* template 1 blue cart buttons */
+.cartbutton {
+  background-color: #3f86c4 !important;
+  border-color: #3f86c4 !important;
+  border-radius: 4px !important;
+}
+
+.cartbutton:hover {
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+
+}
+
+.cartbutton {
+  background-color: #3f86c4 !important;
+  border-color: #3f86c4 !important;
+  border-radius: 4px !important;
+}
+
+.cartbutton:hover {
+  background-color: #3570a3 !important;
+  border-color: #3570a3 !important;
+
+}
+
+.editorder{
+  background-color: #212529 !important;
+  border-color: #212529 !important;
+  border-radius: 4px !important;
+  margin-right: 3px;
+}
+
+.editorder:hover{
+  background-color: #000000  !important;
+  border-color: #000000  !important;
 }

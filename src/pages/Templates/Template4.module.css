@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fuzzy+Bubbles:wght@700&family=Lato:ital,wght@1,300&display=swap');
+
 :root {
   --teal: #809c9a;
   --frosting: #80ae8e;
@@ -120,4 +122,11 @@
   width: 100%;
   height: 20vh;
   object-fit: cover;
+}
+
+
+.foodType {
+  font-family: 'Fuzzy Bubbles', cursive;
+  text-transform: uppercase;
+  color: var(--coffee);
 }

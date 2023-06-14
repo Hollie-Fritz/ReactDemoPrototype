@@ -1,0 +1,16 @@
+.reviewmodal .modal-dialog {
+    width: 700px;
+    max-width: 700px;
+  }
+
+  .submitButton {
+
+    background-color: #3f86c4 !important;
+    border-color: #3f86c4 !important;
+
+  }
+
+  .submitButton:hover {
+    background-color: #3570a3 !important;
+    border-color: #3570a3 !important;
+  }

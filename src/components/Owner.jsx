@@ -85,7 +85,7 @@ function Owner() {
           {userId !== "" &&
           <Row className="justify-content-center mb-4">
             <Col xs={12} md={6} className="text-center">
-              <h1 className="Owner-title">Welcome, {userId}!</h1>
+              <h1 className="Owner-title" data-cy="welcomeName">Welcome, {userId}!</h1>
             </Col>
           </Row>
           }
@@ -97,6 +97,7 @@ function Owner() {
                     variant="outline-light"
                     className="Owner-btn"
                     href="./edit"
+                    data-cy="edit"
                   >
                     Edit Restaurant Webpage
                   </Button>
@@ -106,13 +107,14 @@ function Owner() {
                     variant="outline-light"
                     className="Owner-btn"
                     href="./orders"
+                    data-cy="checkOrders"
                   >
                     Check Orders
                   </Button>
                 </Col>
                 <Col xs={12} md="auto" className="mb-2 text-center">
                   <Link to={`/r/${userId}`}>
-                    <Button variant="outline-light" className="Owner-btn">
+                    <Button variant="outline-light" className="Owner-btn" data-cy="viewWebpage">
                       View My Webpage
                     </Button>
                   </Link>
@@ -126,6 +128,7 @@ function Owner() {
                       variant="outline-light"
                       className="Owner-btn"
                       onClick={() => deleteRestaurant(user.getUsername())}
+                      data-cy="delete"
                     >
                       Delete Restaurant
                     </Button>
@@ -138,6 +141,7 @@ function Owner() {
                   variant="outline-light"
                   className="Owner-btn"
                   href="./create"
+                  data-cy="create"
                 >
                   Webpage Creation
                 </Button>

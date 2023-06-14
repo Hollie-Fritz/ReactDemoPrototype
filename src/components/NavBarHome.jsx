@@ -101,7 +101,7 @@ let NavBarHome = () => {
                       }}
                     >
                       {" "}
-                      Signup/Login{" "}
+                      Sign Up/Login{" "}
                     </Nav.Link>
                   )}
                 </Nav>

@@ -1,7 +1,7 @@
 import React from "react";
-import { Container, Row, Col, Image, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ice from "../assests/icecream.png";
+import "./PageNotFound.css";
 
 const PageNotFound = () => {
   return (
@@ -19,24 +19,34 @@ const PageNotFound = () => {
               <Row>
                 <h3>You can go back to:</h3>
               </Row>
-              <Row className="my-5">
-                <ListGroup>
-                  <ListGroup.Item>
-                    <Link to="/">Home Page</Link>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <Link to="/about">About</Link>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <Link to="/contact">Contact</Link>
-                  </ListGroup.Item>
-                </ListGroup>
-              </Row>
+
+              <Button className="buttonLink" as={Link} to="/">
+                Home Page
+              </Button>
+              <br></br>
+              <Button
+                variant="primary"
+                className="buttonLink"
+                as={Link}
+                to="/about"
+              >
+                About
+              </Button>
+              <br></br>
+              <Button
+                variant="primary"
+                className="buttonLink"
+                as={Link}
+                to="/contact"
+              >
+                Contact
+              </Button>
+              <br></br>
             </Container>
           </Col>
           <Col sm={6}>
             <Image
-              src={ice}
+              src="https://nuorderbucket.s3.us-west-2.amazonaws.com/Kyle.png"
               alt="icecream"
               className="ice-cream"
               responsive

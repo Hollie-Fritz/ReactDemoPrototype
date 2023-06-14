@@ -1,15 +1,19 @@
 import React from "react";
 import Rating from "react-rating-stars-component";
 import { Modal, Table } from "react-bootstrap";
+import "./ViewReview.css";
 
 const ViewReview = ({ show, handleClose, name, reviews }) => {
   return (
     <>
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={show} onHide={handleClose} centered className="reviewmodal">
         <Modal.Header closeButton>
-          <Modal.Title className="ms-auto">Reviews of {name}</Modal.Title>
+          <Modal.Title className="ms-auto"><b>Reviews of {name}</b></Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {reviews.length === 0 ? (
+            <h5 className="text-center">No reviews yet!</h5>
+          ) : (
           <Table responsive="lg" hover size="sm">
             <thead>
               <tr>
@@ -42,6 +46,7 @@ const ViewReview = ({ show, handleClose, name, reviews }) => {
               })}
             </tbody>
           </Table>
+        )}
         </Modal.Body>
       </Modal>
     </>

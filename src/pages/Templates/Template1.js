@@ -1,7 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Row, Container, Button, Card, Col, Stack } from "react-bootstrap";
-import { FaShoppingCart } from "react-icons/fa";
-import Cart from "../Cart";
 import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import Banner from "./Banner.js";
@@ -19,7 +17,6 @@ function Template1(props) {
     fooddata,
     cart,
     setcart,
-    showCart,
     showReviewForm,
     showViewReviewForm,
     reviews,
@@ -27,24 +24,24 @@ function Template1(props) {
     handleShowReviewClick,
     handleReviewFormClose,
     handleViewReviewFormClose,
-    handleShowCartClose,
     bucketUrl,
     id,
     frameRef,
     averageRating,
     showAddedMessage,
     handleAddClick,
-    cartItemCount,
     currentUserId,
     navigate,
-    handleShowCartClick,
-    viewCartClicked,
     groupedFoodData,
   } = props.data;
 
   return (
     <>
-      <Container className="justify-content-center" fluid>
+      <Container
+        className="justify-content-center"
+        style={{ marginTop: "2rem" }}
+        fluid
+      >
         <Row className="m-auto align-self-center">
           <Col className="order-first" xs={8} md={9}>
             <div className="row no-gutters">
@@ -57,8 +54,7 @@ function Template1(props) {
                 <Card.Body style={{ overflow: "hidden" }}>
                   <Row className="d-flex justify-content-between">
                     <Col xs={1} md={5} className="mb-4">
-                      <Card
-
+                      <Card style={{paddingLeft: '20px'}}
                       >
                         {/* RESTAURANT INFO */}
                         <Info

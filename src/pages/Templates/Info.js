@@ -5,7 +5,7 @@ import moment from "moment-timezone";
 import styles from "./info.module.css";
 
 function Info(props) {
-  const { resdata, averageRating, className, templateName } = props.data;
+  const { resdata, averageRating, templateName } = props.data;
   const [isOpen, setIsOpen] = useState(false);
   const [openHours, setOpenHours] = useState("");
   const [closeHours, setCloseHours] = useState("");
@@ -90,17 +90,16 @@ function Info(props) {
         </span>
       </Card.Text>
       <Button
-        onClick={handleOpenModal}
-        className={
-          templateName === "Template1"
-            ? styles.operatingHoursButtonTemplate1
-            : templateName === "Template2"
-            ? styles.operatingHoursButtonTemplate2
-            : templateName === "Template3"
-            ? styles.operatingHoursButtonTemplate3
-            : styles.operatingHoursButtonTemplate4
-        }
-      >
+            onClick={handleOpenModal}
+            className={templateName === "Template1"
+                        ? styles.operatingHoursButtonTemplate1
+                        : templateName === "Template2"
+                        ? styles.operatingHoursButtonTemplate2
+                        : templateName === "Template3"
+                        ? styles.operatingHoursButtonTemplate3
+                        : styles.operatingHoursButtonTemplate4}
+
+          >
         Operating Hours
       </Button>
       <Modal show={showModal} onHide={handleCloseModal} centered>
@@ -145,8 +144,6 @@ function Info(props) {
           </p>
         </Modal.Body>
       </Modal>
-      <br></br>
-      <br></br>
       {/* cuisine type */}
       <Card.Text>
         <nobr className="fw-bold">Cuisine Type: </nobr>
@@ -154,7 +151,7 @@ function Info(props) {
       </Card.Text>
         <Card.Text>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <span className="fw-bold">Rating: </span>
+          <span className="fw-bold">Rating:&nbsp;</span>
             { averageRating !== -1 ?
             <AverageRating averageRating={averageRating} />
             : <span>No reviews yet!</span>

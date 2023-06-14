@@ -48,7 +48,7 @@ function InfoEdit({ formData, setFormData }) {
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       The restaurant banner looks best with the following dimensions:<br></br>
-      1250x200<br></br>
+      1800x200<br></br>
       It will be displayed at the top of your web page with your restaurant name
       over it.
     </Tooltip>
@@ -496,14 +496,20 @@ function InfoEdit({ formData, setFormData }) {
           </Button>
         </Form>
         {formData["mainImageUrl"] ? (
-          <img
-            id="mainImage"
-            src={
-              `https://d12zok1slvqtin.cloudfront.net/` +
-              formData["mainImageUrl"]
-            }
-            alt=""
-          />
+          <>
+            <div>
+              <b>Banner Image Preview:</b>
+            </div>
+            <img
+              className={styles.imagePreview}
+              id="mainImage"
+              src={
+                `https://d12zok1slvqtin.cloudfront.net/` +
+                formData["mainImageUrl"]
+              }
+              alt=""
+            />
+          </>
         ) : (
           ""
         )}

@@ -70,6 +70,9 @@ function ViewOrder() {
   }
 
   useEffect(() => {
+    if(!user){
+      navigate("/login")
+    }
     //fetch orders when the component mounts
     fetchOrders();
   }, []);
@@ -235,13 +238,13 @@ function OrderCard({
       <Card className="mb-3" style={{ height: "456px", overflowY: "auto" }}>
         <Card.Body>
           <Card.Title>
-            <nobr className="fw-bold">{order["customerName"]}'s order</nobr>
+            <nobr className="fw-bold"  data-cy="customerName" >{order["customerName"]}'s order</nobr>
           </Card.Title>
-          <Card.Text>
-            <nobr className="fw-bold">Order Date:</nobr>{" "}
+          <Card.Text >
+            <nobr className="fw-bold" data-cy="orderDateTime">Order Date:</nobr>{" "}
             {orderDateTime.toLocaleDateString()}
             <br></br>
-            <nobr className="fw-bold">Order Time:</nobr>{" "}
+            <nobr className="fw-bold" data-cy="orderDateTime">Order Time:</nobr>{" "}
             {orderDateTime.toLocaleTimeString()}
             <Table responsive>
               <thead>
@@ -263,18 +266,18 @@ function OrderCard({
                 })}
               </tbody>
             </Table>
-            <nobr className="fw-bold border-0" style={{ background: "white" }}>
+            <nobr className="fw-bold border-0" style={{ background: "white" }} data-cy="note">
               {" "}
               Note: {order["note"]}
             </nobr>
             <br></br>
-            <nobr className="fw-bold border-0" style={{ background: "white" }}>
+            <nobr className="fw-bold border-0" style={{ background: "white" }} data-cy="utensils">
               {" "}
               Utensils:{" "}
             </nobr>
             {order["utensils"] ? "yes" : "no"}
             <br></br>
-            <nobr className="fw-bold border-0" style={{ background: "white" }}>
+            <nobr className="fw-bold border-0" style={{ background: "white" }} data-cy="totalCost">
               {" "}
               Total Cost:{" "}
             </nobr>{" "}
@@ -290,6 +293,7 @@ function OrderCard({
                   name="progress"
                   defaultValue={order["progress"]}
                   id={"form" + index}
+                  data-cy = "progressList"
                 >
                   <option value="Order placed"> Order Placed </option>
                   <option value="Preparing"> Preparing </option>
