@@ -101,11 +101,19 @@ function PersistResMenu({ menuItems, setMenuItems }) {
     </Tooltip>
   );
 
+  const [hoveredMenuItem, setHoveredMenuItem] = useState(null);
+
   return (
     <>
       <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
         {menuItems.map((menu, index) => (
-          <Row className="mb-3" key={index}>
+          <Row
+            className="mb-3"
+            key={index}
+            style={
+              hoveredMenuItem === index ? { backgroundColor: "#f3f3f3" } : {}
+            }
+          >
             <Form.Group className="col col-sm-3">
               {/* MENU ITEM */}
               <Form.Label className="fw-bold">
@@ -294,6 +302,8 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                   variant="danger"
                   className={styles.removemenu}
                   onClick={() => handleRemove(index)}
+                  onMouseEnter={() => setHoveredMenuItem(index)}
+              onMouseLeave={() => setHoveredMenuItem(null)}
                 >
                   Remove Menu Item
                 </Button>
