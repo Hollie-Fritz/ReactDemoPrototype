@@ -17,23 +17,20 @@ const Search = () => {
         {
           method: "GET",
           headers: {
-            "Authorization": "Basic a3lsZW1haTpQYXNzd29yZDEyMyQ=",
-          },
-        } 
-      )
-      .then((response)=> response.json())
-      .then((data) => {
-          console.log(data)
-          var list = [];
-          for(var current of data["hits"]["hits"]){
-            list.push(
-              {...current["_source"], userId: current["_id"]}
-            )
+            Authorization: "Basic a3lsZW1haTpQYXNzd29yZDEyMyQ="
           }
-          setRestaurants(list);
         }
       )
-      .catch((error) => console.log(error));
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          var list = [];
+          for (var current of data["hits"]["hits"]) {
+            list.push({ ...current["_source"], userId: current["_id"] });
+          }
+          setRestaurants(list);
+        })
+        .catch((error) => console.log(error));
     };
     fetchData();
   }, [searchField]);
@@ -54,7 +51,7 @@ const Search = () => {
         placeholder="Search by keyword (Restaurant, Cuisine, City, etc..)"
       />
       {notFound ? (
-        <h2 style={{color: "#fff"}}>Restaurant cannot be found</h2>
+        <h2 style={{ color: "#fff" }}>Restaurant cannot be found</h2>
       ) : (
         <CardList restaurants={restaurants} className="card-grid" />
       )}
@@ -70,16 +67,22 @@ export function Customer() {
       <Container fluid="md">
         <Row className="justify-content-center">
           <Col>
-          <br></br>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-          <TopRatedCarousel/>
-          </div>
+            <br></br>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <TopRatedCarousel />
+            </div>
           </Col>
         </Row>
-        <br/><br/><br/><br/><br/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Row className="justify-content-center">
           <Col>
-          <Search  />
+            <h3 style={{textAlign: "center"}}><b>Explore local Washington restaurants!</b></h3>
+            <br></br>
+            <Search />
           </Col>
         </Row>
       </Container>

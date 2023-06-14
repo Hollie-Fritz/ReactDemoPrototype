@@ -6,7 +6,7 @@ import "./Home.css";
 const Home = () => {
   return (
     <>
-    <div className="home_bg_image">
+    <div>
       <Customer/>
     </div>
     </>
