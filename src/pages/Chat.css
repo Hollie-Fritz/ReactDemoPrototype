@@ -1,3 +1,10 @@
+.conversation-box {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  height: 300px;
+  overflow: auto;
+}
 .message-item {
   display: flex;
   justify-content: flex-start;
@@ -16,8 +23,12 @@
 .message-content {
   display: inline-block;
   background-color: #e2e2e2;
-  border-radius: 8px;
-  padding: 8px 12px;
+  border-radius: 15px; /* Increase border radius */
+  padding: 10px 15px; /* Increase padding */
+  font-size: 16px; /* Increase font size */
+  line-height: 1.5; /* Increase line height */
+  color: #333; /* Darker text color for better readability */
+  transition: background-color 0.3s; /* Add transition for background color */
 }
 
 .message-left .message-content {
@@ -33,11 +44,12 @@
 .message-timestamp {
   font-size: 0.8em;
   color: #888;
+  margin-top: 5px; /* Add some spacing above timestamp */
 }
 
 .date-marker {
   text-align: center;
-  color: #888;
+  margin-bottom: 20px; /* Add some spacing below date markers */
 }
 
 .suggestions-card {
@@ -55,4 +67,25 @@
 .message-content:hover + .message-timestamp {
   display: block;
   color:#888;
+}
+
+/* Add hover effect to send button */
+Button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.sendMsg{
+  min-width: 134px;
+  background-color: rgb(107, 107, 107);
+  border-color: rgb(107, 107, 107) !important;
+  color: white;
+  min-width: 149px;
+  margin-left:8px;
+
+}
+
+.sendMsg:hover{
+  background-color: #000000;
+  border-color: #000000 !important;
 }
