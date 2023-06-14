@@ -90,17 +90,16 @@ function Info(props) {
         </span>
       </Card.Text>
       <Button
-        onClick={handleOpenModal}
-        className={
-          templateName === "Template1"
-            ? styles.operatingHoursButtonTemplate1
-            : templateName === "Template2"
-            ? styles.operatingHoursButtonTemplate2
-            : templateName === "Template3"
-            ? styles.operatingHoursButtonTemplate3
-            : styles.operatingHoursButtonTemplate4
-        }
-      >
+            onClick={handleOpenModal}
+            className={templateName === "Template1"
+                        ? styles.operatingHoursButtonTemplate1
+                        : templateName === "Template2"
+                        ? styles.operatingHoursButtonTemplate2
+                        : templateName === "Template3"
+                        ? styles.operatingHoursButtonTemplate3
+                        : styles.operatingHoursButtonTemplate4}
+            style={{ width: '30%', marginBottom: '10px', marginTop: '-5px' }}
+          >
         Operating Hours
       </Button>
       <Modal show={showModal} onHide={handleCloseModal} centered>
