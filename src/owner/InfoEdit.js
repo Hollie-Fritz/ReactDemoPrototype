@@ -48,7 +48,7 @@ function InfoEdit({ formData, setFormData }) {
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       The restaurant banner looks best with the following dimensions:<br></br>
-      1250x200<br></br>
+      1800x200<br></br>
       It will be displayed at the top of your web page with your restaurant name
       over it.
     </Tooltip>

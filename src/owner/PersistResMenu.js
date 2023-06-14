@@ -93,9 +93,10 @@ function PersistResMenu({ menuItems, setMenuItems }) {
 
   const renderTooltip2 = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      The menu item image looks best with the following dimensions:<br></br>
-      ?x?<br></br>
-      It will be displayed at the top of your menu item.
+    Default template dimensions: 550x200<br></br>
+    Display: to the right of the menu item<br></br>
+    Other templates dimensions: 550x200<br></br>
+    Display: on top of the menu item
     </Tooltip>
   );
 

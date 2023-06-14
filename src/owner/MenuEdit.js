@@ -93,6 +93,15 @@ function MenuEdit({ menuItems, setMenuItems }) {
     </Tooltip>
   );
 
+  const renderTooltip2 = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+    Default template dimensions: 550x200<br></br>
+    Display: to the right of the menu item<br></br>
+    Other templates dimensions: 550x200<br></br>
+    Display: on top of the menu item
+  </Tooltip>
+  );
+
   return (
     <>
       <Form className="container mt-3 mb-3" style={{ width: "200rem" }}>
@@ -191,6 +200,18 @@ function MenuEdit({ menuItems, setMenuItems }) {
             {/* MENU ITEM TYPE */}
 
             {/* MENU IMAGE */}
+            <Form.Label className="fw-bold">
+          Menu Item Image
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip2}
+          >
+            <span className={styles.removeimage}>
+              <AiOutlineInfoCircle size={20} className={styles.icon} />
+            </span>
+          </OverlayTrigger>
+          </Form.Label>
             <Form id={"imageForm" + index} className="col col-sm-6">
               <Form.Group className="col col-sm-6 d-flex align-items-center">
                 <input
