@@ -70,6 +70,9 @@ function ViewOrder() {
   }
 
   useEffect(() => {
+    if(!user){
+      navigate("/login")
+    }
     //fetch orders when the component mounts
     fetchOrders();
   }, []);

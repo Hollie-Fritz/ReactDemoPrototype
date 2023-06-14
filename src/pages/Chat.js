@@ -23,6 +23,9 @@ function Chat() {
     ]);
 
   useEffect(() => {
+    if(!user){
+      navigate("/login")
+    }
     async function get() {
       // const nameJson = await Auth.currentUserInfo();
       // const name = nameJson["username"];

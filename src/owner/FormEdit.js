@@ -7,7 +7,7 @@ import MenuEdit from "./MenuEdit";
 import ReviewEdit from "./ReviewEdit";
 import { Button, FormControl } from "react-bootstrap";
 import styles from "./Form.module.css";
-
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
@@ -16,6 +16,15 @@ function FormEdit() {
   //will mutate the variable setPage
   //useState(0) = ResInfo
   const navigate = useNavigate();
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
+
+  useEffect(() => {
+    if(!user){
+      navigate("/login")
+    }
+  }, []);
 
   const [page, setPage] = useState(0);
   //state object that contains all the different fields for ResInfo
