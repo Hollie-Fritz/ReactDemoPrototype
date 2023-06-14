@@ -154,29 +154,32 @@ function Chat() {
             </ListGroup>
           </Col>
           <Col md={8}>
-            <h4 style={{ display: "flex", justifyContent: "center" }}>Chatting with: <Dropdown><Dropdown.Toggle>
-              {location.state? location.state.name:params["toUserId"]}</Dropdown.Toggle>
-              <Dropdown.Menu>
-                {
-                  listChat.map((user,index) =>{
-                    return(
-                      <Dropdown.Item key={index} onClick={() => {
-                        navigate(`/chat/${currentUserId}/${user["id"]}`,
+            <h4 style={{ display: "flex", justifyContent: "center" }}>Chatting with: 
+              <Dropdown style={{ backgroundColor: 'rgb(107, 107, 107)' }}> 
+                <Dropdown.Toggle style={{ backgroundColor: 'rgb(107, 107, 107)',  borderColor: 'rgb(107, 107, 107)'}}>
+                  {location.state? location.state.name:params["toUserId"]}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {
+                    listChat.map((user,index) =>{
+                      return(
+                        <Dropdown.Item key={index} onClick={() => {
+                          navigate(`/chat/${currentUserId}/${user["id"]}`,
                         
-                        {
-                          state:{
-                            name: user["name"]? user["name"]:user["id"]
-                          }
-                        })
-                      }}>
-                      {user["name"]? user["name"]:user["id"]}
-                      </Dropdown.Item>
-                    )
-                  })
-                }
-              </Dropdown.Menu>
-              
-              </Dropdown></h4>
+                          {
+                            state:{
+                              name: user["name"]? user["name"]:user["id"]
+                            }
+                          })
+                        }}>
+                          {user["name"]? user["name"]:user["id"]}
+                        </Dropdown.Item>
+                      )
+                    })
+                  }
+                </Dropdown.Menu>
+              </Dropdown>
+            </h4>
             <hr/>
             <Card className="conversation-box">
               <Card.Body >
