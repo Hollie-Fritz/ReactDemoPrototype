@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Form.module.css";
 import { CgAsterisk } from "react-icons/cg";
 
-
 //2nd page of restaurant owner's form, contains the form for menu items
 function MenuEdit({ menuItems, setMenuItems }) {
   //update and set the menu form items
@@ -39,8 +38,8 @@ function MenuEdit({ menuItems, setMenuItems }) {
         method: "PUT",
         body: file,
         headers: {
-          "Content-type": file.type,
-        },
+          "Content-type": file.type
+        }
       }
     ).then(() => {
       const updatedMenuItems = [...menuItems];
@@ -54,18 +53,18 @@ function MenuEdit({ menuItems, setMenuItems }) {
   };
 
   const handleRemoveImage = async (index) => {
-    setMenuItems(prevMenuItems => {
-      var newData = [...prevMenuItems]
+    setMenuItems((prevMenuItems) => {
+      var newData = [...prevMenuItems];
       newData[index]["menuImageUrl"] = "";
       return newData;
-    })
-    setUploadStatus(prevUploadStatus => {
-      var newData = [...prevUploadStatus]
+    });
+    setUploadStatus((prevUploadStatus) => {
+      var newData = [...prevUploadStatus];
       newData[index] = "Removed";
       return newData;
-    })
+    });
     console.log(menuItems);
-  }
+  };
 
   //function to add form items
   const handleAddItem = () => {
@@ -76,8 +75,8 @@ function MenuEdit({ menuItems, setMenuItems }) {
         menuPrice: "",
         menuDesc: "",
         menuType: "",
-        menuImageUrl: "",
-      },
+        menuImageUrl: ""
+      }
     ]);
   };
 
@@ -89,17 +88,18 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-       Menu items will be sequentially grouped and displayed according to the 'Menu Item Type' you specify during input.
+      Menu items will be sequentially grouped and displayed according to the
+      'Menu Item Type' you specify during input.
     </Tooltip>
   );
 
   const renderTooltip2 = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-    Default template dimensions: 550x200<br></br>
-    Display: to the right of the menu item<br></br>
-    Other templates dimensions: 550x200<br></br>
-    Display: on top of the menu item
-  </Tooltip>
+      Default template dimensions: 130x140<br></br>
+      Display: to the right of the menu item<br></br>
+      Other templates dimensions: 550x200<br></br>
+      Display: on top of the menu item
+    </Tooltip>
   );
 
   return (
@@ -109,10 +109,12 @@ function MenuEdit({ menuItems, setMenuItems }) {
           <Row className="mb-3" key={index}>
             {/* MENU ITEM */}
             <Form.Group controlId="formItem" className="col col-sm-3">
-              <Form.Label className="fw-bold">Menu Item{" "}
-              <span className={styles.asteriskicon}>
-                <CgAsterisk />
-              </span></Form.Label>
+              <Form.Label className="fw-bold">
+                Menu Item{" "}
+                <span className={styles.asteriskicon}>
+                  <CgAsterisk />
+                </span>
+              </Form.Label>
               <Form.Control
                 id="validation"
                 required
@@ -128,10 +130,12 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
             {/* MENU ITEM PRICE */}
             <Form.Group controlId="formItemPrice" className="col col-sm-3">
-              <Form.Label className="fw-bold">Price{" "}
-              <span className={styles.asteriskicon}>
-                <CgAsterisk />
-              </span></Form.Label>
+              <Form.Label className="fw-bold">
+                Price{" "}
+                <span className={styles.asteriskicon}>
+                  <CgAsterisk />
+                </span>
+              </Form.Label>
               <InputGroup className="mb-3">
                 <Form.Control
                   id="validation"
@@ -201,17 +205,17 @@ function MenuEdit({ menuItems, setMenuItems }) {
 
             {/* MENU IMAGE */}
             <Form.Label className="fw-bold">
-          Menu Item Image
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={renderTooltip2}
-          >
-            <span className={styles.removeimage}>
-              <AiOutlineInfoCircle size={20} className={styles.icon} />
-            </span>
-          </OverlayTrigger>
-          </Form.Label>
+              Menu Item Image
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip2}
+              >
+                <span className={styles.removeimage}>
+                  <AiOutlineInfoCircle size={20} className={styles.icon} />
+                </span>
+              </OverlayTrigger>
+            </Form.Label>
             <Form id={"imageForm" + index} className="col col-sm-6">
               <Form.Group className="col col-sm-6 d-flex align-items-center">
                 <input
@@ -233,43 +237,49 @@ function MenuEdit({ menuItems, setMenuItems }) {
                   type="text"
                   value={selectedFile[index] ?? "No File Selected"}
                   placeholder="No File Selected"
-                  onChange={()=>{}}
+                  onChange={() => {}}
                   readOnly
                   className="col col-sm-6 d-flex"
                 />
                 <label
                   htmlFor={"imageInput" + index}
                   className={`btn btn-primary mb-0 mx-2  ${styles.tempbutton}`}
-
                   style={{ marginRight: "10px" }}
                 >
                   Browse
                 </label>
-                <Button  className={`btn btn-primary mb-0 mx-1  ${styles.tempbutton}`} onClick={() => handleSubmitImage(index)}>
+                <Button
+                  className={`btn btn-primary mb-0 mx-1  ${styles.tempbutton}`}
+                  onClick={() => handleSubmitImage(index)}
+                >
                   Upload
                 </Button>
-                <Button className={styles.removebutton} variant="danger" id={"button" + index} onClick={() =>
-                  {
-                    handleRemoveImage(index)
-                  }
-                }>
+                <Button
+                  className={styles.removebutton}
+                  variant="danger"
+                  id={"button" + index}
+                  onClick={() => {
+                    handleRemoveImage(index);
+                  }}
+                >
                   Remove Image
                 </Button>
-                {/* <Button  className={styles.removebutton} variant="danger">
-                  Remove Image
-                </Button> */}
-                {/* <div>{menu["menuImageUrl"]}</div> */}
               </Form.Group>
-              {
-                menu["menuImageUrl"] &&
-                <img
-                src={
-                  "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
-                    menu["menuImageUrl"]
-                }
-                alt=""
-                />
-              }
+              {menu["menuImageUrl"] && (
+                <>
+                  <div>
+                    <b>Menu Item Image Preview:</b>
+                  </div>
+                  <img
+                    className={styles.imagePreview}
+                    src={
+                      "https://d12zok1slvqtin.cloudfront.net/fit-in/286x180/" +
+                      menu["menuImageUrl"]
+                    }
+                    alt=""
+                  />
+                </>
+              )}
             </Form>
             {/* MENU IMAGE */}
 
@@ -287,8 +297,11 @@ function MenuEdit({ menuItems, setMenuItems }) {
             </Form.Group>
           </Row>
         ))}
-        <Button variant="primary" onClick={handleAddItem}
-        className={styles.menubutton}>
+        <Button
+          variant="primary"
+          onClick={handleAddItem}
+          className={styles.menubutton}
+        >
           Add Menu Item
         </Button>
       </Form>

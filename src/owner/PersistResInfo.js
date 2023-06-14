@@ -501,16 +501,21 @@ function PersistResInfo({ formData, setFormData }) {
             Remove Image
           </Button>
         </Form>
-
         {formData["mainImageUrl"] ? (
-          <img
-            id="mainImage"
-            src={
-              `https://nuorderbucket.s3.us-west-2.amazonaws.com/` +
-              formData["mainImageUrl"]
-            }
-            alt=""
-          />
+          <>
+            <div>
+              <b>Banner Image Preview:</b>
+            </div>
+            <img
+              className={styles.imagePreview}
+              id="mainImage"
+              src={
+                `https://d12zok1slvqtin.cloudfront.net/` +
+                formData["mainImageUrl"]
+              }
+              alt=""
+            />
+          </>
         ) : (
           ""
         )}

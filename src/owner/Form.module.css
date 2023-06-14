@@ -116,3 +116,7 @@ adds width so words don't wrap and margin for improved spacing */
   border-color: #000000  !important;
 
 }
+
+.imagePreview {
+  margin-top: 0px;
+}
