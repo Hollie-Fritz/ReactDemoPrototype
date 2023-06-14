@@ -31,7 +31,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/DefaultTemplate02.png" rounded width="275" height="144" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/DefaultTemplate03.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -43,7 +43,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/UpscaleTemplate01.png" rounded width="275" height="144" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/UpscaleTemplate02.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -57,7 +57,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
             <Row>
               <Col>
                 <label>
-                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/FreshTemplate01.png" rounded width="275" height="144" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/FreshTemplate02.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"
@@ -69,7 +69,7 @@ const ChooseTemplate = ({ show, handleClose, handleTemplateSelect }) => {
               </Col>
               <Col>
                 <label>
-                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/DessertBakery01.png" rounded width="275" height="144" />
+                  <Image src="https://nuorderbucket.s3.us-west-2.amazonaws.com/DessertBakery02.png" rounded width="275" height="144" />
                   <Form.Check
                     type="radio"
                     id="default-radio"

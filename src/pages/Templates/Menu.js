@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { AiOutlineCheck } from "react-icons/ai";
 import styles from "./Template1.module.css";
+import { Link, Element } from "react-scroll";
 
 function Menu(props) {
   const { groupedFoodData, handleAddClick, showAddedMessage, cart } =
@@ -9,8 +10,39 @@ function Menu(props) {
 
   return (
     <>
+            <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    whiteSpace: "nowrap",
+                    flexWrap: "no-wrap",
+                    overflow: "auto",
+                    paddingBottom: "20px"
+                  }}
+                >
+                  {Object.keys(groupedFoodData).map((foodType) => (
+                    <Link
+                    activeClass="active"
+                    className={styles.hello}
+                    style={{
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      marginRight: "15px",
+
+                    }}
+                    to={foodType}
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                  >
+                    {foodType}
+                  </Link>
+                  ))}
+                </div>
       {Object.entries(groupedFoodData).map(([foodType, foodItems]) => {
         return (
+          <Element name={foodType} key={foodType}>
           <div key={foodType}>
             <h2>{foodType}</h2>
             <hr/>
@@ -59,6 +91,7 @@ function Menu(props) {
             <br />
             <br />
           </div>
+          </Element>
         );
       })}
     </>

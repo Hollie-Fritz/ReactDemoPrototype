@@ -131,3 +131,15 @@
   text-transform: uppercase;
   color: #763C12;
 }
+
+.hello {
+  color: #763C12 !important;
+  transition: color 0.2s ease-in-out;
+  font-weight:bold;
+  border-bottom: 3px solid #763C12!important;
+}
+
+.hello:hover {
+  color: var(--grass) !important;
+  border-bottom: 3px solid var(--grass) !important;
+}

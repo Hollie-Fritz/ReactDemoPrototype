@@ -20,7 +20,7 @@
 
 /* card styling */
 .card {
-  background-color: var(--butter-milk);
+  /* background-color: var(--butter-milk); */
   border-color: var(--raspberry) !important;
   border-width: 3px !important;
 }
@@ -129,4 +129,16 @@
   font-family: 'Fuzzy Bubbles', cursive;
   text-transform: uppercase;
   color: var(--coffee);
+}
+
+
+.hello {
+  color: var(--berry) !important;
+  transition: color 0.2s ease-in-out;
+  font-weight:bold;
+  border-bottom: 3px solid var(--coffee)!important;
+}
+
+.hello:hover {
+  color: var(--raspberry) !important;
 }
