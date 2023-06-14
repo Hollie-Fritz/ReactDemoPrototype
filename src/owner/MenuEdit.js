@@ -254,14 +254,16 @@ function MenuEdit({ menuItems, setMenuItems }) {
                 <label
                   htmlFor={"imageInput" + index}
                   className={`btn btn-primary mb-0 mx-2  ${styles.tempbutton}`}
-                  style={{ marginRight: "10px" }}
+   style={{ marginRight: "10px" }}
                 >
                   Browse
                 </label>
+
                 <Button
                   className={`btn btn-primary mb-0 mx-1  ${styles.tempbutton}`}
                   onClick={() => handleSubmitImage(index)}
                 >
+
                   Upload
                 </Button>
                 <Button

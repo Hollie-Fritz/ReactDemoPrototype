@@ -259,11 +259,13 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                 >
                   Browse
                 </label>
+
                 <Button
                   className={`btn btn-primary mb-0 mx-1  ${styles.tempbutton}`}
                   onClick={() => handleSubmitImage(index)}
                 >
                   Upload
+
                 </Button>
                 <Button
                   className={styles.removebutton}
@@ -291,6 +293,7 @@ function PersistResMenu({ menuItems, setMenuItems }) {
                   />
                 </>
               )}
+
             </Form>
             {/* MENU IMAGE */}
 

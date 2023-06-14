@@ -226,7 +226,6 @@ function Template4(props) {
                                         : ""
                                     }
                                   />
-
                                   <Card.Body>
                                     <div className={styles.menuItem}>
                                       <Card.Text
