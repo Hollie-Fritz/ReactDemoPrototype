@@ -1,8 +1,7 @@
 /* Template 1 */
 .operatingHoursButtonTemplate1 {
+  margin-bottom: 15px;
   width: 30%;
-  margin-bottom: 10px;
-  margin-top: -5px;
   background-color: var(--white) !important;
   color: var(--dark) !important;
   border-color: var(--biscuit) !important;
@@ -15,6 +14,7 @@
 
 /* Template 2 */
 .operatingHoursButtonTemplate2 {
+  margin-bottom: 15px;
   background-color: var(--white) !important;
   color: var(--dark) !important;
   border-color: var(--biscuit) !important;
@@ -27,6 +27,7 @@
 
 /* Template 3 */
 .operatingHoursButtonTemplate3 {
+  margin-bottom: 15px;
     background-color: var(--white) !important;
     color: var(--grass) !important;
     border-color: var(--matcha) !important;
@@ -39,6 +40,7 @@
 
 /* Template 4 */
 .operatingHoursButtonTemplate4 {
+  margin-bottom: 15px;
     background-color: var(--teal) !important;
     color: var(--butter-milk) !important;
     border-color: var(--frosting) !important;

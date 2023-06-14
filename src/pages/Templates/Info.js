@@ -144,8 +144,6 @@ function Info(props) {
           </p>
         </Modal.Body>
       </Modal>
-      <br></br>
-      <br></br>
       {/* cuisine type */}
       <Card.Text>
         <nobr className="fw-bold">Cuisine Type: </nobr>
