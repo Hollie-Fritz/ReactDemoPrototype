@@ -251,6 +251,7 @@ function Template4(props) {
                                       width: "100%",
                                       display: "block"
                                     }}
+
                                     variant="top"
                                     src={
                                       item.foodImageUrl
