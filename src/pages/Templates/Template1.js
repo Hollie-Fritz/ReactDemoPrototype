@@ -37,7 +37,11 @@ function Template1(props) {
 
   return (
     <>
-      <Container className="justify-content-center" fluid>
+      <Container
+        className="justify-content-center"
+        style={{ marginTop: "2rem" }}
+        fluid
+      >
         <Row className="m-auto align-self-center">
           <Col className="order-first" xs={8} md={9}>
             <div className="row no-gutters">
