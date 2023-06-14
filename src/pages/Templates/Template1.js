@@ -54,8 +54,7 @@ function Template1(props) {
                 <Card.Body style={{ overflow: "hidden" }}>
                   <Row className="d-flex justify-content-between">
                     <Col xs={1} md={5} className="mb-4">
-                      <Card
-
+                      <Card style={{paddingLeft: '20px'}}
                       >
                         {/* RESTAURANT INFO */}
                         <Info

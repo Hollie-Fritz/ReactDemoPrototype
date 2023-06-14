@@ -98,7 +98,7 @@ function Info(props) {
                         : templateName === "Template3"
                         ? styles.operatingHoursButtonTemplate3
                         : styles.operatingHoursButtonTemplate4}
-            style={{ width: '30%', marginBottom: '10px', marginTop: '-5px' }}
+
           >
         Operating Hours
       </Button>
