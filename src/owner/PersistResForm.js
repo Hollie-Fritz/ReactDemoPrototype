@@ -7,7 +7,8 @@ import PersistResMenu from "./PersistResMenu";
 import PersistResReview from "./PersistResReview";
 import { Button } from "react-bootstrap";
 import styles from "./Form.module.css";
-
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useEffect } from "react";
 
 //Source video: https://www.youtube.com/watch?v=wOxP4k9f5rk
 //This file is a container for all the steps of the restaurant owner webpage creator form
@@ -17,6 +18,10 @@ function PersistResForm() {
   //useState(0) = ResInfo
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
+  const { user } = useAuthenticator((context) => [
+    context.user, 
+  ]);
+  
   //state object that contains all the different fields for ResInfo
   const [formData, setFormData] = useState({
     resName: "",
@@ -47,6 +52,12 @@ function PersistResForm() {
     },
   ]);
 
+  useEffect(() => {
+    if(!user){
+      navigate("/login")
+    }
+  }, []);
+  
   const userAction = async () => {
     let nameJson = await Auth.currentUserInfo();
     let name = nameJson["username"];
