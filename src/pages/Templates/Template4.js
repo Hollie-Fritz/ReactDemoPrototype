@@ -7,6 +7,7 @@ import ViewReview from "../../components/rating/ViewReview";
 import ReviewForm from "../../components/rating/ReviewForm";
 import styles from "./Template4.module.css";
 import Info from "./Info.js";
+import { Link, Element } from "react-scroll";
 
 // Template4 component
 function Template4(props) {
@@ -35,7 +36,7 @@ function Template4(props) {
     navigate,
     handleShowCartClick,
     viewCartClicked,
-    groupedFoodData,
+    groupedFoodData
   } = props.data;
 
   return (
@@ -65,7 +66,7 @@ function Template4(props) {
                   display: "flex",
                   justifyContent: "left",
                   alignItems: "center",
-                  position: "relative",
+                  position: "relative"
                 }}
               >
                 {/* restaurant name (displayed on banner) */}
@@ -77,7 +78,7 @@ function Template4(props) {
                     marginBottom: "0.5rem",
                     fontWeight: "bold",
                     textShadow:
-                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000",
+                      "1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000"
                   }}
                 >
                   {resdata["name"]}
@@ -96,7 +97,7 @@ function Template4(props) {
                         data={{
                           resdata,
                           averageRating,
-                          templateName: "Template4",
+                          templateName: "Template4"
                         }}
                       />
                       {/* RESTAURANT INFO */}
@@ -126,8 +127,8 @@ function Template4(props) {
                               onClick={() =>
                                 navigate(`/chat/${currentUserId}/${id}`, {
                                   state: {
-                                    name: resdata["name"],
-                                  },
+                                    name: resdata["name"]
+                                  }
                                 })
                               }
                             >
@@ -170,7 +171,7 @@ function Template4(props) {
                           justifyContent: "center",
                           alignItems: "center",
                           width: "100px",
-                          height: "400px",
+                          height: "400px"
                         }}
                       >
                         <iframe
@@ -184,7 +185,7 @@ function Template4(props) {
                             border: "0",
                             position: "absolute",
                             top: "0",
-                            left: "0",
+                            left: "0"
                           }}
                         />
                       </div>
@@ -194,15 +195,45 @@ function Template4(props) {
                 </Row>
                 <br></br>
                 <Card.Title as="h4"></Card.Title>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    whiteSpace: "nowrap",
+                    flexWrap: "no-wrap",
+                    overflow: "auto",
+                    paddingBottom: "20px"
+                  }}
+                >
+                  {Object.keys(groupedFoodData).map((foodType) => (
+                    <Link
+                    activeClass="active"
+                    className={styles.hello}
+                    style={{
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      marginRight: "15px",
+
+                    }}
+                    to={foodType}
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                  >
+                    {foodType}
+                  </Link>
+                  ))}
+                </div>
 
                 <Card.Title as="h4"></Card.Title>
                 {/* menu: display each menu item as a card */}
                 {Object.entries(groupedFoodData).map(
                   ([foodType, foodItems]) => {
                     return (
-                      <div key={foodType}>
+                      <Element name={foodType} key={foodType}>
                         <h2 className={styles.foodType}>{foodType}</h2>
-                       <hr/>
+                        <hr />
                         <Row md={1} lg={3} className="g-4">
                           {foodItems.map((item, index) => {
                             return (
@@ -213,11 +244,14 @@ function Template4(props) {
                                   key={index}
                                   style={{ width: "37rem" }}
                                 >
-                                <Card.Img
-                                  style ={{objectFit: "contain",
-                                    height: "200px",
-                                    width: "100%",
-                                    display: "block"}}
+                                  <Card.Img
+                                    style={{
+                                      objectFit: "contain",
+                                      height: "200px",
+                                      width: "100%",
+                                      display: "block"
+                                    }}
+
                                     variant="top"
                                     src={
                                       item.foodImageUrl
@@ -231,7 +265,12 @@ function Template4(props) {
                                       <Card.Text
                                         as="h5"
                                         className={`${styles.menuItemTitle}`}
-                                        style={{ fontSize: "18px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+                                        style={{
+                                          fontSize: "18px",
+                                          whiteSpace: "nowrap",
+                                          overflow: "hidden",
+                                          textOverflow: "ellipsis"
+                                        }}
                                       >
                                         <nobr
                                           as="h1"
@@ -260,7 +299,7 @@ function Template4(props) {
                                         fontWeight: "bold",
                                         position: "absolute",
                                         bottom: 5,
-                                        left: 5,
+                                        left: 5
                                       }}
                                       onClick={() =>
                                         handleAddClick(item.foodId)
@@ -280,7 +319,7 @@ function Template4(props) {
                         </Row>
                         <br></br>
                         <br></br>
-                      </div>
+                      </Element>
                     );
                   }
                 )}

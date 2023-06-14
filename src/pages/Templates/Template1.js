@@ -7,6 +7,7 @@ import Info from "./Info.js";
 import GoogleMap from "./GoogleMap.js";
 import Menu from "./Menu.js";
 import Template1Cart from "./Template1Cart.js";
+import { Link, Element } from "react-scroll";
 
 import styles from "./Template1.module.css";
 

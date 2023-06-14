@@ -95,3 +95,16 @@
 .menuDesc{
   color: #757575;
 }
+
+
+.hello {
+  color: black!important;
+  transition: color 0.2s ease-in-out;
+  font-weight:bold;
+  border-bottom: 1px solid #BFBFBF!important;
+}
+
+.hello:hover {
+  color: #757575 !important;
+}
+
