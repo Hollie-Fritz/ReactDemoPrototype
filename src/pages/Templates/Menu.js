@@ -24,7 +24,7 @@ function Menu(props) {
                         <div className={styles.menuDetails}>
                           <Card.Title as="h5"><b>{item.foodName}</b></Card.Title>
                           <Card.Text>${item.foodPrice}</Card.Text>
-                          <Card.Text>{item.foodDesc}</Card.Text>
+                          <Card.Text className={styles.menuDesc}>{item.foodDesc}</Card.Text>
                         </div>
                         <div className={styles.imageContainer}>
                           {item.foodImageUrl && (
