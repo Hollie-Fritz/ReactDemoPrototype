@@ -3,6 +3,13 @@ import { Row, Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
 function PersistResReview({ formData, menuItems }) {
+  const templateNames = {
+    template1: "Default Template",
+    template2: "Upscale",
+    template3: "Fresh",
+    template4: "Dessert/Bakery"
+  };
+
   return (
     <div>
       <Container className="d-flex vh-50">
@@ -69,7 +76,7 @@ function PersistResReview({ formData, menuItems }) {
 
                   <Card.Text>
                     <nobr className="fw-bold">Template Selection: </nobr>
-                    {formData.template}
+                    {templateNames[formData.template]}
                   </Card.Text>
                   {/* end inner card one */}
                 </Card>
@@ -101,6 +108,12 @@ function PersistResReview({ formData, menuItems }) {
                         </Card.Text>
                         <Card.Text>
                           <nobr className="fw-bold">Menu Type: </nobr>
+                          {menuItems.menuType}
+                        </Card.Text>
+                        <Card.Text>
+                          <nobr className="fw-bold">
+                            Menu Item Description:{" "}
+                          </nobr>
                           {menuItems.menuType}
                         </Card.Text>
                       </Card.Body>

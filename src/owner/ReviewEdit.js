@@ -4,6 +4,12 @@ import Card from "react-bootstrap/Card";
 
 
 function ReviewEdit({ formData, menuItems }) {
+  const templateNames = {
+    template1: "Default Template",
+    template2: "Upscale",
+    template3: "Fresh",
+    template4: "Dessert/Bakery"
+  };
   return (
     <div>
       <Container className="d-flex vh-50">
@@ -66,6 +72,11 @@ function ReviewEdit({ formData, menuItems }) {
                     <nobr className="fw-bold">Cuisine Type: </nobr>
                     {formData.resCuisine}
                   </Card.Text>
+                  <Card.Text>
+                    <nobr className="fw-bold">Template Selection: </nobr>
+                    {templateNames[formData.template]}
+                  </Card.Text>
+
                   {/* end inner card one */}
                 </Card>
                 <br></br>
@@ -94,6 +105,19 @@ function ReviewEdit({ formData, menuItems }) {
                           </nobr>
                           {menuItems.menuDesc}
                         </Card.Text>
+                        <Card.Text>
+                          <nobr className="fw-bold">
+                            Menu Item Description:{" "}
+                          </nobr>
+                          {menuItems.menuDesc}
+                        </Card.Text>
+                        <Card.Text>
+                          <nobr className="fw-bold">
+                            Menu Item Description:{" "}
+                          </nobr>
+                          {menuItems.menuType}
+                        </Card.Text>
+
                       </Card.Body>
                       {/* end inner card two */}
                     </Card>

@@ -14,6 +14,12 @@ import styles from "./Form.module.css";
 function PersistResInfo({ formData, setFormData }) {
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
   const [uploadStatus, setUploadStatus] = useState("Upload");
+  const templateNames = {
+    template1: "Default Template",
+    template2: "Upscale",
+    template3: "Fresh",
+    template4: "Dessert/Bakery"
+  };
 
   // show the ChooseTemplate modal
   const handleChooseTemplate = () => {
@@ -447,7 +453,7 @@ function PersistResInfo({ formData, setFormData }) {
                   type="text"
                   value={
                     formData.template
-                      ? formData.template
+                      ? templateNames[formData.template]
                       : "No Template Selected"
                   }
                   readOnly
